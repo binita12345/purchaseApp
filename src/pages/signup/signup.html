@@ -1,0 +1,112 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>signup</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+<header title="Sign Up"> </header> 
+
+<ion-content padding class="padding-top" style="background-color: #DCDBDC;" scrollY="false">
+	<form [formGroup]="signUpFrom" (submit)="userAccount()">
+		<ion-grid>
+			<ion-card class="card-css">
+			  <ion-card-header>
+			  </ion-card-header>
+
+			  <ion-card-content>
+			  	<div class="image">
+			  		<img src="assets/imgs/photo-camera.png" class="cameraImg">
+			  	</div>
+			  	<br/>
+			  	<ion-grid>
+			  		<ion-row class="row-css">
+			  			<ion-col col-1 col-xl-1 class="col-in">
+			  				<!-- <img src="assets/imgs/close-envelope.png" class="img-size1"> -->
+			  				<ion-icon name="ios-contact" class="name-icon"></ion-icon>
+			  			</ion-col>
+			  			<ion-col col-11 col-xl-11 class="col-in2">
+			  				<ion-item class="item-css">
+						    	<ion-label fixed class="label-css">Name</ion-label>
+						    	<ion-input class="input-text" formControlName="name"></ion-input>
+						  	</ion-item>	
+			  			</ion-col>
+			  		</ion-row>
+			  		<br/>
+			  		<ion-row class="row-css">
+			  			<ion-col col-1 col-xl-1 class="col-in">
+			  				<img src="assets/imgs/close-envelope.png" class="img-size1">
+			  			</ion-col>
+			  			<ion-col col-11 col-xl-11 class="col-in2">
+			  				<ion-item class="item-css">
+						    	<ion-label fixed class="label-css">Email</ion-label>
+						    	<ion-input class="input-text" type="email" formControlName="email" [class.invalid]="!signUpFrom.controls.email.valid && signUpFrom.controls.email.dirty"></ion-input>
+						  	</ion-item>	
+						  	<ion-item class="error-message ionItm" 
+						      *ngIf="!signUpFrom.controls.email.valid  && signUpFrom.controls.email.dirty">
+						      <p class="parag">Please enter a valid email.</p>
+						    </ion-item>
+			  			</ion-col>
+			  		</ion-row>
+			  		<br/>
+			  		<ion-row class="row-css">
+			  			<ion-col col-1 col-xl-1 class="col-in">
+			  				<img src="assets/imgs/lock.png" class="img-size1">
+			  			</ion-col>
+			  			<ion-col col-11 col-xl-11 class="col-in2">
+			  				<ion-item class="item-css">
+						    	<ion-label fixed class="label-css">Password</ion-label>
+						    	<ion-input class="input-text" formControlName="password" type="password"
+        	[class.invalid]="!signUpFrom.controls.password.valid && signUpFrom.controls.password.dirty"></ion-input>
+						  	</ion-item>	
+						    <ion-item class="error-message ionItm" 
+						      *ngIf="!signUpFrom.controls.password.valid  && signUpFrom.controls.password.dirty">
+						      <p class="parag">Please enter a valid password.</p>
+						    </ion-item>
+			  			</ion-col>
+			  		</ion-row>
+			  		<br/>
+			  		<ion-row class="row-css">
+			  			<ion-col col-1 col-xl-1 class="col-in">
+			  				<img src="assets/imgs/mobile-phone.png" class="img-size1">
+			  			</ion-col>
+			  			<ion-col col-11 col-xl-11 class="col-in2">
+			  				<ion-item class="item-css">
+						    	<ion-label fixed class="label-css">Mobile Number</ion-label>
+						    	<ion-input class="input-text" type="tel" formControlName="mobile" minlength=10 maxlength=10></ion-input>
+						  	</ion-item>	
+						  	<ion-item class="error-message ionItm" 
+						      *ngIf="!signUpFrom.controls.mobile.valid  && signUpFrom.controls.mobile.dirty">
+						      <p class="parag">Please enter a valid mobile number.</p>
+						    </ion-item>
+			  			</ion-col>
+			  		</ion-row>
+		  		</ion-grid>
+
+			  	<!-- <p class="para">Please Provide Email to Reset Password</p>
+					<br/>	
+			  		<ion-row class="row-css">
+			  			<ion-col col-1 col-xl-1 class="col-in">
+			  				<img src="assets/imgs/close-envelope.png" class="img-size1">
+			  			</ion-col>
+			  			<ion-col col-11 col-xl-11 class="col-in2">
+			  				<ion-item class="item-css">
+						    	<ion-label fixed class="label-css">Email</ion-label>
+						    	<ion-input class="input-text"></ion-input>
+						  	</ion-item>	
+			  			</ion-col>
+			  		</ion-row>
+			  		<button ion-button full class="resetBtn">Reset Password</button> -->
+
+			  </ion-card-content>
+
+			</ion-card>
+		</ion-grid>
+	</form>
+</ion-content>

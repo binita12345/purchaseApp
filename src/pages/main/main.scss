@@ -1,0 +1,34 @@
+page-main {
+	.purchase_bg{
+		background: url('/assets/imgs/main_bg.jpg');
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    background-position: center;
+	    width: 100%;
+	    height: 100%;
+	    margin: auto;
+	    z-index: 2;
+	    position: relative;
+	}
+	.row-center {
+	    position:absolute;
+	    left: 0;
+	    right: 0;
+	    margin:0 auto;
+	    top:50%;
+	    transform:translateY(-50%);
+	}
+	b, strong {
+    	font-weight: 500;
+    	color: #0065B9 !important;
+	}
+	.text-color{
+		font-size: 22px;
+    	font-weight: 500;
+    	color: #2D2D2D;
+    	border: 1px solid #D1D1D1;
+    	text-align: center;
+    	border-radius: 3px;
+    	padding: 18px;
+	}
+}
