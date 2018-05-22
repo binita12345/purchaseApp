@@ -1,0 +1,46 @@
+<!--
+  Generated template for the TabsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>tabs</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+</ion-content>
+ -->
+
+<!-- <ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="HOME" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="SHOPPING LIST" tabIcon="ios-globe"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="REQUEST" tabIcon="logo-designernews"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="PROFILE" tabIcon="ios-stats"></ion-tab>
+  <ion-tab [root]="tab5Root" tabTitle="NOTIFICATION" tabIcon="ios-pulse"></ion-tab>
+  <ion-tab [root]="tab6Root" tabTitle="INQUIRY PRODUCT" tabIcon="ios-pulse"></ion-tab>
+  <ion-tab [root]="tab7Root" tabTitle="INVITE FRIENDS" tabIcon="ios-pulse"></ion-tab>
+  <ion-tab [root]="tab8Root" tabTitle="CHANGE PASSWORD" tabIcon="ios-pulse"></ion-tab>
+</ion-tabs> -->
+
+<!-- <super-tabs id="mainTabs" tabsPlacement="bottom" selectedTabIndex="1" toolbarColor="light" toolbarBackground="dark" indicatorColor="light" badgeColor="light" (tabSelect)="onTabSelect($event)">
+  <super-tab [root]="tab1Root" title="HOME" icon="home" id="homeTab"></super-tab>
+  <super-tab [root]="tab2Root" title="SHOPPING LIST" icon="ios-globe" id="shoppingTab"></super-tab>
+  <super-tab [root]="tab3Root" title="REQUEST" icon="logo-designernews" id="requestTab"></super-tab>
+  <super-tab [root]="tab4Root" title="PROFILE" icon="ios-stats" id="profileTab"></super-tab>
+  <super-tab [root]="tab5Root" title="NOTIFICATION" icon="ios-pulse" id="notificationTab"></super-tab>
+  <super-tab [root]="tab6Root" title="INQUIRY PRODUCT" icon="ios-pulse" id="inquiryTab"></super-tab>
+  <super-tab [root]="tab7Root" title="INVITE FRIENDS" icon="ios-pulse" id="inviteTab"></super-tab>
+  <super-tab [root]="tab8Root" title="CHANGE PASSWORD" icon="ios-pulse" id="changepasswordTab"></super-tab>
+</super-tabs> -->
+
+<super-tabs tabsPlacement="bottom" toolbarBackground="secondary" toolbarColor="light" indicatorColor="light"
+  (tabSelect)="onTabSelect($event)">
+  <super-tab *ngFor="let page of pages" [root]="page.pageName" [title]="page.title" [icon]="page.icon" [id]="page.id" (ionChange)="transition($event)"></super-tab>
+</super-tabs>

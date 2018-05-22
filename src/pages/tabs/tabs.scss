@@ -1,0 +1,15 @@
+page-tabs {
+	.toolbar-md-secondary .toolbar-background-md {
+	    background: #0a76d2;
+	}
+	.toolbar-ios-secondary .toolbar-background-ios {
+	    background: #0a76d2;
+	}
+	.toolbar-wp-secondary .toolbar-background-wp {
+	    background: #0a76d2;
+	}
+	super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button {
+		font-weight: 700;
+    	font-size: 10px;
+	}
+}	

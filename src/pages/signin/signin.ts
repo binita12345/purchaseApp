@@ -36,12 +36,14 @@ export class SigninPage {
   gotoforgotPassword(){
   	this.navCtrl.push("ForgotpasswordPage");
   }
-  gotoSignUp(){
+  onSignup(){
+    console.log("go to sign up page");
     this.navCtrl.push("SignupPage");
   }
   userLogin(){
     console.log("go to home page");
-    // this.navCtrl.push("HomePage");
+    // this.navCtrl.push("HomeappPage");
+    this.navCtrl.setRoot('TabsPage');
   }
 
 }
