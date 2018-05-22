@@ -48,12 +48,12 @@
 						    	<ion-label fixed class="label-css">Email</ion-label>
 						    	<ion-input class="input-text" type="email" formControlName="email" [class.invalid]="!signUpFrom.controls.email.valid && signUpFrom.controls.email.dirty"></ion-input>
 						  	</ion-item>	
-						  	<ion-item class="error-message ionItm" 
-						      *ngIf="!signUpFrom.controls.email.valid  && signUpFrom.controls.email.dirty">
-						      <p class="parag">Please enter a valid email.</p>
-						    </ion-item>
 			  			</ion-col>
 			  		</ion-row>
+			  		<div class="error-message" 
+					      *ngIf="!signUpFrom.controls.email.valid  && signUpFrom.controls.email.dirty">
+					      <p class="parag">Please enter a valid email.</p>
+					    </div>
 			  		<br/>
 			  		<ion-row class="row-css">
 			  			<ion-col col-1 col-xl-1 class="col-in">
@@ -65,12 +65,12 @@
 						    	<ion-input class="input-text" formControlName="password" type="password"
         	[class.invalid]="!signUpFrom.controls.password.valid && signUpFrom.controls.password.dirty"></ion-input>
 						  	</ion-item>	
-						    <ion-item class="error-message ionItm" 
-						      *ngIf="!signUpFrom.controls.password.valid  && signUpFrom.controls.password.dirty">
-						      <p class="parag">Please enter a valid password.</p>
-						    </ion-item>
 			  			</ion-col>
 			  		</ion-row>
+			  		<div class="error-message ionItm" 
+						      *ngIf="!signUpFrom.controls.password.valid  && signUpFrom.controls.password.dirty">
+						      <p class="parag">Please enter a password.</p>
+						    </div>
 			  		<br/>
 			  		<ion-row class="row-css">
 			  			<ion-col col-1 col-xl-1 class="col-in">
@@ -81,12 +81,12 @@
 						    	<ion-label fixed class="label-css">Mobile Number</ion-label>
 						    	<ion-input class="input-text" type="tel" formControlName="mobile" minlength=10 maxlength=10></ion-input>
 						  	</ion-item>	
-						  	<ion-item class="error-message ionItm" 
-						      *ngIf="!signUpFrom.controls.mobile.valid  && signUpFrom.controls.mobile.dirty">
-						      <p class="parag">Please enter a valid mobile number.</p>
-						    </ion-item>
 			  			</ion-col>
 			  		</ion-row>
+			  		<div class="error-message ionItm" 
+				      *ngIf="!signUpFrom.controls.mobile.valid  && signUpFrom.controls.mobile.dirty">
+				      <p class="parag">Please enter a valid mobile number.</p>
+				    </div>
 		  		</ion-grid>
 
 			  	<!-- <p class="para">Please Provide Email to Reset Password</p>

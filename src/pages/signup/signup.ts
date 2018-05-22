@@ -23,7 +23,7 @@ export class SignupPage {
   	this.signUpFrom = formBuilder.group({
       name: [''],
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      password: [''],
+      password: ['', Validators.compose([Validators.required])],
       mobile: [''],
     });
 

@@ -102,7 +102,7 @@ $text-input-md-show-error-highlight:        false;
     min-height: 61px;
 }
 .error-message{
-    color: red;
+    color: red !important;
     text-align: center;
 }
 .platform-ios .ios-header {
