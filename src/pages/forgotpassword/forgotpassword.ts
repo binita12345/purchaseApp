@@ -29,4 +29,8 @@ export class ForgotpasswordPage {
     console.log('ionViewDidLoad ForgotpasswordPage');
   }
 
+  reset(){
+    this.navCtrl.push("SigninPage");
+  }
+
 }

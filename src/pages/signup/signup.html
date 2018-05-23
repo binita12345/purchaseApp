@@ -13,22 +13,22 @@
 </ion-header> -->
 <header title="Sign Up"> </header> 
 
-<ion-content padding class="padding-top" style="background-color: #DCDBDC;" scrollY="false">
+<ion-content padding class="padding-top" scrollY="true">
 	<form [formGroup]="signUpFrom" (submit)="userAccount()">
-		<ion-grid>
+		<!-- <ion-grid>
 			<ion-card class="card-css">
 			  <ion-card-header>
 			  </ion-card-header>
 
-			  <ion-card-content>
+			  <ion-card-content> -->
 			  	<div class="image">
 			  		<img src="assets/imgs/photo-camera.png" class="cameraImg">
 			  	</div>
 			  	<br/>
+
 			  	<ion-grid>
 			  		<ion-row class="row-css">
 			  			<ion-col col-1 col-xl-1 class="col-in">
-			  				<!-- <img src="assets/imgs/close-envelope.png" class="img-size1"> -->
 			  				<ion-icon name="ios-contact" class="name-icon"></ion-icon>
 			  			</ion-col>
 			  			<ion-col col-11 col-xl-11 class="col-in2">
@@ -39,7 +39,8 @@
 			  			</ion-col>
 			  		</ion-row>
 			  		<br/>
-			  		<ion-row class="row-css">
+
+			  		<ion-row class="row-css margn">
 			  			<ion-col col-1 col-xl-1 class="col-in">
 			  				<img src="assets/imgs/close-envelope.png" class="img-size1">
 			  			</ion-col>
@@ -55,24 +56,25 @@
 					      <p class="parag">Please enter a valid email.</p>
 					    </div>
 			  		<br/>
-			  		<ion-row class="row-css">
+
+			  		<ion-row class="row-css margn">
 			  			<ion-col col-1 col-xl-1 class="col-in">
 			  				<img src="assets/imgs/lock.png" class="img-size1">
 			  			</ion-col>
 			  			<ion-col col-11 col-xl-11 class="col-in2">
 			  				<ion-item class="item-css">
 						    	<ion-label fixed class="label-css">Password</ion-label>
-						    	<ion-input class="input-text" formControlName="password" type="password"
-        	[class.invalid]="!signUpFrom.controls.password.valid && signUpFrom.controls.password.dirty"></ion-input>
+						    	<ion-input class="input-text" formControlName="password" type="password" [class.invalid]="!signUpFrom.controls.password.valid && signUpFrom.controls.password.dirty"></ion-input>
 						  	</ion-item>	
 			  			</ion-col>
 			  		</ion-row>
-			  		<div class="error-message ionItm" 
+			  		<div class="error-message" 
 						      *ngIf="!signUpFrom.controls.password.valid  && signUpFrom.controls.password.dirty">
 						      <p class="parag">Please enter a password.</p>
 						    </div>
 			  		<br/>
-			  		<ion-row class="row-css">
+
+			  		<ion-row class="row-css margn">
 			  			<ion-col col-1 col-xl-1 class="col-in">
 			  				<img src="assets/imgs/mobile-phone.png" class="img-size1">
 			  			</ion-col>
@@ -83,30 +85,50 @@
 						  	</ion-item>	
 			  			</ion-col>
 			  		</ion-row>
-			  		<div class="error-message ionItm" 
+			  		<div class="error-message" 
 				      *ngIf="!signUpFrom.controls.mobile.valid  && signUpFrom.controls.mobile.dirty">
 				      <p class="parag">Please enter a valid mobile number.</p>
 				    </div>
+				    <br/>
+				    <br/>
+
+				    <ion-list radio-group (ionChange)="mcqAnswer($event)" formControlName="gender">
+				      <ion-list-header style="font-weight: 500;font-size: 16px;">
+				        Gender
+				      </ion-list-header>
+			      	<ion-grid style="margin-left: -7px;margin-top: 1px;">
+			      		<ion-row>
+			      			<ion-col col-5 col-xl-5>
+							      <ion-item>
+							      	<ion-radio value="female" selected></ion-radio>
+							        <ion-label>Female</ion-label>
+							      </ion-item>
+						      </ion-col>
+						      <ion-col col-5 col-xl-5>
+							      <ion-item>
+							      	<ion-radio value="male"></ion-radio>
+							        <ion-label>Male</ion-label>
+							      </ion-item>
+						      </ion-col>
+					      </ion-row>
+				      </ion-grid>
+				    </ion-list>
+				    <ion-list>
+				    	<ion-item>
+						    <ion-label>Customer</ion-label>
+						    <ion-checkbox [(ngModel)]="customer" formControlName="customer" value="customer" checked="false"></ion-checkbox>
+						  </ion-item>
+				    	<ion-item style="margin-top: -11px !important;">
+						    <ion-label>Supplier</ion-label>
+						    <ion-checkbox [(ngModel)]="supplier" formControlName="supplier" value="supplier" checked="true"></ion-checkbox>
+						  </ion-item>
+				    </ion-list>
+				    <button ion-button full class="signupBtn" type="submit">Sign Up</button>
+				    <p class="para">Already have account ?<b style="color: black;font-weight: 400;" (click)="gotoSignIn()"> Sign In</b></p>
 		  		</ion-grid>
-
-			  	<!-- <p class="para">Please Provide Email to Reset Password</p>
-					<br/>	
-			  		<ion-row class="row-css">
-			  			<ion-col col-1 col-xl-1 class="col-in">
-			  				<img src="assets/imgs/close-envelope.png" class="img-size1">
-			  			</ion-col>
-			  			<ion-col col-11 col-xl-11 class="col-in2">
-			  				<ion-item class="item-css">
-						    	<ion-label fixed class="label-css">Email</ion-label>
-						    	<ion-input class="input-text"></ion-input>
-						  	</ion-item>	
-			  			</ion-col>
-			  		</ion-row>
-			  		<button ion-button full class="resetBtn">Reset Password</button> -->
-
-			  </ion-card-content>
+			  <!-- </ion-card-content>
 
 			</ion-card>
-		</ion-grid>
+		</ion-grid> -->
 	</form>
 </ion-content>
