@@ -134,4 +134,101 @@ page-addreview {
 		font-weight: 500;
 	    text-transform: none;
 	}
+	.row-css{
+		border-bottom: 1px solid #b3b2b3;
+	}
+	.col-in{
+		align-items: center !important;
+    	justify-content: center !important;
+    	text-align: center !important;
+    	vertical-align: center !important;
+	}
+	.name-icon{
+		font-size: 20px;
+		color: #b3b2b3;
+	}
+	.item-css{
+		margin-top: -17px;
+	}
+	.label-css{
+		margin-bottom: -9px;
+	}
+	.input-text{
+		margin-left: -24px;
+		margin-bottom: -21px;
+	}
+	.margn{
+		margin-top: 5px;
+	}
+	.item-md.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: none;
+	}
+	.item-ios.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: none;
+	}
+	.item-wp.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: none;
+	}
+	.item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+	    color: #999;
+	}
+	.item-input .label-ios, .item-select .label-ios, .item-datetime .label-ios {
+	    color: #999;
+	}
+	.item-input .label-wp, .item-select .label-wp, .item-datetime .label-wp {
+	    color: #999;
+	}
+	.item-md {
+	    padding-left: 0px;
+	    padding-right: 0;
+	    position: relative;
+	    font-size: 12px;
+	    font-weight: normal;
+	    text-transform: none;
+	    color: #000;
+	    background-color: #fff;
+	    box-shadow: none;
+	    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	    margin-top: -25px !important;
+	}
+	.item-md:hover {
+	    background-color: transparent;
+	}
+	.item-ios {
+	    padding-left: 0px;
+	    padding-right: 0;
+	    position: relative;
+	    font-size: 12px;
+	    font-weight: normal;
+	    text-transform: none;
+	    color: #000;
+	    background-color: #fff;
+	    box-shadow: none;
+	    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	    margin-top: -25px !important;
+	}
+	.item-wp {
+	    padding-left: 0px;
+	    padding-right: 0;
+	    position: relative;
+	    font-size: 12px;
+	    font-weight: normal;
+	    text-transform: none;
+	    color: #000;
+	    background-color: #fff;
+	    box-shadow: none;
+	    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	    margin-top: -25px !important;
+	}
+	.title-md{
+		margin-top: 16px;
+    	margin-left: -16px;
+	}
+	.img-size1{
+		max-width: 17px;
+    	height: 17px;
+	}
 }
