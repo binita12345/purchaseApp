@@ -177,4 +177,84 @@ page-signup {
 	.margn{
 		margin-top: 5px;
 	}
+	.item-ios .radio-ios {
+	    position: static;
+	    display: block;
+	    margin: 8px 39px 10px 8px;
+	}
+	.item-md .radio-md {
+	    position: static;
+	    display: block;
+	    margin: 8px 39px 10px 8px;
+	}
+	.checkbox-md .checkbox-icon {
+	    width: 20px !important;
+	    height: 20px !important;
+	    border-radius: 5px;
+	}
+	.checkbox-md .checkbox-checked {
+	    border-color: #787878;
+	    background-color: #ffffff;
+	}
+	.checkbox-md .checkbox-checked .checkbox-inner {
+	    left: 9px;
+	    top: -6px;
+	    position: absolute;
+	    width: 8px;
+	    height: 18px;
+	    border-width: 3px;
+	    border-top-width: 0;
+	    border-left-width: 0;
+	    border-style: solid;
+	    border-color: #0C6CB9;
+	    transform: rotate(45deg);
+	}
+	.checkbox-ios .checkbox-icon {
+	    width: 20px !important;
+	    height: 20px !important;
+	    border-radius: 5px;
+	    border-width: 2px;
+	    border-color: #787878;
+	}
+	.checkbox-ios .checkbox-checked {
+	    border-color: #787878;
+	    background-color: #ffffff;
+	}
+	.checkbox-ios .checkbox-checked .checkbox-inner {
+	    left: 9px;
+	    top: -6px;
+	    position: absolute;
+	    width: 8px;
+	    height: 18px;
+	    border-width: 3px;
+	    border-top-width: 0;
+	    border-left-width: 0;
+	    border-style: solid;
+	    border-color: #0C6CB9;
+	    transform: rotate(45deg);
+	}
+	.checkbox-wp .checkbox-icon {
+	    width: 20px !important;
+	    height: 20px !important;
+	    border-radius: 5px;
+	    border-width: 2px;
+	    border-color: #787878;
+	}
+	.checkbox-wp .checkbox-checked {
+	    border-color: #787878;
+	    background-color: #ffffff;
+	}
+	.checkbox-wp .checkbox-checked .checkbox-inner {
+	    left: 9px;
+	    top: -6px;
+	    position: absolute;
+	    width: 8px;
+	    height: 18px;
+	    border-width: 3px;
+	    border-top-width: 0;
+	    border-left-width: 0;
+	    border-style: solid;
+	    border-color: #0C6CB9;
+	    transform: rotate(45deg);
+	}
 }

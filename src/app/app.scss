@@ -95,9 +95,10 @@ $text-input-md-show-error-highlight:        false;
     margin-top: 45px !important;
 }
 
-// .platform-android .headerTitle{
-//     margin-right: 50px !important;
-// }
+.back-button-md {
+    margin: 0 -10px;
+    box-shadow: none;
+}
 .toolbar-ios {
     // padding-top: 15px;
     padding-left: 4px;

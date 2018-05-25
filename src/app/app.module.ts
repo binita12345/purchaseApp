@@ -3,11 +3,9 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-// import { TabsPage } from '../pages/tabs/tabs';
-import { SuperTabsModule } from 'ionic2-super-tabs';
 
 import { HeaderComponent } from '../components/header/header';
-import { NativePageTransitions } from '@ionic-native/native-page-transitions';
+import { FooterComponent } from '../components/footer/footer'
 
 import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
@@ -16,24 +14,20 @@ import { MainPage } from '../pages/main/main';
   declarations: [
     MyApp,
     MainPage,
-    // TabsPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
-    SuperTabsModule.forRoot()
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    MainPage,
-    // TabsPage
+    MainPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    NativePageTransitions
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

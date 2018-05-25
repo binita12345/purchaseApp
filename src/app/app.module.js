@@ -9,8 +9,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-// import { TabsPage } from '../pages/tabs/tabs';
-import { SuperTabsModule } from 'ionic2-super-tabs';
 import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
 var AppModule = /** @class */ (function () {
@@ -24,13 +22,12 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 BrowserModule,
-                IonicModule.forRoot(MyApp),
-                SuperTabsModule.forRoot()
+                IonicModule.forRoot(MyApp)
             ],
             bootstrap: [IonicApp],
             entryComponents: [
                 MyApp,
-                MainPage,
+                MainPage
             ],
             providers: [
                 StatusBar,

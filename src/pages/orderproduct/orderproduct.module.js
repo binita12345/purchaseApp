@@ -6,26 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { TabsPage } from './tabs';
-import { SuperTabsModule } from 'ionic2-super-tabs';
-var TabsPageModule = /** @class */ (function () {
-    function TabsPageModule() {
+import { OrderproductPage } from './orderproduct';
+var OrderproductPageModule = /** @class */ (function () {
+    function OrderproductPageModule() {
     }
-    TabsPageModule = __decorate([
+    OrderproductPageModule = __decorate([
         NgModule({
             declarations: [
-                TabsPage,
+                OrderproductPage,
             ],
             imports: [
-                IonicPageModule.forChild(TabsPage),
-                SuperTabsModule
+                IonicPageModule.forChild(OrderproductPage),
             ],
-            exports: [
-                TabsPage
-            ]
         })
-    ], TabsPageModule);
-    return TabsPageModule;
+    ], OrderproductPageModule);
+    return OrderproductPageModule;
 }());
-export { TabsPageModule };
-//# sourceMappingURL=tabs.module.js.map
+export { OrderproductPageModule };
+//# sourceMappingURL=orderproduct.module.js.map

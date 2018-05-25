@@ -7,6 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { RequestlistPage } from './requestlist';
+import { HeaderComponentModule } from '../../components/header/header.module';
+import { FooterComponentModule } from '../../components/footer/footer.module';
 var RequestlistPageModule = /** @class */ (function () {
     function RequestlistPageModule() {
     }
@@ -17,6 +19,8 @@ var RequestlistPageModule = /** @class */ (function () {
             ],
             imports: [
                 IonicPageModule.forChild(RequestlistPage),
+                HeaderComponentModule,
+                FooterComponentModule
             ],
         })
     ], RequestlistPageModule);

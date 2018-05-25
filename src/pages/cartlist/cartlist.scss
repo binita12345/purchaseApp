@@ -1,3 +1,173 @@
 page-cartlist {
 
+	// footer css
+	.active {
+		max-height: 54px;
+	    background-color: #000000;
+	    color: white;
+	    border-bottom: 1px solid #0A76D2 ;
+	}
+	.slide-zoom {
+	    text-align: center;
+	    display: contents !important;
+	    width: 100%;
+	}
+
+	.card-md {
+	    // margin: 0px;
+	    margin-top: -38px;
+	    margin-left: -13px;
+	    border-radius: 2px;
+	    width: 105%;
+	    font-size: 1.4rem;
+	    background: #fff;
+	    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	}
+	.footerP{
+		font-size: 9px;
+		margin: 6px -11px -3px;
+    	color: #fff;
+    	font-weight: 500;
+	}
+	.slidesCss{
+	    max-height: 56px;
+	    background-color: #0A76D2;
+	}
+	.imagebgColor{
+		height: 20px;
+		width: 20px;
+		margin: auto;
+	}
+	.swiper-slide img {
+	    max-width: 25px;
+	    max-height: 25px;
+	    // margin-top: -10px;
+	}
+	.grid-css{
+		border-right: 1px solid #0967B7;
+		cursor: pointer;
+	}
+	.grid-css:active {
+		max-height: 54px;
+		background-color: #000000;
+		cursor: pointer;
+		border-bottom: 1px solid #0A76D2 ;
+	}
+	.grid-css:focus{
+		max-height: 54px;
+		background-color: #000000;
+		cursor: pointer;
+		border-bottom: 1px solid #0A76D2 ;
+	}
+	.ion-fixed:focus{
+		max-height: 54px;
+		background-color: #000000;
+		cursor: pointer;
+		border-bottom: 1px solid #0A76D2 ;
+	}
+	.grid-css:hover, .grid-css.selected {
+		max-height: 54px;
+	    background-color: #000000;
+	    color: white;
+	    border-bottom: 1px solid #0A76D2 ;
+	}
+	.grid-css:visited {
+		max-height: 54px;
+	    background-color: #000000;
+	    color: white;
+	    border-bottom: 1px solid #0A76D2 ;
+	}
+	.btnInvite{
+		font-size: 12px;
+		text-transform: none;
+		background-color: #0065B9;
+		border-radius: 0px;
+	}
+	.title-col{
+		margin-top: -10px;
+	}
+	.button-md {
+	    margin: -21px 20px !important;
+	    height: 45px !important;
+	}
+	.list-ios {
+	    margin: -49px 0 20px;
+	}
+	.list-wp {
+	    margin: -49px 0 20px;
+	}
+	.toolbar-ios ion-title {
+	    left: -30px;
+	    top: -17px;
+	    padding: 0 !important;
+	    position: absolute;
+	    width: 100%;
+	    transform: translateZ(0);
+	    pointer-events: none;
+	}
+	.toolbar-wp ion-title {
+	    left: -60px;
+	    // top: 20px;
+	    padding: 0 !important;
+	    position: absolute;
+	    width: 100%;
+	    transform: translateZ(0);
+	    pointer-events: none;
+	}
+	.list-wp {
+	    margin: -49px 0 20px;
+	}
+	.button-wp {
+	    margin: -18px!important;
+	    height: 45px !important;
+	}
+	.toolbar-title {
+	    display: block;
+	    overflow: visible !important;
+	    width: 100%;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
+	.button-ios {
+	    margin: -18px!important;
+	    height: 45px !important;
+	}
+	.cart-imgs{
+		height: 14px;
+		width: 12px;
+	}
+	h6{
+		font-size: 12px !important;
+		font-weight: 400 !important;
+	}
+	.cart-parag{
+		font-size: 10px;
+    	color: #6C6C6C;
+	}
+	.cart-list{
+		border: 1px solid #F5F5F5;
+		margin: 5px;
+    	width: 97%;
+	}
+	.item-md ion-thumbnail {
+	    min-width: 50px;
+	    min-height: 50px;
+	}
+	.item-md ion-thumbnail ion-img, .item-md ion-thumbnail img {
+	    width: 65px !important;
+	    height: 65px !important; 
+	    border-radius: 4px;
+	}
+	.item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img {
+	    border-radius: 4px;
+	}
+	.toolbar-title-wp {
+		font-weight: 500;
+	    text-transform: none;
+	}
+	.item-wp ion-thumbnail ion-img, .item-wp ion-thumbnail img {
+	    width: 65px !important;
+	    height: 65px !important; 
+	    border-radius: 4px;
+	}
 }

@@ -41,8 +41,8 @@ var SigninPage = /** @class */ (function () {
     };
     SigninPage.prototype.userLogin = function () {
         console.log("go to home page");
-        // this.navCtrl.push("HomeappPage");
-        this.navCtrl.setRoot('TabsPage');
+        this.navCtrl.push("HomeappPage");
+        // this.navCtrl.setRoot('TabsPage');
     };
     SigninPage = __decorate([
         IonicPage(),
