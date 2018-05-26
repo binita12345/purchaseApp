@@ -81,19 +81,203 @@ page-inquiryproduct {
 	    color: white;
 	    border-bottom: 1px solid #0A76D2 ;
 	}
-	// .active {
-	// 	max-height: 54px;
-	//     background-color: #000000;
-	//     color: white;
-	//     border-bottom: 1px solid #0A76D2 ;
-	// }
-	// :target{
-	// 	max-height: 54px;
-	//     background-color: #000000;
-	//     color: white;
-	//     border-bottom: 1px solid #0A76D2 ;
-	// }
 	.title-col{
 		margin-top: -10px;
+	}
+
+	// header css
+	.toolbar-ios ion-title {
+	    // left: -20px;
+	    top: -30px;
+	    padding: 0 0 1px !important;
+	    text-align: left;
+	    position: absolute;
+	    width: 100%;
+	    transform: translateZ(0);
+	    pointer-events: none;
+	}
+	.toolbar-wp ion-title {
+	    // left: -20px;
+	    top: 0px;
+	    padding: 0 0 1px !important;
+	    text-align: left;
+	    position: absolute;
+	    width: 100%;
+	    transform: translateZ(0);
+	    pointer-events: none;
+	}
+	.toolbar-title {
+	    display: block;
+	    overflow: visible !important;
+	    width: 100%;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
+	.list-ios {
+	    margin: 0px 0 20px;
+	}
+	.list-wp {
+	    margin: -49px 0 20px;
+	}
+	.card-ios {
+	    margin-top: -38px;
+	    margin-left: -13px;
+	    border-radius: 2px;
+	    width: 105%;
+	    font-size: 1.4rem;
+	    background: #fff;
+	    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	}
+	.card-wp {
+	    margin-top: -35px;
+	    margin-left: -13px;
+	    border-radius: 2px;
+	    width: 105%;
+	    font-size: 1.4rem;
+	    background: #fff;
+	    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	}
+	.toolbar-title-wp {
+		font-weight: 500;
+	    text-transform: none;
+	}
+	.back-button-wp {
+	    margin: 0px -15px;
+	    min-width: 44px;
+	    box-shadow: none;
+	}
+	.item-md.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: none;
+	}
+	.item-ios.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: none;
+	}
+	.item-wp.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: none;
+	}
+	.item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+	    color: #999;
+	}
+	.item-input:focus .label-md:focus, .item-select:focus .label-md:focus, .item-datetime:focus .label-md:focus {
+	    color: #4D93CE;
+	}
+	.item-input .label-ios, .item-select .label-ios, .item-datetime .label-ios {
+	    color: #999;
+	}
+	.item-input .label-wp, .item-select .label-wp, .item-datetime .label-wp {
+	    color: #999;
+	}
+	.item-md {
+	    padding-left: 0px;
+	    padding-right: 0;
+	    position: relative;
+	    font-size: 12px;
+	    font-weight: normal;
+	    text-transform: none;
+	    color: #000;
+	    background-color: #fff;
+	    box-shadow: none;
+	    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	    margin-top: -25px !important;
+	}
+	.item-md:hover {
+	    background-color: transparent;
+	}
+	//#4D93CE
+	.item-input:focus{
+		color: #4D93CE !important;
+	}
+	.item-ios {
+	    padding-left: 0px;
+	    padding-right: 0;
+	    position: relative;
+	    font-size: 12px;
+	    font-weight: normal;
+	    text-transform: none;
+	    color: #000;
+	    background-color: #fff;
+	    box-shadow: none;
+	    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	    margin-top: -25px !important;
+	}
+	.item-wp {
+	    padding-left: 0px;
+	    padding-right: 0;
+	    position: relative;
+	    font-size: 12px;
+	    font-weight: normal;
+	    text-transform: none;
+	    color: #000;
+	    background-color: #fff;
+	    box-shadow: none;
+	    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	    margin-top: -25px !important;
+	}
+	.title-md{
+		margin-top: 16px;
+    	margin-left: -16px;
+	}
+	.img-size1{
+		max-width: 17px;
+    	height: 17px;
+	}
+	.btnInvite{
+		font-size: 15px;
+		text-transform: none;
+		background-color: #0065B9;
+		border-radius: 0px;
+	}
+	.button-md {
+	    margin: -7px -14px -30px!important;
+	    height: 45px !important;
+	}
+	.button-ios {
+	    margin: -14px!important;
+	    height: 45px !important;
+	}
+	.button-wp {
+	    margin: -18px!important;
+	    height: 45px !important;
+	}
+	// content css
+	.name-icon {
+		color: #B3B2B3;
+		font-size: 20px;
+	}
+	.row-css{
+		border-bottom: 1px solid #b3b2b3;
+	}
+	.col-in{
+		align-items: center !important;
+    	justify-content: center !important;
+    	text-align: center !important;
+    	vertical-align: center !important;
+	}
+	.img-size1{
+		width: 17px;
+    	height: 17px;
+	}
+	.item-css{
+		margin-top: -17px;
+	}
+	.label-css{
+		margin-bottom: -9px;
+		font-weight: 500;
+		color: #B3B2B3;
+	}
+	.input-text{
+		margin-left: -60px;
+		margin-bottom: -21px;
+	}
+	.margn{
+		margin-top: 5px;
+	}
+	.inquiry-css {
+		margin-top: 26px;
+		color: #999;
+		font-weight: 500;
 	}
 }

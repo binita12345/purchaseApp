@@ -27,6 +27,9 @@ export class CartlistPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CartlistPage');
   }
+  inquiryProduct(){
+    this.navCtrl.push("InquiryproductPage");
+  }
   gotoHome(){
   	// let myDiv = document.getElementById('target1');
   	

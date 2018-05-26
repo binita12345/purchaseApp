@@ -57,9 +57,6 @@ export class RequestlistPage {
       console.log("this.lists...4", this.lists);
     }
   }
-  addProduct(){
-    this.navCtrl.push("AddproductPage");
-  }
 
   addreview(){
     this.navCtrl.push("AddreviewPage");

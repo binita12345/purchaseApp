@@ -42,7 +42,9 @@
 	    <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
 	    <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
 	    <img src="{{list.distance}}">
-	    <p item-end style="color: #000000;">{{list.price}}</p>
+	    <!-- <p item-end style="color: #000000;">{{list.price}}</p>
+	    <button ion-button (click)="inquiryProduct()">Inquiry Product</button> -->
+	    <div item-end class="icon_middle"><p item-end style="color: #000000;">{{list.price}}</p><span ><button ion-button class="btn-inquiry" (click)="inquiryProduct()">Inquiry</button></span> </div>
 	  </ion-item>
 	</ion-list>
 

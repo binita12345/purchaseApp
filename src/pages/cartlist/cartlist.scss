@@ -176,4 +176,14 @@ page-cartlist {
 	    min-width: 44px;
 	    box-shadow: none;
 	}
+
+	// cart-content
+	.icon_middle {
+	    text-align: center;
+	}
+	.btn-inquiry{
+		max-height: 30px !important;
+    	width: 75px !important;
+    	text-transform: none !important;
+	}
 }
