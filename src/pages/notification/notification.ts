@@ -14,8 +14,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
+  lists : any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.lists = [{'desc': "PRODUCT NAME", 'status': "Status"},
+    {'desc': "PRODUCT NAME", 'status': "Status"},
+    {'desc': "PRODUCT NAME", 'status': "Status"}]
   }
 
   ionViewDidLoad() {

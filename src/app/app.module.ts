@@ -9,6 +9,7 @@ import { FooterComponent } from '../components/footer/footer'
 
 import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
+import { Ionic2RatingModule } from 'ionic2-rating';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MainPage } from '../pages/main/main';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

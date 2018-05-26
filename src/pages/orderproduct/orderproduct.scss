@@ -118,9 +118,6 @@ page-orderproduct {
 	    transform: translateZ(0);
 	    pointer-events: none;
 	}
-	.list-wp {
-	    margin: -49px 0 20px;
-	}
 	.toolbar-title {
 	    display: block;
 	    overflow: visible !important;
@@ -307,5 +304,10 @@ page-orderproduct {
 	}
 	.title-md{
 		margin-left: -40px;
+	}
+	.back-button-wp {
+	    margin: 0px -15px;
+	    min-width: 44px;
+	    box-shadow: none;
 	}
 }	

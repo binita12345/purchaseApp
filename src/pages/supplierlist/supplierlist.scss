@@ -98,9 +98,6 @@ page-supplierlist {
 	.list-ios {
 	    margin: -49px 0 20px;
 	}
-	.list-wp {
-	    margin: -49px 0 20px;
-	}
 	.toolbar-ios ion-title {
 	    left: -30px;
 	    top: -17px;
@@ -230,5 +227,10 @@ page-supplierlist {
 	.toolbar-title-wp {
 		font-weight: 500;
 	    text-transform: none;
+	}
+	.back-button-wp {
+	    margin: 0px -15px;
+	    min-width: 44px;
+	    box-shadow: none;
 	}
 }

@@ -105,7 +105,7 @@ page-requestlist {
 	    white-space: nowrap;
 	}
 	.list-ios {
-	    margin: -49px 0 20px;
+	    margin: 0px 0 20px;
 	}
 	.list-wp {
 	    margin: -49px 0 20px;
@@ -170,10 +170,6 @@ page-requestlist {
 	    height: 75px !important; 
 	    border-radius: 4px;
 	}
-	.toolbar-title-wp {
-		font-weight: 500;
-	    text-transform: none;
-	}
 	.delete-img{
 		height: 20px;
 		width: 20px;
@@ -230,9 +226,6 @@ page-requestlist {
 	    font-weight: 500;
 	    text-transform: none !important;
 	}
-	// .segment-button :focus {
-	//     background-color: #0A76D2 !important;
-	// }
 	.segment-ios .segment-button:first-of-type {
 	    border-top-left-radius: 0px;
 	    border-top-right-radius: 2px;
@@ -246,17 +239,12 @@ page-requestlist {
 	    border-bottom-left-radius: 2px;
 	}
 	.segment-button.segment-activated {
-		    // margin-top: 100px;
 	    color: #fff;
 	    background-color: #0A76D2 !important;
 	}
-	// .segment-md .segment-button{
-	//     color: #fff;
-	//     background-color: #2D2D2D !important;
-	// }
-	// .segment-wp .segment-button{
-	//     color: #fff;
-	//     background-color: #2D2D2D !important;
-	// }
-
+	.back-button-wp {
+	    margin: 0px -15px;
+	    min-width: 44px;
+	    box-shadow: none;
+	}
 }

@@ -41,6 +41,12 @@ page-notification {
 	    max-height: 25px;
 	    // margin-top: -10px;
 	}
+	.list-ios {
+	    margin: -49px 0 20px;
+	}
+	.list-wp {
+	    margin: -50px 0 20px;
+	}
 	.grid-css{
 		border-right: 1px solid #0967B7;
 		cursor: pointer;
@@ -75,19 +81,36 @@ page-notification {
 	    color: white;
 	    border-bottom: 1px solid #0A76D2 ;
 	}
-	// .active {
-	// 	max-height: 54px;
-	//     background-color: #000000;
-	//     color: white;
-	//     border-bottom: 1px solid #0A76D2 ;
-	// }
-	// :target{
-	// 	max-height: 54px;
-	//     background-color: #000000;
-	//     color: white;
-	//     border-bottom: 1px solid #0A76D2 ;
-	// }
 	.title-col{
 		margin-top: -10px;
+	}
+	.back-button-wp {
+	    margin: 0px -15px;
+	    min-width: 44px;
+	    box-shadow: none;
+	}
+	.toolbar-ios ion-title {
+	    left: 0;
+	    top: -40px;
+	    padding: 0px 29px 0px;
+	    position: absolute;
+	    width: 100%;
+	    transform: translateZ(0);
+	    pointer-events: none;
+	}
+	.notification-list {
+		border: 1px solid #dadada;
+    	border-radius: 3px;
+    	margin: 0px 0px 10px 0px;
+	}
+	.status-notif {
+		color: #07B311;
+		font-weight: 500;
+		font-size: 12px;
+	}
+	.desc{
+		font-size: 13px;
+		color: #000;
+    	font-weight: 500;
 	}
 }

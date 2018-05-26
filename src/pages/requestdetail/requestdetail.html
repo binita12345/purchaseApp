@@ -1,57 +1,42 @@
 <!--
-  Generated template for the InvitefriendsPage page.
+  Generated template for the RequestdetailPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<!-- <ion-header>
-
-  <ion-navbar>
-    <ion-title>invitefriends</ion-title>
-  </ion-navbar>
-
-</ion-header> -->
-<!-- <header title="Invite friends"> </header> -->
 <ion-header>
-
   <ion-navbar color="dark">
     <ion-grid>
       <ion-row>
-        <ion-col col-4 col-xl-4>
+        <ion-col col-2 col-xl-2>
         </ion-col>
-        <ion-col col-4 col-xl-4>
-          <ion-title>Invite friends</ion-title>
+        <ion-col col-8 col-xl-8>
+          <ion-title>Request details</ion-title>
         </ion-col>
-        <ion-col col-4 col-xl-4 style="text-align: right;">
-          <button ion-button class="btnInvite" (click)="submit()">Submit</button>
-          <!-- <img src="assets/imgs/circleplus.png" style="height: 24px;"> -->
+        <ion-col col-2 col-xl-2>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-navbar>
-  <ion-toolbar class="bg-color">
-    <ion-searchbar></ion-searchbar>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row class="row-css" *ngFor="let list of lists" (click)="checkList(list)">
-      <ion-col col-2 col-xl-2>
-        <ion-icon name="md-contact" class="friendIcon"></ion-icon>
-      </ion-col>
-      <ion-col col-9 col-xl-9>
-        <p class="name">{{list.name}}</p>
-        <p class="num">{{list.num}}</p>
-      </ion-col>
-      <ion-col col-1 col-xl-1>
-        <ion-icon name="md-checkmark" class="friendIcon size" *ngIf="check"></ion-icon>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+	<ion-list class="cart-list" *ngFor="let list of lists">
+      <!-- {{list | json}} -->
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="{{list.image}}">
+        </ion-thumbnail>
+        <h3 style="font-weight: 500;">{{list.name}}</h3>
+        <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
+        <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
+        <p class="priceP">{{list.price}}</p>
+        <img src="assets/imgs/editdetail.png" item-end class="delete-img cursor">
+        <img src="assets/imgs/deletedetail.png" item-end class="delete-img cursor">
+      </ion-item>
+    </ion-list>
 </ion-content>
-<!-- <footer></footer> -->
+
 <ion-footer>
   <ion-toolbar>
     <ion-grid ion-fixed>
@@ -81,7 +66,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" (click)="gotoRequest()">
+                        <ion-grid class="grid-css active" (click)="gotoRequest()">
                           <ion-row>
                             <ion-col col-12>
                               <img src="assets/imgs/request.png" class="imagebgColor">
@@ -123,7 +108,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css active" (click)="gotoInviteFriend()">
+                        <ion-grid class="grid-css" (click)="gotoInviteFriend()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/adduser.png" class="imagebgColor">

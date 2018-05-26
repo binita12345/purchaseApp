@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the InvitefriendsPage page.
+ * Generated class for the RequestdetailPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,32 +10,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-invitefriends',
-  templateUrl: 'invitefriends.html',
+  selector: 'page-requestdetail',
+  templateUrl: 'requestdetail.html',
 })
-export class InvitefriendsPage {
-  lists : any = [];
-  check : boolean = false;
+export class RequestdetailPage {
+	lists : any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.lists = [{'name':"UIDAI", 'num': "+91 98297 99298"},
-    {'name':"Distress Number", 'num': "112"},
-    {'name':"Jeks parser", 'num': "+91 98297 99298"},
-    {'name':"Jeks parser", 'num': "+91 98297 99298"},
-    {'name':"Catch a Song", 'num': "+9157373"}]
-  }
-  checkList(list){
-    console.log("list", list);
-    if(list){
-      this.check = true; 
-    } else {
-      this.check = false; 
-    }
+  	this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
+    {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
+    {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
+    {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"}]
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InvitefriendsPage');
+    console.log('ionViewDidLoad RequestdetailPage');
   }
+
   gotoHome(){
   	this.navCtrl.push("HomeappPage");
   }
