@@ -19,6 +19,10 @@ var NotificationPage = /** @class */ (function () {
     function NotificationPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.lists = [];
+        this.lists = [{ 'desc': "PRODUCT NAME", 'status': "Status" },
+            { 'desc': "PRODUCT NAME", 'status': "Status" },
+            { 'desc': "PRODUCT NAME", 'status': "Status" }];
     }
     NotificationPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad NotificationPage');
@@ -45,7 +49,7 @@ var NotificationPage = /** @class */ (function () {
         // document.getElementById("target5").style.background = "#000000";
     };
     NotificationPage.prototype.gotoInquiryProduct = function () {
-        this.navCtrl.push("InquiryproductPage");
+        this.navCtrl.push("InquiryproductdetailPage");
         // document.getElementById("target6").style.background = "#000000";
     };
     NotificationPage.prototype.gotoInviteFriend = function () {

@@ -21,5 +21,29 @@ export class InquiryproductdetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad InquiryproductdetailPage');
   }
+  gotoHome(){
+  	this.navCtrl.push("HomeappPage");
+  }
+  gotoCart(){
+  	this.navCtrl.push("CartlistPage");
+  }
+  gotoRequest(){
+  	this.navCtrl.push("RequestlistPage");
+  }
+  gotoProfile(){
+  	this.navCtrl.push("ProfilePage");
+  }
+  gotoNotification(){
+  	this.navCtrl.push("NotificationPage");
+  }
+  gotoInquiryProduct(){
+  	this.navCtrl.push("InquiryproductdetailPage");
+  }
+  gotoInviteFriend(){
+  	this.navCtrl.push("InvitefriendsPage");
+  }
+  gotoChangePassword(){
+  	this.navCtrl.push("ChangepasswordPage");
+  }
 
 }

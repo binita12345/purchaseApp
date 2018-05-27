@@ -22,19 +22,19 @@
 
 <ion-content>
 	<ion-list class="cart-list" *ngFor="let list of lists">
-      <!-- {{list | json}} -->
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="{{list.image}}">
-        </ion-thumbnail>
-        <h3 style="font-weight: 500;">{{list.name}}</h3>
-        <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
-        <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
-        <p class="priceP">{{list.price}}</p>
-        <img src="assets/imgs/editdetail.png" item-end class="delete-img cursor">
-        <img src="assets/imgs/deletedetail.png" item-end class="delete-img cursor">
-      </ion-item>
-    </ion-list>
+    <!-- {{list | json}} -->
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="{{list.image}}">
+      </ion-thumbnail>
+      <h3 class="productname" (click)="gotoproductDetail()">{{list.name}}</h3>
+      <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
+      <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
+      <p class="priceP">{{list.price}}</p>
+      <img src="assets/imgs/editdetail.png" item-end class="delete-img cursor" (click)="editProduct()">
+      <img src="assets/imgs/deletedetail.png" item-end class="delete-img cursor">
+    </ion-item>
+  </ion-list>
 </ion-content>
 
 <ion-footer>

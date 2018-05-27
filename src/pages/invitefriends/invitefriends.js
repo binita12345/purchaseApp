@@ -19,42 +19,49 @@ var InvitefriendsPage = /** @class */ (function () {
     function InvitefriendsPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.lists = [];
+        this.check = false;
+        this.lists = [{ 'name': "UIDAI", 'num': "+91 98297 99298" },
+            { 'name': "Distress Number", 'num': "112" },
+            { 'name': "Jeks parser", 'num': "+91 98297 99298" },
+            { 'name': "Jeks parser", 'num': "+91 98297 99298" },
+            { 'name': "Catch a Song", 'num': "+9157373" }];
     }
+    InvitefriendsPage.prototype.checkList = function (list) {
+        console.log("list", list);
+        if (list) {
+            this.check = true;
+        }
+        else {
+            this.check = false;
+        }
+    };
     InvitefriendsPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad InvitefriendsPage');
     };
     InvitefriendsPage.prototype.gotoHome = function () {
-        // let myDiv = document.getElementById('target1');
         this.navCtrl.push("HomeappPage");
-        // document.getElementById("target1").style.background = "#000000";
     };
     InvitefriendsPage.prototype.gotoCart = function () {
         this.navCtrl.push("CartlistPage");
-        // document.getElementById("target2").style.background = "#000000";
     };
     InvitefriendsPage.prototype.gotoRequest = function () {
         this.navCtrl.push("RequestlistPage");
-        // document.getElementById("target3").style.background = "#000000";
     };
     InvitefriendsPage.prototype.gotoProfile = function () {
         this.navCtrl.push("ProfilePage");
-        // document.getElementById("target4").style.background = "#000000";
     };
     InvitefriendsPage.prototype.gotoNotification = function () {
         this.navCtrl.push("NotificationPage");
-        // document.getElementById("target5").style.background = "#000000";
     };
     InvitefriendsPage.prototype.gotoInquiryProduct = function () {
-        this.navCtrl.push("InquiryproductPage");
-        // document.getElementById("target6").style.background = "#000000";
+        this.navCtrl.push("InquiryproductdetailPage");
     };
     InvitefriendsPage.prototype.gotoInviteFriend = function () {
         this.navCtrl.push("InvitefriendsPage");
-        // document.getElementById("target7").style.background = "#000000";
     };
     InvitefriendsPage.prototype.gotoChangePassword = function () {
         this.navCtrl.push("ChangepasswordPage");
-        // document.getElementById("target8").style.background = "#000000";
     };
     InvitefriendsPage = __decorate([
         IonicPage(),

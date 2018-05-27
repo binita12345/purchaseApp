@@ -32,14 +32,12 @@ var RequestlistPage = /** @class */ (function () {
     RequestlistPage.prototype.statusChanged = function (event) {
         console.log("event", event.value);
         if (event.value == "delivery") {
-            document.getElementById("myDiv").style.marginTop = "100px";
             this.delivery = true;
             this.open = false;
             this.close = false;
             console.log("this.lists...1", this.lists);
         }
         else if (event.value == "open") {
-            document.getElementById("myDiv").style.marginTop = "100px";
             this.delivery = false;
             this.open = true;
             this.close = false;
@@ -58,41 +56,38 @@ var RequestlistPage = /** @class */ (function () {
             console.log("this.lists...4", this.lists);
         }
     };
+    RequestlistPage.prototype.addreview = function () {
+        this.navCtrl.push("AddreviewPage");
+    };
+    RequestlistPage.prototype.gotorequestDetail = function () {
+        this.navCtrl.push("RequestdetailPage");
+    };
     RequestlistPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad RequestlistPage');
     };
     RequestlistPage.prototype.gotoHome = function () {
-        // let myDiv = document.getElementById('target1');
         this.navCtrl.push("HomeappPage");
-        // document.getElementById("target1").style.background = "#000000";
     };
     RequestlistPage.prototype.gotoCart = function () {
         this.navCtrl.push("CartlistPage");
-        // document.getElementById("target2").style.background = "#000000";
     };
     RequestlistPage.prototype.gotoRequest = function () {
         this.navCtrl.push("RequestlistPage");
-        // document.getElementById("target3").style.background = "#000000";
     };
     RequestlistPage.prototype.gotoProfile = function () {
         this.navCtrl.push("ProfilePage");
-        // document.getElementById("target4").style.background = "#000000";
     };
     RequestlistPage.prototype.gotoNotification = function () {
         this.navCtrl.push("NotificationPage");
-        // document.getElementById("target5").style.background = "#000000";
     };
     RequestlistPage.prototype.gotoInquiryProduct = function () {
-        this.navCtrl.push("InquiryproductPage");
-        // document.getElementById("target6").style.background = "#000000";
+        this.navCtrl.push("InquiryproductdetailPage");
     };
     RequestlistPage.prototype.gotoInviteFriend = function () {
         this.navCtrl.push("InvitefriendsPage");
-        // document.getElementById("target7").style.background = "#000000";
     };
     RequestlistPage.prototype.gotoChangePassword = function () {
         this.navCtrl.push("ChangepasswordPage");
-        // document.getElementById("target8").style.background = "#000000";
     };
     RequestlistPage = __decorate([
         IonicPage(),

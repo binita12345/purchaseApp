@@ -45,7 +45,7 @@ var ChangepasswordPage = /** @class */ (function () {
         // document.getElementById("target5").style.background = "#000000";
     };
     ChangepasswordPage.prototype.gotoInquiryProduct = function () {
-        this.navCtrl.push("InquiryproductPage");
+        this.navCtrl.push("InquiryproductdetailPage");
         // document.getElementById("target6").style.background = "#000000";
     };
     ChangepasswordPage.prototype.gotoInviteFriend = function () {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the RequestdetailPage page.
@@ -16,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class RequestdetailPage {
 	lists : any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   	this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
     {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
     {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
@@ -25,6 +25,20 @@ export class RequestdetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RequestdetailPage');
+  }
+  editProduct(){
+    let modal = this.modalCtrl.create('EditmodalPage');
+    modal.present();
+
+    modal.onDidDismiss(productId => {
+      if(productId){
+        // this.buyNow(productId)
+      }       
+     });
+  }
+
+  gotoproductDetail(){
+    this.navCtrl.push("ProductdetailPage");
   }
 
   gotoHome(){
@@ -43,7 +57,7 @@ export class RequestdetailPage {
   	this.navCtrl.push("NotificationPage");
   }
   gotoInquiryProduct(){
-  	this.navCtrl.push("InquiryproductPage");
+  	this.navCtrl.push("InquiryproductdetailPage");
   }
   gotoInviteFriend(){
   	this.navCtrl.push("InvitefriendsPage");

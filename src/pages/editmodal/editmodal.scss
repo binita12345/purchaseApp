@@ -1,0 +1,43 @@
+page-editmodal {
+	.item.wrap, .item-content.wrap {
+		white-space: normal;
+	}
+	.modalPage{
+		left: 3%;
+    	top: 20%;
+    	position: absolute;
+    	display: block;
+    	width: 90%;
+    	height: 75%;
+    	border-radius: 5px;
+	}
+	.modal-title{
+		border-bottom: 1px solid #dedede;
+		background-color: #efefef !important;
+		height: 40px;
+		border-top-left-radius: 5px;
+    	border-top-right-radius: 5px;
+	}
+	.scroll-content {
+	    left: 0;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    position: absolute;
+	    z-index: 1;
+	    display: block;
+	    overflow-x: hidden;
+	    overflow-y: hidden;
+	}
+	.input-text{
+		border: 1px solid;
+	}
+	.cancel-btn{
+		background-color: #000000;
+		text-align: center;
+	}
+	.edit-btn{
+		background-color: #0B79D5;
+		text-align: center;
+	}
+}

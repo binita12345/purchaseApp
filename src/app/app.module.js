@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
+import { Ionic2RatingModule } from 'ionic2-rating';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -22,7 +23,8 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 BrowserModule,
-                IonicModule.forRoot(MyApp)
+                IonicModule.forRoot(MyApp),
+                Ionic2RatingModule
             ],
             bootstrap: [IonicApp],
             entryComponents: [

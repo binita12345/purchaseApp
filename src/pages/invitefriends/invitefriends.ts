@@ -52,7 +52,7 @@ export class InvitefriendsPage {
   	this.navCtrl.push("NotificationPage");
   }
   gotoInquiryProduct(){
-  	this.navCtrl.push("InquiryproductPage");
+  	this.navCtrl.push("InquiryproductdetailPage");
   }
   gotoInviteFriend(){
   	this.navCtrl.push("InvitefriendsPage");

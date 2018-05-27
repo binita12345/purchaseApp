@@ -47,7 +47,7 @@ var OrderproductPage = /** @class */ (function () {
         // document.getElementById("target5").style.background = "#000000";
     };
     OrderproductPage.prototype.gotoInquiryProduct = function () {
-        this.navCtrl.push("InquiryproductPage");
+        this.navCtrl.push("InquiryproductdetailPage");
         // document.getElementById("target6").style.background = "#000000";
     };
     OrderproductPage.prototype.gotoInviteFriend = function () {

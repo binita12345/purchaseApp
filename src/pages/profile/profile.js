@@ -45,7 +45,7 @@ var ProfilePage = /** @class */ (function () {
         // document.getElementById("target5").style.background = "#000000";
     };
     ProfilePage.prototype.gotoInquiryProduct = function () {
-        this.navCtrl.push("InquiryproductPage");
+        this.navCtrl.push("InquiryproductdetailPage");
         // document.getElementById("target6").style.background = "#000000";
     };
     ProfilePage.prototype.gotoInviteFriend = function () {

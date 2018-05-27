@@ -58,7 +58,7 @@ export class AddreviewPage {
   	// document.getElementById("target5").style.background = "#000000";
   }
   gotoInquiryProduct(){
-  	this.navCtrl.push("InquiryproductPage");
+  	this.navCtrl.push("InquiryproductdetailPage");
   	// document.getElementById("target6").style.background = "#000000";
   }
   gotoInviteFriend(){

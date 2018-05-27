@@ -189,4 +189,13 @@ page-requestdetail {
 	    min-width: 44px;
 	    box-shadow: none;
 	}
+	// content css
+	.productname{
+		font-weight: 500;
+	}
+	.productname:hover{
+		font-weight: 500;
+		color: #0F66B8;
+		cursor: pointer;
+	}
 }
