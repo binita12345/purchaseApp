@@ -19,6 +19,7 @@ export class RequestlistPage {
   delivery : boolean = true;
   open : boolean = false;
   close : boolean = false;
+  showOnlyForUser : boolean; 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},

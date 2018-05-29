@@ -14,22 +14,28 @@
 
 
 <ion-content class="modalPage">
-	<ion-title class="modal-title">editmodal</ion-title>
+	<ion-title class="modal-title">Products names</ion-title>
 	<div padding>
-		<ion-label>Pick up location</ion-label>
+		<ion-label class="label-text">Pick up location</ion-label>
 		<ion-input class="input-text" value="{{pickup}}"></ion-input>
+		<br/>
+		<ion-label class="label-text">Drop off location</ion-label>
+		<ion-input class="input-text" value="{{dropoff}}"></ion-input>
+		<br/>
+		<ion-label class="label-text">Price</ion-label>
+		<ion-input class="input-text" value="{{price}}"></ion-input>
 	</div>
 	<ion-footer>
-		<ion-grid>
-			<ion-row>
-				<ion-col col-6 col-xl-6>
-					<button ion-button class="cancel-btn">Cancel</button>
-				</ion-col>
-				<ion-col col-6 col-xl-6>
-					<button ion-button class="edit-btn">Edit</button>
-				</ion-col>
-			</ion-row>
-		</ion-grid>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-6 col-xl-6 class="cancel-btn">
+				<button full ion-button class="cancel-btn" (click)="cancel()">Close</button>
+			</ion-col>
+			<ion-col col-6 col-xl-6 class="edit-btn">
+				<button full ion-button class="edit-btn" (click)="edit()">Edit</button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 		
 	</ion-footer>
 </ion-content>

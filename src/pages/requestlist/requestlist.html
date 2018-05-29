@@ -28,7 +28,7 @@
     </ion-grid>
     
   </ion-navbar>
-  <ion-segment [(ngModel)]="requests" (ionChange)="statusChanged($event)">
+  <ion-segment [(ngModel)]="requests" (ionChange)="statusChanged($event)" *ngIf="showOnlyForUser">
     <ion-segment-button value="delivery">
       Delivery Request
     </ion-segment-button>
