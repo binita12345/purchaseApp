@@ -63,6 +63,32 @@ export class SigninPage {
     .catch(e => console.log(e));
   }
 
+  fblogin() {
+    console.log("facebook login");
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+    .then(res => {
+      console.log("facebook res" +JSON.stringify(res));
+      if(res.status === "connected") {
+        this.isLoggedIn = true;
+        this.getUserDetail(res.authResponse.userID);
+      } else {
+        this.isLoggedIn = false;
+      }
+    })
+    .catch(e => console.log('Error logging into Facebook', e));
+  }
+
+  getUserDetail(userid) {
+    this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
+      .then(res => {
+        console.log(res);
+        this.users = res;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad SigninPage');
   }
