@@ -1,9 +1,9 @@
 page-homeapp {
 	.active {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.slide-zoom {
 	    text-align: center;
@@ -46,34 +46,34 @@ page-homeapp {
 		cursor: pointer;
 	}
 	.grid-css:active {
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:focus{
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.ion-fixed:focus{
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:hover, .grid-css.selected {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:visited {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.title-col{
 		margin-top: -10px;
@@ -94,12 +94,12 @@ page-homeapp {
 	    text-overflow: ellipsis;
 	    white-space: nowrap;
 	}
-	.list-ios {
-	    margin: 0px 0 20px;
-	}
-	.list-wp {
-	    margin: -49px 0 20px;
-	}
+	// .list-ios {
+	//     margin: 0px 0 20px;
+	// }
+	// .list-wp {
+	//     margin: -49px 0 20px;
+	// }
 	.card-ios {
 	    // margin: 0px;
 	    margin-top: -38px;
@@ -128,5 +128,12 @@ page-homeapp {
 	    margin: 0px -15px;
 	    min-width: 44px;
 	    box-shadow: none;
+	}
+
+	.review-btn {
+		border-radius: 5px;
+		background-color: #0065B9;
+		text-transform: none;
+		min-height: 50px;
 	}
 }

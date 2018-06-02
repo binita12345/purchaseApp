@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the HomeappPage page.
  *
@@ -14,8 +14,38 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'homeapp.html',
 })
 export class HomeappPage {
+  customerLogin : any;
+  supplierLogin : any;
+  forUserContent : any;
+  forSupplierContent : any;
+  forBothContent : any;
+  bothLogin : any;
+  userType: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+
+    this.storage.get("userData").then(userData => {
+      console.log("userData" +JSON.stringify(userData));
+      this.userType = userData.data.user_type;
+      if (this.userType == "customer") {
+        this.forUserContent = true;
+        this.forSupplierContent =false;
+        this.forBothContent =false;
+      } else if (this.userType == "supplier") {
+        this.forUserContent = false;
+        this.forSupplierContent =true;
+        this.forBothContent =false;
+      } else if (this.userType == "both") {
+        this.forUserContent = false;
+        this.forSupplierContent =false;
+        this.forBothContent =true;
+      } else {
+      }
+    });
+  }
+
+  showreviewlist() {
+    this.navCtrl.push("ReviewlistPage");
   }
 
   ionViewDidLoad() {

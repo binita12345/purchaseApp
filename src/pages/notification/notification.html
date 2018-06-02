@@ -48,7 +48,7 @@
 
 </ion-content>
 <!-- <footer></footer> -->
-<ion-footer>
+<ion-footer class="applyFooter">
   <ion-toolbar>
     <ion-grid ion-fixed>
         <ion-row>
@@ -57,49 +57,7 @@
                 <ion-card>
                   <ion-slides class="slidesCss">
                       <ion-slide (ionSlideDidChange)="slideChanged()">
-                        <ion-grid class="grid-css" id='target1' #target1 (click)="gotoHome()">
-                          <ion-row>
-                            <ion-col col-12>
-                              <img src="assets/imgs/house.png" class="imagebgColor">
-                            </ion-col>
-                            <ion-col col-12 class="title-col">
-                              <p class="footerP">HOME</p>
-                            </ion-col>
-                          </ion-row>
-                        </ion-grid>
-                        <ion-grid class="grid-css" id='target2' #target2 (click)="gotoCart()">
-                          <ion-row>
-                            <ion-col col-12>
-                              <img src="assets/imgs/cart.png" class="imagebgColor">
-                            </ion-col>
-                            <ion-col col-12 class="title-col">
-                              <p class="footerP">SHOPPING LIST</p>
-                            </ion-col>
-                          </ion-row>
-                        </ion-grid>
-                        <ion-grid class="grid-css" id='target3' #target3 (click)="gotoRequest()">
-                          <ion-row>
-                            <ion-col col-12>
-                              <img src="assets/imgs/request.png" class="imagebgColor">
-                            </ion-col>
-                            <ion-col col-12 class="title-col">
-                              <p class="footerP">REQUEST</p>
-                            </ion-col>
-                          </ion-row>
-                        </ion-grid>
-                        <ion-grid class="grid-css" id='target4' #target4 (click)="gotoProfile()">
-                          <ion-row>
-                            <ion-col col-12 >
-                              <img src="assets/imgs/profile.png" class="imagebgColor">
-                            </ion-col>
-                            <ion-col col-12 class="title-col">
-                              <p class="footerP">PROFILE</p>
-                            </ion-col>
-                          </ion-row>
-                        </ion-grid>
-                      </ion-slide>
-                      <ion-slide (ionSlideDidChange)="slideChanged()">
-                        <ion-grid class="grid-css active" id='target5' #target5 (click)="gotoNotification()">
+                        <ion-grid class="grid-css active" (click)="gotoNotification()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/bell.png" class="imagebgColor">
@@ -109,7 +67,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" id='target6' #target6 (click)="gotoInquiryProduct()">
+                        <ion-grid class="grid-css" (click)="gotoInquiryProduct()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/inquiry.png" class="imagebgColor">
@@ -119,7 +77,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" id='target7' #target7 (click)="gotoInviteFriend()">
+                        <ion-grid class="grid-css" (click)="gotoInviteFriend()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/adduser.png" class="imagebgColor">
@@ -129,13 +87,55 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" id='target8' #target8 (click)="gotoChangePassword()">
+                        <ion-grid class="grid-css" (click)="gotoChangePassword()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/lockbk.png" class="imagebgColor">
                             </ion-col>
                             <ion-col col-12 class="title-col">
                               <p class="footerP">CHANGE PASSWORD</p>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                      </ion-slide>
+                      <ion-slide (ionSlideDidChange)="slideChanged()">
+                        <ion-grid class="grid-css" (click)="gotoHome()">
+                          <ion-row>
+                            <ion-col col-12>
+                              <img src="assets/imgs/house.png" class="imagebgColor">
+                            </ion-col>
+                            <ion-col col-12 class="title-col">
+                              <p class="footerP">HOME</p>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                        <ion-grid class="grid-css" (click)="gotoCart()">
+                          <ion-row>
+                            <ion-col col-12>
+                              <img src="assets/imgs/cart.png" class="imagebgColor">
+                            </ion-col>
+                            <ion-col col-12 class="title-col">
+                              <p class="footerP">SHOPPING LIST</p>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                        <ion-grid class="grid-css" (click)="gotoRequest()">
+                          <ion-row>
+                            <ion-col col-12>
+                              <img src="assets/imgs/request.png" class="imagebgColor">
+                            </ion-col>
+                            <ion-col col-12 class="title-col">
+                              <p class="footerP">REQUEST</p>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                        <ion-grid class="grid-css" (click)="gotoProfile()">
+                          <ion-row>
+                            <ion-col col-12 >
+                              <img src="assets/imgs/profile.png" class="imagebgColor">
+                            </ion-col>
+                            <ion-col col-12 class="title-col">
+                              <p class="footerP">PROFILE</p>
                             </ion-col>
                           </ion-row>
                         </ion-grid>

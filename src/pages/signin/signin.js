@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the SigninPage page.
  *
@@ -18,16 +19,19 @@ import { EmailValidator } from '../../validators/email';
  * Ionic pages and navigation.
  */
 var SigninPage = /** @class */ (function () {
-    function SigninPage(navCtrl, navParams, formBuilder) {
+    function SigninPage(navCtrl, navParams, formBuilder, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.formBuilder = formBuilder;
+        this.storage = storage;
         // remember :  any;
         this.error = '';
         this.signInFrom = formBuilder.group({
             email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
             password: ['', Validators.compose([Validators.minLength(4), Validators.required])],
         });
+        this.signInFrom.controls.email.setValue('supplier@gmail.com');
+        this.signInFrom.controls.password.setValue('123456');
     }
     SigninPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad SigninPage');
@@ -39,9 +43,23 @@ var SigninPage = /** @class */ (function () {
         console.log("go to sign up page");
         this.navCtrl.push("SignupPage");
     };
-    SigninPage.prototype.userLogin = function () {
-        console.log("go to home page");
-        this.navCtrl.push("HomeappPage");
+    SigninPage.prototype.appLogin = function () {
+        console.log("sign in email", this.signInFrom.value.email);
+        console.log("sign in password", this.signInFrom.value.password);
+        if (this.signInFrom.value.email == "user@gmail.com" && this.signInFrom.value.password == "123456") {
+            this.storage.set('isUserLogin', true);
+            this.storage.remove('isSupplierLogin');
+            // console.log(this.storage.get('isUserLogin'));
+            console.log("go to home page by user");
+            this.navCtrl.push("HomeappPage");
+        }
+        else if (this.signInFrom.value.email == "supplier@gmail.com" && this.signInFrom.value.password == "123456") {
+            this.storage.remove('isUserLogin');
+            this.storage.set('isSupplierLogin', true);
+            // console.log(this.storage.get('isSupplierLogin'));
+            console.log("go to home page by supplier");
+            this.navCtrl.push("HomeappPage");
+        }
         // this.navCtrl.setRoot('TabsPage');
     };
     SigninPage = __decorate([
@@ -50,7 +68,7 @@ var SigninPage = /** @class */ (function () {
             selector: 'page-signin',
             templateUrl: 'signin.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, FormBuilder])
+        __metadata("design:paramtypes", [NavController, NavParams, FormBuilder, Storage])
     ], SigninPage);
     return SigninPage;
 }());

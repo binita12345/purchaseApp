@@ -16,16 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ProductdetailPage {
 	name : any;
 	description : any;
-	pickup : any;
-	dropoff : any;
+	// pickup : any;
+	// dropoff : any;
+  address: any;
 	time : any;
 	amount : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	this.name = "xyz products";
   	this.description = "There are many variations of passages of Lorem ipsum available, but the majority have suffered alteration in some form, by injected humour";
-  	this.pickup = "Maidenhead, SL6 1QZ, United Kingdom";
-  	this.dropoff = "Maidenhead, SL6 1QZ, United Kingdom";
+  	this.address = "Maidenhead, SL6 1QZ, United Kingdom";
+  	// this.dropoff = "Maidenhead, SL6 1QZ, United Kingdom";
   	this.time = "12:12";
   	this.amount = "$5212";
   }

@@ -2,10 +2,10 @@ page-cartlist {
 
 	// footer css
 	.active {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.slide-zoom {
 	    text-align: center;
@@ -48,34 +48,34 @@ page-cartlist {
 		cursor: pointer;
 	}
 	.grid-css:active {
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:focus{
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.ion-fixed:focus{
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:hover, .grid-css.selected {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:visited {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.btnInvite{
 		font-size: 12px;
@@ -115,9 +115,6 @@ page-cartlist {
 	    transform: translateZ(0);
 	    pointer-events: none;
 	}
-	.list-wp {
-	    margin: -49px 0 20px;
-	}
 	.button-wp {
 	    margin: -18px!important;
 	    height: 45px !important;
@@ -149,6 +146,10 @@ page-cartlist {
 		border: 1px solid #F5F5F5;
 		margin: 5px;
     	width: 97%;
+	}
+	.item-md.item-block .item-inner {
+	    padding-right: 8px;
+	    border-bottom: none;
 	}
 	.item-md ion-thumbnail {
 	    min-width: 50px;
@@ -185,5 +186,80 @@ page-cartlist {
 		max-height: 30px !important;
     	width: 75px !important;
     	text-transform: none !important;
+    	background-color: #0065B9;	
+    }
+
+    // checkbox css
+
+    .checkbox-md .checkbox-icon {
+	    width: 20px !important;
+	    height: 20px !important;
+	    border-radius: 5px;
+	    border-color: #E0E0E0;
+	}
+	.checkbox-md .checkbox-checked {
+	    border-color: #E0E0E0;
+	    background-color: #ffffff;
+	}
+	.checkbox-md .checkbox-checked .checkbox-inner {
+	    left: 5px;
+	    top: 0px;
+	    position: absolute;
+	    width: 6px;
+	    height: 12px;
+	    border-width: 2px;
+	    border-top-width: 0;
+	    border-left-width: 0;
+	    border-style: solid;
+	    border-color: #0C6CB9;
+	    transform: rotate(45deg);
+	}
+	.checkbox-ios .checkbox-icon {
+	    width: 20px !important;
+	    height: 20px !important;
+	    border-radius: 5px;
+	    border-width: 2px;
+	    border-color: #E0E0E0;
+	}
+	.checkbox-ios .checkbox-checked {
+	    border-color: #E0E0E0;
+	    background-color: #ffffff;
+	}
+	.checkbox-ios .checkbox-checked .checkbox-inner {
+	    left: 5px;
+	    top: 0px;
+	    position: absolute;
+	    width: 6px;
+	    height: 12px;
+	    border-width: 2px;
+	    border-top-width: 0;
+	    border-left-width: 0;
+	    border-style: solid;
+	    border-color: #0C6CB9;
+	    transform: rotate(45deg);
+	}
+	.checkbox-wp .checkbox-icon {
+	    width: 20px !important;
+	    height: 20px !important;
+	    border-radius: 5px;
+	    border-width: 2px;
+	    border-color: #E0E0E0;
+	}
+	.checkbox-wp .checkbox-checked {
+	    border-color: #E0E0E0;
+	    background-color: #ffffff;
+	}
+	.checkbox-wp .checkbox-checked .checkbox-inner {
+	    left: 5px;
+	    top: 0px;
+	    position: absolute;
+	    width: 6px;
+	    height: 12px;
+	    border-width: 2px;
+	    border-top-width: 0;
+	    border-left-width: 0;
+	    border-style: solid;
+	    border-color: #0C6CB9;
+	    transform: rotate(45deg);
 	}
 }

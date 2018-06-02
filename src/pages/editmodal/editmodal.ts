@@ -14,13 +14,13 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'editmodal.html',
 })
 export class EditmodalPage {
-	pickup : any;
-	dropoff : any;
+	address : any;
+	// dropoff : any;
 	price : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public renderer: Renderer) {
-  	this.pickup = "E3, Detached Office Block";
-  	this.dropoff = "E3, Detached Office Block";
+  	this.address = "E3, Detached Office Block";
+  	// this.dropoff = "E3, Detached Office Block";
   	this.price = "$512";
 
   	this.renderer.setElementClass(viewCtrl.pageRef().nativeElement, 'custom-popup', true);

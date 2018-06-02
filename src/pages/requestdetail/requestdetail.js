@@ -8,8 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angular';
 /**
  * Generated class for the RequestdetailPage page.
  *
@@ -17,10 +16,10 @@ import { AlertController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 var RequestdetailPage = /** @class */ (function () {
-    function RequestdetailPage(navCtrl, navParams, alertCtrl) {
+    function RequestdetailPage(navCtrl, navParams, modalCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
+        this.modalCtrl = modalCtrl;
         this.lists = [];
         this.lists = [{ 'image': "assets/imgs/bgcolor.png", 'name': "PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00" },
             { 'image': "assets/imgs/bgcolor.png", 'name': "PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00" },
@@ -31,42 +30,13 @@ var RequestdetailPage = /** @class */ (function () {
         console.log('ionViewDidLoad RequestdetailPage');
     };
     RequestdetailPage.prototype.editProduct = function () {
-        var alert = this.alertCtrl.create({
-            title: 'Product Name',
-            inputs: [
-                {
-                    // title: 'Pick up location',
-                    name: 'username',
-                    placeholder: 'Username'
-                },
-                {
-                    name: 'password',
-                    placeholder: 'Password',
-                    type: 'password'
-                }
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: function (data) {
-                        console.log('Cancel clicked');
-                    }
-                },
-                {
-                    text: 'Edit',
-                    handler: function (data) {
-                        // if (User.isValid(data.username, data.password)) {
-                        //   // logged in!
-                        // } else {
-                        //   // invalid login
-                        //   return false;
-                        // }
-                    }
-                }
-            ]
+        var modal = this.modalCtrl.create('EditmodalPage', {}, { showBackdrop: true, enableBackdropDismiss: true });
+        modal.present();
+        modal.onDidDismiss(function (productId) {
+            if (productId) {
+                // this.buyNow(productId)
+            }
         });
-        alert.present();
     };
     RequestdetailPage.prototype.gotoproductDetail = function () {
         this.navCtrl.push("ProductdetailPage");
@@ -101,7 +71,7 @@ var RequestdetailPage = /** @class */ (function () {
             selector: 'page-requestdetail',
             templateUrl: 'requestdetail.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams, AlertController])
+        __metadata("design:paramtypes", [NavController, NavParams, ModalController])
     ], RequestdetailPage);
     return RequestdetailPage;
 }());

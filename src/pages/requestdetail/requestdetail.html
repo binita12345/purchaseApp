@@ -29,7 +29,7 @@
       </ion-thumbnail>
       <h3 class="productname" (click)="gotoproductDetail()">{{list.name}}</h3>
       <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
-      <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
+      <!-- <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p> -->
       <p class="priceP">{{list.price}}</p>
       <img src="assets/imgs/editdetail.png" item-end class="delete-img cursor" (click)="editProduct()">
       <img src="assets/imgs/deletedetail.png" item-end class="delete-img cursor">
@@ -37,7 +37,7 @@
   </ion-list>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="applyFooter">
   <ion-toolbar>
     <ion-grid ion-fixed>
         <ion-row>

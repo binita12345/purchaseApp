@@ -32,6 +32,11 @@
 </ion-header>
 
 <ion-content>
+	<ion-item>
+	    <ion-label item-start>Select all Products</ion-label>
+	    <ion-checkbox item-end [(ngModel)]="selectedAll" (click)="selectAll()"></ion-checkbox>
+  	</ion-item>
+
 	<ion-list class="cart-list" *ngFor="let list of lists">
 		<!-- {{list | json}} -->
 	  <ion-item>
@@ -40,16 +45,17 @@
 	    </ion-thumbnail>
 	    <h3>{{list.name}}</h3>
 	    <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
-	    <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
+	    <!-- <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p> -->
 	    <img src="{{list.distance}}">
-	    <p item-end style="color: #000000;">{{list.price}}</p>
-	    <!-- <div item-end class="icon_middle"><p item-end style="color: #000000;">{{list.price}}</p><span ><button ion-button class="btn-inquiry" (click)="inquiryProduct()">Inquiry</button></span> </div> -->
+	    <p item-end style="color: #000000;" *ngIf="forUserContent">{{list.price}}</p>
+	    <div item-end class="icon_middle"  *ngIf="forSupplierContent"><p item-end style="color: #000000;">{{list.price}}</p><span ><button ion-button class="btn-inquiry" (click)="inquiryProduct()">Inquiry</button></span> </div>
+	    <input type="checkbox" item-end [(ngModel)]="list.selected" (change)="checkIfAllSelected()">
 	  </ion-item>
 	</ion-list>
 
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar class="applyFooter">
     <ion-grid ion-fixed>
 		    <ion-row>
 		      <ion-col col-12 col-xl-12>

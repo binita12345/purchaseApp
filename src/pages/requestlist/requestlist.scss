@@ -1,9 +1,9 @@
 page-requestlist {
 	.active {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.slide-zoom {
 	    text-align: center;
@@ -46,34 +46,34 @@ page-requestlist {
 		cursor: pointer;
 	}
 	.grid-css:active {
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:focus{
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.ion-fixed:focus{
-		max-height: 54px;
+		max-height: 55px;
 		background-color: #000000;
 		cursor: pointer;
-		border-bottom: 1px solid #0A76D2 ;
+		// border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:hover, .grid-css.selected {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.grid-css:visited {
-		max-height: 54px;
+		max-height: 55px;
 	    background-color: #000000;
 	    color: white;
-	    border-bottom: 1px solid #0A76D2 ;
+	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.request-grid{
 		border: 1px solid #F2F2F2;
@@ -89,9 +89,9 @@ page-requestlist {
 		margin-top: -10px;
 	}
 	.toolbar-ios ion-title {
-	    left: -30px;
-	    top: -25px;
-	    padding: 0 28px -11px !important;
+	    // left: -30px;
+	    // top: -20px;
+	    // padding: 0px 45px 10px !important;
 	    position: absolute;
 	    width: 100%;
 	    transform: translateZ(0);
@@ -143,6 +143,7 @@ page-requestlist {
     	color: #6C6C6C;
 	}
 	.cart-list{
+		border-top: 1px solid #D1D1D1;
 		border-bottom: 1px solid #D1D1D1;
 		margin: 0px;
   //   	width: 97%;
@@ -182,6 +183,9 @@ page-requestlist {
 	    font-weight: 500;
 	    color: #000000;
 	    background-color: #CFCFCF;
+	    margin: 0px;
+    	padding: 0px;
+    	padding-top: 10px;
 	}
 	.btn-product{
 		font-size: 12px;
@@ -194,9 +198,10 @@ page-requestlist {
 	    display:block;
 	}
 	.product-span{
-		font-size: 11px;
-		color: #767676;
-		font-weight: 500;
+		font-size: 12px;
+    	color: #767676;
+    	font-weight: 500;
+    	margin-top: 5px;
 	}
 	.item-md .item-button {
 	    margin-top: 12px;
@@ -246,5 +251,98 @@ page-requestlist {
 	    margin: 0px -15px;
 	    min-width: 44px;
 	    box-shadow: none;
+	}
+
+	// css for supplier login 
+
+	.search-css {
+		border: 1px solid;
+	    border-radius: 26px;
+	    margin: 18px;
+	    width: 90%;
+	    min-height: 38px;
+	    border-color: #E7E7E7;
+	    background: none;	
+	    max-height: 20px;
+	}
+	.img-css{
+		height: 20px;
+		width: 20px;
+	}
+	.search-div{
+		text-align: center;
+    	padding-left: 0px;
+    	// padding-top: 8px;
+	}
+	.text-input-md {
+	    margin: 0px;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
+	    font-size: 14px;
+	    font-weight: 500;
+	}
+	.text-input-ios {
+	    margin: 0px;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
+	    font-size: 14px;
+	    font-weight: 500;
+	}
+	.text-input-wp {
+	    margin: -10px 0px;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
+	    font-size: 14px;
+	    font-weight: 500;
+	}
+	.acceptbtn {
+		background-color: #0065b9;
+		text-align: center;
+		margin: auto;
+		height: 2.8rem !important;
+		font-size: 12px;
+		border-radius: 3px;
+	}
+	.productPrice {
+		line-height: 30px;
+    	color: #000000;
+    	font-size: 16px;
+	}
+	.declinebtn {
+		border: 1px solid #0065b9;
+		color: #0065b9 !important;
+		background-color: #ffffff !important;
+		height: 2.8rem !important;
+		font-size: 12px;
+		border-radius: 3px;
+	}
+	.row-btn {
+		margin-top: -22px;
+    	margin-bottom: -12px;
+	}
+	.gridbtn {
+		margin-top: -10px;
+	}
+	.headlist {
+		font-size: 16px;
+		font-weight: 500;
+	}
+	.item-css {
+		margin-top: -18px;
+		font-size: 15px;
+	}
+
+	// segment css
+	.toolbar-ios .segment-ios {
+	    left: 3px;
+	    top: 0;
+	    bottom: 0;
+	    position: absolute;
+	    width: 98%;
+	}
+	.toolbar-ios .segment-button {
+	    max-width: 100px;
+	    height: 4.6rem;
+	    line-height: 4.5rem;
 	}
 }

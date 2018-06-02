@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the RequestlistPage page.
  *
@@ -16,9 +17,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 var RequestlistPage = /** @class */ (function () {
-    function RequestlistPage(navCtrl, navParams) {
+    function RequestlistPage(navCtrl, navParams, storage) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.storage = storage;
         this.lists = [];
         this.delivery = true;
         this.open = false;
@@ -28,6 +31,22 @@ var RequestlistPage = /** @class */ (function () {
             { 'image': "assets/imgs/bgcolor.png", 'name': "User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12" },
             { 'image': "assets/imgs/bgcolor.png", 'name': "User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12" }];
         this.requests = "delivery";
+        this.storage.get("isUserLogin").then(function (UserLogin) {
+            console.log("UserLogin", UserLogin);
+            _this.userLogin = UserLogin;
+            if (_this.userLogin) {
+                _this.forUserContent = true;
+                _this.forSupplierContent = false;
+            }
+        });
+        this.storage.get("isSupplierLogin").then(function (SupplierLogin) {
+            console.log("SupplierLogin", SupplierLogin);
+            _this.supplierLogin = SupplierLogin;
+            if (_this.supplierLogin) {
+                _this.forUserContent = false;
+                _this.forSupplierContent = true;
+            }
+        });
     }
     RequestlistPage.prototype.statusChanged = function (event) {
         console.log("event", event.value);
@@ -55,6 +74,9 @@ var RequestlistPage = /** @class */ (function () {
             this.close = false;
             console.log("this.lists...4", this.lists);
         }
+    };
+    RequestlistPage.prototype.showList = function () {
+        this.navCtrl.push("ListproductPage");
     };
     RequestlistPage.prototype.addreview = function () {
         this.navCtrl.push("AddreviewPage");
@@ -95,7 +117,7 @@ var RequestlistPage = /** @class */ (function () {
             selector: 'page-requestlist',
             templateUrl: 'requestlist.html',
         }),
-        __metadata("design:paramtypes", [NavController, NavParams])
+        __metadata("design:paramtypes", [NavController, NavParams, Storage])
     ], RequestlistPage);
     return RequestlistPage;
 }());
