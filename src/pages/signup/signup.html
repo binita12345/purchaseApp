@@ -118,19 +118,11 @@
 					      </ion-grid>
 				    </ion-list>
 				    <ion-list radio-group (ionChange)="userAnswer($event)" formControlName="userType">
-				    	<!-- <ion-item>
-						    <ion-label>Customer</ion-label>
-						    <ion-checkbox [(ngModel)]="customer" formControlName="customer" value="customer" checked="false"></ion-checkbox>
-						  </ion-item>
-				    	<ion-item style="margin-top: -11px !important;">
-						    <ion-label>Supplier</ion-label>
-						    <ion-checkbox [(ngModel)]="supplier" formControlName="supplier" value="supplier" checked="true"></ion-checkbox>
-						  </ion-item> -->
 						<ion-list-header style="font-weight: 500;font-size: 16px;">
 					        Select User Type
 					    </ion-list-header>
 				      	<ion-grid>
-				      		<ion-row>
+				      		<ion-row style="margin-top: 5px;">
 				      			<ion-col col-4 col-xl-4>
 								      <ion-item>
 								      	<ion-radio value="customer" selected class="radio-css"></ion-radio>

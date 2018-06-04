@@ -51,6 +51,7 @@ export class ServiceProvider {
         });
     });
   }
+
   signinData(credentials) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -58,6 +59,34 @@ export class ServiceProvider {
       this.http.post(apiUrl + 'userSignIn', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
         	console.log("res signin", res.json());
+      		resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  socialSignIn(credentials) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'userSignIn', JSON.stringify(credentials), {headers: headers})
+        .subscribe(res => {
+        	console.log("res signin", res.json());
+      		resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  forgotPasswordData(credential) {
+  	return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'forgotPassword', JSON.stringify(credential), {headers: headers})
+        .subscribe(res => {
+        	console.log("res forgot password", res.json());
       		resolve(res.json());
         }, (err) => {
           reject(err);

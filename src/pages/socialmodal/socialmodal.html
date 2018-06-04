@@ -1,0 +1,81 @@
+<!--
+  Generated template for the SocialmodalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>socialmodal</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content class="modalPage">
+	<ion-title class="modal-title">User Info</ion-title>
+	<div padding>
+		<ion-list radio-group (ionChange)="mcqAnswer($event)" [(ngModel)]="gender">
+		    <ion-list-header>
+		        Gender
+		    </ion-list-header>
+	      	<ion-grid>
+	      		<ion-row>
+	      			<ion-col col-6 col-xl-6>
+					      <ion-item class="modal-item">
+					      	<ion-radio value="female" selected></ion-radio>
+					        <ion-label>Female</ion-label>
+					      </ion-item>
+				      </ion-col>
+				      <ion-col col-6 col-xl-6>
+					      <ion-item class="modal-item">
+					      	<ion-radio value="male"></ion-radio>
+					        <ion-label>Male</ion-label>
+					      </ion-item>
+				      </ion-col>
+			      </ion-row>
+		      </ion-grid>
+	    </ion-list>
+	    <ion-list radio-group (ionChange)="userAnswer($event)" [(ngModel)]="user_type">
+			<ion-list-header>
+		        Select User Type
+		    </ion-list-header>
+	      	<ion-grid>
+	      		<ion-row>
+	      			<ion-col col-12 col-xl-12>
+					      <ion-item class="modal-item">
+					      	<ion-radio value="customer" selected class="radio-css"></ion-radio>
+					        <ion-label>Customer</ion-label>
+					      </ion-item>
+				      </ion-col>
+				      <ion-col col-12 col-xl-12>
+					      <ion-item class="modal-item">
+					      	<ion-radio value="supplier" class="radio-css"></ion-radio>
+					        <ion-label>Supplier</ion-label>
+					      </ion-item>
+				      </ion-col>
+				      <ion-col col-12 col-xl-12>
+					      <ion-item class="modal-item">
+					      	<ion-radio value="both" class="radio-css"></ion-radio>
+					        <ion-label>Both</ion-label>
+					      </ion-item>
+				      </ion-col>
+			      </ion-row>
+		      </ion-grid>
+	    </ion-list>
+	</div>
+	<ion-footer>
+		<ion-grid>
+			<ion-row>
+				<ion-col col-6 col-xl-6 class="cancel-btn">
+					<button full ion-button class="cancel-btn" (click)="cancel()">CANCEL</button>
+				</ion-col>
+				<ion-col col-6 col-xl-6 class="edit-btn">
+					<button full ion-button class="edit-btn" (click)="save()">SAVE</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+		
+	</ion-footer>
+</ion-content>

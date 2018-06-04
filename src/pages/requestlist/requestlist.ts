@@ -29,6 +29,7 @@ export class RequestlistPage {
   forSupplierContent : any;
   forBothContent : any;
   forSupplier : boolean = true;
+  userType: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
     this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
@@ -38,43 +39,29 @@ export class RequestlistPage {
 
     this.requests = "delivery";
 
-    this.storage.get("isCustomerLogin").then((CustomerLogin) => {
-      console.log("CustomerLogin", CustomerLogin);
-      this.customerLogin = CustomerLogin;
-      
-      if(this.customerLogin){
+    this.storage.get("userData").then(userData => {
+      console.log("userData" +JSON.stringify(userData));
+      this.userType = userData.data.user_type;
+      if (this.userType == "customer") {
         this.forUserContent = true;
         this.forSupplierContent =false;
         this.forBothContent = false;
         this.showOnlyForUser = true;
         this.showForBoth = false;
-        // this.userORboth = true;
-      }
-    });
-    this.storage.get("isSupplierLogin").then((SupplierLogin) => {
-      console.log("SupplierLogin", SupplierLogin);
-      this.supplierLogin = SupplierLogin;
-
-      if(this.supplierLogin){
+      } else if (this.userType == "supplier") {
         this.forUserContent = false;
         this.forSupplierContent =true;
         this.forBothContent = false;
         this.showOnlyForUser = false;
         this.showForBoth = false;
         this.forSupplier = false;
-      }
-    });
-    this.storage.get("isBothLogin").then((BothLogin) => {
-      console.log("BothLogin", BothLogin);
-      this.bothLogin = BothLogin;
-
-      if(this.bothLogin){
+      } else if (this.userType == "both") {
         this.forUserContent = false;
         this.forSupplierContent =false;
         this.forBothContent = true;
         this.showOnlyForUser = false;
         this.showForBoth = true;
-        // this.userORboth = true;
+      } else {
       }
     });
   }

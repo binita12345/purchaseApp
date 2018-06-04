@@ -1,0 +1,108 @@
+page-socialmodal {
+	.radio-css {
+		margin: 0px !important;
+	}
+	.cancel-btn{
+		background-color: #000000;
+		text-align: center;
+		text-transform: inherit;
+		font-size: 16px;
+	}
+	.edit-btn{
+		background-color: #0B79D5;
+		text-align: center;
+		text-transform: inherit;
+		font-size: 16px;
+	}
+	.cancel-btn.activated {
+	    background-color: #000000;
+	}
+	.edit-btn.activated {
+	    background-color: #0B79D5;
+	}
+	.modalPage{
+		left: 10%;
+    	top: 20%;
+    	position: absolute;
+    	display: block;
+    	width: 80%;
+    	height: 70%;
+    	border-radius: 5px;
+    	border: 1px solid #e0e0e0;
+	}
+	.modal-title{
+		border-bottom: 1px solid #dedede;
+		background-color: #efefef !important;
+		height: 45px;
+		border-top-left-radius: 5px;
+    	border-top-right-radius: 5px;
+	}
+	ion-modal {
+
+    	ion-backdrop {
+        	visibility: none;
+	        opacity: 0.75;
+	        z-index: 0;
+	    }
+	}
+	.button-md {
+		box-shadow: 0px !important;
+		-webkit-box-shadow: 0 !important;
+	}
+	.button-md {
+	    -webkit-box-shadow: none !important;
+	    box-shadow: none !important; 
+	    -webkit-transition: none !important;
+	    transition: none !important;
+	    transition: none !important;
+	    transition: none !important;
+	}
+	.list-md {
+	    margin: 0px 0 21px;
+	}
+	.list-header-md {
+	    padding-left: 0px;
+	    margin-bottom: -17px;
+	    min-height: 0px !important;
+	    border-top: none;
+	    font-size: 14px;
+	    color: #757575;
+	}
+	.list-ios {
+	    margin: 0px 0 21px;
+	}
+	.list-header-ios {
+	    padding-left: 0px;
+	    margin-bottom: -17px;
+	    min-height: 0px !important;
+	    border-top: none;
+	    font-size: 14px;
+	    color: #757575;
+	    border-bottom: none !important;
+	    text-transform: none;
+	}
+	.list-wp {
+	    margin: 0px 0 21px;
+	}
+	.list-header-wp {
+	    padding-left: 0px;
+	    margin-bottom: -17px;
+	    min-height: 0px !important;
+	    border-top: none;
+	    font-size: 14px;
+	    color: #757575;
+	}
+	.modal-item {
+		padding-left: 0px !important;
+	    padding-right: 0;
+	    position: relative;
+	    font-size: 13px !important;
+	    border-bottom: none;
+	    font-weight: normal;
+	    text-transform: none;
+	    color: #000;
+	    background-color: #fff;
+	    box-shadow: none;
+	    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
+}

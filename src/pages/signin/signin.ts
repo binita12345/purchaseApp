@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { Storage } from '@ionic/storage';
 import { Loader } from "../../providers/loader/loader";
 import { ServiceProvider } from '../../providers/service/service';
 import { Device } from '@ionic-native/device';
-import { Facebook } from '@ionic-native/facebook';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the SigninPage page.
@@ -35,9 +37,19 @@ export class SigninPage {
 
   isLoggedIn:boolean = false;
   users: any;
+  displayName: any;
+  familyName: any;
+  givenName: any;
+  userId: any;
+  imageUrl: any;
+  loginType : any;
+  testRadioResult : any;
+  gender: any;
+  user_type: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public storage: Storage, 
-    private loader: Loader, public serviceProvider: ServiceProvider, private device: Device, private fb: Facebook) {
+    private loader: Loader, public serviceProvider: ServiceProvider, private device: Device, private fb: Facebook, private googlePlus: GooglePlus,
+    public modalCtrl: ModalController, private alertCtrl: AlertController) {
     this.signInFrom = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(4), Validators.required])],
@@ -51,42 +63,171 @@ export class SigninPage {
       this.usertype = userType;
     });
 
-    fb.getLoginStatus()
-    .then(res => {
-      console.log(res.status);
-      if(res.status === "connect") {
-        this.isLoggedIn = true;
-      } else {
-        this.isLoggedIn = false;
-      }
-    })
-    .catch(e => console.log(e));
+    console.log("this.usertype", this.usertype);
+    this.deviceInfo.token = this.device.uuid;
+    console.log("this.deviceInfo.token", this.deviceInfo.token);
+    this.deviceInfo.platform = this.device.platform;
+    console.log("this.deviceInfo.platform", this.deviceInfo.platform);
+
+    this.gender = navParams.get('gender');
+    console.log("this.gender", this.gender);
+    this.user_type = navParams.get('user_type');
+    console.log("this.user_type", this.user_type);
+    // fb.getLoginStatus()
+    // .then(res => {
+    //   console.log(res.status);
+    //   if(res.status === "connect") {
+    //     this.isLoggedIn = true;
+    //   } else {
+    //     this.isLoggedIn = false;
+    //   }
+    // })
+    // .catch(e => console.log(e));
   }
 
-  fblogin() {
+  // fblogin() {
+  //   console.log("facebook login");
+  //   this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
+  //   .then( (res: FacebookLoginResponse) => {
+  //     console.log("facebook res" +JSON.stringify(res));
+  //     if(res.status === "connected") {
+  //       this.isLoggedIn = true;
+  //       this.getUserDetail(res.authResponse.userID);
+  //     } else {
+  //       this.isLoggedIn = false;
+  //     }
+  //   })
+  //   .catch(e => console.log('Error logging into Facebook', e));
+  // }
+  fblogin(){
+    this.loginType = "FACEBOOK";
+
     console.log("facebook login");
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-    .then(res => {
-      console.log("facebook res" +JSON.stringify(res));
-      if(res.status === "connected") {
-        this.isLoggedIn = true;
-        this.getUserDetail(res.authResponse.userID);
-      } else {
-        this.isLoggedIn = false;
-      }
+    // Login with permissions
+    this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
+    .then( (res: FacebookLoginResponse) => {
+        console.log("facebook res" +JSON.stringify(res));
+        console.log("facebook res status" +res.status);
+        // The connection was successful
+        if(res.status == "connected") {
+
+            // Get user ID and Token
+            console.log("facebook userId" +res.authResponse.userID);
+            var fb_id = res.authResponse.userID;
+            console.log("fb_id" +fb_id);
+
+            console.log("facebook accessToken" +res.authResponse.accessToken);
+            var fb_token = res.authResponse.accessToken;
+            console.log("fb_token" +fb_token);
+
+            // Get user infos from the API
+            this.fb.api("/me?fields=name,gender,birthday,email", []).then((user) => {
+              console.log("facebook user" +JSON.stringify(user));
+                // Get the connected user details
+                var gender    = user.gender;
+                var birthday  = user.birthday;
+                var name      = user.name;
+                var email     = user.email;
+
+                console.log("=== USER INFOS ===");
+                console.log("Gender : " + gender);
+                console.log("Birthday : " + birthday);
+                console.log("Name : " + name);
+                console.log("Email : " + email);
+
+                // => Open user session and redirect to the next page
+
+            });
+
+        } 
+        // An error occurred while loging-in
+        else {
+
+            console.log("An error occurred...");
+
+        }
+
     })
-    .catch(e => console.log('Error logging into Facebook', e));
+    .catch((e) => {
+        console.log('Error logging into Facebook', e);
+    });
   }
 
-  getUserDetail(userid) {
-    this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
-      .then(res => {
-        console.log(res);
-        this.users = res;
-      })
-      .catch(e => {
-        console.log(e);
-      });
+  googlelogin() {
+    // let modal = this.modalCtrl.create('SocialmodalPage',{},{showBackdrop:true, enableBackdropDismiss:true});
+    // modal.present();
+    // modal.onDidDismiss(info => {
+    //   console.log(info);
+    //   // if(info){
+    //     // this.buyNow(productId)
+    //   // }       
+    //  });
+    this.loginType = "GOOGLE";
+    console.log("google login" +this.loginType);
+    // this.googlePlus.login({})
+    //   .then(res => {
+    //     console.log("google res" +JSON.stringify(res));
+    //     this.displayName = res.displayName;
+    //     this.email = res.email;
+    //     this.familyName = res.familyName;
+    //     this.givenName = res.givenName;
+    //     this.userId = res.userId;
+    //     console.log("google res this.userId" +this.userId);
+    //     this.imageUrl = res.imageUrl;
+    //     console.log("google res this.imageUrl" +this.imageUrl);
+
+    //     if(res.gender == undefined && res.user_type == undefined){
+          console.log("iffffffrf");
+          let modal = this.modalCtrl.create('SocialmodalPage',{},{showBackdrop:true, enableBackdropDismiss:false});
+          modal.present();
+        // }
+        
+
+      //   let googlePlusData = {
+      //     "identifierId":this.userId,
+      //     "name":this.displayName,
+      //     "email":this.email,
+      //     "deviceType":this.deviceInfo.platform,
+      //     "deviceToken":this.deviceInfo.token,
+      //     "loginType":this.loginType,
+      //     "userType":this.user_type,
+      //     "userImageUrl":this.imageUrl,
+      //     "gender":this.testRadioResult
+      //   }
+
+      //   console.log("google plus googlePlusData" +JSON.stringify(googlePlusData));
+
+      // })
+      // .catch(err => console.error("google err" +JSON.stringify(err)));
+
+      // let alert = this.alertCtrl.create();
+      //   alert.setTitle('Select Gender');
+
+      //   alert.addInput({
+      //     type: 'radio',
+      //     label: 'Male',
+      //     value: 'Male',
+      //     checked: true
+      //   });
+      //   alert.addInput({
+      //     type: 'radio',
+      //     label: 'Female',
+      //     value: 'Female',
+      //     checked: false
+      //   });
+
+      //   alert.addButton('Cancel');
+      //   alert.addButton({
+      //     text: 'OK',
+      //     handler: data => {
+      //       console.log("radio data" +JSON.stringify(data));
+      //       // this.testRadioOpen = false;
+      //       this.testRadioResult = data;
+      //       console.log("this.testRadioResult" +this.testRadioResult);
+      //     }
+      //   });
+      //   alert.present();
+        
   }
 
   ionViewDidLoad() {
@@ -106,11 +247,7 @@ export class SigninPage {
 
     // console.log("sign in email", this.signInFrom.value.email);
     // console.log("sign in password", this.signInFrom.value.password);
-    console.log("this.usertype", this.usertype);
-    this.deviceInfo.token = this.device.uuid;
-    console.log("this.deviceInfo.token", this.deviceInfo.token);
-    this.deviceInfo.platform = this.device.platform;
-    console.log("this.deviceInfo.platform", this.deviceInfo.platform);
+    
 
     let signinData = {
       email: this.signInFrom.value.email,
@@ -121,14 +258,18 @@ export class SigninPage {
     console.log("signinData object" +JSON.stringify(signinData));
 
     if (!this.signInFrom.valid) {
+      console.log("sign in form is not valid");
       this.loader.hide();
     } else {
+      console.log("sign in form is valid");
       this.serviceProvider.signinData(signinData).then(
         data => {
           console.log("ts data" +JSON.stringify(data))
 
           let obj: any = data;
           console.log("obj" +JSON.stringify(obj));
+          console.log("userId" +obj.data.ID);
+          console.log("token" +obj.data.sessionId);
           // console.log(this.serviceProvider.headers, obj.data.ID);
           this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
           this.storage.set("userData", obj);

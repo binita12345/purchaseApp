@@ -27,7 +27,7 @@ export class RequestdetailPage {
     console.log('ionViewDidLoad RequestdetailPage');
   }
   editProduct(){
-    let modal = this.modalCtrl.create('EditmodalPage',{},{showBackdrop:true, enableBackdropDismiss:true});
+    let modal = this.modalCtrl.create('EditmodalPage',{},{showBackdrop:true, enableBackdropDismiss:false});
     modal.present();
 
     modal.onDidDismiss(productId => {

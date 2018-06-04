@@ -9,6 +9,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Device } from '@ionic-native/device';
 import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 // import { HttpClientModule } from "@angular/common/http";
 import { Dialogs } from '@ionic-native/dialogs';
@@ -50,7 +51,8 @@ import { ServiceProvider } from '../providers/service/service';
     Dialogs,
     Loader,
     Device,
-    Facebook
+    Facebook,
+    GooglePlus
   ]
 })
 export class AppModule {}
