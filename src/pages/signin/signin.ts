@@ -50,12 +50,15 @@ export class SigninPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public storage: Storage, 
     private loader: Loader, public serviceProvider: ServiceProvider, private device: Device, private fb: Facebook, private googlePlus: GooglePlus,
     public modalCtrl: ModalController, private alertCtrl: AlertController) {
+
+    // this.modalback = false;
+
     this.signInFrom = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(4), Validators.required])],
     });
 
-    this.signInFrom.controls.email.setValue('both@gmail.com');
+    this.signInFrom.controls.email.setValue('bini1@gmail.com');
     this.signInFrom.controls.password.setValue('123456')
 
     this.storage.get("user_type").then((userType) => {
@@ -154,79 +157,80 @@ export class SigninPage {
   }
 
   googlelogin() {
-    // let modal = this.modalCtrl.create('SocialmodalPage',{},{showBackdrop:true, enableBackdropDismiss:true});
-    // modal.present();
-    // modal.onDidDismiss(info => {
-    //   console.log(info);
-    //   // if(info){
-    //     // this.buyNow(productId)
-    //   // }       
-    //  });
     this.loginType = "GOOGLE";
     console.log("google login" +this.loginType);
-    // this.googlePlus.login({})
-    //   .then(res => {
-    //     console.log("google res" +JSON.stringify(res));
-    //     this.displayName = res.displayName;
-    //     this.email = res.email;
-    //     this.familyName = res.familyName;
-    //     this.givenName = res.givenName;
-    //     this.userId = res.userId;
-    //     console.log("google res this.userId" +this.userId);
-    //     this.imageUrl = res.imageUrl;
-    //     console.log("google res this.imageUrl" +this.imageUrl);
+    this.googlePlus.login({})
+      .then(res => {
+        console.log("google res" +JSON.stringify(res));
+        this.displayName = res.displayName;
+        this.email = res.email;
+        this.familyName = res.familyName;
+        this.givenName = res.givenName;
+        this.userId = res.userId;
+        console.log("google res this.userId" +this.userId);
+        this.imageUrl = res.imageUrl;
+        console.log("google res this.imageUrl" +this.imageUrl);
 
-    //     if(res.gender == undefined && res.user_type == undefined){
+        if(res.gender == undefined && res.user_type == undefined){
           console.log("iffffffrf");
-          let modal = this.modalCtrl.create('SocialmodalPage',{},{showBackdrop:true, enableBackdropDismiss:false});
+          let modal = this.modalCtrl.create('SocialmodalPage');
+          document.getElementById("myDIV").style.opacity = "0.5";
           modal.present();
-        // }
-        
+          modal.onDidDismiss(data => {
+            console.log(data);
+            document.getElementById("myDIV").style.opacity = "1";
+          });
+        }
 
-      //   let googlePlusData = {
-      //     "identifierId":this.userId,
-      //     "name":this.displayName,
-      //     "email":this.email,
-      //     "deviceType":this.deviceInfo.platform,
-      //     "deviceToken":this.deviceInfo.token,
-      //     "loginType":this.loginType,
-      //     "userType":this.user_type,
-      //     "userImageUrl":this.imageUrl,
-      //     "gender":this.testRadioResult
-      //   }
+        let googlePlusData = {
+          "identifierId":this.userId,
+          "name":this.displayName,
+          "email":this.email,
+          "deviceType":this.deviceInfo.platform,
+          "deviceToken":this.deviceInfo.token,
+          "loginType":this.loginType,
+          "userType":this.user_type,
+          "userImageUrl":this.imageUrl,
+          "gender":this.gender,
+          "password": "123456"
+        }
 
-      //   console.log("google plus googlePlusData" +JSON.stringify(googlePlusData));
+        console.log("google plus googlePlusData" +JSON.stringify(googlePlusData));
+        this.serviceProvider.socialSignIn(googlePlusData).then(
+          data => {
+            console.log("ts data" +JSON.stringify(data))
 
-      // })
-      // .catch(err => console.error("google err" +JSON.stringify(err)));
+            let obj: any = data;
+            console.log("obj" +JSON.stringify(obj));
+            console.log("userId" +obj.data.ID);
+            console.log("token" +obj.data.sessionId);
+            console.log("user_type" +obj.data.user_type);
+            // console.log(this.serviceProvider.headers, obj.data.ID);
+            this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
+            this.storage.set("userData", obj);
+            this.storage.set("userId", obj.data.ID);
+            this.storage.set("token", obj.data.sessionId);
 
-      // let alert = this.alertCtrl.create();
-      //   alert.setTitle('Select Gender');
+            if (obj.data.user_type) {
+                this.loader.hide();
+                this.navCtrl.setRoot("HomeappPage", { user_type: obj.data.user_type });
+            }
+          },
+          err => {
+            this.storage.set("userId", "");
+            this.storage.set("token", "");
+            this.storage.set("userData", "");
 
-      //   alert.addInput({
-      //     type: 'radio',
-      //     label: 'Male',
-      //     value: 'Male',
-      //     checked: true
-      //   });
-      //   alert.addInput({
-      //     type: 'radio',
-      //     label: 'Female',
-      //     value: 'Female',
-      //     checked: false
-      //   });
+            this.loader.hide();
+            // console.log("err", err)
+            this.error = err.message;
+            // console.log("this.error", this.error)
+          }
+        );
 
-      //   alert.addButton('Cancel');
-      //   alert.addButton({
-      //     text: 'OK',
-      //     handler: data => {
-      //       console.log("radio data" +JSON.stringify(data));
-      //       // this.testRadioOpen = false;
-      //       this.testRadioResult = data;
-      //       console.log("this.testRadioResult" +this.testRadioResult);
-      //     }
-      //   });
-      //   alert.present();
+      })
+      .catch(err => console.error("google err" +JSON.stringify(err)));
+
         
   }
 

@@ -13,143 +13,145 @@
 </ion-header> -->
 <header title="Sign Up"> </header> 
 
-<ion-content padding class="padding-top" scrollY="true">
-	<form [formGroup]="signUpFrom" (submit)="userAccount()">
-		<!-- <ion-grid>
-			<ion-card class="card-css">
-			  <ion-card-header>
-			  </ion-card-header>
+<ion-content padding class="padding-top" scrollY="true" >
+	<ion-scroll scrollX="true" scrollY="true" style="height: 105vh;">
+		<form [formGroup]="signUpFrom" (submit)="userAccount()">
+			<!-- <ion-grid>
+				<ion-card class="card-css">
+				  <ion-card-header>
+				  </ion-card-header>
 
-			  <ion-card-content> -->
-			  	<!-- <div class="image"> -->
-			  		<img src="assets/imgs/photo-camera.png" *ngIf="!base64Image" class="cameraImg" (click)="choosePhoto()">
-			  		<img [src]="base64Image" *ngIf="base64Image" (click)="choosePhoto()" class="chooseImg">
-			  	<!-- </div> -->
-			  	<br/>
-			  	<div class="error-message">
-						{{error}}
-					</div>
-					<br/>
-			  	<ion-grid>
-			  		<ion-row class="row-css">
-			  			<ion-col col-1 col-xl-1 class="col-in">
-			  				<ion-icon name="ios-contact" class="name-icon"></ion-icon>
-			  			</ion-col>
-			  			<ion-col col-11 col-xl-11 class="col-in2">
-			  				<ion-item class="item-css">
-						    	<ion-label fixed class="label-css">Name</ion-label>
-						    	<ion-input class="input-text" formControlName="name"></ion-input>
-						  	</ion-item>	
-			  			</ion-col>
-			  		</ion-row>
-			  		<br/>
+				  <ion-card-content> -->
+				  	<!-- <div class="image"> -->
+				  		<img src="assets/imgs/photo-camera.png" *ngIf="!base64Image" class="cameraImg" (click)="choosePhoto()">
+				  		<img [src]="base64Image" *ngIf="base64Image" (click)="choosePhoto()" class="chooseImg">
+				  	<!-- </div> -->
+				  	<br/>
+				  	<div class="error-message">
+							{{error}}
+						</div>
+						<br/>
+				  	<ion-grid>
+				  		<ion-row class="row-css">
+				  			<ion-col col-1 col-xl-1 class="col-in">
+				  				<ion-icon name="ios-contact" class="name-icon"></ion-icon>
+				  			</ion-col>
+				  			<ion-col col-11 col-xl-11 class="col-in2">
+				  				<ion-item class="item-css">
+							    	<ion-label fixed class="label-css">Name</ion-label>
+							    	<ion-input class="input-text" formControlName="name"></ion-input>
+							  	</ion-item>	
+				  			</ion-col>
+				  		</ion-row>
+				  		<br/>
 
-			  		<ion-row class="row-css margn">
-			  			<ion-col col-1 col-xl-1 class="col-in">
-			  				<img src="assets/imgs/close-envelope.png" class="img-size1">
-			  			</ion-col>
-			  			<ion-col col-11 col-xl-11 class="col-in2">
-			  				<ion-item class="item-css">
-						    	<ion-label fixed class="label-css">Email</ion-label>
-						    	<ion-input class="input-text" type="email" formControlName="email" [class.invalid]="!signUpFrom.controls.email.valid && signUpFrom.controls.email.dirty"></ion-input>
-						  	</ion-item>	
-			  			</ion-col>
-			  		</ion-row>
-			  		<div class="error-message" 
-					      *ngIf="!signUpFrom.controls.email.valid  && signUpFrom.controls.email.dirty">
-					      <p class="parag">Please enter a valid email.</p>
-					    </div>
-			  		<br/>
-
-			  		<ion-row class="row-css margn">
-			  			<ion-col col-1 col-xl-1 class="col-in">
-			  				<img src="assets/imgs/lock.png" class="img-size1">
-			  			</ion-col>
-			  			<ion-col col-11 col-xl-11 class="col-in2">
-			  				<ion-item class="item-css">
-						    	<ion-label fixed class="label-css">Password</ion-label>
-						    	<ion-input class="input-text" formControlName="password" type="password" [class.invalid]="!signUpFrom.controls.password.valid && signUpFrom.controls.password.dirty"></ion-input>
-						  	</ion-item>	
-			  			</ion-col>
-			  		</ion-row>
-			  		<div class="error-message" 
-						      *ngIf="!signUpFrom.controls.password.valid  && signUpFrom.controls.password.dirty">
-						      <p class="parag">Please enter a password.</p>
+				  		<ion-row class="row-css margn">
+				  			<ion-col col-1 col-xl-1 class="col-in">
+				  				<img src="assets/imgs/close-envelope.png" class="img-size1">
+				  			</ion-col>
+				  			<ion-col col-11 col-xl-11 class="col-in2">
+				  				<ion-item class="item-css">
+							    	<ion-label fixed class="label-css">Email</ion-label>
+							    	<ion-input class="input-text" type="email" formControlName="email" [class.invalid]="!signUpFrom.controls.email.valid && signUpFrom.controls.email.dirty"></ion-input>
+							  	</ion-item>	
+				  			</ion-col>
+				  		</ion-row>
+				  		<div class="error-message" 
+						      *ngIf="!signUpFrom.controls.email.valid  && signUpFrom.controls.email.dirty">
+						      <p class="parag">Please enter a valid email.</p>
 						    </div>
-			  		<br/>
+				  		<br/>
 
-			  		<ion-row class="row-css margn">
-			  			<ion-col col-1 col-xl-1 class="col-in">
-			  				<img src="assets/imgs/mobile-phone.png" class="img-size1">
-			  			</ion-col>
-			  			<ion-col col-11 col-xl-11 class="col-in2">
-			  				<ion-item class="item-css">
-						    	<ion-label fixed class="label-css">Mobile Number</ion-label>
-						    	<ion-input class="input-text" type="tel" formControlName="mobile" minlength=10 maxlength=10></ion-input>
-						  	</ion-item>	
-			  			</ion-col>
-			  		</ion-row>
-			  		<div class="error-message" 
-				      *ngIf="!signUpFrom.controls.mobile.valid  && signUpFrom.controls.mobile.dirty">
-				      <p class="parag">Please enter a valid mobile number.</p>
-				    </div>
-				    <br/>
-				    <br/>
+				  		<ion-row class="row-css margn">
+				  			<ion-col col-1 col-xl-1 class="col-in">
+				  				<img src="assets/imgs/lock.png" class="img-size1">
+				  			</ion-col>
+				  			<ion-col col-11 col-xl-11 class="col-in2">
+				  				<ion-item class="item-css">
+							    	<ion-label fixed class="label-css">Password</ion-label>
+							    	<ion-input class="input-text" formControlName="password" type="password" [class.invalid]="!signUpFrom.controls.password.valid && signUpFrom.controls.password.dirty"></ion-input>
+							  	</ion-item>	
+				  			</ion-col>
+				  		</ion-row>
+				  		<div class="error-message" 
+							      *ngIf="!signUpFrom.controls.password.valid  && signUpFrom.controls.password.dirty">
+							      <p class="parag">Please enter a password.</p>
+							    </div>
+				  		<br/>
 
-				    <ion-list radio-group (ionChange)="mcqAnswer($event)" formControlName="gender">
-					    <ion-list-header style="font-weight: 500;font-size: 16px;">
-					        Gender
-					    </ion-list-header>
-				      	<ion-grid style="margin-left: -7px;margin-top: 1px;">
-				      		<ion-row>
-				      			<ion-col col-5 col-xl-5>
-								      <ion-item>
-								      	<ion-radio value="female" selected></ion-radio>
-								        <ion-label>Female</ion-label>
-								      </ion-item>
-							      </ion-col>
-							      <ion-col col-5 col-xl-5>
-								      <ion-item>
-								      	<ion-radio value="male"></ion-radio>
-								        <ion-label>Male</ion-label>
-								      </ion-item>
-							      </ion-col>
-						      </ion-row>
-					      </ion-grid>
-				    </ion-list>
-				    <ion-list radio-group (ionChange)="userAnswer($event)" formControlName="userType">
-						<ion-list-header style="font-weight: 500;font-size: 16px;">
-					        Select User Type
-					    </ion-list-header>
-				      	<ion-grid>
-				      		<ion-row style="margin-top: 5px;">
-				      			<ion-col col-4 col-xl-4>
-								      <ion-item>
-								      	<ion-radio value="customer" selected class="radio-css"></ion-radio>
-								        <ion-label>Customer</ion-label>
-								      </ion-item>
-							      </ion-col>
-							      <ion-col col-4 col-xl-4>
-								      <ion-item>
-								      	<ion-radio value="supplier" class="radio-css"></ion-radio>
-								        <ion-label>Supplier</ion-label>
-								      </ion-item>
-							      </ion-col>
-							      <ion-col col-4 col-xl-4>
-								      <ion-item>
-								      	<ion-radio value="both" class="radio-css"></ion-radio>
-								        <ion-label>Both</ion-label>
-								      </ion-item>
-							      </ion-col>
-						      </ion-row>
-					      </ion-grid>
-				    </ion-list>
-				    <button ion-button full class="signupBtn" type="submit">Sign Up</button>
-				    <p class="para">Already have account ?<b style="color: black;font-weight: 400;" (click)="gotoSignIn()"> Sign In</b></p>
-		  		</ion-grid>
-			  <!-- </ion-card-content>
+				  		<ion-row class="row-css margn">
+				  			<ion-col col-1 col-xl-1 class="col-in">
+				  				<img src="assets/imgs/mobile-phone.png" class="img-size1">
+				  			</ion-col>
+				  			<ion-col col-11 col-xl-11 class="col-in2">
+				  				<ion-item class="item-css">
+							    	<ion-label fixed class="label-css">Mobile Number</ion-label>
+							    	<ion-input class="input-text" type="tel" formControlName="mobile" minlength=10 maxlength=10></ion-input>
+							  	</ion-item>	
+				  			</ion-col>
+				  		</ion-row>
+				  		<div class="error-message" 
+					      *ngIf="!signUpFrom.controls.mobile.valid  && signUpFrom.controls.mobile.dirty">
+					      <p class="parag">Please enter a valid mobile number.</p>
+					    </div>
+					    <br/>
+					    <br/>
 
-			</ion-card>
-		</ion-grid> -->
-	</form>
+					    <ion-list radio-group (ionChange)="mcqAnswer($event)" formControlName="gender">
+						    <ion-list-header style="font-weight: 500;font-size: 16px;">
+						        Gender
+						    </ion-list-header>
+					      	<ion-grid style="margin-left: -7px;margin-top: 1px;">
+					      		<ion-row>
+					      			<ion-col col-5 col-xl-5>
+									      <ion-item>
+									      	<ion-radio value="female" selected></ion-radio>
+									        <ion-label>Female</ion-label>
+									      </ion-item>
+								      </ion-col>
+								      <ion-col col-5 col-xl-5>
+									      <ion-item>
+									      	<ion-radio value="male"></ion-radio>
+									        <ion-label>Male</ion-label>
+									      </ion-item>
+								      </ion-col>
+							      </ion-row>
+						      </ion-grid>
+					    </ion-list>
+					    <ion-list radio-group (ionChange)="userAnswer($event)" formControlName="userType">
+							<ion-list-header style="font-weight: 500;font-size: 16px;">
+						        Select User Type
+						    </ion-list-header>
+					      	<ion-grid>
+					      		<ion-row style="margin-left: -7px;margin-top: 5px;">
+					      			<ion-col col-4 col-xl-4>
+									      <ion-item>
+									      	<ion-radio value="customer" selected class="radio-css"></ion-radio>
+									        <ion-label>Customer</ion-label>
+									      </ion-item>
+								      </ion-col>
+								      <ion-col col-4 col-xl-4>
+									      <ion-item>
+									      	<ion-radio value="supplier" class="radio-css"></ion-radio>
+									        <ion-label>Supplier</ion-label>
+									      </ion-item>
+								      </ion-col>
+								      <ion-col col-4 col-xl-4>
+									      <ion-item>
+									      	<ion-radio value="both" class="radio-css"></ion-radio>
+									        <ion-label>Both</ion-label>
+									      </ion-item>
+								      </ion-col>
+							      </ion-row>
+						      </ion-grid>
+					    </ion-list>
+					    <button ion-button full class="signupBtn" type="submit">Sign Up</button>
+					    <p class="para">Already have account ?<b style="color: black;font-weight: 400;" (click)="gotoSignIn()"> Sign In</b></p>
+			  		</ion-grid>
+				  <!-- </ion-card-content>
+
+				</ion-card>
+			</ion-grid> -->
+		</form>
+	</ion-scroll>
 </ion-content>

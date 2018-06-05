@@ -165,3 +165,50 @@ p{
 .title-wp{
   text-transform: none !important;
 }
+
+// modal transeparency
+  .modal {
+    background: rgba(0,0,0,0.5);
+  }
+  .modal-backdrop.fade {
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+  .modal-backdrop.in {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+  }
+  .modal-backdrop.fade {
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+  .modal-backdrop.fade.in {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+  }
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    background-color: #333333;
+    opacity:0.8; // I ADDED THIS LINE 
+      // }
+  }
+  .active .modal-backdrop-bg {
+    opacity: .5;
+    transition: opacity 300ms ease-in-out;
+    background-color: #000;
+  }
+  .custom-popover {
+
+    .ion-backdrop
+    {
+      opacity:0.4;
+    }
+  }
+  .scroll-content {
+    overflow-y: auto !important;
+  }

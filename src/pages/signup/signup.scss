@@ -1,4 +1,7 @@
 page-signup {
+	.scroll-content {
+		overflow-y: auto !important;
+	}
 	.row-css{
 		border-bottom: 1px solid #b3b2b3;
 	}
@@ -88,7 +91,7 @@ page-signup {
 	.para{
 		color: #999;
 		text-align: center;
-		line-height: 2.5;
+		line-height: 5px !important;
 		font-size: 13px;	
 	}
 	.card-css{
@@ -132,8 +135,8 @@ page-signup {
 	.cameraImg{
 		border: 1px solid #e0e0e0;
 	    border-radius: 100px;
-	    height: 100px;
-	    width: 100px;
+	    height: 22%;
+	    width: 22%;
 	    padding: 5px;
 	    background-color: #e0e0e0;
 	  	margin: auto;
@@ -142,20 +145,11 @@ page-signup {
 	.chooseImg {
 		border: transparent;
 		border-radius: 100px;
-		height: 100px;
-	    width: 100px;
+		height: 22%;
+	    width: 22%;
 	    margin: auto;
 	    display: block;
 	}
-	// .image {
-	//     height: 15vw;
-	//     padding: 3vw;
-	//     width: 15vw;
-	//     background: #DCDBDC;
-	//     border-radius: 50%;
-	//     margin: auto;
-	//     display: block;
-	// } 
 	.name-icon{
 		font-size: 20px;
 		color: #b3b2b3;
@@ -188,6 +182,15 @@ page-signup {
 		min-height: 49px;
     	transition: none;
     	border-radius: 3px;
+    	// margin-top: -20px;
+	}
+	.button-full-md {
+	    margin-left: 0;
+	    margin-right: 0;
+	    // border-radius: 0;
+	    border-right-width: 0;
+	    border-left-width: 0;
+	    margin-top: -20px;
 	}
 	.margn{
 		margin-top: 5px;
@@ -274,5 +277,10 @@ page-signup {
 	}
 	.radio-css {
 		margin: 0px !important;
+	}
+	.padding-top {
+	    margin-top: 44px !important;
+	    margin-left: -15px;
+	    width: 110%;
 	}
 }

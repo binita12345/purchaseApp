@@ -18,7 +18,7 @@
   </ion-navbar>
 
   
-  <ion-toolbar *ngIf="forSupplier">
+  <ion-toolbar *ngIf="forSupplier" class="toolbar-color">
     <ion-segment [(ngModel)]="requests" (ionChange)="statusChanged($event)" *ngIf="showOnlyForUser" no-border-top>
       <ion-segment-button value="delivery">
         Delivery Request
@@ -32,16 +32,16 @@
     </ion-segment>
     <ion-segment [(ngModel)]="requests" (ionChange)="statusChanged($event)" *ngIf="showForBoth" no-border-top>
       <ion-segment-button value="delivery">
-        Delivery Request
+        <p style="font-size: 10px;text-align: left;">Delivery Request</p>
       </ion-segment-button>
       <ion-segment-button value="open">
-        Open Relationship
+        <p style="font-size: 10px;text-align: left;">Open Relationship</p>
       </ion-segment-button>
       <ion-segment-button value="close">
-        Close Relationship
+        <p style="font-size: 10px;text-align: left;">Close Relationship</p>
       </ion-segment-button>
       <ion-segment-button value="userrequest">
-        User Requests
+        <p style="font-size: 10px;text-align: left;">User Requests</p>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>

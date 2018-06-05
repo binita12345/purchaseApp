@@ -56,10 +56,10 @@ page-signin {
 	.loginBtn--facebook {
 		min-width: 100%;
 		text-align: center;
-	  background-color: #2B4999;
-	  background-image: linear-gradient(#4C69BA, #3B55A0);
-	  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
-	  text-shadow: 0 -1px 0 #2B4999;
+	  	background-color: #2B4999;
+	  	background-image: linear-gradient(#4C69BA, #3B55A0);
+		/*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+		text-shadow: 0 -1px 0 #2B4999;
 	}
 	// .loginBtn--facebook:before {
 	//   border-right: #364e92 1px solid;
@@ -210,4 +210,48 @@ page-signin {
 		text-align: center;
 		font-weight: 500;
 	}
+
+	// modal transeparency
+	.modal {
+		background: rgba(0,0,0,0.5);
+	}
+	.modal-backdrop.fade {
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+	.modal-backdrop.in {
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+	}
+	.modal-backdrop.fade {
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+	.modal-backdrop.fade.in {
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+	}
+	.modal-backdrop {
+	  position: fixed;
+	  top: 0;
+	  right: 0;
+	  bottom: 0;
+	  left: 0;
+	  z-index: 1030;
+	  background-color: #333333;
+	  opacity:0.8; // I ADDED THIS LINE 
+	    // }
+	}
+	.active .modal-backdrop-bg {
+    	opacity: .5;
+    	transition: opacity 300ms ease-in-out;
+    	background-color: #000;
+    }
+    .custom-popover {
+
+  		.ion-backdrop
+  		{
+		  	opacity:0.4;
+		  }
+		}
 }
