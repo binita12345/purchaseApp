@@ -26,7 +26,8 @@
 
 <ion-content padding>
   <div class="image">
-    <img src="assets/imgs/photo-camera.png" class="cameraImg">
+    <!-- <img src="assets/imgs/photo-camera.png" class="cameraImg"> -->
+    <img src="{{userImage}}" class="cameraImg">
   </div>
   <br/>
   <br/>
@@ -38,8 +39,8 @@
       <ion-col col-11 col-xl-11 class="col-in2">
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Name</ion-label>
-          <ion-input class="input-text"></ion-input>
-          <!-- <ion-input class="input-text" value="{{}}"></ion-input> -->
+          <!-- <ion-input class="input-text"></ion-input> -->
+          <ion-input class="input-text" value="{{name}}"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -52,7 +53,8 @@
       <ion-col col-11 col-xl-11 class="col-in2">
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Email</ion-label>
-          <ion-input class="input-text" type="email"></ion-input>
+          <!-- <ion-input class="input-text" type="email"></ion-input> -->
+          <ion-input class="input-text" type="email" value="{{email}}"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -65,7 +67,8 @@
       <ion-col col-11 col-xl-11 class="col-in2">
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Mobile Number</ion-label>
-          <ion-input class="input-text" type="tel" minlength=10 maxlength=10></ion-input>
+          <!-- <ion-input class="input-text" type="tel" minlength=10 maxlength=10></ion-input> -->
+          <ion-input class="input-text" type="tel" minlength=10 maxlength=10 value="{{mobile}}"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>

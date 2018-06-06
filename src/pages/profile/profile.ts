@@ -16,11 +16,23 @@ import { Storage } from '@ionic/storage';
 export class ProfilePage {
 
   userProfileData : any;
+  name : any;
+  email : any;
+  mobile : any;
+  gender : any;
+  userImage : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
     this.storage.get("userSignupData").then((getUserSignupData) => {
-      console.log("getUserSignupData" +JSON.stringify(getUserSignupData));
+      // console.log("getUserSignupData" +JSON.stringify(getUserSignupData));
       this.userProfileData = getUserSignupData;
+      console.log("this.userProfileData" +JSON.stringify(this.userProfileData));
+
+      this.name = this.userProfileData.data.name;
+      this.email = this.userProfileData.data.email;
+      this.mobile = this.userProfileData.data.mobile;
+      this.gender = this.userProfileData.data.gender;
+      this.userImage = this.userProfileData.data.userImage;
     });
   }  
 
