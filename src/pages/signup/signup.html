@@ -120,8 +120,18 @@
 					    </ion-list>
 					    <ion-list radio-group (ionChange)="userAnswer($event)" formControlName="userType">
 							<ion-list-header style="font-weight: 500;font-size: 16px;">
+							<!-- <ion-list-header> -->
 						        Select User Type
 						    </ion-list-header>
+						    <!-- <ion-item style="margin-top: -10px !important;">
+							    <ion-label>Customer</ion-label>
+							    <ion-checkbox value="customer"></ion-checkbox>
+							</ion-item>
+							<br/>
+							<ion-item>
+							    <ion-label>Supplier</ion-label>
+							    <ion-checkbox value="supplier"></ion-checkbox>
+							</ion-item> -->
 					      	<ion-grid>
 					      		<ion-row style="margin-left: -7px;margin-top: 5px;">
 					      			<ion-col col-4 col-xl-4>
@@ -143,7 +153,7 @@
 									      </ion-item>
 								      </ion-col>
 							      </ion-row>
-						      </ion-grid>
+						    </ion-grid>
 					    </ion-list>
 					    <button ion-button full class="signupBtn" type="submit">Sign Up</button>
 					    <p class="para">Already have account ?<b style="color: black;font-weight: 400;" (click)="gotoSignIn()"> Sign In</b></p>

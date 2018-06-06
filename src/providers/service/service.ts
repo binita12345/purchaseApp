@@ -44,7 +44,7 @@ export class ServiceProvider {
 
       this.http.post(apiUrl + 'userSignUp', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
-        	console.log("res signup", res.json());
+        	// console.log("res signup", res.json());
       		resolve(res.json());
         }, (err) => {
           reject(err);
@@ -58,7 +58,7 @@ export class ServiceProvider {
 
       this.http.post(apiUrl + 'userSignIn', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
-        	console.log("res signin", res.json());
+        	// console.log("res signin", res.json());
       		resolve(res.json());
         }, (err) => {
           reject(err);
@@ -70,9 +70,9 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'userSignIn', JSON.stringify(credentials), {headers: headers})
+      this.http.post(apiUrl + 'socialSignIn', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
-        	console.log("res signin", res.json());
+        	// console.log("res signin", res.json());
       		resolve(res.json());
         }, (err) => {
           reject(err);
@@ -86,8 +86,22 @@ export class ServiceProvider {
 
       this.http.post(apiUrl + 'forgotPassword', JSON.stringify(credential), {headers: headers})
         .subscribe(res => {
-        	console.log("res forgot password", res.json());
+        	// console.log("res forgot password", res.json());
       		resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  profileUpdateData(credential) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'userUpdate', JSON.stringify(credential), {headers: headers})
+        .subscribe(res => {
+          // console.log("res forgot password", res.json());
+          resolve(res.json());
         }, (err) => {
           reject(err);
         });

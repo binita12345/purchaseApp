@@ -150,9 +150,19 @@ export class SignupPage {
       console.log("result signup" +JSON.stringify(result));
       this.responseData = result;
       console.log("this.responseData" +JSON.stringify(this.responseData));
+
+      // set storage data to get all user data on profile page
+      this.storage.set('userSignupData', this.responseData);
+
       if(this.responseData["status"] == 0) {
-        this.error = this.responseData["message"];
-        console.log("this.error 0", this.error);
+        // this.error = this.responseData["message"];
+        // console.log("this.error 0", this.error);
+        let alert = this.alertCtrl.create({
+          // title: 'Low battery',
+          subTitle: this.responseData["message"],
+          buttons: ['Ok']
+        });
+        alert.present();
       } else if(this.responseData["status"] == 1) {
         console.log("signup status 1", this.responseData["message"]);
         let alert = this.alertCtrl.create({
@@ -174,8 +184,15 @@ export class SignupPage {
         });
         alert.present();
       } else if(this.responseData["status"] == 2) {
-        this.error = this.responseData["message"];
-        console.log("this.error 2", this.error);
+        // this.error = this.responseData["message"];
+        let alert = this.alertCtrl.create({
+          // title: 'Low battery',
+          subTitle: this.responseData["message"],
+          buttons: ['Ok']
+        });
+        alert.present();
+      } else {
+
       }
     }, (err) => {
       console.log("err signup" +JSON.stringify(err));

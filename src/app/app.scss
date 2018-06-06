@@ -212,3 +212,14 @@ p{
   .scroll-content {
     overflow-y: auto !important;
   }
+
+.toast-success {
+  > div{
+       background-color:#00c851!important;
+   }
+}
+.toast-error {
+    > div{
+       background-color:#ff3547!important;
+   }
+}

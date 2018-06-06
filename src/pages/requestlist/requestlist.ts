@@ -64,6 +64,31 @@ export class RequestlistPage {
       } else {
       }
     });
+    this.storage.get("user_type").then(getUserType => {
+      console.log("getUserType" +JSON.stringify(getUserType));
+      this.userType = getUserType;
+      if (this.userType == "customer") {
+        this.forUserContent = true;
+        this.forSupplierContent =false;
+        this.forBothContent = false;
+        this.showOnlyForUser = true;
+        this.showForBoth = false;
+      } else if (this.userType == "supplier") {
+        this.forUserContent = false;
+        this.forSupplierContent =true;
+        this.forBothContent = false;
+        this.showOnlyForUser = false;
+        this.showForBoth = false;
+        this.forSupplier = false;
+      } else if (this.userType == "both") {
+        this.forUserContent = false;
+        this.forSupplierContent =false;
+        this.forBothContent = true;
+        this.showOnlyForUser = false;
+        this.showForBoth = true;
+      } else {
+      }
+    });
   }
   statusChanged(event) {
 

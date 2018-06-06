@@ -15,7 +15,7 @@
           <ion-title>Profile</ion-title>
         </ion-col>
         <ion-col col-2 col-xl-2 style="text-align: right;">
-          <img src="assets/imgs/pensquare.png" style="height: 20px;" class="cursor" (click)="addProduct()">
+          <img src="assets/imgs/pensquare.png" style="height: 20px;" class="cursor" (click)="editProfile()">
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -39,6 +39,7 @@
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Name</ion-label>
           <ion-input class="input-text"></ion-input>
+          <!-- <ion-input class="input-text" value="{{}}"></ion-input> -->
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -70,7 +71,7 @@
     </ion-row>
     
     <br/>
-    <ion-list radio-group [(ngModel)]="payment" class="radio-class">
+    <ion-list radio-group [(ngModel)]="gender" class="radio-class">
       <ion-list-header class="radio-header">
         Gender
       </ion-list-header>

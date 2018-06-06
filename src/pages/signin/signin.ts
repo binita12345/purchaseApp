@@ -104,7 +104,10 @@ export class SigninPage {
   // }
   fblogin(){
     this.loginType = "FACEBOOK";
+    this.storage.set('loginType', "FACEBOOK");
 
+    this.error = "";
+    // this.loader.show("Please Wait");
     console.log("facebook login");
     // Login with permissions
     this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
@@ -124,20 +127,129 @@ export class SigninPage {
             console.log("fb_token" +fb_token);
 
             // Get user infos from the API
-            this.fb.api("/me?fields=name,gender,birthday,email", []).then((user) => {
+            this.fb.api("/me?fields=name,gender,birthday,email,picture", []).then((user) => {
               console.log("facebook user" +JSON.stringify(user));
                 // Get the connected user details
                 var gender    = user.gender;
                 var birthday  = user.birthday;
                 var name      = user.name;
                 var email     = user.email;
+                var picture     = user.picture;
 
                 console.log("=== USER INFOS ===");
                 console.log("Gender : " + gender);
                 console.log("Birthday : " + birthday);
                 console.log("Name : " + name);
                 console.log("Email : " + email);
+                console.log("picture : " + picture);
+                console.log("picture url : " + picture.data.url);
 
+                let facebookLoginData = {
+                  "identifierId":fb_id,
+                  "name":name,
+                  "email":email,
+                  "deviceType":this.deviceInfo.platform,
+                  "deviceToken":this.deviceInfo.token,
+                  "loginType":this.loginType,
+                  "userImageUrl":picture.data.url,
+                  // "userType":this.user_type,
+                  // "gender":this.gender,
+                  // "password": "123456"
+                }
+                console.log("facebookLoginData " +JSON.stringify(facebookLoginData));
+
+                this.serviceProvider.socialSignIn(facebookLoginData).then(
+                  data => {
+                    console.log("ts data" +JSON.stringify(data))
+                    if(data['status'] == 1) {
+                      this.loader.hide();
+                      let obj: any = data;
+                      console.log("obj" +JSON.stringify(obj));
+                      console.log("userId" +obj.data.ID);
+                      console.log("token" +obj.data.sessionId);
+                      console.log("user_type" +obj.data.user_type);
+                      // console.log(this.serviceProvider.headers, obj.data.ID);
+                      this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
+                      this.storage.set("userData", obj);
+                      this.storage.set("userId", obj.data.ID);
+                      this.storage.set("token", obj.data.sessionId);
+
+                      if (obj.data.user_type) {
+                          this.loader.hide();
+                          this.navCtrl.setRoot("HomeappPage", { user_type: obj.data.user_type });
+                      }
+
+                    } else if(data['status'] == 2){
+                      this.loader.hide();
+                      let alert = this.alertCtrl.create({
+                        title: data["message"],
+                        inputs: [
+                          {
+                            type: 'radio',
+                            label: 'Customer',
+                            value: 'customer',
+                            checked: true
+                          },
+                          {
+                            type: 'radio',
+                            label: 'Supplier',
+                            value: 'supplier'
+                          },
+                          {
+                            type: 'radio',
+                            label: 'Both',
+                            value: 'both'
+                          },
+                        ],
+                        buttons : [
+                          {
+                            text: 'Cancel'
+                          },
+                          {
+                            text: 'Ok',
+                            handler: (data: any) => {
+                              console.log('Radio data:' +JSON.stringify(data));
+                              console.log("user_type" +data);
+                              this.storage.set("user_type", data);
+                              this.navCtrl.setRoot("HomeappPage", { user_type: data });
+                            }
+                          }
+                        ]
+                      });
+
+                      alert.present();
+                    } else{
+                      console.log("else....... facebook");
+                      this.loader.hide();
+                    }
+                    
+                  },
+                  err => {
+                    // this.storage.set("userId", "");
+                    // this.storage.set("token", "");
+                    // this.storage.set("userData", "");
+
+                    // this.loader.hide();
+                    // // console.log("err", err)
+                    // this.error = err.message;
+                    console.log("this.error" +JSON.stringify(err));
+                  }
+                );
+                // if(user.user_type == undefined){
+                //   console.log("facebook ifffffff");
+                //   this.loader.hide();
+                //   let modal = this.modalCtrl.create('SocialmodalPage', {'facebookdata': facebookLoginData});
+                //   document.getElementById("myDIV").style.opacity = "0.5";
+                //   modal.present();
+                //   modal.onDidDismiss(data => {
+                //     console.log(data);
+                //     document.getElementById("myDIV").style.opacity = "1";
+                //   });
+                // }
+
+                this.fb.logout()
+                  .then( res => console.log('Logged into Facebook!', res))
+                  .catch(e => console.log('Error logout from Facebook', e));
                 // => Open user session and redirect to the next page
 
             });
@@ -151,13 +263,17 @@ export class SigninPage {
         }
 
     })
-    .catch((e) => {
-        console.log('Error logging into Facebook', e);
-    });
+    .catch(err => console.error("facebook login err" +JSON.stringify(err)));
   }
 
   googlelogin() {
+
     this.loginType = "GOOGLE";
+    this.storage.set('loginType', "GOOGLE");
+
+    this.error = "";
+    this.loader.show("Please Wait");
+
     console.log("google login" +this.loginType);
     this.googlePlus.login({})
       .then(res => {
@@ -171,60 +287,120 @@ export class SigninPage {
         this.imageUrl = res.imageUrl;
         console.log("google res this.imageUrl" +this.imageUrl);
 
-        if(res.gender == undefined && res.user_type == undefined){
-          console.log("iffffffrf");
-          let modal = this.modalCtrl.create('SocialmodalPage');
-          document.getElementById("myDIV").style.opacity = "0.5";
-          modal.present();
-          modal.onDidDismiss(data => {
-            console.log(data);
-            document.getElementById("myDIV").style.opacity = "1";
-          });
-        }
-
-        let googlePlusData = {
+        let googlePlusLoginData = {
           "identifierId":this.userId,
           "name":this.displayName,
           "email":this.email,
           "deviceType":this.deviceInfo.platform,
           "deviceToken":this.deviceInfo.token,
           "loginType":this.loginType,
-          "userType":this.user_type,
           "userImageUrl":this.imageUrl,
-          "gender":this.gender,
-          "password": "123456"
+          // "userType":this.user_type,
+          // "gender":this.gender,
+          // "password": "123456"
         }
+        console.log("google plus googlePlusLoginData" +JSON.stringify(googlePlusLoginData));
+        // if(res.user_type == undefined){
+        //   console.log("iffffffrf");
+          
+        //   let modal = this.modalCtrl.create('SocialmodalPage', {'googledata': googlePlusLoginData});
+        //   document.getElementById("myDIV").style.opacity = "0.5";
+        //   modal.present();
+        //   modal.onDidDismiss(data => {
+        //     console.log(data);
+        //     document.getElementById("myDIV").style.opacity = "1";
+        //   });
+        // }
 
-        console.log("google plus googlePlusData" +JSON.stringify(googlePlusData));
-        this.serviceProvider.socialSignIn(googlePlusData).then(
+        // let googlePlusData = {
+        //   "identifierId":this.userId,
+        //   "name":this.displayName,
+        //   "email":this.email,
+        //   "deviceType":this.deviceInfo.platform,
+        //   "deviceToken":this.deviceInfo.token,
+        //   "loginType":this.loginType,
+        //   "userType":this.user_type,
+        //   "userImageUrl":this.imageUrl,
+        //   "gender":this.gender,
+        //   "password": "123456"
+        // }
+
+        // console.log("google plus googlePlusData" +JSON.stringify(googlePlusData));
+        this.serviceProvider.socialSignIn(googlePlusLoginData).then(
           data => {
             console.log("ts data" +JSON.stringify(data))
+            if(data['status'] == 1) {
+              this.loader.hide();
+              let obj: any = data;
+              console.log("obj" +JSON.stringify(obj));
+              console.log("userId" +obj.data.ID);
+              console.log("token" +obj.data.sessionId);
+              console.log("user_type" +obj.data.user_type);
+              // console.log(this.serviceProvider.headers, obj.data.ID);
+              this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
+              this.storage.set("userData", obj);
+              this.storage.set("userId", obj.data.ID);
+              this.storage.set("token", obj.data.sessionId);
 
-            let obj: any = data;
-            console.log("obj" +JSON.stringify(obj));
-            console.log("userId" +obj.data.ID);
-            console.log("token" +obj.data.sessionId);
-            console.log("user_type" +obj.data.user_type);
-            // console.log(this.serviceProvider.headers, obj.data.ID);
-            this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
-            this.storage.set("userData", obj);
-            this.storage.set("userId", obj.data.ID);
-            this.storage.set("token", obj.data.sessionId);
+              if (obj.data.user_type) {
+                  this.loader.hide();
+                  this.navCtrl.setRoot("HomeappPage", { user_type: obj.data.user_type });
+              }
 
-            if (obj.data.user_type) {
-                this.loader.hide();
-                this.navCtrl.setRoot("HomeappPage", { user_type: obj.data.user_type });
+            } else if(data['status'] == 2){
+              this.loader.hide();
+              let alert = this.alertCtrl.create({
+                title: data["message"],
+                inputs: [
+                  {
+                    type: 'radio',
+                    label: 'Customer',
+                    value: 'customer',
+                    checked: true
+                  },
+                  {
+                    type: 'radio',
+                    label: 'Supplier',
+                    value: 'supplier'
+                  },
+                  {
+                    type: 'radio',
+                    label: 'Both',
+                    value: 'both'
+                  },
+                ],
+                buttons : [
+                  {
+                    text: 'Cancel'
+                  },
+                  {
+                    text: 'Ok',
+                    handler: (data: any) => {
+                      console.log('Radio data:' +JSON.stringify(data));
+                      console.log("user_type" +data);
+                      this.storage.set("user_type", data);
+                      this.navCtrl.setRoot("HomeappPage", { user_type: data });
+                    }
+                  }
+                ]
+              });
+
+              alert.present();
+            } else{
+              console.log("else....... facebook");
+              this.loader.hide();
             }
+            
           },
           err => {
-            this.storage.set("userId", "");
-            this.storage.set("token", "");
-            this.storage.set("userData", "");
+            // this.storage.set("userId", "");
+            // this.storage.set("token", "");
+            // this.storage.set("userData", "");
 
-            this.loader.hide();
-            // console.log("err", err)
-            this.error = err.message;
-            // console.log("this.error", this.error)
+            // this.loader.hide();
+            // // console.log("err", err)
+            // this.error = err.message;
+            console.log("this.error" +JSON.stringify(err));
           }
         );
 
