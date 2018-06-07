@@ -139,10 +139,23 @@ page-profile {
 	    display: block;
 	} 
 	.cameraImg{
-		width: 35px;
-		height: 35px;
+		border: 1px solid #e0e0e0;
+	    border-radius: 100px;
+	    height: 100px;
+	    width: 100px;
+	    padding: 5px;
+	    background-color: #e0e0e0;
 	  	margin: auto;
 	  	display: block;
+	}
+	.chooseImg {
+		// border: transparent;
+		border: 1px solid #e0e0e0;
+		border-radius: 100px;
+		height: 100px;
+	    width: 100px;
+	    margin: auto;
+	    display: block;
 	}
 	.row-css{
 		border-bottom: 1px solid #b3b2b3;
@@ -360,3 +373,5 @@ page-profile {
     	text-transform: none !important;
 	}
 }
+
+

@@ -29,12 +29,15 @@
   	</div>
   	<br/>
   	<br/>
+    <div class="error-message">
+      {{error}}
+    </div>
   	<ion-grid>
   		<!-- <ion-row class="row-css">
   			<ion-col col-12 col-xl-12> -->
   				<ion-item class="item-css row-css">
 			    	<ion-label fixed class="label-css">Product Name</ion-label>
-			    	<ion-input class="input-text"></ion-input>
+			    	<ion-input class="input-text" [(ngModel)]="productData.name" required></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->
@@ -47,7 +50,7 @@
 	      	</ion-col>
 	      	<ion-col col-12 col-xl-12>
 		  		<ion-item>
-			        <ion-textarea [(ngModel)]="description" name="description"></ion-textarea>
+			        <ion-textarea [(ngModel)]="productData.description" name="description"></ion-textarea>
 		      	</ion-item>
 	      	</ion-col>
       	</ion-row>
@@ -56,7 +59,7 @@
   			<ion-col col-12 col-xl-12> -->
   				<ion-item class="item-css row-css margn">
 			    	<ion-label fixed class="label-css">Delivery Address</ion-label>
-			    	<ion-input class="input-text"></ion-input>
+			    	<ion-input class="input-text" [(ngModel)]="productData.address" required></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->
@@ -76,7 +79,7 @@
   			<ion-col col-12 col-xl-12> -->
   				<ion-item class="item-css row-css margn">
 			    	<ion-label fixed class="label-css">Time</ion-label>
-			    	<ion-input class="input-text"></ion-input>
+			    	<ion-input class="input-text" [(ngModel)]="productData.time"></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->
@@ -85,7 +88,7 @@
   			<ion-col col-12 col-xl-12> -->
   				<ion-item class="item-css row-css margn">
 			    	<ion-label fixed class="label-css">Amount</ion-label>
-			    	<ion-input class="input-text"></ion-input>
+			    	<ion-input class="input-text" [(ngModel)]="productData.amount" required></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->

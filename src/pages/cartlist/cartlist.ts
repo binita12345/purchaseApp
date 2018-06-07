@@ -22,6 +22,7 @@ export class CartlistPage {
   forUserContent : any;
   forSupplierContent : any;
   selectedAll: any;
+  userType: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
     this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "1",selected: false},
@@ -29,22 +30,36 @@ export class CartlistPage {
     {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "3",selected: false},
     {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "4",selected: false}]
 
-    this.storage.get("isCustomerLogin").then((CustomerLogin) => {
-      console.log("CustomerLogin", CustomerLogin);
-      this.customerLogin = CustomerLogin;
+    // this.storage.get("isCustomerLogin").then((CustomerLogin) => {
+    //   console.log("CustomerLogin", CustomerLogin);
+    //   this.customerLogin = CustomerLogin;
       
-      if(this.customerLogin){
+    //   if(this.customerLogin){
+    //     this.forUserContent = true;
+    //     this.forSupplierContent =false;
+    //   }
+    // });
+    // this.storage.get("isSupplierLogin").then((SupplierLogin) => {
+    //   console.log("SupplierLogin", SupplierLogin);
+    //   this.supplierLogin = SupplierLogin;
+
+    //   if(this.supplierLogin){
+    //     this.forUserContent = false;
+    //     this.forSupplierContent =true;
+    //   }
+    // });
+    this.storage.get("userData").then(userData => {
+      console.log("userData" +JSON.stringify(userData));
+      this.userType = userData.data.user_type;
+      if (this.userType == "customer") {
         this.forUserContent = true;
         this.forSupplierContent =false;
-      }
-    });
-    this.storage.get("isSupplierLogin").then((SupplierLogin) => {
-      console.log("SupplierLogin", SupplierLogin);
-      this.supplierLogin = SupplierLogin;
-
-      if(this.supplierLogin){
+        // this.forBothContent =false;
+      } else if (this.userType == "supplier" || "both") {
         this.forUserContent = false;
         this.forSupplierContent =true;
+        // this.forBothContent =false;
+      } else {
       }
     });
   }

@@ -135,18 +135,19 @@ page-signup {
 	.cameraImg{
 		border: 1px solid #e0e0e0;
 	    border-radius: 100px;
-	    height: 22%;
-	    width: 22%;
+	    height: 100px;
+	    width: 100px;
 	    padding: 5px;
 	    background-color: #e0e0e0;
 	  	margin: auto;
 	  	display: block;
 	}
 	.chooseImg {
-		border: transparent;
+		border: 1px solid #e0e0e0;
+		// border: transparent;
 		border-radius: 100px;
-		height: 22%;
-	    width: 22%;
+		height: 100px;
+	    width: 100px;
 	    margin: auto;
 	    display: block;
 	}

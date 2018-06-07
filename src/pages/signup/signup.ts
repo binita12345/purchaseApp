@@ -27,10 +27,11 @@ export class SignupPage {
   userValue: any;
 	customer: boolean = false;
 	supplier: boolean = true;
-  base64Image : any;
-
+  // base64Image : any;
+  base64Image = 'assets/imgs/photo-camera.png';
   responseData : any;
   error : any = '';
+  image : 'assets/imgs/photo-camera.png';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform, 
     public actionSheetCtrl: ActionSheetController, public serviceProvider: ServiceProvider, private alertCtrl: AlertController, public storage: Storage) {
@@ -76,16 +77,18 @@ export class SignupPage {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
+      encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
 
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
-      console.log("take photo imagedata" +JSON.stringify(imageData));
-      this.base64Image  = 'data:image/png;base64,' + imageData;
-      console.log("take photo base64Image" +this.base64Image);
+      // console.log("take photo imagedata" +JSON.stringify(imageData));
+      this.image = imageData;
+      console.log("take photo image" +this.image);
+      this.base64Image  = 'data:image/jpeg;base64,' + imageData;
+      // console.log("take photo base64Image" +this.base64Image);
       // this.photos.push(this.base64Image);
       // this.photos.reverse();
     }, (err) => {
@@ -97,19 +100,23 @@ export class SignupPage {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
+      encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
     }
  
     this.camera.getPicture(options).then((imageData) => {
+      console.log("get image from gallary");
        // imageData is either a base64 encoded string or a file URI
        // If it's base64:
-      console.log("gallary imagedata" +JSON.stringify(imageData));
-      this.base64Image  = 'data:image/png;base64,' + imageData;
-      console.log("gallary base64Image" +this.base64Image);
+      // console.log("gallary imagedata" +JSON.stringify(imageData));
+      this.image = imageData;
+      console.log("gallary image" +this.image);
+      this.base64Image  = 'data:image/jpeg;base64,'+imageData;
+      // console.log("gallary base64Image" +this.base64Image);
     }, (err) => {
        // Handle error
+       console.log("gallary err" +JSON.stringify(err));
     })
   }
 
@@ -139,12 +146,12 @@ export class SignupPage {
       'mobileNo':this.signUpFrom.value.mobile,
       'gender':this.radioValue,
       'userType':this.userValue,
-      'image':this.base64Image
+      'userImage':this.image
       // 'customer':this.signUpFrom.value.customer,
       // 'supplier':this.signUpFrom.value.supplier
     }
 
-    console.log(formObj);
+    console.log("formObj signup" +JSON.stringify(formObj));
 
     this.serviceProvider.signupData(formObj).then((result) => {
       console.log("result signup" +JSON.stringify(result));
@@ -177,7 +184,7 @@ export class SignupPage {
                 let userType = this.responseData.data.user_type;
                 this.storage.set('user_type', userType);
                 
-                this.navCtrl.push("HomeappPage", {'user_type' : userType});
+                this.navCtrl.push("SigninPage");
               }
             }
           ]

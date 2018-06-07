@@ -38,6 +38,12 @@ export class ServiceProvider {
     }
   }
 
+  private extractData(res: Response) {
+    let body = res;
+    return body || { };
+  }
+
+  // This api is used for sign up in application.
   signupData(credentials) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -52,6 +58,7 @@ export class ServiceProvider {
     });
   }
 
+  // This api is used for signIn in application.
   signinData(credentials) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -66,6 +73,7 @@ export class ServiceProvider {
     });
   }
 
+  // This api is used to login by social signIn in application.
   socialSignIn(credentials) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -80,6 +88,7 @@ export class ServiceProvider {
     });
   }
 
+  // This api is used for user which forgot his/her password.
   forgotPasswordData(credential) {
   	return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -94,6 +103,7 @@ export class ServiceProvider {
     });
   }
 
+  // This api is used for user which will update his/her profile.
   profileUpdateData(credential) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -101,6 +111,36 @@ export class ServiceProvider {
       this.http.post(apiUrl + 'userUpdate', JSON.stringify(credential), {headers: headers})
         .subscribe(res => {
           // console.log("res forgot password", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to add products in application
+  addProductData(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'productAdd', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("add product data", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to get products list of user in application
+  getProductList(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'productList', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("add product data", res.json());
           resolve(res.json());
         }, (err) => {
           reject(err);

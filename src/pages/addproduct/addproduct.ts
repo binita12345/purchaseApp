@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, Platform, ActionSheetController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ServiceProvider } from '../../providers/service/service';
 /**
  * Generated class for the AddproductPage page.
  *
@@ -15,7 +17,92 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddproductPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  productData = { name:'', description: '', address: '', time: '', amount: '' };
+  id : any;
+  base64Image = 'assets/imgs/photo-camera.png';
+  // image : 'assets/imgs/photo-camera.png';
+  image : any;
+  error : any = '';
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private camera: Camera, 
+    public platform: Platform, public actionSheetCtrl: ActionSheetController, public serviceProvider: ServiceProvider) {
+
+    this.storage.get("userData").then(userData => {
+      console.log("userData" +JSON.stringify(userData));
+      this.id = userData.data.ID;
+    });
+  }
+
+  choosePhoto() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Option',
+      cssClass: 'action-sheets-basic-page',
+      buttons: [
+        {
+          text: 'Take photo',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'ios-camera-outline' : null,
+          handler: () => {
+            this.takephoto();
+          }
+        },
+        {
+          text: 'Choose photo from Gallery',
+          icon: !this.platform.is('ios') ? 'ios-images-outline' : null,
+          handler: () => {
+            this.openGallery();
+          }
+        },
+      ]
+    });
+    actionSheet.present();
+  }
+
+  takephoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      // console.log("take photo imagedata" +JSON.stringify(imageData));
+      this.image = imageData;
+      console.log("take photo image" +this.image);
+      this.base64Image  = 'data:image/jpeg;base64,' + imageData;
+      // console.log("take photo base64Image" +this.base64Image);
+      // this.photos.push(this.base64Image);
+      // this.photos.reverse();
+    }, (err) => {
+      // Handle error
+    })
+  }
+ 
+  openGallery() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
+    }
+ 
+    this.camera.getPicture(options).then((imageData) => {
+      console.log("get image from gallary");
+       // imageData is either a base64 encoded string or a file URI
+       // If it's base64:
+      // console.log("gallary imagedata" +JSON.stringify(imageData));
+      this.image = imageData;
+      console.log("gallary image" +this.image);
+      this.base64Image  = 'data:image/jpeg;base64,'+imageData;
+      // console.log("gallary base64Image" +this.base64Image);
+    }, (err) => {
+       // Handle error
+       console.log("gallary err" +JSON.stringify(err));
+    })
   }
 
   ionViewDidLoad() {
@@ -23,6 +110,29 @@ export class AddproductPage {
   }
 
   addtoCartList(){
+    this.error = '';
+    console.log("add product of user");
+
+    let productsObj = {
+      'ID': this.id,
+      'name': this.productData.name,
+      'description': this.productData.description,
+      'deliveryAddress': this.productData.address,
+      'deliveryTime': this.productData.time,
+      'amount': this.productData.amount,
+      'productImage': this.image,
+    }
+
+    console.log("productsObj" +JSON.stringify(productsObj));
+    this.serviceProvider.addProductData(productsObj).then((result) => {
+      console.log("result add product" +JSON.stringify(result));
+      if(result["status"] == 2) {
+        this.error = result["message"];
+      }
+    }, (err) => {
+      console.log("err add product" +JSON.stringify(err));
+      // Error log
+    });
   	this.navCtrl.push("CartlistPage");
   }
 

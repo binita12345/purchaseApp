@@ -25,10 +25,13 @@
 <!-- <header title="Profile"> </header> -->
 
 <ion-content padding>
-  <div class="image">
+  <!-- <div class="image"> -->
     <!-- <img src="assets/imgs/photo-camera.png" class="cameraImg"> -->
-    <img src="{{userImage}}" class="cameraImg">
-  </div>
+    <!-- <img [src]="userImage" class="cameraImg"> -->
+    <!-- <img src="assets/imgs/photo-camera.png" *ngIf="!base64Image" class="cameraImg" (click)="choosePhoto()"> -->
+    <!-- <img [src]="base64Image" *ngIf="base64Image" (click)="choosePhoto()" class="chooseImg"> -->
+    <img src="{{base64Image}}" (click)="choosePhoto()" class="chooseImg">
+  <!-- </div> -->
   <br/>
   <br/>
   <ion-grid>
@@ -40,7 +43,7 @@
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Name</ion-label>
           <!-- <ion-input class="input-text"></ion-input> -->
-          <ion-input class="input-text" value="{{name}}"></ion-input>
+          <ion-input class="input-text" value="{{name}}" [(ngModel)]="name"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -54,7 +57,7 @@
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Email</ion-label>
           <!-- <ion-input class="input-text" type="email"></ion-input> -->
-          <ion-input class="input-text" type="email" value="{{email}}"></ion-input>
+          <ion-input class="input-text" type="email" value="{{email}}" [(ngModel)]="email"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -68,7 +71,7 @@
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Mobile Number</ion-label>
           <!-- <ion-input class="input-text" type="tel" minlength=10 maxlength=10></ion-input> -->
-          <ion-input class="input-text" type="tel" minlength=10 maxlength=10 value="{{mobile}}"></ion-input>
+          <ion-input class="input-text" type="tel" minlength=10 maxlength=10 value="{{mobile}}" [(ngModel)]="mobile"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -110,7 +113,7 @@
                 <ion-card>
                   <ion-slides class="slidesCss">
                       <ion-slide (ionSlideDidChange)="slideChanged()">
-                        <ion-grid class="grid-css" id='target1' #target1 (click)="gotoHome()">
+                        <ion-grid class="grid-css" (click)="gotoHome()">
                           <ion-row>
                             <ion-col col-12>
                               <img src="assets/imgs/house.png" class="imagebgColor">
@@ -120,7 +123,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" id='target2' #target2 (click)="gotoCart()">
+                        <ion-grid class="grid-css" (click)="gotoCart()">
                           <ion-row>
                             <ion-col col-12>
                               <img src="assets/imgs/cart.png" class="imagebgColor">
@@ -130,7 +133,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" id='target3' #target3 (click)="gotoRequest()">
+                        <ion-grid class="grid-css" (click)="gotoRequest()">
                           <ion-row>
                             <ion-col col-12>
                               <img src="assets/imgs/request.png" class="imagebgColor">
@@ -140,7 +143,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css active" id='target4' #target4 (click)="gotoProfile()">
+                        <ion-grid class="grid-css active" (click)="gotoProfile()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/profile.png" class="imagebgColor">
@@ -152,7 +155,7 @@
                         </ion-grid>
                       </ion-slide>
                       <ion-slide (ionSlideDidChange)="slideChanged()">
-                        <ion-grid class="grid-css" id='target5' #target5 (click)="gotoNotification()">
+                        <ion-grid class="grid-css" (click)="gotoNotification()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/bell.png" class="imagebgColor">
@@ -162,7 +165,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" id='target6' #target6 (click)="gotoInquiryProduct()">
+                        <ion-grid class="grid-css" (click)="gotoInquiryProduct()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/inquiry.png" class="imagebgColor">
@@ -172,7 +175,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" id='target7' #target7 (click)="gotoInviteFriend()">
+                        <ion-grid class="grid-css" (click)="gotoInviteFriend()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/adduser.png" class="imagebgColor">
@@ -182,7 +185,7 @@
                             </ion-col>
                           </ion-row>
                         </ion-grid>
-                        <ion-grid class="grid-css" id='target8' #target8 (click)="gotoChangePassword()">
+                        <ion-grid class="grid-css" (click)="gotoChangePassword()">
                           <ion-row>
                             <ion-col col-12 >
                               <img src="assets/imgs/lockbk.png" class="imagebgColor">

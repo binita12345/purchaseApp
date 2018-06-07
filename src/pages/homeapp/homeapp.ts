@@ -42,24 +42,24 @@ export class HomeappPage {
       } else {
       }
     });
-    this.storage.get("user_type").then(getUserType => {
-      console.log("getUserType" +JSON.stringify(getUserType));
-      this.userType = getUserType;
-      if (this.userType == "customer") {
-        this.forUserContent = true;
-        this.forSupplierContent =false;
-        this.forBothContent =false;
-      } else if (this.userType == "supplier") {
-        this.forUserContent = false;
-        this.forSupplierContent =true;
-        this.forBothContent =false;
-      } else if (this.userType == "both") {
-        this.forUserContent = false;
-        this.forSupplierContent =false;
-        this.forBothContent =true;
-      } else {
-      }
-    });
+    // this.storage.get("user_type").then(getUserType => {
+    //   console.log("getUserType" +JSON.stringify(getUserType));
+    //   this.userType = getUserType;
+    //   if (this.userType == "customer") {
+    //     this.forUserContent = true;
+    //     this.forSupplierContent =false;
+    //     this.forBothContent =false;
+    //   } else if (this.userType == "supplier") {
+    //     this.forUserContent = false;
+    //     this.forSupplierContent =true;
+    //     this.forBothContent =false;
+    //   } else if (this.userType == "both") {
+    //     this.forUserContent = false;
+    //     this.forSupplierContent =false;
+    //     this.forBothContent =true;
+    //   } else {
+    //   }
+    // });
   }
 
   showreviewlist() {

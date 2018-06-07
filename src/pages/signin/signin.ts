@@ -446,20 +446,34 @@ export class SigninPage {
         data => {
           console.log("ts data" +JSON.stringify(data))
 
-          let obj: any = data;
-          console.log("obj" +JSON.stringify(obj));
-          console.log("userId" +obj.data.ID);
-          console.log("token" +obj.data.sessionId);
-          // console.log(this.serviceProvider.headers, obj.data.ID);
-          this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
-          this.storage.set("userData", obj);
-          this.storage.set("userId", obj.data.ID);
-          this.storage.set("token", obj.data.sessionId);
+          if(data["status"] == 0) {
+            this.loader.hide();
+            let alert = this.alertCtrl.create({
+              title: 'Sorry !',
+              subTitle: data["message"],
+              buttons: ['Ok']
+            });
+            alert.present();
+          } else if(data["status"] == 1) {
+            // this.loader.show("Logging in....");
+            let obj: any = data;
+            console.log("obj" +JSON.stringify(obj));
+            console.log("userId" +obj.data.ID);
+            console.log("token" +obj.data.sessionId);
+            // console.log(this.serviceProvider.headers, obj.data.ID);
+            this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
+            this.storage.set("userData", obj);
+            this.storage.set("userId", obj.data.ID);
+            this.storage.set("token", obj.data.sessionId);
 
-          if (obj.data.user_type) {
-              this.loader.hide();
-              this.navCtrl.setRoot("HomeappPage", { user_type: obj.data.user_type });
+            if (obj.data.user_type) {
+                this.loader.hide();
+                this.navCtrl.setRoot("HomeappPage", { user_type: obj.data.user_type });
+            }
+          } else {
+
           }
+          
         },
         err => {
           this.storage.set("userId", "");

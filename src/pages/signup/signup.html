@@ -14,7 +14,7 @@
 <header title="Sign Up"> </header> 
 
 <ion-content padding class="padding-top" scrollY="true" >
-	<ion-scroll scrollX="true" scrollY="true" style="height: 105vh;">
+	<ion-scroll scrollX="true" scrollY="true" style="height: 115vh;">
 		<form [formGroup]="signUpFrom" (submit)="userAccount()">
 			<!-- <ion-grid>
 				<ion-card class="card-css">
@@ -23,8 +23,9 @@
 
 				  <ion-card-content> -->
 				  	<!-- <div class="image"> -->
-				  		<img src="assets/imgs/photo-camera.png" *ngIf="!base64Image" class="cameraImg" (click)="choosePhoto()">
-				  		<img [src]="base64Image" *ngIf="base64Image" (click)="choosePhoto()" class="chooseImg">
+				  		<!-- <img src="assets/imgs/photo-camera.png" *ngIf="!base64Image" class="cameraImg" (click)="choosePhoto()"> -->
+				  		<img src="{{base64Image}}" (click)="choosePhoto()" class="chooseImg">
+				  		<!-- <img src="{{imgPreview}}" (click)="choosePhoto()" class="chooseImg"> -->
 				  	<!-- </div> -->
 				  	<br/>
 				  	<div class="error-message">
