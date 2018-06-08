@@ -8,6 +8,7 @@ import { ActionSheetController } from 'ionic-angular';
 import { ServiceProvider } from '../../providers/service/service';
 import { AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the SignupPage page.
  *
@@ -34,7 +35,8 @@ export class SignupPage {
   image : 'assets/imgs/photo-camera.png';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private camera: Camera, public platform: Platform, 
-    public actionSheetCtrl: ActionSheetController, public serviceProvider: ServiceProvider, private alertCtrl: AlertController, public storage: Storage) {
+    public actionSheetCtrl: ActionSheetController, public serviceProvider: ServiceProvider, private alertCtrl: AlertController, public storage: Storage,
+    private loader: Loader) {
 
   	this.signUpFrom = formBuilder.group({
       name: [''],
@@ -86,7 +88,7 @@ export class SignupPage {
       // If it's base64:
       // console.log("take photo imagedata" +JSON.stringify(imageData));
       this.image = imageData;
-      console.log("take photo image" +this.image);
+      // console.log("take photo image" +this.image);
       this.base64Image  = 'data:image/jpeg;base64,' + imageData;
       // console.log("take photo base64Image" +this.base64Image);
       // this.photos.push(this.base64Image);
@@ -111,7 +113,7 @@ export class SignupPage {
        // If it's base64:
       // console.log("gallary imagedata" +JSON.stringify(imageData));
       this.image = imageData;
-      console.log("gallary image" +this.image);
+      // console.log("gallary image" +this.image);
       this.base64Image  = 'data:image/jpeg;base64,'+imageData;
       // console.log("gallary base64Image" +this.base64Image);
     }, (err) => {
@@ -125,18 +127,19 @@ export class SignupPage {
   }
   mcqAnswer(value)
   {
-     console.log("value", value);
+     // console.log("value", value);
      this.radioValue = value;
-     console.log("this.radioValue", this.radioValue);
+     // console.log("this.radioValue", this.radioValue);
   }
   userAnswer(value1)
   {
-     console.log("value..1", value1);
+     // console.log("value..1", value1);
      this.userValue = value1;
-     console.log("this.userValue", this.userValue);
+     // console.log("this.userValue", this.userValue);
   }
   userAccount(){
     this.error = '';
+    this.loader.show("Please Wait");
   	console.log("user account");
 
   	let formObj = {
@@ -154,9 +157,9 @@ export class SignupPage {
     console.log("formObj signup" +JSON.stringify(formObj));
 
     this.serviceProvider.signupData(formObj).then((result) => {
-      console.log("result signup" +JSON.stringify(result));
+      // console.log("result signup" +JSON.stringify(result));
       this.responseData = result;
-      console.log("this.responseData" +JSON.stringify(this.responseData));
+      // console.log("this.responseData" +JSON.stringify(this.responseData));
 
       // set storage data to get all user data on profile page
       this.storage.set('userSignupData', this.responseData);
@@ -164,6 +167,7 @@ export class SignupPage {
       if(this.responseData["status"] == 0) {
         // this.error = this.responseData["message"];
         // console.log("this.error 0", this.error);
+        this.loader.hide();
         let alert = this.alertCtrl.create({
           // title: 'Low battery',
           subTitle: this.responseData["message"],
@@ -171,7 +175,8 @@ export class SignupPage {
         });
         alert.present();
       } else if(this.responseData["status"] == 1) {
-        console.log("signup status 1", this.responseData["message"]);
+        // console.log("signup status 1", this.responseData["message"]);
+        this.loader.hide();
         let alert = this.alertCtrl.create({
           subTitle: this.responseData["message"],
           buttons: [
@@ -180,7 +185,7 @@ export class SignupPage {
               handler: () => {
                 console.log('ok clicked');
                 // console.log("this.responseData on alert control" +JSON.stringify(this.responseData));
-                console.log("usertype signup" +this.responseData.data.user_type);
+                // console.log("usertype signup" +this.responseData.data.user_type);
                 let userType = this.responseData.data.user_type;
                 this.storage.set('user_type', userType);
                 
@@ -192,6 +197,7 @@ export class SignupPage {
         alert.present();
       } else if(this.responseData["status"] == 2) {
         // this.error = this.responseData["message"];
+        this.loader.hide();
         let alert = this.alertCtrl.create({
           // title: 'Low battery',
           subTitle: this.responseData["message"],

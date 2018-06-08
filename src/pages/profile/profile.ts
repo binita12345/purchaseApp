@@ -48,7 +48,7 @@ export class ProfilePage {
 
   getProfileData() {
     this.storage.get("userData").then(userData => {
-      console.log("user profile data" +JSON.stringify(userData));
+      // console.log("user profile data" +JSON.stringify(userData));
       this.id = userData.data.ID;
       this.name = userData.data.name;
       this.email = userData.data.email;
@@ -102,7 +102,7 @@ export class ProfilePage {
       this.image = imageData;
       // console.log("take photo imagedata" +JSON.stringify(imageData));
       this.base64Image  = 'data:image/png;base64,' + imageData;
-      console.log("take photo base64Image" +this.base64Image);
+      // console.log("take photo base64Image" +this.base64Image);
       // this.photos.push(this.base64Image);
       // this.photos.reverse();
     }, (err) => {
@@ -125,7 +125,7 @@ export class ProfilePage {
       this.image = imageData;
       // console.log("gallary imagedata" +JSON.stringify(imageData));
       this.base64Image  = 'data:image/png;base64,' + imageData;
-      console.log("gallary base64Image" +this.base64Image);
+      // console.log("gallary base64Image" +this.base64Image);
     }, (err) => {
        // Handle error
     })
@@ -143,9 +143,9 @@ export class ProfilePage {
       // 'customer':this.signUpFrom.value.customer,
       // 'supplier':this.signUpFrom.value.supplier
     }
-    console.log("profileObj" +JSON.stringify(profileObj));
+    // console.log("profileObj" +JSON.stringify(profileObj));
     this.serviceProvider.profileUpdateData(profileObj).then((result) => {
-      console.log("result profile" +JSON.stringify(result));
+      // console.log("result profile" +JSON.stringify(result));
       if(result["status"] == 1) {
         let alert = this.alertCtrl.create({
           subTitle: result["message"],

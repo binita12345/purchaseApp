@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+import { ServiceProvider } from '../../providers/service/service';
 /**
  * Generated class for the CartlistPage page.
  *
@@ -23,12 +23,13 @@ export class CartlistPage {
   forSupplierContent : any;
   selectedAll: any;
   userType: any;
+  id : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
-    this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "1",selected: false},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "2",selected: false},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "3",selected: false},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "4",selected: false}]
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider) {
+    // this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "1",selected: false},
+    // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "2",selected: false},
+    // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "3",selected: false},
+    // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "4",selected: false}]
 
     // this.storage.get("isCustomerLogin").then((CustomerLogin) => {
     //   console.log("CustomerLogin", CustomerLogin);
@@ -48,8 +49,12 @@ export class CartlistPage {
     //     this.forSupplierContent =true;
     //   }
     // });
+    this.id = navParams.get('id');
+    console.log("get navpramas this.id" +this.id);
     this.storage.get("userData").then(userData => {
       console.log("userData" +JSON.stringify(userData));
+      this.id = userData.data.ID;
+      console.log("this.id" +this.id);
       this.userType = userData.data.user_type;
       if (this.userType == "customer") {
         this.forUserContent = true;
@@ -62,13 +67,30 @@ export class CartlistPage {
       } else {
       }
     });
+    this.getProductsListData();
+  }
+
+  getProductsListData() {
+    console.log("this.id" +this.id);
+    let getId = {
+      'ID' : this.id
+    }
+    console.log("getId" +JSON.stringify(getId));
+    this.serviceProvider.getProductList(getId).then((result) => {
+      console.log("result products list" +JSON.stringify(result));
+      
+      // this.getProfileData();
+    }, (err) => {
+      console.log("err product list" +JSON.stringify(err));
+      // Error log
+    });
   }
 
   selectAll() {
     console.log("selects all");
     for (var i = 0; i < this.lists.length; i++) {
       this.lists[i].selected = this.selectedAll;
-      console.log("this.lists[i].selected", this.lists[i].selected);
+      console.log("this.lists[i].selected" +this.lists[i].selected);
     }
   }
   checkIfAllSelected() {

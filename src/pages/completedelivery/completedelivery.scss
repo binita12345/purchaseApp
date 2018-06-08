@@ -173,8 +173,9 @@ page-completedelivery {
     	height: 45px !important;
 	}
 	.button-md {
-	    margin: -21px -14px !important;
-	    height: 45px !important;
+	    margin: -17px -14px -15px!important;
+	    // width: 80px !important;
+	    height: 56px !important;
 	}
 
 	// content css
@@ -224,5 +225,9 @@ page-completedelivery {
 		font-size: 16px;
     	font-weight: normal;
     	line-height: 20px;
+	}
+	.title-md{
+		margin-top: 5px;
+    	// margin-left: -16px;
 	}
 }

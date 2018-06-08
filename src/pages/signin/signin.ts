@@ -58,7 +58,7 @@ export class SigninPage {
       password: ['', Validators.compose([Validators.minLength(4), Validators.required])],
     });
 
-    this.signInFrom.controls.email.setValue('bini1@gmail.com');
+    this.signInFrom.controls.email.setValue('customer@gmail.com');
     this.signInFrom.controls.password.setValue('123456')
 
     this.storage.get("user_type").then((userType) => {
@@ -108,27 +108,27 @@ export class SigninPage {
 
     this.error = "";
     // this.loader.show("Please Wait");
-    console.log("facebook login");
+    // console.log("facebook login");
     // Login with permissions
     this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
     .then( (res: FacebookLoginResponse) => {
-        console.log("facebook res" +JSON.stringify(res));
-        console.log("facebook res status" +res.status);
+        // console.log("facebook res" +JSON.stringify(res));
+        // console.log("facebook res status" +res.status);
         // The connection was successful
         if(res.status == "connected") {
 
             // Get user ID and Token
-            console.log("facebook userId" +res.authResponse.userID);
+            // console.log("facebook userId" +res.authResponse.userID);
             var fb_id = res.authResponse.userID;
-            console.log("fb_id" +fb_id);
+            // console.log("fb_id" +fb_id);
 
-            console.log("facebook accessToken" +res.authResponse.accessToken);
+            // console.log("facebook accessToken" +res.authResponse.accessToken);
             var fb_token = res.authResponse.accessToken;
-            console.log("fb_token" +fb_token);
+            // console.log("fb_token" +fb_token);
 
             // Get user infos from the API
             this.fb.api("/me?fields=name,gender,birthday,email,picture", []).then((user) => {
-              console.log("facebook user" +JSON.stringify(user));
+              // console.log("facebook user" +JSON.stringify(user));
                 // Get the connected user details
                 var gender    = user.gender;
                 var birthday  = user.birthday;
@@ -136,13 +136,13 @@ export class SigninPage {
                 var email     = user.email;
                 var picture     = user.picture;
 
-                console.log("=== USER INFOS ===");
-                console.log("Gender : " + gender);
-                console.log("Birthday : " + birthday);
-                console.log("Name : " + name);
-                console.log("Email : " + email);
-                console.log("picture : " + picture);
-                console.log("picture url : " + picture.data.url);
+                // console.log("=== USER INFOS ===");
+                // console.log("Gender : " + gender);
+                // console.log("Birthday : " + birthday);
+                // console.log("Name : " + name);
+                // console.log("Email : " + email);
+                // console.log("picture : " + picture);
+                // console.log("picture url : " + picture.data.url);
 
                 let facebookLoginData = {
                   "identifierId":fb_id,
@@ -156,18 +156,18 @@ export class SigninPage {
                   // "gender":this.gender,
                   // "password": "123456"
                 }
-                console.log("facebookLoginData " +JSON.stringify(facebookLoginData));
+                // console.log("facebookLoginData " +JSON.stringify(facebookLoginData));
 
                 this.serviceProvider.socialSignIn(facebookLoginData).then(
                   data => {
-                    console.log("ts data" +JSON.stringify(data))
+                    // console.log("ts data" +JSON.stringify(data))
                     if(data['status'] == 1) {
                       this.loader.hide();
                       let obj: any = data;
-                      console.log("obj" +JSON.stringify(obj));
-                      console.log("userId" +obj.data.ID);
-                      console.log("token" +obj.data.sessionId);
-                      console.log("user_type" +obj.data.user_type);
+                      // console.log("obj" +JSON.stringify(obj));
+                      // console.log("userId" +obj.data.ID);
+                      // console.log("token" +obj.data.sessionId);
+                      // console.log("user_type" +obj.data.user_type);
                       // console.log(this.serviceProvider.headers, obj.data.ID);
                       this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
                       this.storage.set("userData", obj);
@@ -208,8 +208,8 @@ export class SigninPage {
                           {
                             text: 'Ok',
                             handler: (data: any) => {
-                              console.log('Radio data:' +JSON.stringify(data));
-                              console.log("user_type" +data);
+                              // console.log('Radio data:' +JSON.stringify(data));
+                              // console.log("user_type" +data);
                               this.storage.set("user_type", data);
                               this.navCtrl.setRoot("HomeappPage", { user_type: data });
                             }
@@ -274,18 +274,18 @@ export class SigninPage {
     this.error = "";
     this.loader.show("Please Wait");
 
-    console.log("google login" +this.loginType);
+    // console.log("google login" +this.loginType);
     this.googlePlus.login({})
       .then(res => {
-        console.log("google res" +JSON.stringify(res));
+        // console.log("google res" +JSON.stringify(res));
         this.displayName = res.displayName;
         this.email = res.email;
         this.familyName = res.familyName;
         this.givenName = res.givenName;
         this.userId = res.userId;
-        console.log("google res this.userId" +this.userId);
+        // console.log("google res this.userId" +this.userId);
         this.imageUrl = res.imageUrl;
-        console.log("google res this.imageUrl" +this.imageUrl);
+        // console.log("google res this.imageUrl" +this.imageUrl);
 
         let googlePlusLoginData = {
           "identifierId":this.userId,
@@ -299,7 +299,7 @@ export class SigninPage {
           // "gender":this.gender,
           // "password": "123456"
         }
-        console.log("google plus googlePlusLoginData" +JSON.stringify(googlePlusLoginData));
+        // console.log("google plus googlePlusLoginData" +JSON.stringify(googlePlusLoginData));
         // if(res.user_type == undefined){
         //   console.log("iffffffrf");
           
@@ -328,14 +328,14 @@ export class SigninPage {
         // console.log("google plus googlePlusData" +JSON.stringify(googlePlusData));
         this.serviceProvider.socialSignIn(googlePlusLoginData).then(
           data => {
-            console.log("ts data" +JSON.stringify(data))
+            // console.log("ts data" +JSON.stringify(data))
             if(data['status'] == 1) {
               this.loader.hide();
               let obj: any = data;
-              console.log("obj" +JSON.stringify(obj));
-              console.log("userId" +obj.data.ID);
-              console.log("token" +obj.data.sessionId);
-              console.log("user_type" +obj.data.user_type);
+              // console.log("obj" +JSON.stringify(obj));
+              // console.log("userId" +obj.data.ID);
+              // console.log("token" +obj.data.sessionId);
+              // console.log("user_type" +obj.data.user_type);
               // console.log(this.serviceProvider.headers, obj.data.ID);
               this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
               this.storage.set("userData", obj);
@@ -376,8 +376,8 @@ export class SigninPage {
                   {
                     text: 'Ok',
                     handler: (data: any) => {
-                      console.log('Radio data:' +JSON.stringify(data));
-                      console.log("user_type" +data);
+                      // console.log('Radio data:' +JSON.stringify(data));
+                      // console.log("user_type" +data);
                       this.storage.set("user_type", data);
                       this.navCtrl.setRoot("HomeappPage", { user_type: data });
                     }
@@ -457,9 +457,9 @@ export class SigninPage {
           } else if(data["status"] == 1) {
             // this.loader.show("Logging in....");
             let obj: any = data;
-            console.log("obj" +JSON.stringify(obj));
-            console.log("userId" +obj.data.ID);
-            console.log("token" +obj.data.sessionId);
+            // console.log("obj" +JSON.stringify(obj));
+            // console.log("userId" +obj.data.ID);
+            // console.log("token" +obj.data.sessionId);
             // console.log(this.serviceProvider.headers, obj.data.ID);
             this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
             this.storage.set("userData", obj);

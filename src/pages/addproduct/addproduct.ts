@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ActionSheetController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ServiceProvider } from '../../providers/service/service';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the AddproductPage page.
  *
@@ -25,7 +26,8 @@ export class AddproductPage {
   error : any = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private camera: Camera, 
-    public platform: Platform, public actionSheetCtrl: ActionSheetController, public serviceProvider: ServiceProvider) {
+    public platform: Platform, public actionSheetCtrl: ActionSheetController, public serviceProvider: ServiceProvider,
+    private alertCtrl: AlertController, private loader: Loader) {
 
     this.storage.get("userData").then(userData => {
       console.log("userData" +JSON.stringify(userData));
@@ -111,13 +113,14 @@ export class AddproductPage {
 
   addtoCartList(){
     this.error = '';
+    this.loader.show("Please Wait");
     console.log("add product of user");
 
     let productsObj = {
       'ID': this.id,
       'name': this.productData.name,
       'description': this.productData.description,
-      'deliveryAddress': this.productData.address,
+      'address': this.productData.address,
       'deliveryTime': this.productData.time,
       'amount': this.productData.amount,
       'productImage': this.image,
@@ -127,13 +130,35 @@ export class AddproductPage {
     this.serviceProvider.addProductData(productsObj).then((result) => {
       console.log("result add product" +JSON.stringify(result));
       if(result["status"] == 2) {
+        this.loader.hide();
         this.error = result["message"];
+
+      } else if(result["status"] == 1) {
+        this.loader.hide();
+        let alert = this.alertCtrl.create({
+          subTitle: result["message"],
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                console.log('ok clicked');
+                this.navCtrl.push("CartlistPage", {'id': this.id});
+                // console.log("this.responseData on alert control" +JSON.stringify(this.responseData));
+                // console.log("usertype signup" +this.responseData.data.user_type);
+                // let userType = this.responseData.data.user_type;
+                // this.storage.set('user_type', userType);
+                
+                // this.navCtrl.push("SigninPage");
+              }
+            }
+          ]
+        });
+        alert.present();
       }
     }, (err) => {
       console.log("err add product" +JSON.stringify(err));
       // Error log
     });
-  	this.navCtrl.push("CartlistPage");
   }
 
 }

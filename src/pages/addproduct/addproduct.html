@@ -24,14 +24,17 @@
 
 <ion-content padding>
 	<br/>
-  	<div class="image">
-  		<img src="assets/imgs/photo-camera.png" class="cameraImg">
-  	</div>
+  	<!-- <div class="image"> -->
+  		<!-- <img src="assets/imgs/photo-camera.png" class="cameraImg" (click)="choosePhoto()"> -->
+      <img src="{{base64Image}}" (click)="choosePhoto()" class="chooseImg">
+  	<!-- </div> -->
   	<br/>
-  	<br/>
-    <div class="error-message">
+    <br/>
+    <div class="error-message">  
       {{error}}
     </div>
+    <br/>
+    <br/>
   	<ion-grid>
   		<!-- <ion-row class="row-css">
   			<ion-col col-12 col-xl-12> -->

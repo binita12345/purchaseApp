@@ -16,7 +16,7 @@ import { Storage } from "@ionic/storage";
   and Angular DI.
 */
 
-let apiUrl = 'http://192.168.0.127:8080/purchasing/apis/usermodule/';
+let apiUrl = 'http://192.168.0.125:8080/purchasing/apis/';
 
 @Injectable()
 export class ServiceProvider {
@@ -48,7 +48,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'userSignUp', JSON.stringify(credentials), {headers: headers})
+      this.http.post(apiUrl + 'usermodule/userSignUp', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
         	// console.log("res signup", res.json());
       		resolve(res.json());
@@ -63,7 +63,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'userSignIn', JSON.stringify(credentials), {headers: headers})
+      this.http.post(apiUrl + 'usermodule/userSignIn', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
         	// console.log("res signin", res.json());
       		resolve(res.json());
@@ -78,7 +78,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'socialSignIn', JSON.stringify(credentials), {headers: headers})
+      this.http.post(apiUrl + 'usermodule/socialSignIn', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
         	// console.log("res signin", res.json());
       		resolve(res.json());
@@ -93,7 +93,7 @@ export class ServiceProvider {
   	return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'forgotPassword', JSON.stringify(credential), {headers: headers})
+      this.http.post(apiUrl + 'usermodule/forgotPassword', JSON.stringify(credential), {headers: headers})
         .subscribe(res => {
         	// console.log("res forgot password", res.json());
       		resolve(res.json());
@@ -108,7 +108,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'userUpdate', JSON.stringify(credential), {headers: headers})
+      this.http.post(apiUrl + 'usermodule/userUpdate', JSON.stringify(credential), {headers: headers})
         .subscribe(res => {
           // console.log("res forgot password", res.json());
           resolve(res.json());
@@ -123,7 +123,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'productAdd', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'productmodule/productAdd', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("add product data", res.json());
           resolve(res.json());
@@ -134,13 +134,28 @@ export class ServiceProvider {
   }
 
   // This api is used to get products list of user in application
-  getProductList(data) {
+  getProductList(ID) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'productList', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'productmodule/productList', JSON.stringify(ID), {headers: headers})
         .subscribe(res => {
-          console.log("add product data", res.json());
+          console.log("get product list", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to get products list of user in application
+  getSupplierList(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'usermodule/supplierList', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("get product list", res.json());
           resolve(res.json());
         }, (err) => {
           reject(err);

@@ -146,12 +146,12 @@ page-addproduct {
 		margin-top: -17px;
 	}
 	.label-css{
-		margin-bottom: -9px;
+		margin-bottom: 0px;
 		font-weight: 400 !important;
-    	font-size: 12px;
+    	font-size: 13px;
 	}
 	.input-text{
-		margin-left: -24px;
+		margin-left: 0px;
 		margin-bottom: -21px;
 	}
 	.margn{
@@ -232,8 +232,8 @@ page-addproduct {
 	    margin-top: -16px !important;
 	}
 	.title-md{
-		margin-top: 16px;
-    	margin-left: -16px;
+		margin-top: 5px;
+    	// margin-left: -16px;
 	}
 	
 	.img-size1{
@@ -247,9 +247,9 @@ page-addproduct {
 		border-radius: 0px;
 	}
 	.button-md {
-	    margin: -4px -14px -33px!important;
-    	height: 45px !important;
-    	width: 80px;
+	    margin: -15px -14px -15px!important;
+	    // width: 80px !important;
+	    height: 56px !important;
 	}
 	.button-ios {
 	    margin: 4px -15px -13px !important;
@@ -270,14 +270,23 @@ page-addproduct {
 	    margin: auto;
 	    display: block;
 	} 
-	.cameraImg{
-		width: 35px;
-		height: 35px;
-	  	margin: auto;
-	  	display: block;
+	// .cameraImg{
+	// 	width: 35px;
+	// 	height: 35px;
+	//   	margin: auto;
+	//   	display: block;
+	// }
+	.chooseImg {
+		border: 1px solid #e0e0e0;
+		// border: transparent;
+		border-radius: 100px;
+		height: 100px;
+	    width: 100px;
+	    margin: auto;
+	    display: block;
 	}
 	.comment-css{
-		font-size: 12px;
+		font-size: 14px;
 		font-weight: 400;
 		color: #8D8D8D;
 	}
@@ -289,5 +298,8 @@ page-addproduct {
 	    margin: 0px -15px;
 	    min-width: 44px;
 	    box-shadow: none;
+	}
+	.text-input-md {
+ 	   margin: 11px 9px 10px;
 	}
 }

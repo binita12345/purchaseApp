@@ -87,9 +87,9 @@ page-cartlist {
 		margin-top: -10px;
 	}
 	.button-md {
-	    margin: -21px 0px !important;
-	    height: 45px !important;
-	    width: 115px;
+	    margin: -17px -14px -15px!important;
+	    // width: 80px !important;
+	    height: 56px !important;
 	}
 	.list-ios {
 	    margin: -49px 0 20px;
@@ -261,5 +261,9 @@ page-cartlist {
 	    border-style: solid;
 	    border-color: #0C6CB9;
 	    transform: rotate(45deg);
+	}
+	.title-md{
+		margin-top: 5px;
+    	// margin-left: -16px;
 	}
 }

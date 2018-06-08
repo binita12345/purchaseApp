@@ -85,9 +85,9 @@ page-orderproduct {
 		margin-top: -10px;
 	}
 	.button-md {
-	    margin: -17px -14px !important;
-    	width: 90px !important;
-    	height: 45px;
+	    margin: -17px -14px -15px!important;
+	    // width: 80px !important;
+	    height: 56px !important;
 	}
 	.button-ios {
 	    margin: -22px -14px !important;
@@ -303,7 +303,8 @@ page-orderproduct {
 	    text-transform: none;
 	}
 	.title-md{
-		margin-left: -40px;
+		margin-top: 5px;
+    	margin-left: -40px;
 	}
 	.back-button-wp {
 	    margin: 0px -15px;
