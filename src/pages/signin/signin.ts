@@ -58,24 +58,24 @@ export class SigninPage {
       password: ['', Validators.compose([Validators.minLength(4), Validators.required])],
     });
 
-    this.signInFrom.controls.email.setValue('customer@gmail.com');
-    this.signInFrom.controls.password.setValue('123456')
+    this.signInFrom.controls.email.setValue('custmer@gmail.com');
+    this.signInFrom.controls.password.setValue('12345')
 
     this.storage.get("user_type").then((userType) => {
-      console.log("userType", userType);
+      // console.log("userType", userType);
       this.usertype = userType;
     });
 
-    console.log("this.usertype", this.usertype);
+    // console.log("this.usertype", this.usertype);
     this.deviceInfo.token = this.device.uuid;
-    console.log("this.deviceInfo.token", this.deviceInfo.token);
+    // console.log("this.deviceInfo.token", this.deviceInfo.token);
     this.deviceInfo.platform = this.device.platform;
-    console.log("this.deviceInfo.platform", this.deviceInfo.platform);
+    // console.log("this.deviceInfo.platform", this.deviceInfo.platform);
 
     this.gender = navParams.get('gender');
-    console.log("this.gender", this.gender);
+    // console.log("this.gender", this.gender);
     this.user_type = navParams.get('user_type');
-    console.log("this.user_type", this.user_type);
+    // console.log("this.user_type", this.user_type);
     // fb.getLoginStatus()
     // .then(res => {
     //   console.log(res.status);
@@ -187,18 +187,18 @@ export class SigninPage {
                           {
                             type: 'radio',
                             label: 'Customer',
-                            value: 'customer',
+                            value: 'CUSTOMER',
                             checked: true
                           },
                           {
                             type: 'radio',
                             label: 'Supplier',
-                            value: 'supplier'
+                            value: 'SUPPLIER'
                           },
                           {
                             type: 'radio',
                             label: 'Both',
-                            value: 'both'
+                            value: 'USER'
                           },
                         ],
                         buttons : [
@@ -355,18 +355,18 @@ export class SigninPage {
                   {
                     type: 'radio',
                     label: 'Customer',
-                    value: 'customer',
+                    value: 'CUSTOMER',
                     checked: true
                   },
                   {
                     type: 'radio',
                     label: 'Supplier',
-                    value: 'supplier'
+                    value: 'SUPPLIER'
                   },
                   {
                     type: 'radio',
                     label: 'Both',
-                    value: 'both'
+                    value: 'USER'
                   },
                 ],
                 buttons : [

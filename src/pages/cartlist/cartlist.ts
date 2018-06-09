@@ -24,6 +24,7 @@ export class CartlistPage {
   selectedAll: any;
   userType: any;
   id : any;
+  selectedArray :any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider) {
     // this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "1",selected: false},
@@ -31,54 +32,42 @@ export class CartlistPage {
     // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "3",selected: false},
     // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "4",selected: false}]
 
-    // this.storage.get("isCustomerLogin").then((CustomerLogin) => {
-    //   console.log("CustomerLogin", CustomerLogin);
-    //   this.customerLogin = CustomerLogin;
-      
-    //   if(this.customerLogin){
-    //     this.forUserContent = true;
-    //     this.forSupplierContent =false;
-    //   }
-    // });
-    // this.storage.get("isSupplierLogin").then((SupplierLogin) => {
-    //   console.log("SupplierLogin", SupplierLogin);
-    //   this.supplierLogin = SupplierLogin;
-
-    //   if(this.supplierLogin){
-    //     this.forUserContent = false;
-    //     this.forSupplierContent =true;
-    //   }
-    // });
     this.id = navParams.get('id');
-    console.log("get navpramas this.id" +this.id);
+    // console.log("get navpramas this.id" +this.id);
     this.storage.get("userData").then(userData => {
-      console.log("userData" +JSON.stringify(userData));
+      // console.log("userData" +JSON.stringify(userData));
       this.id = userData.data.ID;
-      console.log("this.id" +this.id);
+      // console.log("this.id" +this.id);
       this.userType = userData.data.user_type;
-      if (this.userType == "customer") {
+      if (this.userType == "CUSTOMER") {
         this.forUserContent = true;
         this.forSupplierContent =false;
         // this.forBothContent =false;
-      } else if (this.userType == "supplier" || "both") {
+      } else if (this.userType == "SUPPLIER" || "USER") {
         this.forUserContent = false;
         this.forSupplierContent =true;
         // this.forBothContent =false;
       } else {
       }
+      this.getProductsListData();
+      this.storage.remove("selectedArray");
     });
-    this.getProductsListData();
+    
   }
 
   getProductsListData() {
-    console.log("this.id" +this.id);
+    // console.log("getProductsListData");
+    // console.log("this.id....." +this.id);
     let getId = {
       'ID' : this.id
     }
-    console.log("getId" +JSON.stringify(getId));
+    // console.log("getId" +JSON.stringify(getId));
     this.serviceProvider.getProductList(getId).then((result) => {
-      console.log("result products list" +JSON.stringify(result));
-      
+      // console.log("result products list" +JSON.stringify(result));
+      if(result["status"] == 1) {
+        this.lists = result["data"];
+        // console.log("lists of product" +JSON.stringify(this.lists));
+      }
       // this.getProfileData();
     }, (err) => {
       console.log("err product list" +JSON.stringify(err));
@@ -91,12 +80,33 @@ export class CartlistPage {
     for (var i = 0; i < this.lists.length; i++) {
       this.lists[i].selected = this.selectedAll;
       console.log("this.lists[i].selected" +this.lists[i].selected);
+      // console.log("this.lists" +JSON.stringify(this.lists));
+      this.selectedArray = this.lists;
+      // console.log("this.selectedArray" +JSON.stringify(this.selectedArray));
+      this.storage.set("selectedArray", this.selectedArray);
     }
   }
-  checkIfAllSelected() {
+  checkIfAllSelected(data) {
+    console.log("select check box for product");
     this.selectedAll = this.lists.every(function(item:any) {
-        return item.selected == true;
-      })
+      return item.selected == true;
+    })
+    // console.log("selected data" +JSON.stringify(data));
+    if (data.selected == true) {
+      this.selectedArray.push(data);
+      // console.log("this.selectedArray" +JSON.stringify(this.selectedArray));
+    } else {
+      let newArray = this.selectedArray.filter(function(el) {
+        // console.log("el..............." +JSON.stringify(el));
+        return el.productid !== data.productid;
+      });
+      this.selectedArray = newArray;
+    }
+   // console.log("this.selectedArray........." +JSON.stringify(this.selectedArray));
+   this.storage.set("selectedArray", this.selectedArray);
+    // this.selectedAll = this.lists.every(function(item:any) {
+    //     return item.selected == true;
+    //   })
   }
 
   ionViewDidLoad() {

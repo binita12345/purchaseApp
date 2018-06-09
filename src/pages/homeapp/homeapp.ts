@@ -25,17 +25,17 @@ export class HomeappPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 
     this.storage.get("userData").then(userData => {
-      console.log("userData" +JSON.stringify(userData));
+      // console.log("userData" +JSON.stringify(userData));
       this.userType = userData.data.user_type;
-      if (this.userType == "customer") {
+      if (this.userType == "CUSTOMER") {
         this.forUserContent = true;
         this.forSupplierContent =false;
         this.forBothContent =false;
-      } else if (this.userType == "supplier") {
+      } else if (this.userType == "SUPPLIER") {
         this.forUserContent = false;
         this.forSupplierContent =true;
         this.forBothContent =false;
-      } else if (this.userType == "both") {
+      } else if (this.userType == "USER") {
         this.forUserContent = false;
         this.forSupplierContent =false;
         this.forBothContent =true;

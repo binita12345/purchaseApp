@@ -25,15 +25,20 @@
 
 <ion-content padding>
 	<ion-grid *ngFor="let list of lists" class="supplier-grid">
+		<!-- {{ list | json }} -->
 	    <ion-row>
 	      <ion-col col-2 col-xl-2>
-	        <img src="{{list.image}}" class="supplier-img">
+	        <!-- <img src="{{list.userImage}}" class="supplier-img"> -->
+	        <img src="{{list.userImage}}" *ngIf="!list.userImage==''" class="supplier-img">
+	      <img src="assets/imgs/user.png" *ngIf="list.userImage==''" class="supplier-img">
 	      </ion-col>
 	      <ion-col col-9 col-xl-9>
-	        <p>{{list.desc}}</p>
+	        <p>{{list.name}}</p>
 	      </ion-col>
 	      <ion-col col-1 col-xl-1 class="check-supplier">
-	        <ion-checkbox></ion-checkbox>
+	        <!-- <ion-checkbox [(ngModel)]="list.selected" (change)="selectSupplier(list)"></ion-checkbox> -->
+	        <input type="checkbox" item-end [(ngModel)]="list.selected" (change)="selectSupplier(list)">
+	        <!-- <ion-checkbox (change)="addCheckbox($event,list.name)"></ion-checkbox> -->
 	      </ion-col>
 	    </ion-row>
 	  </ion-grid>

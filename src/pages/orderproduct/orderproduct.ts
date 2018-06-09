@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
+import { ServiceProvider } from '../../providers/service/service';
 /**
  * Generated class for the OrderproductPage page.
  *
@@ -15,10 +16,49 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class OrderproductPage {
 	lists : any = [];
+  selectedbox : boolean;
+  supplierId : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product names", 'price': "$512"},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"Product names", 'price': "$512"}]
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider) {
+  	// this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product names", 'price': "$512"},
+   //  {'image' : "assets/imgs/bgcolor.png", 'name':"Product names", 'price': "$512"}]
+    this.supplierId = navParams.get('supplierid');
+    console.log("this.supplierId" +JSON.stringify(this.supplierId));
+
+    this.storage.get("checked").then(checked => {
+      console.log("checked" +checked);
+      if(checked) {
+        this.storage.get("selectedArray").then(getSelectedArray => {
+          console.log("getSelectedArray" +JSON.stringify(getSelectedArray));
+          for (let array of getSelectedArray) {
+            console.log("array....." +JSON.stringify(array));
+            this.selectedbox = array.selected;
+            console.log("this.selectedbox....." +JSON.stringify(this.selectedbox));
+            if(this.selectedbox == true) {
+              console.log("if true");
+              this.lists = getSelectedArray;
+            } else {
+              console.log("else false");
+              this.lists = [];
+            }
+          }
+          // this.lists = getSelectedArray;
+        });
+      }
+        
+    });
+  }
+
+  placeOrder() {
+    console.log("order place");
+    let placeData = {
+
+    }
+
+  }
+
+  closeProduct() {
+
   }
 
   ionViewDidLoad() {

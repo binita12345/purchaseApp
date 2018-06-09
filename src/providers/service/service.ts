@@ -149,13 +149,43 @@ export class ServiceProvider {
   }
 
   // This api is used to get products list of user in application
-  getSupplierList(data) {
+  getSupplierList(ID) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'usermodule/supplierList', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'usermodule/supplierList', JSON.stringify(ID), {headers: headers})
         .subscribe(res => {
-          console.log("get product list", res.json());
+          console.log("get supplier list", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to change the password of application
+  changePasswordService(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'usermodule/changePassword', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("change password", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to create the order
+  orderPlace(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'ordermodule/orderCreate', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("create order", res.json());
           resolve(res.json());
         }, (err) => {
           reject(err);

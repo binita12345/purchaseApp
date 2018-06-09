@@ -15,7 +15,7 @@
           <ion-title>Order Products</ion-title>
         </ion-col>
         <ion-col col-4 col-xl-4 style="text-align: right;">
-          <button ion-button class="btnInvite" (click)="gotoRequestlist()">Order place</button>
+          <button ion-button class="btnInvite" (click)="placeOrder()">Order place</button>
           <!-- <img src="assets/imgs/circleplus.png" style="height: 24px;"> -->
         </ion-col>
       </ion-row>
@@ -29,37 +29,28 @@
 
 	  <ion-item>
 	    <ion-thumbnail item-start>
-	      <img src="{{list.image}}">
+	      <!-- <img src="{{list.image}}"> -->
+	      <img src="{{list.productImage}}" *ngIf="!list.productImage==''">
+	      <img src="assets/imgs/bgcolor.png" *ngIf="list.productImage==''">
 	    </ion-thumbnail>
 	    <h3 style="font-weight: 500;color: #2E2E2E;">{{list.name}}</h3>
-	    <p style="color: #2E2E2E;font-weight: 500;">{{list.price}}</p>
+	    <p style="color: #2E2E2E;font-weight: 500;">₹ {{list.amount}}</p>
 	    <ion-icon name="md-add-circle" item-end class="icon-color"></ion-icon>
 	    <p item-end style="font-weight: 500;color: #2E2E2E;">1</p>
 	   	<ion-icon name="md-remove-circle" item-end class="icon-color"></ion-icon>
-	   	<ion-icon name="ios-close-circle-outline" class="close-icon" item-end></ion-icon>
+	   	<ion-icon name="ios-close-circle-outline" class="close-icon" item-end (click)="closeProduct()"></ion-icon>
 	  </ion-item>
 	</ion-list>
 	<br/>
 	<ion-item class="text-input">
 	  <ion-label stacked class="label-font">Address</ion-label>
-	  <ion-input type="text" class="input-font">Rosebery NSW 2018 Australia</ion-input>
+	  <ion-input type="text" class="input-font" [(ngModel)]="address"></ion-input>
 	</ion-item>
 	<ion-item class="text-input">
 	  <ion-label stacked class="label-font">Contact No</ion-label>
-	  <ion-input type="tel" class="input-font">+91 8525 5252 52</ion-input>
+	  <ion-input type="tel" class="input-font" [(ngModel)]="contact"></ion-input>
 	</ion-item>
 
-	<!-- <ion-list radio-group [(ngModel)]="payment">
-	  <ion-item>
-	    <ion-label>Cash</ion-label>
-	    <ion-radio value="cash" checked></ion-radio>
-	  </ion-item>
-	  <ion-item>
-	    <ion-label>Paypal</ion-label>
-	    <ion-radio value="paypal"></ion-radio>
-	  </ion-item>
-	</ion-list>
- -->
  <br/>
  <br/>
  <br/>

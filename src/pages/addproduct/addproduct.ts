@@ -30,7 +30,7 @@ export class AddproductPage {
     private alertCtrl: AlertController, private loader: Loader) {
 
     this.storage.get("userData").then(userData => {
-      console.log("userData" +JSON.stringify(userData));
+      // console.log("userData" +JSON.stringify(userData));
       this.id = userData.data.ID;
     });
   }
@@ -73,7 +73,7 @@ export class AddproductPage {
       // If it's base64:
       // console.log("take photo imagedata" +JSON.stringify(imageData));
       this.image = imageData;
-      console.log("take photo image" +this.image);
+      // console.log("take photo image" +this.image);
       this.base64Image  = 'data:image/jpeg;base64,' + imageData;
       // console.log("take photo base64Image" +this.base64Image);
       // this.photos.push(this.base64Image);
@@ -98,7 +98,7 @@ export class AddproductPage {
        // If it's base64:
       // console.log("gallary imagedata" +JSON.stringify(imageData));
       this.image = imageData;
-      console.log("gallary image" +this.image);
+      // console.log("gallary image" +this.image);
       this.base64Image  = 'data:image/jpeg;base64,'+imageData;
       // console.log("gallary base64Image" +this.base64Image);
     }, (err) => {
@@ -122,13 +122,13 @@ export class AddproductPage {
       'description': this.productData.description,
       'address': this.productData.address,
       'deliveryTime': this.productData.time,
-      'amount': this.productData.amount,
+      'amount': "₹ " +this.productData.amount,
       'productImage': this.image,
     }
 
-    console.log("productsObj" +JSON.stringify(productsObj));
+    // console.log("productsObj" +JSON.stringify(productsObj));
     this.serviceProvider.addProductData(productsObj).then((result) => {
-      console.log("result add product" +JSON.stringify(result));
+      // console.log("result add product" +JSON.stringify(result));
       if(result["status"] == 2) {
         this.loader.hide();
         this.error = result["message"];
@@ -142,6 +142,7 @@ export class AddproductPage {
               text: 'OK',
               handler: () => {
                 console.log('ok clicked');
+                // console.log("this.id", this.id);
                 this.navCtrl.push("CartlistPage", {'id': this.id});
                 // console.log("this.responseData on alert control" +JSON.stringify(this.responseData));
                 // console.log("usertype signup" +this.responseData.data.user_type);
