@@ -86,7 +86,7 @@ page-supplierlist {
 		margin-top: -10px;
 	}
 	.button-md {
-	    margin: -17px -14px -15px!important;
+	    margin: -16px -14px -15px!important;
 	    // width: 80px !important;
 	    height: 56px !important;
 	}
@@ -239,5 +239,10 @@ page-supplierlist {
 	}
 	p {
 	    line-height: 15px !important;
+	}
+	.check-css {
+		height: 20px !important;
+    	margin-right: 0px !important;
+    	width: 20px !important;
 	}
 }

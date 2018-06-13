@@ -24,7 +24,7 @@
 </ion-header>
 
 <ion-content>
-	<ion-list class="cart-list" *ngFor="let list of lists">
+	<ion-list class="cart-list" *ngFor="let list of lists;let i = index ">
 		<!-- {{list | json}} -->
 
 	  <ion-item>
@@ -33,14 +33,24 @@
 	      <img src="{{list.productImage}}" *ngIf="!list.productImage==''">
 	      <img src="assets/imgs/bgcolor.png" *ngIf="list.productImage==''">
 	    </ion-thumbnail>
-	    <h3 style="font-weight: 500;color: #2E2E2E;">{{list.name}}</h3>
-	    <p style="color: #2E2E2E;font-weight: 500;">₹ {{list.amount}}</p>
-	    <ion-icon name="md-add-circle" item-end class="icon-color"></ion-icon>
-	    <p item-end style="font-weight: 500;color: #2E2E2E;">1</p>
-	   	<ion-icon name="md-remove-circle" item-end class="icon-color"></ion-icon>
-	   	<ion-icon name="ios-close-circle-outline" class="close-icon" item-end (click)="closeProduct()"></ion-icon>
+	    <h3 style="font-weight: 500;color: #2E2E2E;"> {{list.name}} </h3>
+	    <p style="color: #2E2E2E;font-weight: 500;"> ₹ {{list.amount * productdetail[i].quantity}} </p>
+
+	    <!-- <ion-icon name="md-add-circle" item-end class="icon-color" (click)="incrementQty(quantity, i)"></ion-icon>
+	    <p item-end style="font-weight: 500;color: #2E2E2E;"> {{quantity}} </p>
+	   	<ion-icon name="md-remove-circle" item-end class="icon-color" (click)="decrementQty(quantity, i)"></ion-icon> -->
+
+	   	<ion-icon name="md-add-circle" item-end class="icon-color" (click)="incrementQty(i)"></ion-icon>
+	    <p item-end style="font-weight: 500;color: #2E2E2E;">{{productdetail[i].quantity}}</p>
+	   	<ion-icon name="md-remove-circle" item-end class="icon-color" (click)="decrementQty(i)"></ion-icon>
+
+	   	<ion-icon name="ios-close-circle-outline" class="close-icon" item-end (click)="closeProduct(list)"></ion-icon>
 	  </ion-item>
 	</ion-list>
+	<br/>
+	<div class="error-message">
+		{{error}}
+	</div>
 	<br/>
 	<ion-item class="text-input">
 	  <ion-label stacked class="label-font">Address</ion-label>
@@ -48,7 +58,7 @@
 	</ion-item>
 	<ion-item class="text-input">
 	  <ion-label stacked class="label-font">Contact No</ion-label>
-	  <ion-input type="tel" class="input-font" [(ngModel)]="contact"></ion-input>
+	  <ion-input type="tel" class="input-font" minlength=10 maxlength=10 [(ngModel)]="contact"></ion-input>
 	</ion-item>
 
  <br/>

@@ -129,9 +129,10 @@ page-requestdetail {
 		width: 12px;
 	}
 	.cart-parag{
-		font-size: 10px;
+		font-size: 12px;
     	color: #6C6C6C;
     	font-weight: 500;
+    	margin-left: -14px;
 	}
 	.cart-list{
 		border-bottom: 1px solid #D1D1D1;
@@ -182,7 +183,12 @@ page-requestdetail {
 	.priceP{
 		color: #000000;
 	    font-weight: 500;
-	    font-size: 16px;
+	    font-size: 14px;
+	}
+	.qty {
+		font-weight: 400;
+	    font-size: 14px;
+	    color: #000000;
 	}
 	.back-button-wp {
 	    margin: 0px -15px;

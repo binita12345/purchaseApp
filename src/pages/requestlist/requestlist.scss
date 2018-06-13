@@ -172,8 +172,8 @@ page-requestlist {
 	    border-radius: 4px;
 	}
 	.delete-img{
-		height: 20px;
-		width: 20px;
+		height: 25px;
+		width: 25px;
 	}
 	.count-btn{
 		height: 35px !important;
@@ -360,4 +360,13 @@ page-requestlist {
 	    border-color: #1F1F1F !important;
 	    background: #1F1F1F !important;
 	}
+
+	// contents
+	.order-css {
+		margin-left: 6px;
+    	max-height: 50px;
+	}
+	// .item-inner {
+	// 	margin-top: -15px;
+	// }
 }

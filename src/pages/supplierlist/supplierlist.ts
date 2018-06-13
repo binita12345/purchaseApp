@@ -29,12 +29,14 @@ export class SupplierlistPage {
   	// this.lists = [{'image': "assets/imgs/user.png", 'desc': "Nevine Acotanza"},
    //  {'image': "assets/imgs/user.png", 'desc': "Oluwarotimi Adesina"},
    //  {'image': "assets/imgs/user.png", 'desc': "Fabrizio Cedrone"}]
-     this.storage.get("userData").then(userData => {
+    
+    this.storage.get("userData").then(userData => {
       // console.log("userData" +JSON.stringify(userData));
       this.id = userData.data.ID;
       // console.log("this.id" +this.id);
       
       this.getSupplierListData();
+      // this.storage.remove("selectedSupplierArray");
     });
 
   }
@@ -74,18 +76,23 @@ export class SupplierlistPage {
   //  }
 
   selectSupplier(data) {
-    console.log("selected data" +JSON.stringify(data));
+    // console.log("selected data" +JSON.stringify(data));
     if (data.selected == true) {
       this.selectedSupplierArray.push(data);
-      console.log("this.selectedSupplierArray" +JSON.stringify(this.selectedSupplierArray));
+      // console.log("Supplier Array" +JSON.stringify(this.selectedSupplierArray));
     } else {
       let newArray = this.selectedSupplierArray.filter(function(el) {
-        console.log("el..............." +JSON.stringify(el));
-        return el.supplierid !== data.supplierid;
+        // console.log("supplier el..............." +JSON.stringify(el));
+        // if(el.selected == true) {
+        //   console.log("get el...." +JSON.stringify(el));
+        // }
+        return el.ID !== data.ID;
+
       });
       this.selectedSupplierArray = newArray;
     }
-    console.log("this.selectedSupplierArray........." +JSON.stringify(this.selectedSupplierArray));
+    // console.log("this.selectedSupplierArray........." +JSON.stringify(this.selectedSupplierArray));
+    this.storage.set("selectedSupplierArray", this.selectedSupplierArray);
     // for(let supplier of this.selectedSupplierArray) {
     //   console.log("supplier........." +JSON.stringify(supplier));
     //   this.supplierid  = supplier.ID;
@@ -128,11 +135,17 @@ export class SupplierlistPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SupplierlistPage');
+    
   }
 
+  // ionViewDidEnter() {
+  //   console.log('ionViewDidEnter SupplierlistPage............');
+  //   // this.storage.remove("selectedSupplierArray");
+  // }
+
   gotoOrderProduct(){
-    console.log("go order product this.selectedSupplierArray........." +JSON.stringify(this.selectedSupplierArray));
-  	this.navCtrl.push("OrderproductPage", {'supplierid' : this.selectedSupplierArray});
+    // console.log("go order product this.selectedSupplierArray........." +JSON.stringify(this.selectedSupplierArray));
+  	this.navCtrl.push("OrderproductPage");
   }
 
   gotoHome(){

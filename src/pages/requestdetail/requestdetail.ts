@@ -15,19 +15,35 @@ import { IonicPage, NavController, ModalController, NavParams } from 'ionic-angu
 })
 export class RequestdetailPage {
 	lists : any = [];
+  amount : any;
+  address : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
-  	this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"}]
+  	// this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
+   //  {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
+   //  {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
+   //  {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"}]
+
+    this.lists = navParams.get('productdetail');
+    console.log("request detail lists" +JSON.stringify(this.lists));
+    // for(let data of this.lists) {
+    //   console.log("data...." +JSON.stringify(data));
+    //   this.address = data.address;
+    //   this.amount = data.amount;
+    // }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RequestdetailPage');
   }
-  editProduct(){
-    let modal = this.modalCtrl.create('EditmodalPage',{},{showBackdrop:true, enableBackdropDismiss:false});
+
+  editProduct(list){
+    console.log("list edit..." +JSON.stringify(list));
+    // console.log("this.amount..." +JSON.stringify(this.amount));
+    this.address = list.address;
+    this.amount = list.amount * list.quantity;
+
+    let modal = this.modalCtrl.create('EditmodalPage', {'address': this.address, 'amount': this.amount},{showBackdrop:true, enableBackdropDismiss:false});
     modal.present();
 
     modal.onDidDismiss(productId => {

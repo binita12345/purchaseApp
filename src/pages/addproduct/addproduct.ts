@@ -122,7 +122,7 @@ export class AddproductPage {
       'description': this.productData.description,
       'address': this.productData.address,
       'deliveryTime': this.productData.time,
-      'amount': "₹ " +this.productData.amount,
+      'amount': this.productData.amount,
       'productImage': this.image,
     }
 

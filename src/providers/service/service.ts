@@ -16,7 +16,7 @@ import { Storage } from "@ionic/storage";
   and Angular DI.
 */
 
-let apiUrl = 'http://192.168.0.125:8080/purchasing/apis/';
+let apiUrl = 'http://192.168.0.144:8080/purchasing/apis/';
 
 @Injectable()
 export class ServiceProvider {
@@ -193,4 +193,33 @@ export class ServiceProvider {
     });
   }
 
+  // This api is used to deliver request, open relationship and close relationship
+  requestListData(ID) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'ordermodule/requestList', JSON.stringify(ID), {headers: headers})
+        .subscribe(res => {
+          console.log("get request list", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to deliver request, open relationship and close relationship
+  deleteOrderData(Id) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'ordermodule/orderDelete', JSON.stringify(Id), {headers: headers})
+        .subscribe(res => {
+          console.log("delete order service", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }

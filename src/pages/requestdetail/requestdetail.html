@@ -25,13 +25,15 @@
     <!-- {{list | json}} -->
     <ion-item>
       <ion-thumbnail item-start>
-        <img src="{{list.image}}">
+        <img src="{{list.productImage}}" *ngIf="!list.productImage==''">
+        <img src="assets/imgs/bgcolor.png" *ngIf="list.productImage==''">
       </ion-thumbnail>
       <h3 class="productname" (click)="gotoproductDetail()">{{list.name}}</h3>
-      <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
+      <p class="cart-parag"><img src="assets/imgs/placeholder.png" class="cart-imgs"> {{list.address}}</p>
       <!-- <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p> -->
-      <p class="priceP">{{list.price}}</p>
-      <img src="assets/imgs/editdetail.png" item-end class="delete-img cursor" (click)="editProduct()">
+      <p class="qty"><b>Qty:</b> {{list.quantity}}</p>
+      <p class="priceP">₹ {{list.quantity * list.amount}}</p>
+      <img src="assets/imgs/editdetail.png" item-end class="delete-img cursor" (click)="editProduct(list)">
       <img src="assets/imgs/deletedetail.png" item-end class="delete-img cursor">
     </ion-item>
   </ion-list>
