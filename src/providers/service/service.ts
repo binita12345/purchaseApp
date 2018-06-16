@@ -208,7 +208,7 @@ export class ServiceProvider {
     });
   }
 
-  // This api is used to deliver request, open relationship and close relationship
+  // This api is used to delete order
   deleteOrderData(Id) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -216,6 +216,21 @@ export class ServiceProvider {
       this.http.post(apiUrl + 'ordermodule/orderDelete', JSON.stringify(Id), {headers: headers})
         .subscribe(res => {
           console.log("delete order service", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to accept order request
+  acceptOrderData(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'ordermodule/orderRequest', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("accept order service", res.json());
           resolve(res.json());
         }, (err) => {
           reject(err);

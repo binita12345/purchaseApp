@@ -14,12 +14,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'completedelivery.html',
 })
 export class CompletedeliveryPage {
-	lists : any = [];
+	selectedProducts : any = [];
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00"},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00"},
-    {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00"}]
+  	// this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00"},
+   //  {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00"},
+   //  {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00"}]
+
+    this.selectedProducts = navParams.get('selectedProducts');
+    console.log("delivery this.selectedProducts.... " +JSON.stringify(this.selectedProducts));
   }
 
   ionViewDidLoad() {
@@ -27,7 +31,7 @@ export class CompletedeliveryPage {
   }
 
   gotodeliveryList() {
-  	this.navCtrl.push("DeliverylistPage");
+  	this.navCtrl.push("DeliverylistPage", {'selectedProducts' : this.selectedProducts });
   }
 
   gotoHome(){

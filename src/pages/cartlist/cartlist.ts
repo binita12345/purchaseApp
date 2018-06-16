@@ -94,15 +94,15 @@ export class CartlistPage {
     // console.log("selected data" +JSON.stringify(data));
     if (data.selected == true) {
       this.selectedArray.push(data);
-      console.log("this.selectedArray" +JSON.stringify(this.selectedArray));
+      // console.log("this.selectedArray" +JSON.stringify(this.selectedArray));
     } else {
       let newArray = this.selectedArray.filter(function(el) {
-        console.log("el..............." +JSON.stringify(el));
+        // console.log("el..............." +JSON.stringify(el));
         return el.productid !== data.productid;
       });
       this.selectedArray = newArray;
     }
-    console.log("product Array........." +JSON.stringify(this.selectedArray));
+    // console.log("product Array........." +JSON.stringify(this.selectedArray));
     this.storage.set("selectedArray", this.selectedArray);
     // this.selectedAll = this.lists.every(function(item:any) {
     //     return item.selected == true;

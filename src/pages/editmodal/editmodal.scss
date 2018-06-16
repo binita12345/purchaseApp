@@ -3,19 +3,19 @@ page-editmodal {
 		white-space: normal;
 	}
 	.modalPage{
-		left: 3%;
-    	top: 20%;
-    	position: absolute;
-    	display: block;
-    	width: 90%;
-    	height: 70%;
-    	border-radius: 5px;
-    	border: 1px solid #e0e0e0;
+		left: 30px;
+	    top: 160px;
+	    position: absolute;
+	    display: block;
+	    width: 300px;
+	    height: 280px;
+	    border-radius: 5px;
+	    border: 1px solid #e0e0e0;
 	}
 	.modal-title{
 		border-bottom: 1px solid #dedede;
 		background-color: #efefef !important;
-		height: 45px;
+		height: 40px;
 		border-top-left-radius: 5px;
     	border-top-right-radius: 5px;
 	}
@@ -31,23 +31,40 @@ page-editmodal {
 	    overflow-y: hidden;
 	}
 	.input-text{
+		height: 30px;
 		border: 1px solid;
 		color: #999999;
 		border-color: #E1E1E1;
-		font-weight: 500;
+		font-weight: 400;
 		border-radius: 3px;
 	}
 	.cancel-btn{
+		height: 35px;
 		background-color: #000000;
 		text-align: center;
 		text-transform: inherit;
 		font-size: 16px;
 	}
 	.edit-btn{
+		height: 35px;
 		background-color: #0B79D5;
 		text-align: center;
 		text-transform: inherit;
 		font-size: 16px;
+	}
+	.cancelbtn{
+		background-color: #000000;
+		text-align: center;
+		text-transform: inherit;
+		font-size: 14px;
+		height: 20px;
+	}
+	.editbtn{
+		background-color: #0B79D5;
+		text-align: center;
+		text-transform: inherit;
+		font-size: 14px;
+		height: 20px;
 	}
 	.cancel-btn.activated {
 	    background-color: #000000;
@@ -56,7 +73,8 @@ page-editmodal {
 	    background-color: #0B79D5;
 	}
 	.label-text{
-		font-weight: bold;
+		font-weight: 400;
+		margin: 0px 0px 8px 0;
 	}
 	// ion-modal.custom-popup ion-backdrop {
 	//     visibility: visible !important;
@@ -87,5 +105,32 @@ page-editmodal {
 	    transition: none !important;
 	    transition: none !important;
 	    transition: none !important;
+	}
+	ion-app.md [padding] {
+	    padding: 10px;
+	}
+	ion-app.ios [padding] {
+	    padding: 10px;
+	}
+	ion-app.wp [padding] {
+	    padding: 10px;
+	}
+	.text-input-md {
+	    margin: 7px 8px;
+	    font-size: 12px;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
+	}
+	.text-input-ios {
+	    margin: 7px 8px;
+	    font-size: 12px;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
+	}
+	.text-input-wp {
+	    margin: 7px 8px;
+	    font-size: 12px;
+	    padding: 0;
+	    width: calc(100% - 8px - 8px);
 	}
 }

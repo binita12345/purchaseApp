@@ -16,7 +16,8 @@ import { Loader } from "../../providers/loader/loader";
   templateUrl: 'requestlist.html',
 })
 export class RequestlistPage {
-  lists : any = [];
+  deliveryrequests : any = [];
+  userrequests : any = [];
   requests : any;
   delivery : boolean = true;
   open : boolean = false;
@@ -35,17 +36,31 @@ export class RequestlistPage {
   id : any;
   error : any = '';
   productdetail : any = [];
+  amount : any;
+  quantity : any;
+  count : any;
+  totalPrice : any = 0;
+  totalSum : any;
+  // arraysum : any = [];
+  // amountArray : any = [];
+  // mergeArray : any = [];
+  // summation : any;
+  accepted : any;
+  accept : boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
     private loader: Loader, private alertCtrl: AlertController, public toastCtrl: ToastController) {
-
+    // this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
+    // {'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
+    // {'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
+    // {'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"}]
     // this.lists = [{'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
     // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
     // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
     // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"}]
-    this.getRequestList();
-    this.requests = "delivery";
     
+    this.requests = "delivery";
+    this.getRequestList();
   }
 
   getRequestList() {
@@ -62,15 +77,61 @@ export class RequestlistPage {
 
         if(result["status"] == 1){
           this.loader.hide();
-          this.lists = result["data"].deliveryRequest;
-          // console.log("get request list" +JSON.stringify(this.lists));
+          this.deliveryrequests = result["data"].deliveryRequest;
+          // console.log("get request list" +JSON.stringify(this.deliveryrequests));
 
-          for(let products of this.lists) {
+          this.userrequests = result["data"].userRequest;
+          // console.log("get user request list" +JSON.stringify(this.userrequests));
+          
+          for(let products of this.deliveryrequests) {
             // console.log("get products......" +JSON.stringify(products));
             this.productdetail = products.productDetails;
             // console.log("this.productdetail......" +JSON.stringify(this.productdetail));
-          }
+            let totalPrice = 0;
+            let stringArray : any = [];
+            for(let detail of this.productdetail) {
+              // console.log("get detail......" +JSON.stringify(detail));
+              this.amount = detail.amount;
+              this.quantity = detail.quantity;
+              this.count = this.amount * this.quantity;
+              // console.log("this.count......" +JSON.stringify(this.count));
 
+              totalPrice += this.count;
+              this.totalSum = totalPrice;
+              // console.log("totalPrice......" +JSON.stringify(this.totalPrice));
+              // console.log("this.totalSum......" +this.totalSum);  
+              
+            }
+            // stringArray.push({'totalSum': this.totalSum});
+            // console.log("this.stringArray......" +JSON.stringify(stringArray));
+            // this.deliveryrequests.push(stringArray);
+            // console.log("this.deliveryrequests......" +JSON.stringify(this.deliveryrequests)); 
+            // this.deliveryrequests.push({'totalSum': this.totalSum});
+            // console.log("get request list" +JSON.stringify(this.deliveryrequests));
+            // let sum = {
+            //   'total': this.totalSum
+            // }
+            // console.log("sum......" +JSON.stringify(sum));
+            // // stringArray.push(sum);
+            // // console.log("this.stringArray......" +JSON.stringify(stringArray));
+            // this.amountArray.push(sum);
+            // console.log("this.amountArray......" +JSON.stringify(this.amountArray));
+            // this.deliveryrequests.push(this.totalSum);
+            // console.log("get request list" +JSON.stringify(this.deliveryrequests));
+            // this.amountArray.push(sum);
+            // console.log("this.amountArray......" +JSON.stringify(this.amountArray)); 
+            
+            // stringArray.push(sum);
+            // console.log("this.stringArray......" +JSON.stringify(stringArray));
+            // this.amountArray = stringArray;
+            // console.log("this.amountArray......" +JSON.stringify(this.amountArray)); 
+            // this.mergeArray.push(sum);
+            // console.log("this.mergeArray......" +JSON.stringify(this.mergeArray));
+            // this.total = this.totalPrice;
+            // console.log("this.total......" +this.total);  
+          }
+          
+          
         } else {
           this.loader.hide();
         }
@@ -113,64 +174,46 @@ export class RequestlistPage {
     let deleteData = {
        "orderid": orderId
     }
-    // this.serviceProvider.deleteOrderData(deleteData).then((result) => {
-    //   console.log("result delete order" +JSON.stringify(result));
-    //   if(result["status"] == 1){
-    //     this.loader.hide();
-        // let alert = this.alertCtrl.create({
-        //   subTitle: result["message"],
-        //   buttons: [
-        //     {
-        //       text: 'OK',
-        //       handler: () => {
-        //         console.log('ok clicked');
-        //         this.getRequestList();
-        //         // this.navCtrl.push("RequestlistPage");
-        //       }
-        //     }
-        //   ]
-        // });
-        // alert.present();
-        let alert = this.alertCtrl.create({
-          title: 'Confirm delete order',
-          message: 'Are you sure you want to permanently delete this order?',
-          buttons: [
-              {
-                  text: 'No',
-                  handler: () => {
-                      console.log('Cancel clicked');
-                  }
-              },
-              {
-                  text: 'Yes',
-                  handler: () => {
-                    console.log('ok clicked');
-                    this.serviceProvider.deleteOrderData(deleteData).then((result) => {
-                      console.log("result delete order" +JSON.stringify(result));
-                      
-                      if(result["status"] == 1){
-                        this.loader.hide();     
-                          let toastSuccess = this.toastCtrl.create({
-                          message: result["message"],
-                          duration: 5000,
-                          position: 'top',
-                          showCloseButton:true,
-                          closeButtonText:'X',
-                          cssClass: "toast-success",
-                        });
-                        toastSuccess.present();
-                        this.getRequestList();
-                      }
-
-                    }, (err) => {
-                      console.log("err delete records" +JSON.stringify(err));
-                      // Error log
-                    });
-                  }
+    let alert = this.alertCtrl.create({
+      title: 'Confirm delete order',
+      message: 'Are you sure you want to permanently delete this order?',
+      buttons: [
+          {
+              text: 'No',
+              handler: () => {
+                  console.log('Cancel clicked');
               }
-          ]
-        });
-        alert.present();
+          },
+          {
+              text: 'Yes',
+              handler: () => {
+                console.log('ok clicked');
+                this.serviceProvider.deleteOrderData(deleteData).then((result) => {
+                  console.log("result delete order" +JSON.stringify(result));
+                  
+                  if(result["status"] == 1){
+                    this.loader.hide();     
+                      let toastSuccess = this.toastCtrl.create({
+                      message: result["message"],
+                      duration: 7000,
+                      position: 'top',
+                      showCloseButton:true,
+                      closeButtonText:'X',
+                      cssClass: "toast-success",
+                    });
+                    toastSuccess.present();
+                    this.getRequestList();
+                  }
+
+                }, (err) => {
+                  console.log("err delete records" +JSON.stringify(err));
+                  // Error log
+                });
+              }
+          }
+      ]
+    });
+    alert.present();
       
   }
 
@@ -182,40 +225,79 @@ export class RequestlistPage {
       this.open = false;
       this.close = false;
       this.userrequest = false;
-      console.log("this.lists...1", this.lists);
-
+      console.log("this.deliveryrequests...1", this.deliveryrequests);
+      this.getRequestList();
     } else if(event.value == "open"){
       this.delivery = false;
       this.open = true;
       this.close = false;
       this.userrequest = false;
-      console.log("this.lists...2", this.lists);
-
+      console.log("this.deliveryrequests...2", this.deliveryrequests);
+      this.getRequestList();
     } else if(event.value == "close"){
       this.delivery = false;
       this.open = false;
       this.close = true;
       this.userrequest = false;
-      console.log("this.lists...3", this.lists);
-
+      console.log("this.deliveryrequests...3", this.deliveryrequests);
+      this.getRequestList();
     } else if(event.value == "userrequest"){
       this.delivery = false;
       this.open = false;
       this.close = false;
       this.userrequest = true;
-      console.log("this.lists...4", this.lists);
+      console.log("this.userrequests...4", this.userrequests);
+      this.getRequestList();
 
     } else {
       this.delivery = true;
       this.open = false;
       this.close = false;
       this.userrequest = false;
-      console.log("this.lists...5", this.lists);
+      console.log("this.deliveryrequests...5", this.deliveryrequests);
     }
   }
 
-  accepttoshowList() {
-    this.navCtrl.push("ListproductPage");
+  accepttoshowList(reqOrederId) {
+    console.log("reqOrederId....." +JSON.stringify(reqOrederId));
+    this.accept = false;
+    this.accepted = true;
+    this.storage.set('accept', this.accepted);
+    let acceptData = {
+      "ID": this.id,
+      "orderid": reqOrederId,
+      "orderType": "ACCEPT"
+    }
+    this.serviceProvider.acceptOrderData(acceptData).then((result) => {
+      console.log("result accepted list" +JSON.stringify(result));
+      if(result["status"] == 1) {
+        this.loader.hide();
+        let alert = this.alertCtrl.create({
+          subTitle: result["message"],
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                console.log('ok clicked');
+                this.getRequestList();
+                // this.accept = false;
+                // this.accepted = true;
+                this.navCtrl.push("ListproductPage", {'productdetail' : reqOrederId});
+              }
+            }
+          ]
+        });
+        alert.present();
+      } else {
+
+      }
+    }, (err) => {
+      console.log("err accepted list" +JSON.stringify(err));
+      // Error log
+    });
+    // this.getRequestList();
+
+    // this.navCtrl.push("ListproductPage", {'productdetail' : requests.productDetails});
   }
 
   addreview(){

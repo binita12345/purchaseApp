@@ -129,28 +129,28 @@ export class OrderproductPage {
   }
 
   incrementQty(index:number){
-    console.log("increment index" +index);
-    console.log("increment index qty" +this.productdetail[index].quantity);
+    // console.log("increment index" +index);
+    // console.log("increment index qty" +this.productdetail[index].quantity);
     this.productdetail[index].quantity += 1;
-    console.log("increment qty......" +this.productdetail[index].quantity);
+    // console.log("increment qty......" +this.productdetail[index].quantity);
   }
 
   decrementQty(index:number){
-    console.log("decrement index" +index);
-    console.log("decrement index qty" +this.productdetail[index].quantity);
+    // console.log("decrement index" +index);
+    // console.log("decrement index qty" +this.productdetail[index].quantity);
     if(this.productdetail[index].quantity > 1) {
       this.productdetail[index].quantity -= 1;
-      console.log("decrement qty......" +this.productdetail[index].quantity);
+      // console.log("decrement qty......" +this.productdetail[index].quantity);
     }
   }
 
   closeProduct(list) {
-    console.log("list" +list);
+    // console.log("list" +list);
     let index = this.lists.indexOf(list);
-    console.log("index" +index);
+    // console.log("index" +index);
     if(index > -1){
       this.lists.splice(index, 1);
-      console.log("this.lists" +JSON.stringify(this.lists));
+      // console.log("this.lists" +JSON.stringify(this.lists));
     }
   }
 
@@ -158,16 +158,16 @@ export class OrderproductPage {
     this.error = '';
     this.loader.show("Please Wait");
 
-    console.log("order place");
-    console.log("this.filtered" +JSON.stringify(this.filtered));
-    console.log("this.address" +this.address);
-    console.log("this.contact" +this.contact);
-    console.log("this.payment" +this.payment);
-    console.log("this.havingcar" +this.havingcar);
-    console.log("quantity" +this.quantity);
-    console.log("this.getSup....." +JSON.stringify(this.getSup));
-    console.log("order suppArray....." +JSON.stringify(this.suppArray));
-    console.log(this.suppArray.toString());
+    // console.log("order place");
+    // console.log("this.filtered" +JSON.stringify(this.filtered));
+    // console.log("this.address" +this.address);
+    // console.log("this.contact" +this.contact);
+    // console.log("this.payment" +this.payment);
+    // console.log("this.havingcar" +this.havingcar);
+    // console.log("quantity" +this.quantity);
+    // console.log("this.getSup....." +JSON.stringify(this.getSup));
+    // console.log("order suppArray....." +JSON.stringify(this.suppArray));
+    // console.log(this.suppArray.toString());
     let placeData = {
       "ID": this.id,
       "ProductDetails": this.filtered,

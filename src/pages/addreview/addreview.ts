@@ -15,6 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddreviewPage {
 	// public addReviewFrom:FormGroup;
+  ratings : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   	// this.addReviewFrom = formBuilder.group({
@@ -32,7 +33,9 @@ export class AddreviewPage {
   	this.navCtrl.pop();
   }
   onModelChange(event){
-  	console.log("event star", event.value);
+  	console.log("event star" +JSON.stringify(event));
+    this.ratings = event;
+    // console.log("event value..." +JSON.stringify(event.value));
   }
 
   gotoHome(){

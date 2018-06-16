@@ -176,7 +176,7 @@ page-signup {
 	    border-top: none !important;
 	}
 	.list-ios {
-	    margin: 0px !important;
+    	margin: 0px 0 32px;
 	}
 	.signupBtn{
 		background-color: #0B79D5;
@@ -199,7 +199,11 @@ page-signup {
 	.item-ios .radio-ios {
 	    position: static;
 	    display: block;
-	    margin: 8px 39px 10px 8px;
+	    margin: 8px 10px 10px 8px;
+	    border: 2px solid #999;
+	    border-radius: 100px;
+	    width: 20px;
+	    height: 20px;
 	}
 	.item-md .radio-md {
 	    position: static;
@@ -283,5 +287,8 @@ page-signup {
 	    margin-top: 44px !important;
 	    margin-left: -15px;
 	    width: 110%;
+	}
+	.radomrgn {
+		margin: -5px !important;
 	}
 }

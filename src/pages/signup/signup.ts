@@ -44,7 +44,7 @@ export class SignupPage {
       password: ['', Validators.compose([Validators.required])],
       mobile: [''],
       gender: [''],
-      userType: [''],
+      // userType: [''],
       // customer: [''],
       // supplier : [''],
     });
@@ -131,12 +131,12 @@ export class SignupPage {
      this.radioValue = value;
      // console.log("this.radioValue", this.radioValue);
   }
-  userAnswer(value1)
-  {
-     // console.log("value..1", value1);
-     this.userValue = value1;
-     // console.log("this.userValue", this.userValue);
-  }
+  // userAnswer(value1)
+  // {
+  //    // console.log("value..1", value1);
+  //    this.userValue = value1;
+  //    // console.log("this.userValue", this.userValue);
+  // }
   userAccount(){
     this.error = '';
     this.loader.show("Please Wait");
@@ -148,7 +148,7 @@ export class SignupPage {
       'password':this.signUpFrom.value.password,
       'mobileNo':this.signUpFrom.value.mobile,
       'gender':this.radioValue,
-      'userType':this.userValue,
+      'userType':"USER",
       'userImage':this.image
       // 'customer':this.signUpFrom.value.customer,
       // 'supplier':this.signUpFrom.value.supplier
@@ -186,9 +186,13 @@ export class SignupPage {
                 console.log('ok clicked');
                 // console.log("this.responseData on alert control" +JSON.stringify(this.responseData));
                 // console.log("usertype signup" +this.responseData.data.user_type);
+
+                // ------------------------------temporary comment this code of userType------------------------------
                 let userType = this.responseData.data.user_type;
+
+                // let userType = "USER";
                 this.storage.set('user_type', userType);
-                
+                // this.storage.set('user_type', "USER");
                 this.navCtrl.push("SigninPage");
               }
             }

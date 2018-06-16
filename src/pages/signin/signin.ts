@@ -58,8 +58,8 @@ export class SigninPage {
       password: ['', Validators.compose([Validators.minLength(4), Validators.required])],
     });
 
-    this.signInFrom.controls.email.setValue('custmer@gmail.com');
-    this.signInFrom.controls.password.setValue('12345')
+    this.signInFrom.controls.email.setValue('binita@gmail.com');
+    this.signInFrom.controls.password.setValue('123456')
 
     this.storage.get("user_type").then((userType) => {
       // console.log("userType", userType);
@@ -181,43 +181,45 @@ export class SigninPage {
 
                     } else if(data['status'] == 2){
                       this.loader.hide();
-                      let alert = this.alertCtrl.create({
-                        title: data["message"],
-                        inputs: [
-                          {
-                            type: 'radio',
-                            label: 'Customer',
-                            value: 'CUSTOMER',
-                            checked: true
-                          },
-                          {
-                            type: 'radio',
-                            label: 'Supplier',
-                            value: 'SUPPLIER'
-                          },
-                          {
-                            type: 'radio',
-                            label: 'Both',
-                            value: 'USER'
-                          },
-                        ],
-                        buttons : [
-                          {
-                            text: 'Cancel'
-                          },
-                          {
-                            text: 'Ok',
-                            handler: (data: any) => {
-                              // console.log('Radio data:' +JSON.stringify(data));
-                              // console.log("user_type" +data);
-                              this.storage.set("user_type", data);
-                              this.navCtrl.setRoot("HomeappPage", { user_type: data });
-                            }
-                          }
-                        ]
-                      });
+                      // let alert = this.alertCtrl.create({
+                      //   title: data["message"],
+                      //   inputs: [
+                      //     {
+                      //       type: 'radio',
+                      //       label: 'Customer',
+                      //       value: 'CUSTOMER',
+                      //       checked: true
+                      //     },
+                      //     {
+                      //       type: 'radio',
+                      //       label: 'Supplier',
+                      //       value: 'SUPPLIER'
+                      //     },
+                      //     {
+                      //       type: 'radio',
+                      //       label: 'Both',
+                      //       value: 'USER'
+                      //     },
+                      //   ],
+                      //   buttons : [
+                      //     {
+                      //       text: 'Cancel'
+                      //     },
+                      //     {
+                      //       text: 'Ok',
+                      //       handler: (data: any) => {
+                      //         // console.log('Radio data:' +JSON.stringify(data));
+                      //         // console.log("user_type" +data);
+                      //         this.storage.set("user_type", data);
+                      //         this.navCtrl.setRoot("HomeappPage", { user_type: data });
+                      //       }
+                      //     }
+                      //   ]
+                      // });
 
-                      alert.present();
+                      // alert.present();
+                      this.storage.set("user_type", "USER");
+                      this.navCtrl.setRoot("HomeappPage", { user_type: "USER" });
                     } else{
                       console.log("else....... facebook");
                       this.loader.hide();
@@ -349,43 +351,45 @@ export class SigninPage {
 
             } else if(data['status'] == 2){
               this.loader.hide();
-              let alert = this.alertCtrl.create({
-                title: data["message"],
-                inputs: [
-                  {
-                    type: 'radio',
-                    label: 'Customer',
-                    value: 'CUSTOMER',
-                    checked: true
-                  },
-                  {
-                    type: 'radio',
-                    label: 'Supplier',
-                    value: 'SUPPLIER'
-                  },
-                  {
-                    type: 'radio',
-                    label: 'Both',
-                    value: 'USER'
-                  },
-                ],
-                buttons : [
-                  {
-                    text: 'Cancel'
-                  },
-                  {
-                    text: 'Ok',
-                    handler: (data: any) => {
-                      // console.log('Radio data:' +JSON.stringify(data));
-                      // console.log("user_type" +data);
-                      this.storage.set("user_type", data);
-                      this.navCtrl.setRoot("HomeappPage", { user_type: data });
-                    }
-                  }
-                ]
-              });
+              // let alert = this.alertCtrl.create({
+              //   title: data["message"],
+              //   inputs: [
+              //     {
+              //       type: 'radio',
+              //       label: 'Customer',
+              //       value: 'CUSTOMER',
+              //       checked: true
+              //     },
+              //     {
+              //       type: 'radio',
+              //       label: 'Supplier',
+              //       value: 'SUPPLIER'
+              //     },
+              //     {
+              //       type: 'radio',
+              //       label: 'Both',
+              //       value: 'USER'
+              //     },
+              //   ],
+              //   buttons : [
+              //     {
+              //       text: 'Cancel'
+              //     },
+              //     {
+              //       text: 'Ok',
+              //       handler: (data: any) => {
+              //         // console.log('Radio data:' +JSON.stringify(data));
+              //         // console.log("user_type" +data);
+              //         this.storage.set("user_type", data);
+              //         this.navCtrl.setRoot("HomeappPage", { user_type: data });
+              //       }
+              //     }
+              //   ]
+              // });
 
-              alert.present();
+              // alert.present();
+              this.storage.set("user_type", "USER");
+              this.navCtrl.setRoot("HomeappPage", { user_type: "USER" });
             } else{
               console.log("else....... facebook");
               this.loader.hide();

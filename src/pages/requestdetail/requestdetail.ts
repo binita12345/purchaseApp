@@ -44,12 +44,14 @@ export class RequestdetailPage {
     this.amount = list.amount * list.quantity;
 
     let modal = this.modalCtrl.create('EditmodalPage', {'address': this.address, 'amount': this.amount},{showBackdrop:true, enableBackdropDismiss:false});
+    document.getElementById("myDIV").style.opacity = "0.2";
     modal.present();
 
     modal.onDidDismiss(productId => {
-      if(productId){
-        // this.buyNow(productId)
-      }       
+      document.getElementById("myDIV").style.opacity = "1";
+      // if(productId){
+      //   // this.buyNow(productId)
+      // }       
      });
   }
 
