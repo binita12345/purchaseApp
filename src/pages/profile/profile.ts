@@ -145,7 +145,7 @@ export class ProfilePage {
     }
     // console.log("profileObj" +JSON.stringify(profileObj));
     this.serviceProvider.profileUpdateData(profileObj).then((result) => {
-      // console.log("result profile" +JSON.stringify(result));
+      console.log("result profile" +JSON.stringify(result));
       if(result["status"] == 1) {
         let alert = this.alertCtrl.create({
           subTitle: result["message"],

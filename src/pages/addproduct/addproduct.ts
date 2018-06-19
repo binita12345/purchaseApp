@@ -144,12 +144,6 @@ export class AddproductPage {
                 console.log('ok clicked');
                 // console.log("this.id", this.id);
                 this.navCtrl.push("CartlistPage", {'id': this.id});
-                // console.log("this.responseData on alert control" +JSON.stringify(this.responseData));
-                // console.log("usertype signup" +this.responseData.data.user_type);
-                // let userType = this.responseData.data.user_type;
-                // this.storage.set('user_type', userType);
-                
-                // this.navCtrl.push("SigninPage");
               }
             }
           ]

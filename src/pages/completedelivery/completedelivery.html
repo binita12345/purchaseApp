@@ -40,10 +40,11 @@
 	    </ion-thumbnail>
 	    <div></div>
 	    <h3 class="headername">{{product.name}}</h3>
+      <p class="qty"><b>Qty:</b> {{product.quantity}}</p>
 	    <p class="cart-parag"><img src="assets/imgs/placeholder.png" class="cart-imgs"> {{product.address}}</p>
 	    <!-- <p class="cart-parag"><img src="{{product.map}}" class="cart-imgs"> {{product.parag}}</p> -->
 	    <img src="assets/imgs/map.png">
-	    <p item-end style="color: #000000;">₹ {{product.amount}}</p>
+	    <p item-end style="color: #000000;">₹ {{product.amount * product.quantity}}</p>
 	   	<!-- <input type="checkbox" *ngIf="!selectedAll" [(ngModel)]="product.id" > -->
 	    <!-- <ion-checkbox item-end class="check-css" [(ngModel)]="checklist"></ion-checkbox> -->
 	  </ion-item>

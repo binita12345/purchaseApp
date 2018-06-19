@@ -18,20 +18,26 @@ import { Loader } from "../../providers/loader/loader";
 export class RequestlistPage {
   deliveryrequests : any = [];
   userrequests : any = [];
+  openrelations : any = [];
+  closerelations : any = [];
+
   requests : any;
   delivery : boolean = true;
   open : boolean = false;
   close : boolean = false;
   userrequest : boolean = false;
+
   showOnlyForUser : boolean; 
   showForBoth : boolean;
   customerLogin : any;
   bothLogin : any;
   supplierLogin : any;
+
   forUserContent : any;
   forSupplierContent : any;
   forBothContent : any;
   forSupplier : boolean = true;
+
   userType: any;
   id : any;
   error : any = '';
@@ -41,12 +47,13 @@ export class RequestlistPage {
   count : any;
   totalPrice : any = 0;
   totalSum : any;
+  totalprice : any;
   // arraysum : any = [];
   // amountArray : any = [];
   // mergeArray : any = [];
   // summation : any;
-  accepted : any;
-  accept : boolean = true;
+  // accepted : any;
+  // accept : boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
     private loader: Loader, private alertCtrl: AlertController, public toastCtrl: ToastController) {
@@ -58,13 +65,17 @@ export class RequestlistPage {
     // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
     // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
     // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"}]
+    // this.storage.get("totalSum").then(totalPrice => {
+    //   this.totalprice = totalPrice;
+    //   console.log("this.totalprice list products" +this.totalprice);
+    // });
     
     this.requests = "delivery";
     this.getRequestList();
   }
 
   getRequestList() {
-     this.storage.get("userData").then(userData => {
+    this.storage.get("userData").then(userData => {
       // console.log("userData" +JSON.stringify(userData));
 
       this.id = userData.data.ID;
@@ -73,7 +84,7 @@ export class RequestlistPage {
          "ID": this.id,
       }
       this.serviceProvider.requestListData(reqObj).then((result) => {
-        // console.log("result request list" +JSON.stringify(result));
+        console.log("result request list" +JSON.stringify(result));
 
         if(result["status"] == 1){
           this.loader.hide();
@@ -81,7 +92,13 @@ export class RequestlistPage {
           // console.log("get request list" +JSON.stringify(this.deliveryrequests));
 
           this.userrequests = result["data"].userRequest;
-          // console.log("get user request list" +JSON.stringify(this.userrequests));
+          // console.log("get user list" +JSON.stringify(this.userrequests));
+
+          this.openrelations = result["data"].openReationship;
+          // console.log("get open relations list" +JSON.stringify(this.openrelations));
+
+          this.closerelations = result["data"].closeReationship;
+          console.log("get close relations list" +JSON.stringify(this.closerelations));
           
           for(let products of this.deliveryrequests) {
             // console.log("get products......" +JSON.stringify(products));
@@ -225,50 +242,49 @@ export class RequestlistPage {
       this.open = false;
       this.close = false;
       this.userrequest = false;
-      console.log("this.deliveryrequests...1", this.deliveryrequests);
-      this.getRequestList();
+      console.log("this.deliveryrequests...1" +JSON.stringify(this.deliveryrequests));
+      // this.getRequestList();
     } else if(event.value == "open"){
       this.delivery = false;
       this.open = true;
       this.close = false;
       this.userrequest = false;
-      console.log("this.deliveryrequests...2", this.deliveryrequests);
-      this.getRequestList();
+      console.log("this.deliveryrequests...2" +JSON.stringify(this.deliveryrequests));
+      // this.getRequestList();
     } else if(event.value == "close"){
       this.delivery = false;
       this.open = false;
       this.close = true;
       this.userrequest = false;
-      console.log("this.deliveryrequests...3", this.deliveryrequests);
-      this.getRequestList();
+      console.log("this.deliveryrequests...3" +JSON.stringify(this.deliveryrequests));
+      // this.getRequestList();
     } else if(event.value == "userrequest"){
       this.delivery = false;
       this.open = false;
       this.close = false;
       this.userrequest = true;
-      console.log("this.userrequests...4", this.userrequests);
-      this.getRequestList();
+      console.log("this.userrequests...4" +JSON.stringify(this.userrequests));
+      // this.getRequestList();
 
     } else {
       this.delivery = true;
       this.open = false;
       this.close = false;
       this.userrequest = false;
-      console.log("this.deliveryrequests...5", this.deliveryrequests);
+      console.log("this.deliveryrequests...5" +JSON.stringify(this.deliveryrequests));
     }
   }
 
-  accepttoshowList(reqOrederId) {
-    console.log("reqOrederId....." +JSON.stringify(reqOrederId));
-    this.accept = false;
-    this.accepted = true;
-    this.storage.set('accept', this.accepted);
+  accepttoshowList(reqOrederData) {
+    console.log("accept reqOrederId....." +JSON.stringify(reqOrederData));
+    
+    // this.storage.set('accept', this.accepted);
     let acceptData = {
       "ID": this.id,
-      "orderid": reqOrederId,
+      "orderid": reqOrederData.orderid,
       "orderType": "ACCEPT"
     }
-    this.serviceProvider.acceptOrderData(acceptData).then((result) => {
+    this.serviceProvider.acceptORdeclineOrderData(acceptData).then((result) => {
       console.log("result accepted list" +JSON.stringify(result));
       if(result["status"] == 1) {
         this.loader.hide();
@@ -279,17 +295,18 @@ export class RequestlistPage {
               text: 'OK',
               handler: () => {
                 console.log('ok clicked');
-                this.getRequestList();
                 // this.accept = false;
                 // this.accepted = true;
-                this.navCtrl.push("ListproductPage", {'productdetail' : reqOrederId});
+                // this.getRequestList();
+                console.log("reqOrederData accepted" +JSON.stringify(reqOrederData));
+                this.getRequestList();
               }
             }
           ]
         });
         alert.present();
       } else {
-
+        
       }
     }, (err) => {
       console.log("err accepted list" +JSON.stringify(err));
@@ -300,12 +317,57 @@ export class RequestlistPage {
     // this.navCtrl.push("ListproductPage", {'productdetail' : requests.productDetails});
   }
 
+  declineRequest(reqOrederData) {
+    console.log("decline reqOrederData....." +JSON.stringify(reqOrederData));
+
+    let declineData = {
+      "ID": this.id,
+      "orderid": reqOrederData.orderid,
+      "orderType": "DECLINE"
+    }
+    this.serviceProvider.acceptORdeclineOrderData(declineData).then((result) => {
+      console.log("result declined list" +JSON.stringify(result));
+      if(result["status"] == 1) {
+        this.loader.hide();
+        let alert = this.alertCtrl.create({
+          subTitle: result["message"],
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                console.log('ok clicked');
+                // this.accept = false;
+                // this.accepted = true;
+                // this.getRequestList();
+                console.log("reqOrederData declined" +JSON.stringify(reqOrederData));
+                this.getRequestList();
+              }
+            }
+          ]
+        });
+        alert.present();
+      } else {
+        
+      }
+    }, (err) => {
+      console.log("err declined list" +JSON.stringify(err));
+      // Error log
+    });
+  }
+
+  seeListOfProducts(products) {
+    console.log("requested list products......" +JSON.stringify(products));
+    this.storage.set('confirmOrderid', products.orderid);
+    this.navCtrl.push("ListproductPage", { 'productdetail': products.productDetails });
+  }
+
   addreview(){
     this.navCtrl.push("AddreviewPage");
   }
   gotorequestDetail(list){
-    console.log("requested list......" +JSON.stringify(list.productDetails));
-    this.navCtrl.push("RequestdetailPage", { 'productdetail': list.productDetails });
+    console.log("requested list......" +JSON.stringify(list));
+    // this.storage.set('productdetails', list);
+    this.navCtrl.push("RequestdetailPage", { 'productdetails': list });
   }
 
   ionViewDidLoad() {

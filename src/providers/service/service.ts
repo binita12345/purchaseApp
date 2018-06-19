@@ -16,7 +16,7 @@ import { Storage } from "@ionic/storage";
   and Angular DI.
 */
 
-let apiUrl = 'http://192.168.0.144:8080/purchasing/apis/';
+let apiUrl = 'http://192.168.0.109:8080/purchasing/apis/';
 
 @Injectable()
 export class ServiceProvider {
@@ -148,6 +148,21 @@ export class ServiceProvider {
     });
   }
 
+  // This api is used to edit particular products list
+  editProductData(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'productmodule/productEdit', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("edit products list" +JSON.stringify(res.json()));
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
   // This api is used to get products list of user in application
   getSupplierList(ID) {
     return new Promise((resolve, reject) => {
@@ -224,13 +239,28 @@ export class ServiceProvider {
   }
 
   // This api is used to accept order request
-  acceptOrderData(data) {
+  acceptORdeclineOrderData(data) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
       this.http.post(apiUrl + 'ordermodule/orderRequest', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("accept order service", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to accept order request
+  completeDeliveryData(Id) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'ordermodule/orderConfrom', JSON.stringify(Id), {headers: headers})
+        .subscribe(res => {
+          console.log("confirm order service", res.json());
           resolve(res.json());
         }, (err) => {
           reject(err);

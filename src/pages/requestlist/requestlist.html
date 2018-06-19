@@ -170,8 +170,8 @@
             <ion-row class="row-btn">
               <ion-col col-3></ion-col>
               <ion-col col-7>
-                <button ion-button class="acceptbtn" (click)="accepttoshowList()">ACCEPT</button>
-                <button ion-button class="declinebtn">DECLINE</button>
+                <button ion-button class="acceptbtn" (click)="accepttoshowList(reqs.orderid)">ACCEPT</button>
+                <button ion-button class="declinebtn" (click)="declineRequest(reqs.orderid)">DECLINE</button>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -186,8 +186,8 @@
       <ion-list class="cart-list" *ngFor="let request of deliveryrequests">
         <!-- {{ request | json }} -->
         <ion-item>
-          <p> {{request.orderid}} </p>
-          <p> {{request.created_at}} </p>
+          <p><b>OrderId: </b> {{request.orderid}} </p>
+          <p><b>Order_date: </b> {{request.created_at}} </p>
           <p> <img src="assets/imgs/placeholder.png" class="cart-imgs"> {{request.address}}</p>
           <!-- <p class="productPrice" style="color: #000000;">₹ {{request.totalSum}}</p> -->
           <!-- <div *ngFor="let str of mergeArray"> -->
@@ -196,7 +196,7 @@
               {{str.totalSum}} 
               
             </p>
- -->
+          -->
           <!-- </div> -->
           <!-- <ion-thumbnail item-start>
             <img src="{{request.image}}">
@@ -212,16 +212,17 @@
     </div>
 
     <div *ngIf="open">
-      <ion-list class="cart-list" *ngFor="let list of lists">
+      <ion-list class="cart-list" *ngFor="let openproduct of openrelations">
         <ion-item>
           <ion-thumbnail item-start>
-            <img src="{{list.image}}">
+            <img src="{{openproduct.UserDetails.userImage}}" *ngIf="!openproduct.UserDetails.userImage==''">
+            <img src="assets/imgs/bgcolor.png" *ngIf="openproduct.UserDetails.userImage==''">
           </ion-thumbnail>
-          <h3>{{list.name}}</h3>
-          <!-- <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p> -->
-          <p class="cart-parag"><img src="{{list.map}}" class="cart-imgs"> {{list.parag}}</p>
-          <p style="color: #000000;">{{list.price}}</p>
-          <div item-end class="icon_middle"><button ion-button  class="count-btn">{{list.count}}</button> <span class="product-span">products</span></div>
+          <h3>{{openproduct.UserDetails.name}}</h3>
+          <!-- <p class="cart-parag"><img src="{{openproduct.map}}" class="cart-imgs"> {{openproduct.parag}}</p> -->
+          <p class="cart-parag"><img src="assets/imgs/placeholder.png" class="cart-imgs"> {{openproduct.address}}</p>
+          <!-- <p style="color: #000000;">{{openproduct.price}}</p> -->
+          <div item-end class="icon_middle"><button ion-button  class="count-btn">{{openproduct.productCount}}</button> <span class="product-span">products</span></div>
         </ion-item>
       </ion-list>
     </div>
@@ -281,11 +282,11 @@
                   <h3 class="headlist">{{reqs.UserDetails.name}}</h3>
                   <!-- <p class="cart-parag"><img src="{{reqs.map}}" class="cart-imgs"> {{reqs.parag}}</p> -->
                   <p class="cart-parag"><img src="assets/imgs/placeholder.png" class="cart-imgs"> {{reqs.address}}</p>
-                  <!-- <p class="productPrice" value="totalPrice"></p> -->
+                  <!-- <p class="productPrice">₹ {{totalprice}}</p> -->
                 </ion-col>
                 
                 <ion-col col-2 style="float: right;">
-                  <div class="icon_middle"><button ion-button  class="count-btn">{{reqs.productCount}}</button> <span class="product-span">products</span></div>
+                  <div class="icon_middle"><button ion-button  class="count-btn" (click)="seeListOfProducts(reqs)">{{reqs.productCount}}</button> <span class="product-span">products</span></div>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -293,9 +294,9 @@
               <ion-row class="row-btn">
                 <ion-col col-3></ion-col>
                 <ion-col col-7>
-                  <button ion-button class="acceptbtn" (click)="accepttoshowList(reqs.orderid)" *ngIf="accept">ACCEPT</button>
-                  <button ion-button class="acceptedbtn" *ngIf="accepted">ACCEPTED</button>
-                  <button ion-button class="declinebtn">DECLINE</button>
+                  <button ion-button class="acceptbtn" (click)="accepttoshowList(reqs)">ACCEPT</button>
+                  <!-- <button ion-button class="acceptedbtn" *ngIf="accepted">ACCEPTED</button> -->
+                  <button ion-button class="declinebtn" (click)="declineRequest(reqs)">DECLINE</button>
                 </ion-col>
               </ion-row>
             </ion-grid>

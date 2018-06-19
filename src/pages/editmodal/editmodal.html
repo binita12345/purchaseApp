@@ -17,13 +17,13 @@
 	<ion-title class="modal-title">Products names</ion-title>
 	<div padding>
 		<ion-label class="label-text">Delivery Address</ion-label>
-		<ion-input class="input-text" value="{{address}}"></ion-input>
+		<ion-input class="input-text" value="{{address}}" [(ngModel)]="address"></ion-input>
 		<br/>
 		<!-- <ion-label class="label-text">Drop off location</ion-label>
 		<ion-input class="input-text" value="{{dropoff}}"></ion-input>
 		<br/> -->
 		<ion-label class="label-text">Price</ion-label>
-		<ion-input class="input-text" value="{{amount}}"></ion-input>
+		<ion-input class="input-text" value="{{amount}}" [(ngModel)]="amount"></ion-input>
 	</div>
 	<ion-footer>
 	<ion-grid>
@@ -32,7 +32,7 @@
 				<button full ion-button class="cancelbtn" (click)="cancel()">Close</button>
 			</ion-col>
 			<ion-col col-6 col-xl-6 class="edit-btn">
-				<button full ion-button class="editbtn" (click)="edit()">Edit</button>
+				<button full ion-button class="editbtn" (click)="edit(data)">Edit</button>
 			</ion-col>
 		</ion-row>
 	</ion-grid>

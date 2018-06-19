@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ServiceProvider } from '../../providers/service/service';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the AddreviewPage page.
  *
@@ -17,12 +18,8 @@ export class AddreviewPage {
 	// public addReviewFrom:FormGroup;
   ratings : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	// this.addReviewFrom = formBuilder.group({
-   //    username: [''],
-   //    productname: [''],
-   //    comments: ['']
-   //  });
+  constructor(public navCtrl: NavController, public navParams: NavParams, public serviceProvider: ServiceProvider, private loader: Loader) {
+
   }
 
   ionViewDidLoad() {

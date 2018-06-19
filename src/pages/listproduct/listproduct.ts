@@ -20,13 +20,36 @@ export class ListproductPage {
 	selectedAll: any;
   productdetail : any = [];
   selectedProducts :any = [];
+  amount : any;
+  quantity : any;
+  count : any;
+  totalPrice : any = 0;
+  totalSum : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
   	// this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "1",selected: false},
    //  {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "2",selected: false},
    //  {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "3",selected: false}]
     this.productdetail = navParams.get('productdetail');
-    console.log("this.productdetail", this.productdetail);
+    console.log("this.productdetail" +JSON.stringify(this.productdetail));
+
+    // let totalPrice = 0;
+    // let stringArray : any = [];
+    // for(let detail of this.productdetail) {
+    //   // console.log("get detail......" +JSON.stringify(detail));
+    //   this.amount = detail.amount;
+    //   this.quantity = detail.quantity;
+    //   this.count = this.amount * this.quantity;
+    //   // console.log("this.count......" +JSON.stringify(this.count));
+
+    //   this.totalPrice += this.count;
+    //   console.log("this.totalPrice......" +JSON.stringify(this.totalPrice));
+    //   // this.totalSum = this.totalPrice;
+    //   // // console.log("totalPrice......" +JSON.stringify(this.totalPrice));
+    //   // console.log("this.totalSum......" +this.totalSum);  
+    //   this.storage.set('totalSum', this.totalPrice);
+    // }
+
   }
 
   selectAll() {

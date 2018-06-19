@@ -38,6 +38,8 @@ export class OrderproductPage {
   filtered : any;
   error : any = '';
   private quantities: number[];
+  amount : any;
+  total : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
     private loader: Loader, private alertCtrl: AlertController) {
@@ -90,13 +92,22 @@ export class OrderproductPage {
           //   this.quantity = 0; 
           // });
           // console.log("this.lists....." +JSON.stringify(this.lists));
+          let totalPrice = 0;
           for (let list of this.lists) {
-            // console.log("list........" +JSON.stringify(list));
+            console.log("list........" +JSON.stringify(list));
             this.productId = list.productid;
             // console.log("this.productId........" +JSON.stringify(this.productId));
+            console.log("list quantity......." +JSON.stringify(this.quantity));
+            this.amount = list.amount;
+            console.log("list amount......." +JSON.stringify(this.amount));
+            // totalPrice = this.amount * this.quantity;
+            // this.total = totalPrice;
+            // console.log("list total......." +JSON.stringify(this.total));
+
             let detailProduct = {
               'productid': this.productId,
-              'quantity' : this.quantity
+              'quantity' : this.quantity,
+              'amount' : this.amount
             }
             // console.log("detailProduct" +JSON.stringify(detailProduct));
             this.productdetail.push(detailProduct);
@@ -133,6 +144,8 @@ export class OrderproductPage {
     // console.log("increment index qty" +this.productdetail[index].quantity);
     this.productdetail[index].quantity += 1;
     // console.log("increment qty......" +this.productdetail[index].quantity);
+    this.total = this.productdetail[index].amount * this.productdetail[index].quantity;
+    // console.log("increment total......" +this.total);
   }
 
   decrementQty(index:number){
@@ -141,6 +154,8 @@ export class OrderproductPage {
     if(this.productdetail[index].quantity > 1) {
       this.productdetail[index].quantity -= 1;
       // console.log("decrement qty......" +this.productdetail[index].quantity);
+      this.total = this.productdetail[index].amount * this.productdetail[index].quantity;
+      // console.log("increment total......" +this.total);
     }
   }
 
@@ -159,7 +174,7 @@ export class OrderproductPage {
     this.loader.show("Please Wait");
 
     // console.log("order place");
-    // console.log("this.filtered" +JSON.stringify(this.filtered));
+    console.log("this.filtered" +JSON.stringify(this.filtered));
     // console.log("this.address" +this.address);
     // console.log("this.contact" +this.contact);
     // console.log("this.payment" +this.payment);
