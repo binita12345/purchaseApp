@@ -281,4 +281,11 @@ page-addreview {
 	    min-width: 44px;
 	    box-shadow: none;
 	}
+
+	// contents
+
+	.ratingName {
+		display: flex !important;
+		align-items: center !important;
+	}
 }

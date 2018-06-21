@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { ServiceProvider } from '../../providers/service/service';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the HomeappPage page.
  *
@@ -21,10 +23,13 @@ export class HomeappPage {
   forBothContent : any;
   bothLogin : any;
   userType: any;
+  id : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
+    private loader: Loader, private alertCtrl: AlertController) {
 
     this.storage.get("userData").then(userData => {
+      this.id = userData.data.ID;
       // console.log("userData" +JSON.stringify(userData));
       this.userType = userData.data.user_type;
       if (this.userType == "CUSTOMER") {
@@ -63,7 +68,32 @@ export class HomeappPage {
   }
 
   showreviewlist() {
-    this.navCtrl.push("ReviewlistPage");
+    this.loader.show("Please Wait");
+    let getReviewObj = {
+      "ID": this.id 
+    }
+
+    this.serviceProvider.ReviewListData(getReviewObj).then((result) => {
+      console.log("result ReviewListData" +JSON.stringify(result));
+      if(result["status"] == 1) {
+        this.loader.hide();
+        console.log("review result" +JSON.stringify(result["data"]));
+        this.storage.set('reviewData', result["data"]);
+        this.navCtrl.push("ReviewlistPage");
+      } else if(result["status"] == 0) {
+        this.loader.hide();
+        let alert = this.alertCtrl.create({
+          // title: 'Low battery',
+          subTitle: result["message"],
+          buttons: ['Ok']
+        });
+        alert.present();
+      }
+    }, (err) => {
+      console.log("err declined list" +JSON.stringify(err));
+      // Error log
+    });
+    
   }
 
   ionViewDidLoad() {

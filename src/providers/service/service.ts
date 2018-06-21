@@ -253,7 +253,7 @@ export class ServiceProvider {
     });
   }
 
-  // This api is used to accept order request
+  // This api is used to complete the user order request
   completeDeliveryData(Id) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -261,6 +261,36 @@ export class ServiceProvider {
       this.http.post(apiUrl + 'ordermodule/orderConfrom', JSON.stringify(Id), {headers: headers})
         .subscribe(res => {
           console.log("confirm order service", res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to give review to supplier or user
+  addReviewData(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'reviewmodule/reviewAdd', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("add review service" +res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to get user's review list
+  ReviewListData(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'reviewmodule/reviewList', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("add review service" +res.json());
           resolve(res.json());
         }, (err) => {
           reject(err);

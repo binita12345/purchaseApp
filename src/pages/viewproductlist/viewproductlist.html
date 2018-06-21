@@ -5,22 +5,15 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <!-- <ion-navbar color="dark">
-    <ion-title item-start>List Products</ion-title>
-    <button ion-button style="float: right;" item-end>Submit</button>
-  </ion-navbar> -->
   <ion-navbar color="dark">
     <ion-grid>
       <ion-row>
         <ion-col col-2 col-xl-2>
         </ion-col>
-        <ion-col col-7 col-xl-7>
-          <ion-title>List Products</ion-title>
+        <ion-col col-8 col-xl-8>
+          <ion-title>View Products</ion-title>
         </ion-col>
-        <ion-col col-3 col-xl-3 style="text-align: right;">
-          <button ion-button class="btnchangepwd" (click)="doneProductsToDeliver()" [disabled]="!isEnabled">Done</button>
-          <!-- <img src="assets/imgs/circleplus.png" style="height: 24px;"> -->
+        <ion-col col-2 col-xl-2>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -28,10 +21,10 @@
 </ion-header>
 
 <ion-content>
-	  <ion-item>
+  	<!-- <ion-item>
 	    <ion-label item-start>Select all Products</ion-label>
 	    <ion-checkbox item-end [(ngModel)]="selectedAll" (click)="selectAll()"></ion-checkbox>
-  	</ion-item>
+  	</ion-item> -->
 
 	<ion-list class="cart-list" *ngFor="let product of productdetail">
 		<!-- {{product | json}} -->
@@ -49,7 +42,7 @@
 	    <p class="cart-parag"><img src="assets/imgs/placeholder.png" class="cart-imgs"> {{product.address}}</p>
 	    <img src="assets/imgs/map.png">
 	    <p item-end style="color: #000000;">₹ {{product.amount * product.quantity}}</p>
-	   	<input type="checkbox" item-end [(ngModel)]="product.selected" (change)="checkIfAllSelected(product)" class="check-css">
+	   	<!-- <input type="checkbox" item-end [(ngModel)]="product.selected" (change)="checkIfAllSelected(product)" class="check-css"> -->
 	   	<!-- <input type="checkbox" *ngIf="!selectedAll" [(ngModel)]="product.id" > -->
 	    <!-- <ion-checkbox item-end class="check-css" [(ngModel)]="checklist"></ion-checkbox> -->
 	  </ion-item>

@@ -124,6 +124,7 @@ page-reviewlist {
 		text-align: right;
 		color: #717171;
 		font-weight: 500;
+		font-size: 10px;
 	}
 	.listdesc {
 		color: #6C6C6C;
@@ -148,5 +149,8 @@ page-reviewlist {
 	      border-radius: 12px;
 	    }
 	  }
+	}
+	.reviewImage{
+		border-radius: 100px;
 	}
 }

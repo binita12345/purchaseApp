@@ -28,7 +28,7 @@
 	<br/>
 	<br/>
 	<ion-grid>
-  		<ion-row class="row-css">
+  		<!-- <ion-row class="row-css">
   			<ion-col col-1 col-xl-1 class="col-in">
   				<ion-icon name="ios-contact" class="name-icon"></ion-icon>
   			</ion-col>
@@ -50,7 +50,7 @@
 			    	<ion-input class="input-text" type="text"></ion-input>
 			  	</ion-item>	
   			</ion-col>
-  		</ion-row>
+  		</ion-row> -->
   		<ion-row class="row-css marginArea">
   			<ion-col col-12 col-xl-12>
 		  		<ion-item>
@@ -64,7 +64,10 @@
 	      	</ion-col>
       	</ion-row>
      	<ion-row>
-     		<ion-col col-12 col-xl-12>
+     		<ion-col col-5 col-xl-5 class="ratingName">
+     			Product Rating:
+     		</ion-col>
+     		<ion-col col-7 col-xl-7>
      			<rating [(ngModel)]="rate" 
 					        readOnly="false" 
 					        max="5" 

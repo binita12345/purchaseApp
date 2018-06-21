@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
 import { Loader } from "../../providers/loader/loader";
+import { Location } from '@angular/common';
 /**
  * Generated class for the RequestlistPage page.
  *
@@ -42,12 +43,23 @@ export class RequestlistPage {
   id : any;
   error : any = '';
   productdetail : any = [];
+  stardetail : any = [];
   amount : any;
   quantity : any;
   count : any;
   totalPrice : any = 0;
   totalSum : any;
   totalprice : any;
+
+  ownUser : any;
+  anotherUser: any;
+  reqIdentify : any;
+  openproduct : any;
+  closeRelation : any;
+  ratings: any;
+  orderid : any;
+
+  star : any;
   // arraysum : any = [];
   // amountArray : any = [];
   // mergeArray : any = [];
@@ -56,7 +68,7 @@ export class RequestlistPage {
   // accept : boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
-    private loader: Loader, private alertCtrl: AlertController, public toastCtrl: ToastController) {
+    private loader: Loader, private alertCtrl: AlertController, public toastCtrl: ToastController, private location: Location) {
     // this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
     // {'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
     // {'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
@@ -69,10 +81,37 @@ export class RequestlistPage {
     //   this.totalprice = totalPrice;
     //   console.log("this.totalprice list products" +this.totalprice);
     // });
-    
+    // this.ratings = navParams.get('reviewStar');
+    // console.log("review ratings" +this.ratings);
+    // this.supplierid = navParams.get('userid');
+    // console.log("review supplierid" +this.supplierid);
+    this.storage.get("reviewStar").then(ratings => {
+      this.ratings = ratings;
+      this.star = this.ratings;
+      console.log("review ratings" +this.ratings);
+    });
+    this.storage.get("orderid").then(orderId => {
+      this.orderid = orderId;
+      console.log("review orderid" +this.orderid);
+    });
+
     this.requests = "delivery";
     this.getRequestList();
+
+    this.ownUser = "Your Request";
+    this.anotherUser = "Deliver Request";
+    // if(this.ownUser) {
+    //   this.closeRelation = true;
+    // } else if(this.anotherUser){
+    //   this.closeRelation = false;
+    // }
   }
+
+  ngOnInit() { 
+    this.getRequestList();
+  }
+
+
 
   getRequestList() {
     this.storage.get("userData").then(userData => {
@@ -84,8 +123,8 @@ export class RequestlistPage {
          "ID": this.id,
       }
       this.serviceProvider.requestListData(reqObj).then((result) => {
-        console.log("result request list" +JSON.stringify(result));
-
+        // console.log("result request list" +JSON.stringify(result));
+        // location.reload()
         if(result["status"] == 1){
           this.loader.hide();
           this.deliveryrequests = result["data"].deliveryRequest;
@@ -96,9 +135,61 @@ export class RequestlistPage {
 
           this.openrelations = result["data"].openReationship;
           // console.log("get open relations list" +JSON.stringify(this.openrelations));
+          // console.log("this.reqIdentify...." +JSON.stringify(this.reqIdentify));
+
+          
+          // if(this.openrelations) {
+          //   this.reqIdentify = true;
+          //   console.log("this.reqIdentify open" +this.reqIdentify);
+          // } else {
+          //   this.reqIdentify = false;
+          //   console.log("this.reqIdentify is not open" +this.reqIdentify);
+          // }
+          // this.openrelations.forEach((request, callback) => { // foreach statement  
+          //   console.log("request" +JSON.stringify(request));
+          //   if(this.id == request.UserDetails.ID) {
+          //     this.ownUser = true;
+          //     this.anotherUser = false;
+          //   } else {
+          //     this.ownUser = false;
+          //     this.anotherUser = true;
+          //   }
+          //   callback();
+          // })
+          // for(var request in this.openrelations) {
+          //   console.log("request" +JSON.stringify(this.openrelations[request]));
+          //   if(this.id == this.openrelations[request].UserDetails.ID) {
+          //     this.ownUser = true;
+          //     this.anotherUser = false;
+          //   } else {
+          //     this.ownUser = false;
+          //     this.anotherUser = true;
+          //   }
+          // }
+          // console.log("this.reqIdentify" +this.reqIdentify);
+          // this.reqIdentify = 
+          // console.log("this.openrelations.UserDetails.ID" +this.openrelations.UserDetails);
+          // console.log("this.id" +this.id);
+          // if(this.id == this.openrelations.UserDetails.ID) {
+          //   this.ownUser = true;
+          //   this.anotherUser = false;
+          // } else {
+          //   this.ownUser = false;
+          //   this.anotherUser = true;
+          // }
 
           this.closerelations = result["data"].closeReationship;
-          console.log("get close relations list" +JSON.stringify(this.closerelations));
+          for (let closer of this.closerelations) {
+            console.log("closer........" +JSON.stringify(closer));
+
+            let detailStar = {
+              'star' : this.star
+            }
+            // console.log("detailProduct" +JSON.stringify(detailProduct));
+            this.stardetail.push(detailStar);
+            console.log("stardetail" +JSON.stringify(this.stardetail));
+          }
+          // console.log("get close relations list" +JSON.stringify(this.closerelations));
           
           for(let products of this.deliveryrequests) {
             // console.log("get products......" +JSON.stringify(products));
@@ -242,28 +333,28 @@ export class RequestlistPage {
       this.open = false;
       this.close = false;
       this.userrequest = false;
-      console.log("this.deliveryrequests...1" +JSON.stringify(this.deliveryrequests));
+      // console.log("this.deliveryrequests...1" +JSON.stringify(this.deliveryrequests));
       // this.getRequestList();
     } else if(event.value == "open"){
       this.delivery = false;
       this.open = true;
       this.close = false;
       this.userrequest = false;
-      console.log("this.deliveryrequests...2" +JSON.stringify(this.deliveryrequests));
+      // console.log("this.deliveryrequests...2" +JSON.stringify(this.deliveryrequests));
       // this.getRequestList();
     } else if(event.value == "close"){
       this.delivery = false;
       this.open = false;
       this.close = true;
       this.userrequest = false;
-      console.log("this.deliveryrequests...3" +JSON.stringify(this.deliveryrequests));
+      // console.log("this.deliveryrequests...3" +JSON.stringify(this.deliveryrequests));
       // this.getRequestList();
     } else if(event.value == "userrequest"){
       this.delivery = false;
       this.open = false;
       this.close = false;
       this.userrequest = true;
-      console.log("this.userrequests...4" +JSON.stringify(this.userrequests));
+      // console.log("this.userrequests...4" +JSON.stringify(this.userrequests));
       // this.getRequestList();
 
     } else {
@@ -271,13 +362,13 @@ export class RequestlistPage {
       this.open = false;
       this.close = false;
       this.userrequest = false;
-      console.log("this.deliveryrequests...5" +JSON.stringify(this.deliveryrequests));
+      // console.log("this.deliveryrequests...5" +JSON.stringify(this.deliveryrequests));
     }
   }
 
   accepttoshowList(reqOrederData) {
     console.log("accept reqOrederId....." +JSON.stringify(reqOrederData));
-    
+    this.loader.show("Please Wait");
     // this.storage.set('accept', this.accepted);
     let acceptData = {
       "ID": this.id,
@@ -319,7 +410,7 @@ export class RequestlistPage {
 
   declineRequest(reqOrederData) {
     console.log("decline reqOrederData....." +JSON.stringify(reqOrederData));
-
+    this.loader.show("Please Wait");
     let declineData = {
       "ID": this.id,
       "orderid": reqOrederData.orderid,
@@ -357,12 +448,70 @@ export class RequestlistPage {
 
   seeListOfProducts(products) {
     console.log("requested list products......" +JSON.stringify(products));
-    this.storage.set('confirmOrderid', products.orderid);
-    this.navCtrl.push("ListproductPage", { 'productdetail': products.productDetails });
+    // this.storage.set('confirmOrderid', products.orderid);
+    this.navCtrl.push("ListproductPage", { 'productdetail': products });
   }
 
-  addreview(){
-    this.navCtrl.push("AddreviewPage");
+  viewProductList(products) {
+    console.log("view list products......" +JSON.stringify(products));
+    // this.storage.set('confirmOrderid', products.orderid);
+    this.navCtrl.push("ViewproductlistPage", { 'productdetail': products.productDetails });
+  }
+
+  toMakeClose(products){
+    this.loader.show("Please Wait");
+    console.log("toMakeClose......" +JSON.stringify(products));
+    let confirmData = {
+      "orderid": products.orderid
+    }
+
+    this.serviceProvider.completeDeliveryData(confirmData).then((result) => {
+      console.log("result completeDeliveryData" +JSON.stringify(result));
+
+      if(result["status"] == 0) {
+        // this.error = result["message"];
+        // console.log("this.error 0", this.error);
+        this.loader.hide();
+        let alert = this.alertCtrl.create({
+          // title: 'Low battery',
+          subTitle: result["message"],
+          buttons: ['Ok']
+        });
+        alert.present();
+      } else if(result["status"] == 1) {
+        // console.log("signup status 1", result["message"]);
+        this.loader.hide();
+        let alert = this.alertCtrl.create({
+          subTitle: result["message"],
+          buttons: [
+            {
+              text: 'OK',
+              handler: () => {
+                console.log('ok clicked');
+                this.getRequestList();
+                // this.navCtrl.push("DeliverylistPage", {'selectedProducts' : this.selectedProducts });
+              }
+            }
+          ]
+        });
+        alert.present();
+      } else {
+
+      }
+    }, (err) => {
+      console.log("err completeDeliveryData" +JSON.stringify(err));
+      // Error log
+    });
+  }
+
+  addreview(product, index){
+    console.log("add review product" +JSON.stringify(product));
+    console.log("add review index" +index);
+    console.log("this.closerelations[index]" +JSON.stringify(this.closerelations[index]));
+    this.stardetail[index].star = this.ratings;
+    // this.closerelations[index] = this.ratings;
+    // console.log('add review closerelations' +JSON.stringify(this.closerelations));
+    this.navCtrl.push("AddreviewPage", {'reviewUserid' : product.UserDetails.ID});
   }
   gotorequestDetail(list){
     console.log("requested list......" +JSON.stringify(list));

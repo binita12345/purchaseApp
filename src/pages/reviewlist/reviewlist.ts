@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the ReviewlistPage page.
  *
@@ -16,11 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ReviewlistPage {
 
 	lists : any = [];
+  reviews : any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.lists = [{'name':"User Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration", 'time': "Date & Time"},
-    {'name':"User Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration", 'time': "Date & Time"},
-    {'name':"User Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration", 'time': "Date & Time"}]
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
+  	// this.lists = [{'name':"User Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration", 'time': "Date & Time"},
+   //  {'name':"User Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration", 'time': "Date & Time"},
+   //  {'name':"User Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration", 'time': "Date & Time"}]
+
+   // this.reviews = 
+   this.storage.get("reviewData").then(getReviewData => {
+      this.reviews = getReviewData;
+      console.log("review data" +JSON.stringify(this.reviews));
+    });
   }
 
   ionViewDidLoad() {
