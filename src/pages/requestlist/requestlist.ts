@@ -59,13 +59,18 @@ export class RequestlistPage {
   ratings: any;
   orderid : any;
 
-  star : any;
+  star : boolean = false;
+  listorderId : any;
   // arraysum : any = [];
   // amountArray : any = [];
   // mergeArray : any = [];
   // summation : any;
   // accepted : any;
   // accept : boolean = true;
+  reviewOrderId : any;
+  reviewUserId: any;
+  closeUserId : any;
+  starRate : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
     private loader: Loader, private alertCtrl: AlertController, public toastCtrl: ToastController, private location: Location) {
@@ -85,11 +90,11 @@ export class RequestlistPage {
     // console.log("review ratings" +this.ratings);
     // this.supplierid = navParams.get('userid');
     // console.log("review supplierid" +this.supplierid);
-    this.storage.get("reviewStar").then(ratings => {
-      this.ratings = ratings;
-      this.star = this.ratings;
-      console.log("review ratings" +this.ratings);
-    });
+    // this.storage.get("reviewStar").then(ratings => {
+    //   this.ratings = ratings;
+    //   this.star = this.ratings;
+    //   console.log("review ratings" +this.ratings);
+    // });
     this.storage.get("orderid").then(orderId => {
       this.orderid = orderId;
       console.log("review orderid" +this.orderid);
@@ -107,9 +112,9 @@ export class RequestlistPage {
     // }
   }
 
-  ngOnInit() { 
-    this.getRequestList();
-  }
+  // ngOnInit() { 
+  //   this.getRequestList();
+  // }
 
 
 
@@ -122,6 +127,8 @@ export class RequestlistPage {
       let reqObj = {
          "ID": this.id,
       }
+      
+
       this.serviceProvider.requestListData(reqObj).then((result) => {
         // console.log("result request list" +JSON.stringify(result));
         // location.reload()
@@ -179,17 +186,45 @@ export class RequestlistPage {
           // }
 
           this.closerelations = result["data"].closeReationship;
-          for (let closer of this.closerelations) {
-            console.log("closer........" +JSON.stringify(closer));
+          console.log("get close relations list" +JSON.stringify(this.closerelations));
+          // for (let closer of this.closerelations) {
+          //   console.log("closer........" +JSON.stringify(closer));
+          //   this.starRate = closer.reviewStar;
+          //   console.log("this.starRate........" +JSON.stringify(this.starRate));
+          //   if(this.starRate > 0) {
+          //     this.star = true;
+          //   } else {
+          //     this.star = false;
+          //   }
+          //   // console.log("closer........" +JSON.stringify(closer));
+          //   // this.listorderId = closer.orderid;
+          //   // console.log("this.listorderId........" +this.listorderId);
+          //   // this.closeUserId = closer["UserDetails"].ID;
+          //   // console.log("result closeUserId" +this.closeUserId);
+          //   // let detailStar = {
+          //   //   'star' : this.star
+          //   // }
+          //   // // console.log("detailProduct" +JSON.stringify(detailProduct));
+          //   // this.stardetail.push(detailStar);
+          //   // console.log("stardetail" +JSON.stringify(this.stardetail));
+          // }
+          // this.serviceProvider.ReviewListData(reqObj).then((result) => {
+          //   console.log("result ReviewListData" +JSON.stringify(result));
+          //   for(let reviewOrder of result["data"]) {
+          //     console.log("reviewOrder" +JSON.stringify(reviewOrder));
+          //     this.reviewOrderId = reviewOrder["orderid"];
+          //     console.log("result this.reviewOrderId" +this.reviewOrderId);
+          //     this.ratings = reviewOrder["review_star"];
+          //     this.reviewUserId = reviewOrder["UserDetails"].ID;
+          //     console.log("result this.reviewUserId" +this.reviewUserId);
+          //   }
+          // }, (err) => {  
+          //   console.log("err declined list" +JSON.stringify(err));
+          //   // Error log
+          // });
+          
+          // if(this.closerelations.)
 
-            let detailStar = {
-              'star' : this.star
-            }
-            // console.log("detailProduct" +JSON.stringify(detailProduct));
-            this.stardetail.push(detailStar);
-            console.log("stardetail" +JSON.stringify(this.stardetail));
-          }
-          // console.log("get close relations list" +JSON.stringify(this.closerelations));
           
           for(let products of this.deliveryrequests) {
             // console.log("get products......" +JSON.stringify(products));
@@ -508,9 +543,15 @@ export class RequestlistPage {
     console.log("add review product" +JSON.stringify(product));
     console.log("add review index" +index);
     console.log("this.closerelations[index]" +JSON.stringify(this.closerelations[index]));
-    this.stardetail[index].star = this.ratings;
-    // this.closerelations[index] = this.ratings;
+    // this.stardetail[index].star = this.ratings;
+
+    // this.closerelations[index].orderid = this.ratings;
     // console.log('add review closerelations' +JSON.stringify(this.closerelations));
+    // this.getRequestList();
+    // this.star = true;
+
+    this.storage.set('orderid', product.orderid);
+    console.log("product.UserDetails.ID" +product.UserDetails.ID);
     this.navCtrl.push("AddreviewPage", {'reviewUserid' : product.UserDetails.ID});
   }
   gotorequestDetail(list){

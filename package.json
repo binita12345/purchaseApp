@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "5.2.10",
     "@ionic-native/base64": "^4.7.0",
     "@ionic-native/camera": "^4.7.0",
+    "@ionic-native/contacts": "^4.7.0",
     "@ionic-native/core": "4.7.0",
     "@ionic-native/device": "^4.7.0",
     "@ionic-native/dialogs": "^4.7.0",
@@ -41,6 +42,7 @@
     "cordova-android": "7.0.0",
     "cordova-ios": "4.5.4",
     "cordova-plugin-camera": "^4.0.3",
+    "cordova-plugin-contacts": "^3.0.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-dialogs": "^2.0.1",
     "cordova-plugin-facebook4": "^2.1.0",
@@ -86,7 +88,8 @@
       "cordova-plugin-telerik-imagepicker": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "your usage message"
       },
-      "com-badrit-base64": {}
+      "com-badrit-base64": {},
+      "cordova-plugin-contacts": {}
     },
     "platforms": [
       "android",

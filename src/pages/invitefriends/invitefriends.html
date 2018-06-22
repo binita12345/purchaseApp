@@ -36,13 +36,13 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row class="row-css" *ngFor="let list of lists" (click)="checkList(list)">
+    <ion-row class="row-css" *ngFor="let contact of contactlist;let i = index " (click)="checkList(list, i)">
       <ion-col col-2 col-xl-2>
         <ion-icon name="md-contact" class="friendIcon"></ion-icon>
       </ion-col>
       <ion-col col-9 col-xl-9>
-        <p class="name">{{list.name}}</p>
-        <p class="num">{{list.num}}</p>
+        <p class="name">{{ contact.displayName }}</p>
+        <p class="num">{{ contact.phoneNumbers }}</p>
       </ion-col>
       <ion-col col-1 col-xl-1>
         <ion-icon name="md-checkmark" class="friendIcon size" *ngIf="check"></ion-icon>

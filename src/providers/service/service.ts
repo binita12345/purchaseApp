@@ -215,7 +215,7 @@ export class ServiceProvider {
 
       this.http.post(apiUrl + 'ordermodule/requestList', JSON.stringify(ID), {headers: headers})
         .subscribe(res => {
-          console.log("get request list", res.json());
+          // console.log("get request list", res.json());
           resolve(res.json());
         }, (err) => {
           reject(err);

@@ -242,6 +242,8 @@
     <div *ngIf="close">
       <ion-list class="cart-list" *ngFor="let closeproduct of closerelations;let i = index ">
         <!-- {{closeproduct | json}} -->
+        <!-- <ion-item *ngIf="closeproduct.reviewStar >0 ">
+        </ion-item> -->
         <ion-item (click)="addreview(closeproduct, i)">
           <ion-thumbnail item-start>
             <img src="{{closeproduct.UserDetails.userImage}}" *ngIf="!closeproduct.UserDetails.userImage==''">
@@ -261,7 +263,8 @@
           <!-- <p style="color: #000000;">{{closeproduct.price}}</p> -->
           <!-- <rating *ngIf="supplierid === openproduct.supplierid" readOnly="true">{{ratings}}</rating> -->
           <!-- <h4 *ngIf="supplierid === closeproduct.supplierid"> Value {{ratings.star}} </h4> -->
-          <rating [(ngModel)]="stardetail[i].star" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"> </rating>
+          <rating *ngIf="closeproduct.reviewStar > 0" [(ngModel)]="closeproduct.reviewStar" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"> </rating>
+          <!-- <rating *ngIf="reviewOrderId === closeproduct.orderid &&closeUserId === closeproduct.UserDetails.ID" [(ngModel)]="ratings" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false"> </rating> -->
           <div item-end class="icon_middle"><button ion-button  class="count-btn">{{closeproduct.productCount}}</button> <span class="product-span">products</span></div>
         </ion-item>
       </ion-list>

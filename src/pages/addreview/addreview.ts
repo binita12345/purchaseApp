@@ -30,6 +30,10 @@ export class AddreviewPage {
       this.id = userData.data.ID;
     });
     this.userid = navParams.get('reviewUserid');
+    this.storage.get("orderid").then(getOrderId => {
+      this.orderid = getOrderId;
+      console.log("review orderid" +JSON.stringify(this.orderid));
+    });
     // this.orderid = navParams.get('orderid');
     // console.log(this.comments);
     // console.log(this.ratings);
@@ -49,6 +53,7 @@ export class AddreviewPage {
     let reviewObj = {
       "ID": this.id,
       "userid": this.userid,
+      "orderid": this.orderid,
       "reviewStar": this.ratings,
       "reviewContent": this.comments
     }
