@@ -542,7 +542,7 @@ export class RequestlistPage {
   addreview(product, index){
     console.log("add review product" +JSON.stringify(product));
     console.log("add review index" +index);
-    console.log("this.closerelations[index]" +JSON.stringify(this.closerelations[index]));
+    // console.log("this.closerelations[index]" +JSON.stringify(this.closerelations[index]));
     // this.stardetail[index].star = this.ratings;
 
     // this.closerelations[index].orderid = this.ratings;
@@ -551,7 +551,7 @@ export class RequestlistPage {
     // this.star = true;
 
     this.storage.set('orderid', product.orderid);
-    console.log("product.UserDetails.ID" +product.UserDetails.ID);
+    // console.log("product.UserDetails.ID" +product.UserDetails.ID);
     this.navCtrl.push("AddreviewPage", {'reviewUserid' : product.UserDetails.ID});
   }
   gotorequestDetail(list){

@@ -30,15 +30,25 @@
     </ion-grid>
   </ion-navbar>
   <ion-toolbar class="bg-color">
-    <ion-searchbar></ion-searchbar>
+    <!-- <ion-searchbar [(ngModel)]="contacts"></ion-searchbar> -->
+    <!-- <ion-searchbar [(ngModel)]="names"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="setFilteredNames($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar> -->
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row class="row-css" *ngFor="let contact of contactlist;let i = index " (click)="checkList(list, i)">
+    <ion-row class="row-css" *ngFor="let contact of filtered; let i = index " (click)="checkList(list, i)">
+      <!-- {{ contact | json }} -->
       <ion-col col-2 col-xl-2>
         <ion-icon name="md-contact" class="friendIcon"></ion-icon>
+        <!-- <ion-icon name="md-contact" class="friendIcon" *ngIf="contact.displayImage==''"></ion-icon> -->
+        <!-- <ion-icon name="md-contact" class="friendIcon" *ngIf="review.UserDetails.userImage==''"></ion-icon> -->
+        <!-- <img style="border-radius: 100px;" [src]="contact.displayImage" *ngIf="contact.displayImage"> -->
       </ion-col>
       <ion-col col-9 col-xl-9>
         <p class="name">{{ contact.displayName }}</p>

@@ -16,7 +16,7 @@ import { Storage } from "@ionic/storage";
   and Angular DI.
 */
 
-let apiUrl = 'http://192.168.0.109:8080/purchasing/apis/';
+let apiUrl = 'http://192.168.0.114:8080/purchasing/apis/';
 
 @Injectable()
 export class ServiceProvider {
