@@ -4,6 +4,8 @@ import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/cont
 import { DomSanitizer } from '@angular/platform-browser';
 import * as _ from 'lodash';
 import { Loader } from "../../providers/loader/loader";
+// import { PipesModule } from '../../pipes/pipes.module';
+// import { Pipe, PipeTransform } from '@angular/core';
 // import { SearchPipe } from '../../pipes/search/search';
 // import { SortPipe } from '../../pipes/sort/sort';
 /**
@@ -26,21 +28,23 @@ export class InvitefriendsPage {
   filtered : any;
 
   names = '';
-  contactslists : any = [];
-  private searchItems: any;
-  // descending: boolean = false;
-  // order: number;
-  // column: string = 'name';
+  // contactslists : any = [];
+  private searchItems: any = [];
+  items : any = [];
+  filteredArray: any;
+
+  selected : boolean = false;
+  contactArray : any = [];
+
+  selectedAll: any;
+  selectedArray :any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private contacts: Contacts, private loader: Loader,
     private sanitizer: DomSanitizer) {
 
-    this.loader.show("Please Wait");
-    this.fetchDeviceContact();
-    this.initializeItems();
-    // this.listOfContact()
-    // this.descending = true;
-    // this.order = this.descending ? 1 : -1;
+    this.loader.show("Retrieving contacts...");
+    // this.fetchDeviceContact();
+
     // this.lists = [{'name':"UIDAI", 'num': "+91 98297 99298"},
     // {'name':"Distress Number", 'num': "112"},
     // {'name':"Jeks parser", 'num': "+91 98297 99298"},
@@ -57,6 +61,10 @@ export class InvitefriendsPage {
     // );
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad InvitefriendsPage');
+    this.fetchDeviceContact();
+  }
   fetchDeviceContact(){
 
     var options = {
@@ -66,7 +74,7 @@ export class InvitefriendsPage {
     };
 
     this.contacts.find(["*"],options).then((res) => {
-      console.log("res >>>" +JSON.stringify(res));
+      // console.log("res >>>" +JSON.stringify(res));
       for (var i = 0; i < res.length; i++) {
         // console.log("res[i]" ,res[i]);
         var contact = res[i];
@@ -111,14 +119,14 @@ export class InvitefriendsPage {
               // console.log("contactData" ,contactData);
 
               this.contactlist.push(contactData);
+              // console.log("contactlist >>>",this.contactlist);
               this.filtered =  _.uniqWith(this.contactlist, _.isEqual);
-
+              // console.log("this.filtered" ,this.filtered);
+              this.filteredArray = this.filtered;
             }
           }
         }
       }
-      console.log("this.filtered" ,this.filtered);
-      // console.log("contactlist >>>",this.contactlist);
 
     }).catch((err) => {
         console.log('err',err);
@@ -126,73 +134,83 @@ export class InvitefriendsPage {
 
   }
 
-  // listOfContact() {
-  //   this.contactslists = this.filtered;
-  //   console.log("this.contactslists...", this.contactslists);
-  // }
-
-  // setFilteredNames(ev: any) {
-
-  //   // this.fetchDeviceContact()
-  //   // this.listOfContact();
-  //   let val = ev.target.value;
-  //   console.log("val >>>" ,val);
-
-  //   if (val && val.trim() != '') {
-  //     this.filtered = this.filtered.filter((item) => {
-  //       console.log("item >>>" ,item);
-  //       return (item.displayName.toLowerCase().indexOf(val.toLowerCase())>-1);
-
-  //     })
-  //     // console.log("this.filtered value" ,this.filtered);
-      
-  //   }
-
-  // }
-
-  initializeItems() {
-    this.searchItems = this.filtered;
-  }
-
   getItems(ev: any) {
     // Reset items back to all of the items
-    this.initializeItems();
-
-    // set val to the value of the searchbar
     let val = ev.target.value;
 
-    // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.searchItems = this.searchItems.map((item)=>{
-        console.log("item >>>" ,item);
-        if(item  && item.length > 0){
-          item = item.filter(brand=>{
+      // console.log("filtered" ,this.filtered);
+      this.filteredArray = this.filtered.filter((item) => {
+        // console.log("get items item...", item);
+          return ((item.displayName.toLowerCase().indexOf(val.toLowerCase()) > -1) || (item.phoneNumbers.toLowerCase().indexOf(val.toLowerCase()) > -1));
+      });
 
-            console.log("brand >>>" ,brand);
-            // if(!brand.displayName) return false;
-            // return brand.displayName.toLowerCase().indexOf(val.toLowerCase()) > -1;
-          });
-        }    
-        return item;   
-      })
+    } else if(val == ''){
+      this.filteredArray = this.filtered;
     }
   }
 
-  
-  
-  checkList(list, i){
-    console.log("list" +JSON.stringify(list));
-    console.log("i" +i);
-    if(list){
-      this.check = true; 
+  // checkList(list, i){
+  //   console.log("list" +JSON.stringify(list));
+  //   console.log("i" +i);
+  //   // this.selected = true;
+  //   if(this.selected == false) {
+  //     console.log("list" +JSON.stringify(list));
+  //     console.log("i" +i);
+  //     this.check = true;
+  //   }
+  //   this.contactArray.push(list);
+  //   console.log("this.contactArray" +JSON.stringify(this.contactArray));
+
+  //   // for(let i=0; i < this.contactArray.length; i++) {
+  //     console.log("this.contactArray[i]" +JSON.stringify(this.contactArray[i]));
+  //   //   this.contactArray[i].selected = true;
+  //   //   console.log("this.contactArray[i].selected" +this.contactArray[i].selected);
+  //   //   if(this.contactArray[i].selected == true) {
+  //   //     this.check = true;
+  //   //   } else {
+  //   //     this.check = false;
+  //   //   }
+  //   // }
+  //   // for(let contacts of this.contactArray) {
+  //   //   console.log("contacts" +JSON.stringify(contacts));
+  //   //   // contacts[i].selected = true;
+  //   //   // console.log("contacts[i].selected" +contacts[i].selected);
+  //   //   // if(contacts[i].selected == true) {
+  //   //   //   this.check = true;
+  //   //   // } else {
+  //   //   //   this.check = false;
+  //   //   // }
+  //   // }
+  // }
+  checkIfAllSelected(data) {
+    console.log("select check box for product" +JSON.stringify(data));
+    // this.selectedAll = this.lists.every(function(item:any) {
+    //   return item.selected == true;
+    // })
+    console.log("selected data" +JSON.stringify(data));
+    if (data.selected == true) {
+      this.selectedArray.push(data);
+      // console.log("this.selectedArray" +JSON.stringify(this.selectedArray));
     } else {
-      this.check = false; 
+      let newArray = this.selectedArray.filter(function(el) {
+        // console.log("el..............." +JSON.stringify(el));
+        return el.productid !== data.productid;
+      });
+      this.selectedArray = newArray;
     }
+    console.log("product Array........." +JSON.stringify(this.selectedArray));
+    // this.storage.set("selectedArray", this.selectedArray);
+    // this.selectedAll = this.lists.every(function(item:any) {
+    //     return item.selected == true;
+    //   })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InvitefriendsPage');
+  submitFriends() {
+    console.log("submitFriends");
   }
+
+  
   gotoHome(){
   	this.navCtrl.push("HomeappPage");
   }

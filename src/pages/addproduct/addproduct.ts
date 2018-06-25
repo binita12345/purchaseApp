@@ -35,6 +35,12 @@ export class AddproductPage {
     });
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad AddproductPage');
+  }
+
+  // var input = document.getElementById('pac-input');
+  
   choosePhoto() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Option',
@@ -107,9 +113,7 @@ export class AddproductPage {
     })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddproductPage');
-  }
+
 
   addtoCartList(){
     this.error = '';

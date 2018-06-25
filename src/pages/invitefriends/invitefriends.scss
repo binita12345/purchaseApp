@@ -308,4 +308,16 @@ page-invitefriends {
 	    right: 20px;
 	    top: 9px;
 	}
+
+	.check-css {
+		height: 20px !important;
+    	margin-right: 0px !important;
+    	width: 20px !important;
+	}
+	.check-col {
+	    display: flex;
+		align-items: center;
+	}
+
+	.active ion-row{color:red;}
 }

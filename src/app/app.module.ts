@@ -13,6 +13,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import * as _ from 'lodash';
 import { SearchPipe } from '../pipes/search/search';
 import { SortPipe } from '../pipes/sort/sort';
+// import { InvitefriendsPageModule } from '../pages/invitefriends/invitefriends.module';
 
 // import { HttpClientModule } from "@angular/common/http";
 import { Dialogs } from '@ionic-native/dialogs';
@@ -25,6 +26,7 @@ import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service/service';
+// import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { ServiceProvider } from '../providers/service/service';
   ],
   imports: [
     BrowserModule,
+    // PipesModule,
+    // InvitefriendsPageModule,
     // HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
@@ -57,7 +61,8 @@ import { ServiceProvider } from '../providers/service/service';
     Loader,
     Device,
     Facebook,
-    GooglePlus
+    GooglePlus,
+    // SearchPipe
   ]
 })
 export class AppModule {}

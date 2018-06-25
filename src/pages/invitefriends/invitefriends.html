@@ -23,7 +23,7 @@
           <ion-title>Invite friends</ion-title>
         </ion-col>
         <ion-col col-4 col-xl-4 style="text-align: right;">
-          <button ion-button class="btnInvite" (click)="submit()">Submit</button>
+          <button ion-button class="btnInvite" (click)="submitFriends()">Submit</button>
           <!-- <img src="assets/imgs/circleplus.png" style="height: 24px;"> -->
         </ion-col>
       </ion-row>
@@ -42,7 +42,8 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row class="row-css" *ngFor="let contact of filtered; let i = index " (click)="checkList(list, i)">
+    <!-- <ion-row class="row-css" (click)="checkList(contact, i)"> -->
+    <ion-row class="row-css" *ngFor="let contact of filteredArray; let i = index ">
       <!-- {{ contact | json }} -->
       <ion-col col-2 col-xl-2>
         <ion-icon name="md-contact" class="friendIcon"></ion-icon>
@@ -55,7 +56,8 @@
         <p class="num">{{ contact.phoneNumbers }}</p>
       </ion-col>
       <ion-col col-1 col-xl-1>
-        <ion-icon name="md-checkmark" class="friendIcon size" *ngIf="check"></ion-icon>
+        <!-- <ion-icon name="md-checkmark" class="friendIcon size" *ngIf="check"></ion-icon> -->
+        <input type="checkbox" item-end [(ngModel)]="contact.selected" (change)="checkIfAllSelected(contact)" class="check-css">
       </ion-col>
     </ion-row>
   </ion-grid>
