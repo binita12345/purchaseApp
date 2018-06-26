@@ -30,9 +30,6 @@ export class RequestlistPage {
 
   showOnlyForUser : boolean; 
   showForBoth : boolean;
-  customerLogin : any;
-  bothLogin : any;
-  supplierLogin : any;
 
   forUserContent : any;
   forSupplierContent : any;
@@ -43,34 +40,44 @@ export class RequestlistPage {
   id : any;
   error : any = '';
   productdetail : any = [];
-  stardetail : any = [];
   amount : any;
   quantity : any;
   count : any;
-  totalPrice : any = 0;
   totalSum : any;
   totalprice : any;
 
   ownUser : any;
   anotherUser: any;
-  reqIdentify : any;
-  openproduct : any;
-  closeRelation : any;
-  ratings: any;
   orderid : any;
 
-  star : boolean = false;
-  listorderId : any;
+  beforeAccept : boolean;
+  afterAccept : boolean;
+  // accept : boolean;
+
+  // customerLogin : any;
+  // bothLogin : any;
+  // supplierLogin : any;
+
+  // stardetail : any = [];
+  // totalPrice : any = 0;
+  // reqIdentify : any;
+  // openproduct : any;
+  // closeRelation : any;
+  // ratings: any;
+  
+
+  // star : boolean = false;
+  // listorderId : any;
   // arraysum : any = [];
   // amountArray : any = [];
   // mergeArray : any = [];
   // summation : any;
   // accepted : any;
   // accept : boolean = true;
-  reviewOrderId : any;
-  reviewUserId: any;
-  closeUserId : any;
-  starRate : any;
+  // reviewOrderId : any;
+  // reviewUserId: any;
+  // closeUserId : any;
+  // starRate : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
     private loader: Loader, private alertCtrl: AlertController, public toastCtrl: ToastController, private location: Location) {
@@ -95,6 +102,8 @@ export class RequestlistPage {
     //   this.star = this.ratings;
     //   console.log("review ratings" +this.ratings);
     // });
+    
+
     this.storage.get("orderid").then(orderId => {
       this.orderid = orderId;
       console.log("review orderid" +this.orderid);
@@ -112,12 +121,6 @@ export class RequestlistPage {
     // }
   }
 
-  // ngOnInit() { 
-  //   this.getRequestList();
-  // }
-
-
-
   getRequestList() {
     this.storage.get("userData").then(userData => {
       // console.log("userData" +JSON.stringify(userData));
@@ -130,102 +133,22 @@ export class RequestlistPage {
       
 
       this.serviceProvider.requestListData(reqObj).then((result) => {
-        // console.log("result request list" +JSON.stringify(result));
+        console.log("result request list" +JSON.stringify(result));
         // location.reload()
         if(result["status"] == 1){
           this.loader.hide();
           this.deliveryrequests = result["data"].deliveryRequest;
-          // console.log("get request list" +JSON.stringify(this.deliveryrequests));
+          console.log("get request list" +JSON.stringify(this.deliveryrequests));
 
           this.userrequests = result["data"].userRequest;
           // console.log("get user list" +JSON.stringify(this.userrequests));
 
           this.openrelations = result["data"].openReationship;
           // console.log("get open relations list" +JSON.stringify(this.openrelations));
-          // console.log("this.reqIdentify...." +JSON.stringify(this.reqIdentify));
-
-          
-          // if(this.openrelations) {
-          //   this.reqIdentify = true;
-          //   console.log("this.reqIdentify open" +this.reqIdentify);
-          // } else {
-          //   this.reqIdentify = false;
-          //   console.log("this.reqIdentify is not open" +this.reqIdentify);
-          // }
-          // this.openrelations.forEach((request, callback) => { // foreach statement  
-          //   console.log("request" +JSON.stringify(request));
-          //   if(this.id == request.UserDetails.ID) {
-          //     this.ownUser = true;
-          //     this.anotherUser = false;
-          //   } else {
-          //     this.ownUser = false;
-          //     this.anotherUser = true;
-          //   }
-          //   callback();
-          // })
-          // for(var request in this.openrelations) {
-          //   console.log("request" +JSON.stringify(this.openrelations[request]));
-          //   if(this.id == this.openrelations[request].UserDetails.ID) {
-          //     this.ownUser = true;
-          //     this.anotherUser = false;
-          //   } else {
-          //     this.ownUser = false;
-          //     this.anotherUser = true;
-          //   }
-          // }
-          // console.log("this.reqIdentify" +this.reqIdentify);
-          // this.reqIdentify = 
-          // console.log("this.openrelations.UserDetails.ID" +this.openrelations.UserDetails);
-          // console.log("this.id" +this.id);
-          // if(this.id == this.openrelations.UserDetails.ID) {
-          //   this.ownUser = true;
-          //   this.anotherUser = false;
-          // } else {
-          //   this.ownUser = false;
-          //   this.anotherUser = true;
-          // }
 
           this.closerelations = result["data"].closeReationship;
-          console.log("get close relations list" +JSON.stringify(this.closerelations));
-          // for (let closer of this.closerelations) {
-          //   console.log("closer........" +JSON.stringify(closer));
-          //   this.starRate = closer.reviewStar;
-          //   console.log("this.starRate........" +JSON.stringify(this.starRate));
-          //   if(this.starRate > 0) {
-          //     this.star = true;
-          //   } else {
-          //     this.star = false;
-          //   }
-          //   // console.log("closer........" +JSON.stringify(closer));
-          //   // this.listorderId = closer.orderid;
-          //   // console.log("this.listorderId........" +this.listorderId);
-          //   // this.closeUserId = closer["UserDetails"].ID;
-          //   // console.log("result closeUserId" +this.closeUserId);
-          //   // let detailStar = {
-          //   //   'star' : this.star
-          //   // }
-          //   // // console.log("detailProduct" +JSON.stringify(detailProduct));
-          //   // this.stardetail.push(detailStar);
-          //   // console.log("stardetail" +JSON.stringify(this.stardetail));
-          // }
-          // this.serviceProvider.ReviewListData(reqObj).then((result) => {
-          //   console.log("result ReviewListData" +JSON.stringify(result));
-          //   for(let reviewOrder of result["data"]) {
-          //     console.log("reviewOrder" +JSON.stringify(reviewOrder));
-          //     this.reviewOrderId = reviewOrder["orderid"];
-          //     console.log("result this.reviewOrderId" +this.reviewOrderId);
-          //     this.ratings = reviewOrder["review_star"];
-          //     this.reviewUserId = reviewOrder["UserDetails"].ID;
-          //     console.log("result this.reviewUserId" +this.reviewUserId);
-          //   }
-          // }, (err) => {  
-          //   console.log("err declined list" +JSON.stringify(err));
-          //   // Error log
-          // });
-          
-          // if(this.closerelations.)
+          // console.log("get close relations list" +JSON.stringify(this.closerelations));
 
-          
           for(let products of this.deliveryrequests) {
             // console.log("get products......" +JSON.stringify(products));
             this.productdetail = products.productDetails;
@@ -242,36 +165,8 @@ export class RequestlistPage {
               totalPrice += this.count;
               this.totalSum = totalPrice;
               // console.log("totalPrice......" +JSON.stringify(this.totalPrice));
-              // console.log("this.totalSum......" +this.totalSum);  
-              
+              // console.log("this.totalSum......" +this.totalSum);   
             }
-            // stringArray.push({'totalSum': this.totalSum});
-            // console.log("this.stringArray......" +JSON.stringify(stringArray));
-            // this.deliveryrequests.push(stringArray);
-            // console.log("this.deliveryrequests......" +JSON.stringify(this.deliveryrequests)); 
-            // this.deliveryrequests.push({'totalSum': this.totalSum});
-            // console.log("get request list" +JSON.stringify(this.deliveryrequests));
-            // let sum = {
-            //   'total': this.totalSum
-            // }
-            // console.log("sum......" +JSON.stringify(sum));
-            // // stringArray.push(sum);
-            // // console.log("this.stringArray......" +JSON.stringify(stringArray));
-            // this.amountArray.push(sum);
-            // console.log("this.amountArray......" +JSON.stringify(this.amountArray));
-            // this.deliveryrequests.push(this.totalSum);
-            // console.log("get request list" +JSON.stringify(this.deliveryrequests));
-            // this.amountArray.push(sum);
-            // console.log("this.amountArray......" +JSON.stringify(this.amountArray)); 
-            
-            // stringArray.push(sum);
-            // console.log("this.stringArray......" +JSON.stringify(stringArray));
-            // this.amountArray = stringArray;
-            // console.log("this.amountArray......" +JSON.stringify(this.amountArray)); 
-            // this.mergeArray.push(sum);
-            // console.log("this.mergeArray......" +JSON.stringify(this.mergeArray));
-            // this.total = this.totalPrice;
-            // console.log("this.total......" +this.total);  
           }
           
           
@@ -375,6 +270,12 @@ export class RequestlistPage {
       this.open = true;
       this.close = false;
       this.userrequest = false;
+      // this.beforeAccept = false;
+      this.afterAccept = true;
+      this.storage.remove('beforeAccept');
+      this.storage.set('afterAccept', this.afterAccept);
+      
+    
       // console.log("this.deliveryrequests...2" +JSON.stringify(this.deliveryrequests));
       // this.getRequestList();
     } else if(event.value == "close"){
@@ -389,6 +290,10 @@ export class RequestlistPage {
       this.open = false;
       this.close = false;
       this.userrequest = true;
+      this.beforeAccept = true;
+      // this.afterAccept = false;
+      this.storage.remove('afterAccept');
+      this.storage.set('beforeAccept', this.beforeAccept);
       // console.log("this.userrequests...4" +JSON.stringify(this.userrequests));
       // this.getRequestList();
 
@@ -402,7 +307,9 @@ export class RequestlistPage {
   }
 
   accepttoshowList(reqOrederData) {
-    console.log("accept reqOrederId....." +JSON.stringify(reqOrederData));
+    // this.accept = true;
+    // this.storage.set('acceptStatus', this.accept);
+    // console.log("accept reqOrederId....." +JSON.stringify(reqOrederData));
     this.loader.show("Please Wait");
     // this.storage.set('accept', this.accepted);
     let acceptData = {
@@ -411,7 +318,7 @@ export class RequestlistPage {
       "orderType": "ACCEPT"
     }
     this.serviceProvider.acceptORdeclineOrderData(acceptData).then((result) => {
-      console.log("result accepted list" +JSON.stringify(result));
+      // console.log("result accepted list" +JSON.stringify(result));
       if(result["status"] == 1) {
         this.loader.hide();
         let alert = this.alertCtrl.create({
@@ -424,7 +331,7 @@ export class RequestlistPage {
                 // this.accept = false;
                 // this.accepted = true;
                 // this.getRequestList();
-                console.log("reqOrederData accepted" +JSON.stringify(reqOrederData));
+                // console.log("reqOrederData accepted" +JSON.stringify(reqOrederData));
                 this.getRequestList();
               }
             }
@@ -444,7 +351,7 @@ export class RequestlistPage {
   }
 
   declineRequest(reqOrederData) {
-    console.log("decline reqOrederData....." +JSON.stringify(reqOrederData));
+    // console.log("decline reqOrederData....." +JSON.stringify(reqOrederData));
     this.loader.show("Please Wait");
     let declineData = {
       "ID": this.id,
@@ -452,7 +359,7 @@ export class RequestlistPage {
       "orderType": "DECLINE"
     }
     this.serviceProvider.acceptORdeclineOrderData(declineData).then((result) => {
-      console.log("result declined list" +JSON.stringify(result));
+      // console.log("result declined list" +JSON.stringify(result));
       if(result["status"] == 1) {
         this.loader.hide();
         let alert = this.alertCtrl.create({
@@ -465,7 +372,7 @@ export class RequestlistPage {
                 // this.accept = false;
                 // this.accepted = true;
                 // this.getRequestList();
-                console.log("reqOrederData declined" +JSON.stringify(reqOrederData));
+                // console.log("reqOrederData declined" +JSON.stringify(reqOrederData));
                 this.getRequestList();
               }
             }
@@ -490,7 +397,8 @@ export class RequestlistPage {
   viewProductList(products) {
     console.log("view list products......" +JSON.stringify(products));
     // this.storage.set('confirmOrderid', products.orderid);
-    this.navCtrl.push("ViewproductlistPage", { 'productdetail': products.productDetails });
+    // this.navCtrl.push("ViewproductlistPage", { 'productdetail': products.productDetails});
+    this.navCtrl.push("ViewproductlistPage", { 'productdetail': products});
   }
 
   toMakeClose(products){
@@ -542,13 +450,6 @@ export class RequestlistPage {
   addreview(product, index){
     console.log("add review product" +JSON.stringify(product));
     console.log("add review index" +index);
-    // console.log("this.closerelations[index]" +JSON.stringify(this.closerelations[index]));
-    // this.stardetail[index].star = this.ratings;
-
-    // this.closerelations[index].orderid = this.ratings;
-    // console.log('add review closerelations' +JSON.stringify(this.closerelations));
-    // this.getRequestList();
-    // this.star = true;
 
     this.storage.set('orderid', product.orderid);
     // console.log("product.UserDetails.ID" +product.UserDetails.ID);

@@ -185,7 +185,7 @@
     <div *ngIf="delivery">
       <ion-list class="cart-list" *ngFor="let request of deliveryrequests">
         <!-- {{ request | json }} -->
-        <ion-item>
+        <ion-item text-wrap>
           <p><b>OrderId: </b> {{request.orderid}} </p>
           <p><b>Order_date: </b> {{request.created_at}} </p>
           <p> <img src="assets/imgs/placeholder.png" class="cart-imgs"> {{request.address}}</p>
@@ -213,7 +213,7 @@
 
     <div *ngIf="open">
       <ion-list class="cart-list" *ngFor="let openproduct of openrelations">
-        <ion-item>
+        <ion-item text-wrap>
           <ion-thumbnail item-start>
             <img src="{{openproduct.UserDetails.userImage}}" *ngIf="!openproduct.UserDetails.userImage==''">
             <img src="assets/imgs/bgcolor.png" *ngIf="openproduct.UserDetails.userImage==''">
@@ -244,7 +244,7 @@
         <!-- {{closeproduct | json}} -->
         <!-- <ion-item *ngIf="closeproduct.reviewStar >0 ">
         </ion-item> -->
-        <ion-item (click)="addreview(closeproduct, i)">
+        <ion-item text-wrap (click)="addreview(closeproduct, i)">
           <ion-thumbnail item-start>
             <img src="{{closeproduct.UserDetails.userImage}}" *ngIf="!closeproduct.UserDetails.userImage==''">
             <img src="assets/imgs/bgcolor.png" *ngIf="closeproduct.UserDetails.userImage==''">
@@ -297,7 +297,7 @@
       <div>
         <ion-list class="cart-list" *ngFor="let reqs of userrequests">
           <!-- {{reqs | json}} -->
-          <ion-item>
+          <ion-item text-wrap>
             <ion-grid class="gridbtn">
               <ion-row>
                 <ion-col col-3>

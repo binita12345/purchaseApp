@@ -28,7 +28,7 @@
 
 	<ion-list class="cart-list" *ngFor="let product of productdetail">
 		<!-- {{product | json}} -->
-	  <ion-item>
+	  <ion-item text-wrap>
 	    <ion-thumbnail item-start>
 	      <!-- <img src="{{product.productImage}}"> -->
         <img src="{{product.productImage}}" *ngIf="!product.productImage==''">
@@ -41,7 +41,8 @@
 	    <!-- <p class="cart-parag"><img src="{{product.map}}" class="cart-imgs"> {{product.parag}}</p> -->
 	    <p class="cart-parag"><img src="assets/imgs/placeholder.png" class="cart-imgs"> {{product.address}}</p>
 	    <img src="assets/imgs/map.png">
-	    <p item-end style="color: #000000;">₹ {{product.amount * product.quantity}}</p>
+	    <p item-end style="color: #000000;" *ngIf="afterAccept">₹ {{product.amount * product.quantity}}</p>
+      <div item-end class="icon_middle" *ngIf="beforeAccept"><p item-end style="color: #000000;">₹ {{product.amount * product.quantity}}</p><span><button ion-button class="btn-inquiry" (click)="inquiryProduct()">Inquiry</button></span> </div>
 	   	<!-- <input type="checkbox" item-end [(ngModel)]="product.selected" (change)="checkIfAllSelected(product)" class="check-css"> -->
 	   	<!-- <input type="checkbox" *ngIf="!selectedAll" [(ngModel)]="product.id" > -->
 	    <!-- <ion-checkbox item-end class="check-css" [(ngModel)]="checklist"></ion-checkbox> -->

@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, NgZone, ElementRef, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
 import * as _ from 'lodash';
 import { Loader } from "../../providers/loader/loader";
+import { } from 'googlemaps';
+import {FormControl} from "@angular/forms";
+import { MapsAPILoader } from '@agm/core';
 /**
  * Generated class for the OrderproductPage page.
  *
@@ -41,8 +44,16 @@ export class OrderproductPage {
   amount : any;
   total : any;
 
+  public searchControl: FormControl;
+  public latitude: number;
+  public longitude: number;
+  public zoom: number;
+
+  @ViewChild("search")
+  public searchElementRef;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
-    private loader: Loader, private alertCtrl: AlertController) {
+    private loader: Loader, private alertCtrl: AlertController, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {
   	// this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product names", 'price': "$512"},
    //  {'image' : "assets/imgs/bgcolor.png", 'name':"Product names", 'price': "$512"}]
     // this.supplierArray = navParams.get('supplierarray');
@@ -54,6 +65,9 @@ export class OrderproductPage {
     //   this.suppArray.push(this.getSup);
     //   console.log("this.suppArray....." +JSON.stringify(this.suppArray));
     // }
+
+    this.searchControl = new FormControl();
+    this.setCurrentPosition();
 
     this.storage.get("userData").then(userData => {
       // console.log("userData" +JSON.stringify(userData));
@@ -139,6 +153,51 @@ export class OrderproductPage {
       
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad orderproductPage');
+
+    //create search FormControl
+    this.searchControl = new FormControl();
+
+    //set current position
+    this.setCurrentPosition();
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let nativeHomeInputBox = document.getElementById('txtHome').getElementsByTagName('input')[0];
+      let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          console.log("autocomplete places" +JSON.stringify(place));
+          this.address = place.formatted_address;
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+  }
+
+  private setCurrentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 12;
+      });
+    }
+  }
+
   incrementQty(index:number){
     // console.log("increment index" +index);
     // console.log("increment index qty" +this.productdetail[index].quantity);
@@ -222,10 +281,6 @@ export class OrderproductPage {
       // Error log
     });
 
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad OrderproductPage');
   }
 
   gotoHome(){

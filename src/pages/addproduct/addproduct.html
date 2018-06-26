@@ -35,12 +35,12 @@
     </div>
     <br/>
     <br/>
-  	<ion-grid>
+  	<ion-grid text-wrap>
   		<!-- <ion-row class="row-css">
   			<ion-col col-12 col-xl-12> -->
   				<ion-item class="item-css row-css">
 			    	<ion-label fixed class="label-css">Product Name</ion-label>
-			    	<ion-input class="input-text" [(ngModel)]="productData.name" required></ion-input>
+			    	<ion-input class="input-name" [(ngModel)]="productData.name" required></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->
@@ -60,9 +60,9 @@
       	<br/>
   		<!-- <ion-row class="row-css margn">
   			<ion-col col-12 col-xl-12> -->
-  				<ion-item class="item-css row-css margn">
+  				<ion-item text-wrap class="item-css row-css margn">
 			    	<ion-label fixed class="label-css">Address</ion-label>
-			    	<ion-input class="input-text" id="pac-input" [(ngModel)]="productData.address" required></ion-input>
+			    	<ion-input text-wrap class="input-text" type="text" id="txtHome" [(ngModel)]="productData.address" required></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->

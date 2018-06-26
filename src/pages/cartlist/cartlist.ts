@@ -39,16 +39,16 @@ export class CartlistPage {
       this.id = userData.data.ID;
       // console.log("this.id" +this.id);
       this.userType = userData.data.user_type;
-      if (this.userType == "CUSTOMER") {
-        this.forUserContent = true;
-        this.forSupplierContent =false;
-        // this.forBothContent =false;
-      } else if (this.userType == "SUPPLIER" || "USER") {
-        this.forUserContent = false;
-        this.forSupplierContent =true;
-        // this.forBothContent =false;
-      } else {
-      }
+      // if (this.userType == "CUSTOMER") {
+      //   this.forUserContent = true;
+      //   this.forSupplierContent =false;
+      //   // this.forBothContent =false;
+      // } else if (this.userType == "SUPPLIER" || "USER") {
+      //   this.forUserContent = false;
+      //   this.forSupplierContent =true;
+      //   // this.forBothContent =false;
+      // } else {
+      // }
       this.getProductsListData();
       this.storage.remove("selectedArray");
     });
@@ -112,9 +112,9 @@ export class CartlistPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CartlistPage');
   }
-  inquiryProduct(){
-    this.navCtrl.push("InquiryproductPage");
-  }
+  // inquiryProduct(){
+  //   this.navCtrl.push("InquiryproductPage");
+  // }
   gotoHome(){
   	this.navCtrl.push("HomeappPage");
   }

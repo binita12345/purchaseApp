@@ -236,4 +236,16 @@ page-viewproductlist {
     	padding: 0px;
     	padding-top: 10px;
 	}
+
+	// cart-content
+	.icon_middle {
+	    text-align: center;
+	}
+	.btn-inquiry{
+		max-height: 30px !important;
+    	width: 75px !important;
+    	text-transform: none !important;
+    	background-color: #0065B9;
+    	padding: 8px !important;	
+    }
 }

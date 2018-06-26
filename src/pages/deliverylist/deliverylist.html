@@ -21,7 +21,7 @@
 
 	<ion-list class="cart-list" *ngFor="let product of deliveredProducts">
 		<!-- {{list | json}} -->
-	  <ion-item>
+	  <ion-item text-wrap>
 	    <ion-thumbnail item-start>
 	      <img src="{{product.productImage}}" *ngIf="!product.productImage==''">
         <img src="assets/imgs/bgcolor.png" *ngIf="product.productImage==''">

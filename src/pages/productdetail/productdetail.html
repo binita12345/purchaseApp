@@ -14,8 +14,8 @@
           <ion-title>Product detail</ion-title>
         </ion-col>
         <ion-col col-2 col-xl-2 style="text-align: right;">
-        	<!-- <img src="assets/imgs/pensquare.png" class="cursor" style="height: 24px;" (click)="editProduct()"> -->
-          <img src="assets/imgs/pensquare.png" class="cursor" style="height: 24px;">
+        	<img src="assets/imgs/pensquare.png" class="cursor" style="height: 24px;" (click)="editProduct()">
+          <!-- <img src="assets/imgs/pensquare.png" class="cursor" style="height: 24px;"> -->
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -23,9 +23,10 @@
 </ion-header>
 
 <ion-content padding>
-	<div class="image">
+	<!-- <div class="image">
 	    <img src="assets/imgs/photo-camera.png" class="cameraImg">
-  	</div>
+  	</div> -->
+    <img src="{{base64Image}}" (click)="choosePhoto()" class="chooseImg">
   	<br/>
   	<br/>
   	<ion-grid>
@@ -33,7 +34,7 @@
   			<ion-col col-12 col-xl-12> -->
   				<ion-item class="item-css row-css">
 			    	<!-- <ion-label fixed class="label-css">Product Name</ion-label> -->
-			    	<ion-input class="input-text" value="{{name}}"></ion-input>
+			    	<ion-input class="input-text" value="{{name}}" [(ngModel)]="name"></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->
@@ -46,16 +47,16 @@
 	      	</ion-col> -->
 	      	<ion-col col-12 col-xl-12>
 		  		<ion-item>
-			        <ion-textarea class="input-textarea" name="description" value="{{description}}"></ion-textarea>
+			        <ion-textarea class="input-textarea" name="description" value="{{description}}" [(ngModel)]="description"></ion-textarea>
 		      	</ion-item>
 	      	</ion-col>
       	</ion-row>
       	<br/>
   		<!-- <ion-row class="row-css margn">
   			<ion-col col-12 col-xl-12> -->
-  				<ion-item class="item-css row-css margn">
+  				<ion-item class="item-css row-css margn" text-wrap>
 			    	<!-- <ion-label fixed class="label-css">Pick up</ion-label> -->
-			    	<ion-input class="input-text" value="{{address}}"></ion-input>
+			    	<ion-input class="input-text" value="{{address}}" [(ngModel)]="address"></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->
@@ -75,7 +76,7 @@
   			<ion-col col-12 col-xl-12> -->
   				<ion-item class="item-css row-css margn">
 			    	<!-- <ion-label fixed class="label-css">Time</ion-label> -->
-			    	<ion-input class="input-text" value="{{time}}"></ion-input>
+			    	<ion-input class="input-text" value="{{time}}" [(ngModel)]="time"></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->
@@ -84,7 +85,7 @@
   			<ion-col col-12 col-xl-12> -->
   				<ion-item class="item-css row-css margn">
 			    	<!-- <ion-label fixed class="label-css">Amount</ion-label> -->
-			    	<ion-input class="input-text" value="{{amount}}"></ion-input>
+			    	<ion-input class="input-text" value="{{amount}}" [(ngModel)]="amount"></ion-input>
 			  	</ion-item>	
   			<!-- </ion-col>
   		</ion-row> -->

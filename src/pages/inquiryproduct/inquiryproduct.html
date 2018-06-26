@@ -27,7 +27,7 @@
 
 <ion-content padding>
 
-  <ion-grid>
+  <ion-grid text-wrap>
     <br/>
     <ion-row class="row-css">
       <ion-col col-1 col-xl-1 class="col-in">
@@ -36,7 +36,7 @@
       <ion-col col-11 col-xl-11>
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Name</ion-label>
-          <ion-input class="input-text"></ion-input>
+          <ion-input class="input-text" value="{{name}}" [(ngModel)]="name"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -47,9 +47,9 @@
         <img src="assets/imgs/close-envelope.png" class="img-size1">
       </ion-col>
       <ion-col col-11 col-xl-11>
-        <ion-item class="item-css">
+        <ion-item class="item-css" text-wrap>
           <ion-label fixed class="label-css">Email</ion-label>
-          <ion-input class="input-text" type="email"></ion-input>
+          <ion-input class="input-text" type="email" value="{{email}}" [(ngModel)]="email"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -62,7 +62,7 @@
       <ion-col col-11 col-xl-11>
         <ion-item class="item-css">
           <ion-label fixed class="label-css">Subjects</ion-label>
-          <ion-input class="input-text"></ion-input>
+          <ion-input class="input-text" [(ngModel)]="subjects"></ion-input>
         </ion-item> 
       </ion-col>
     </ion-row>
@@ -81,7 +81,7 @@
     <ion-row class="row-css margn">
       <ion-col col-12 col-xl-12>
         <ion-item>
-          <ion-textarea [(ngModel)]="inquiry" name="inquiry"></ion-textarea>
+          <ion-textarea [(ngModel)]="inquiries" name="inquiry"></ion-textarea>
         </ion-item>
       </ion-col>
     </ion-row>

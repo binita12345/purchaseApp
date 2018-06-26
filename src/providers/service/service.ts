@@ -16,7 +16,7 @@ import { Storage } from "@ionic/storage";
   and Angular DI.
 */
 
-let apiUrl = 'http://192.168.0.125:8080/purchasing/apis/';
+let apiUrl = 'http://192.168.0.137:8080/purchasing/apis/';
 
 @Injectable()
 export class ServiceProvider {
@@ -291,6 +291,36 @@ export class ServiceProvider {
       this.http.post(apiUrl + 'reviewmodule/reviewList', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("add review service" +res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to do inquiries for products which are available or not in other stores.
+  inquiryProducts(data) {
+    // return new Promise((resolve, reject) => {
+    //   let headers = new Headers();
+
+    //   this.http.post(apiUrl + 'reviewmodule/reviewList', JSON.stringify(data), {headers: headers})
+    //     .subscribe(res => {
+    //       console.log("add review service" +res.json());
+    //       resolve(res.json());
+    //     }, (err) => {
+    //       reject(err);
+    //     });
+    // });
+  }
+
+  // This api is used to delete the products which is of any order request
+  deleteProduct(Id) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'ProductModule/productDelete', JSON.stringify(Id), {headers: headers})
+        .subscribe(res => {
+          console.log("delete order product" +res.json());
           resolve(res.json());
         }, (err) => {
           reject(err);

@@ -12,7 +12,8 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import * as _ from 'lodash';
 import { SearchPipe } from '../pipes/search/search';
-import { SortPipe } from '../pipes/sort/sort';
+// import { SortPipe } from '../pipes/sort/sort';
+import { AgmCoreModule } from '@agm/core';
 // import { InvitefriendsPageModule } from '../pages/invitefriends/invitefriends.module';
 
 // import { HttpClientModule } from "@angular/common/http";
@@ -33,7 +34,7 @@ import { ServiceProvider } from '../providers/service/service';
     MyApp,
     MainPage,
     SearchPipe,
-    SortPipe
+    // SortPipe
   ],
   imports: [
     BrowserModule,
@@ -41,6 +42,10 @@ import { ServiceProvider } from '../providers/service/service';
     // InvitefriendsPageModule,
     // HttpClientModule,
     IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({
+          apiKey: "AIzaSyDfFWPRgehrmHkdwL1PLAWRVJPmfFk3b30",
+          libraries: ["places"]
+    }),
     IonicStorageModule.forRoot(),
     Ionic2RatingModule,
     HttpModule

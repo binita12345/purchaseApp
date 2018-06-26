@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the RequestdetailPage page.
  *
@@ -23,7 +24,7 @@ export class RequestdetailPage {
   productid : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public storage: Storage,
-    private alertCtrl: AlertController, public serviceProvider: ServiceProvider) {
+    private alertCtrl: AlertController, public serviceProvider: ServiceProvider, private loader: Loader, public toastCtrl: ToastController) {
   	// this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
    //  {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
    //  {'image' : "assets/imgs/bgcolor.png", 'name':"PRODUCT NAME", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00"},
@@ -57,117 +58,102 @@ export class RequestdetailPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RequestdetailPage');
   }
+  // ionViewWillEnter(){
+  //     this.getDetail();
+  // }
 
-  editProduct(list){
-    console.log("request order products" +JSON.stringify(this.products));
+  // editProduct(list){
+  //   console.log("request order products" +JSON.stringify(this.products));
     
-    console.log("list edit..." +JSON.stringify(list));
-    // console.log("this.amount..." +JSON.stringify(this.amount));
-    this.orderid = this.products.orderid;
-    this.productid = list.productid;
-    this.address = list.address;
-    this.amount = list.amount * list.quantity;
+  //   console.log("list edit..." +JSON.stringify(list));
+  //   // console.log("this.amount..." +JSON.stringify(this.amount));
+  //   this.orderid = this.products.orderid;
+  //   this.productid = list.productid;
+  //   this.address = list.address;
+  //   this.amount = list.amount * list.quantity;
 
-    let editData = {
-      orderid: this.orderid,
-      productid: this.productid,
-      address: this.address,
-      amount: this.amount
-    }  
-    // let alert = this.alertCtrl.create({
-    //   title: 'Products names',
-    //   inputs: [
-    //     {
-    //       name: 'Delivery Address',
-    //       placeholder: this.address
-    //     },
-    //     {
-    //       name: 'Price',
-    //       placeholder: this.amount
-    //     }
-    //   ],
-    //   buttons: [
-    //     {
-    //       text: 'Cancel',
-    //       role: 'cancel',
-    //       handler: data => {
-    //         console.log('Cancel clicked');
-    //       }
-    //     },
-    //     {
-    //       text: 'Edit',
-    //       handler: data => {
-    //         this.serviceProvider.editProductData(editData).then((result) => {
-    //           console.log("edited result" +JSON.stringify(result));
+  //   let editData = {
+  //     orderid: this.orderid,
+  //     productid: this.productid,
+  //     address: this.address,
+  //     amount: this.amount
+  //   }  
 
-    //           if(result['status'] == 1) {
-    //             // this.loader.hide();
-    //             let alert = this.alertCtrl.create({
-    //               subTitle: result["message"],
-    //               buttons: [
-    //                 {
-    //                   text: 'OK',
-    //                   handler: () => {
-    //                     console.log('ok clicked');
-    //                     this.getDetail();
-    //                     // this.viewCtrl.dismiss(result);
-    //                     // this.geteditedData();
-    //                     // this.navCtrl.pop();
-    //                     // this.getRequestDetail();
-    //                   }
-    //                 }
-    //               ]
-    //             });
-    //             alert.present();
-    //           } else {
-    //             // this.loader.hide();
-    //             let alert = this.alertCtrl.create({
-    //               subTitle: result["message"],
-    //               buttons: ['Ok']
-    //             });
-    //             alert.present();
-    //           }
-    //         }, (err) => {
-    //           console.log("err edit product" +JSON.stringify(err));
-    //           // Error log
-    //         });
-    //         // if (User.isValid(data.username, data.password)) {
-    //         //   // logged in!
-    //         // } else {
-    //         //   // invalid login
-    //         //   return false;
-    //         // }
-    //       }
-    //     }
-    //   ]
-    // });
-    // alert.present();
+  //   this.storage.set('editdata', editData);
 
-    this.storage.set('editdata', editData);
+  //   let modal = this.modalCtrl.create('EditmodalPage', {data: editData}, {showBackdrop:true, enableBackdropDismiss:false});
+  //   document.getElementById("myDIV").style.opacity = "0.2";
+  //   // modal.present();
 
-    let modal = this.modalCtrl.create('EditmodalPage', {data: editData}, {showBackdrop:true, enableBackdropDismiss:false});
-    document.getElementById("myDIV").style.opacity = "0.2";
-    // modal.present();
+  //   modal.present();
+  //   modal.onWillDismiss(data => {
+  //       console.log(`About to dismiss with: ${data}`);
+  //   })
 
-    modal.present();
-    modal.onWillDismiss(data => {
-        console.log(`About to dismiss with: ${data}`);
-    })
-    // modal.onDidDimiss(data => {
-    //     console.log(`Dismissed with: ${data}`);
-    // })
+  //   modal.onDidDismiss(data => {
+  //     console.log("modal data....." +JSON.stringify(data));
+  //     document.getElementById("myDIV").style.opacity = "1";
+  //   });
+  // }
 
-    modal.onDidDismiss(data => {
-      console.log("modal data....." +JSON.stringify(data));
-      document.getElementById("myDIV").style.opacity = "1";
-      // if(productId){
-      //   // this.buyNow(productId)
-      // }       
-    });
+  gotoeditproductDetail(product){
+    console.log("edit gotoeditproductDetail" +JSON.stringify(product));
+    this.navCtrl.push("ProductdetailPage", {'productDetail': product});
   }
 
-  gotoproductDetail(){
-    this.navCtrl.push("ProductdetailPage");
+  deleteProduct(productId) {
+    console.log("deleteProduct" +productId);
+    let deleteData = {
+       "productid": productId
+    }
+    let alert = this.alertCtrl.create({
+      title: 'Confirm delete product',
+      message: 'Are you sure you want to permanently delete this product?',
+      buttons: [
+          {
+              text: 'No',
+              handler: () => {
+                  console.log('Cancel clicked');
+              }
+          },
+          {
+              text: 'Yes',
+              handler: () => {
+                console.log('ok clicked');
+                this.serviceProvider.deleteProduct(deleteData).then((result) => {
+                  console.log("result delete product" +JSON.stringify(result));
+                  
+                  if(result["status"] == 1){
+                    this.loader.hide();     
+                      let toastSuccess = this.toastCtrl.create({
+                      message: result["message"],
+                      duration: 7000,
+                      position: 'top',
+                      showCloseButton:true,
+                      closeButtonText:'X',
+                      cssClass: "toast-success",
+                    });
+                    toastSuccess.present();
+
+                    // this.ionViewWillEnter();
+                    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                  } else if(result["status"] == 2) {
+                    this.loader.hide();
+                    let alert = this.alertCtrl.create({
+                      subTitle: result["message"],
+                      buttons: ['Ok']
+                    });
+                    alert.present();
+                  }
+                }, (err) => {
+                  console.log("err delete records" +JSON.stringify(err));
+                  // Error log
+                });
+              }
+          }
+      ]
+    });
+    alert.present();
   }
 
   gotoHome(){
