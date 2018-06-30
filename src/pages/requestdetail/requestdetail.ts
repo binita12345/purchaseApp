@@ -22,6 +22,7 @@ export class RequestdetailPage {
   products : any;
   orderid : any;
   productid : any;
+  productOrderId : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public storage: Storage,
     private alertCtrl: AlertController, public serviceProvider: ServiceProvider, private loader: Loader, public toastCtrl: ToastController) {
@@ -45,22 +46,27 @@ export class RequestdetailPage {
     //   this.address = data.address;
     //   this.amount = data.amount;
     // }
-    this.getDetail();
+    
   }
   getDetail(){
     //get params here
     this.products = this.navParams.get('productdetails');
-    // console.log("request order products" +JSON.stringify(this.products));
+    console.log("request detail order products" +JSON.stringify(this.products));
+    this.productOrderId = this.products.orderid;
     this.lists = this.products.productDetails;
     console.log("request detail lists" +JSON.stringify(this.lists));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RequestdetailPage');
+    // this.getDetail();
   }
   // ionViewWillEnter(){
   //     this.getDetail();
   // }
+  ngOnInit() {
+    this.getDetail();
+  }
 
   // editProduct(list){
   //   console.log("request order products" +JSON.stringify(this.products));
@@ -104,7 +110,8 @@ export class RequestdetailPage {
   deleteProduct(productId) {
     console.log("deleteProduct" +productId);
     let deleteData = {
-       "productid": productId
+      "productid": productId,
+      "orderid": this.productOrderId
     }
     let alert = this.alertCtrl.create({
       title: 'Confirm delete product',
@@ -124,7 +131,7 @@ export class RequestdetailPage {
                   console.log("result delete product" +JSON.stringify(result));
                   
                   if(result["status"] == 1){
-                    this.loader.hide();     
+                    // this.loader.hide();     
                       let toastSuccess = this.toastCtrl.create({
                       message: result["message"],
                       duration: 7000,
@@ -134,11 +141,11 @@ export class RequestdetailPage {
                       cssClass: "toast-success",
                     });
                     toastSuccess.present();
-
+                    this.getDetail();
                     // this.ionViewWillEnter();
-                    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                    // this.navCtrl.setRoot(this.navCtrl.getActive().component);
                   } else if(result["status"] == 2) {
-                    this.loader.hide();
+                    // this.loader.hide();
                     let alert = this.alertCtrl.create({
                       subTitle: result["message"],
                       buttons: ['Ok']
@@ -156,29 +163,53 @@ export class RequestdetailPage {
     alert.present();
   }
 
-  gotoHome(){
-  	this.navCtrl.push("HomeappPage");
+  statusChanged(event) {
+
+    console.log("event", event.value);
+    if(event.value == "home"){
+      this.navCtrl.push("HomeappPage");
+    } else if(event.value == "shopping"){
+      this.navCtrl.push("CartlistPage");
+    } else if(event.value == "request"){
+      this.navCtrl.push("RequestlistPage");
+    } else if(event.value == "profile"){
+      this.navCtrl.push("ProfilePage");
+    } else if(event.value == "notification"){
+      this.navCtrl.push("NotificationPage");
+    } else if(event.value == "inquiry"){
+      this.navCtrl.push("InquiryproductdetailPage");
+    } else if(event.value == "invitation"){
+      this.navCtrl.push("InvitefriendsPage");
+    } else if(event.value == "changepwd"){
+      this.navCtrl.push("ChangepasswordPage");
+    } else {
+      
+    }
   }
-  gotoCart(){
-  	this.navCtrl.push("CartlistPage");
-  }
-  gotoRequest(){
-  	this.navCtrl.push("RequestlistPage");
-  }
-  gotoProfile(){
-  	this.navCtrl.push("ProfilePage");
-  }
-  gotoNotification(){
-  	this.navCtrl.push("NotificationPage");
-  }
-  gotoInquiryProduct(){
-  	this.navCtrl.push("InquiryproductdetailPage");
-  }
-  gotoInviteFriend(){
-  	this.navCtrl.push("InvitefriendsPage");
-  }
-  gotoChangePassword(){
-  	this.navCtrl.push("ChangepasswordPage");
-  }
+
+  // gotoHome(){
+  // 	this.navCtrl.push("HomeappPage");
+  // }
+  // gotoCart(){
+  // 	this.navCtrl.push("CartlistPage");
+  // }
+  // gotoRequest(){
+  // 	this.navCtrl.push("RequestlistPage");
+  // }
+  // gotoProfile(){
+  // 	this.navCtrl.push("ProfilePage");
+  // }
+  // gotoNotification(){
+  // 	this.navCtrl.push("NotificationPage");
+  // }
+  // gotoInquiryProduct(){
+  // 	this.navCtrl.push("InquiryproductdetailPage");
+  // }
+  // gotoInviteFriend(){
+  // 	this.navCtrl.push("InvitefriendsPage");
+  // }
+  // gotoChangePassword(){
+  // 	this.navCtrl.push("ChangepasswordPage");
+  // }
 
 }

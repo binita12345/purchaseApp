@@ -21,10 +21,10 @@ footer {
     	color: #fff;
     	font-weight: 500;
 	}
-	.slidesCss{
-	    max-height: 56px;
-	    background-color: #0A76D2;
-	}
+	// .slidesCss{
+	//     min-height: 70px;
+	//     background-color: #0A76D2;
+	// }
 	.imagebgColor{
 		height: 20px;
 		width: 20px;
@@ -83,5 +83,14 @@ footer {
 	// }
 	.title-col{
 		margin-top: -10px;
+	}
+
+	// new css
+	.slide-css {
+		height: 70px !important;
+	}
+	.slidesCss{
+	    min-height: 70px;
+	    background-color: #0A76D2;
 	}
 }

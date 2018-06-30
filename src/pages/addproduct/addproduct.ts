@@ -35,6 +35,9 @@ export class AddproductPage {
   @ViewChild("search")
   public searchElementRef;
 
+  currentLatitude : any;
+  currentLongitude : any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private camera: Camera, 
     public platform: Platform, public actionSheetCtrl: ActionSheetController, public serviceProvider: ServiceProvider,
     private alertCtrl: AlertController, private loader: Loader, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {
@@ -45,7 +48,9 @@ export class AddproductPage {
     });
 
     this.searchControl = new FormControl();
+    this.getCurrentLocation();
     this.setCurrentPosition();
+
   }
 
   ionViewDidLoad() {
@@ -80,6 +85,17 @@ export class AddproductPage {
           this.zoom = 12;
         });
       });
+    });
+  }
+
+  getCurrentLocation() {
+    this.storage.get("currentLatitude").then(currentLat => {
+      this.currentLatitude = currentLat;
+      console.log("this.currentLatitude" +this.currentLatitude);
+    });
+    this.storage.get("currentLongitude").then(currentLng => {
+      this.currentLongitude = currentLng;
+      console.log("this.currentLongitude" +this.currentLongitude);
     });
   }
 
@@ -179,6 +195,8 @@ export class AddproductPage {
       'name': this.productData.name,
       'description': this.productData.description,
       'address': this.productData.address,
+      "latitude": this.currentLatitude,
+      "longitude": this.currentLongitude,
       'deliveryTime': this.productData.time,
       'amount': this.productData.amount,
       'productImage': this.image,
@@ -186,7 +204,7 @@ export class AddproductPage {
 
     // console.log("productsObj" +JSON.stringify(productsObj));
     this.serviceProvider.addProductData(productsObj).then((result) => {
-      // console.log("result add product" +JSON.stringify(result));
+      console.log("result add product" +JSON.stringify(result));
       if(result["status"] == 2) {
         this.loader.hide();
         this.error = result["message"];

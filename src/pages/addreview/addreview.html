@@ -1,15 +1,15 @@
-<!--
+<!-- 
   Generated template for the AddreviewPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
--->
+ -->
 <ion-header>
 
   <ion-navbar color="dark">
     <ion-grid>
       <ion-row>
-        <ion-col col-4 col-xl-4>
+         <ion-col col-4 col-xl-4>
         </ion-col>
         <ion-col col-4 col-xl-4>
           <ion-title>Add review</ion-title>
@@ -18,6 +18,8 @@
           <button ion-button class="btnInvite" (click)="submit()">Submit</button>
           <!-- <img src="assets/imgs/circleplus.png" style="height: 24px;"> -->
         </ion-col>
+          <!-- <ion-title>Add review</ion-title>
+          <button ion-button class="btnInvite" (click)="submit()">Submit</button> -->
       </ion-row>
     </ion-grid>
   </ion-navbar>
@@ -82,103 +84,48 @@
   	</ion-grid>
 
 </ion-content>
-<ion-footer class="applyFooter">
-  <ion-toolbar>
-    <ion-grid ion-fixed>
-		    <ion-row>
-		      <ion-col col-12 col-xl-12>
-		        <ion-list>
-		            <ion-card>
-		              <ion-slides class="slidesCss">
-		                  <ion-slide (ionSlideDidChange)="slideChanged()">
-		                    <ion-grid class="grid-css" (click)="gotoHome()">
-		                      <ion-row>
-		                        <ion-col col-12>
-		                          <img src="assets/imgs/house.png" class="imagebgColor">
-		                        </ion-col>
-		                        <ion-col col-12 class="title-col">
-		                          <p class="footerP">HOME</p>
-		                        </ion-col>
-		                      </ion-row>
-		                    </ion-grid>
-		                    <ion-grid class="grid-css" (click)="gotoCart()">
-		                      <ion-row>
-		                        <ion-col col-12>
-		                          <img src="assets/imgs/cart.png" class="imagebgColor">
-		                        </ion-col>
-		                        <ion-col col-12 class="title-col">
-		                          <p class="footerP">SHOPPING LIST</p>
-		                        </ion-col>
-		                      </ion-row>
-		                    </ion-grid>
-		                    <ion-grid class="grid-css active" (click)="gotoRequest()">
-		                      <ion-row>
-		                        <ion-col col-12>
-		                          <img src="assets/imgs/request.png" class="imagebgColor">
-		                        </ion-col>
-		                        <ion-col col-12 class="title-col">
-		                          <p class="footerP">REQUEST</p>
-		                        </ion-col>
-		                      </ion-row>
-		                    </ion-grid>
-		                    <ion-grid class="grid-css" (click)="gotoProfile()">
-		                      <ion-row>
-		                        <ion-col col-12 >
-		                          <img src="assets/imgs/profile.png" class="imagebgColor">
-		                        </ion-col>
-		                        <ion-col col-12 class="title-col">
-		                          <p class="footerP">PROFILE</p>
-		                        </ion-col>
-		                      </ion-row>
-		                    </ion-grid>
-		                  </ion-slide>
-		                  <ion-slide (ionSlideDidChange)="slideChanged()">
-		                    <ion-grid class="grid-css" (click)="gotoNotification()">
-		                      <ion-row>
-		                        <ion-col col-12 >
-		                          <img src="assets/imgs/bell.png" class="imagebgColor">
-		                        </ion-col>
-		                        <ion-col col-12 class="title-col">
-		                          <p class="footerP">NOTIFICATION</p>
-		                        </ion-col>
-		                      </ion-row>
-		                    </ion-grid>
-		                    <ion-grid class="grid-css" (click)="gotoInquiryProduct()">
-		                      <ion-row>
-		                        <ion-col col-12 >
-		                          <img src="assets/imgs/inquiry.png" class="imagebgColor">
-		                        </ion-col>
-		                        <ion-col col-12 class="title-col">
-		                          <p class="footerP">INQUIRY PRODUCT</p>
-		                        </ion-col>
-		                      </ion-row>
-		                    </ion-grid>
-		                    <ion-grid class="grid-css" (click)="gotoInviteFriend()">
-		                      <ion-row>
-		                        <ion-col col-12 >
-		                          <img src="assets/imgs/adduser.png" class="imagebgColor">
-		                        </ion-col>
-		                        <ion-col col-12 class="title-col">
-		                          <p class="footerP">INVITE FRIENDS</p>
-		                        </ion-col>
-		                      </ion-row>
-		                    </ion-grid>
-		                    <ion-grid class="grid-css" (click)="gotoChangePassword()">
-		                      <ion-row>
-		                        <ion-col col-12 >
-		                          <img src="assets/imgs/lockbk.png" class="imagebgColor">
-		                        </ion-col>
-		                        <ion-col col-12 class="title-col">
-		                          <p class="footerP">CHANGE PASSWORD</p>
-		                        </ion-col>
-		                      </ion-row>
-		                    </ion-grid>
-		                  </ion-slide>
-		                </ion-slides>
-		            </ion-card>
-		        </ion-list>
-		       </ion-col>
-		    </ion-row>
-		</ion-grid>
-  </ion-toolbar>
+
+<ion-footer>
+  <ion-slides class="slidesCss">
+      <ion-slide (ionSlideDidChange)="slideChanged()" class="slide-css">
+        <ion-segment [(ngModel)]="requests" (ionChange)="statusChanged($event)" no-border-top>
+            <ion-segment-button class="seg-btn" value="home" #home id="home">
+              <img src="assets/imgs/house.png" class="imagebgColor">
+              <br/>HOME
+            </ion-segment-button>
+            <ion-segment-button class="seg-btn" value="shopping">
+              <img src="assets/imgs/cart.png" class="imagebgColor">
+              <br/>SHOPPING LIST
+            </ion-segment-button>
+            <ion-segment-button class="seg-btn active" value="request">
+              <img src="assets/imgs/request.png" class="imagebgColor">
+              <br/>REQUEST
+            </ion-segment-button>
+            <ion-segment-button class="seg-btn" value="profile">
+              <img src="assets/imgs/profile.png" class="imagebgColor">
+              <br/>PROFILE
+            </ion-segment-button>
+          </ion-segment>
+      </ion-slide>
+      <ion-slide (ionSlideDidChange)="slideChanged()" class="slide-css">
+        <ion-segment [(ngModel)]="requests" (ionChange)="statusChanged($event)" no-border-top>
+            <ion-segment-button class="seg-btn" value="notification">
+              <img src="assets/imgs/bell.png" class="imagebgColor">
+              <br/>NOTIFICATION
+            </ion-segment-button>
+            <ion-segment-button class="seg-btn" value="inquiry">
+              <img src="assets/imgs/inquiry.png" class="imagebgColor">
+              <br/>INQUIRY PRODUCT
+            </ion-segment-button>
+            <ion-segment-button class="seg-btn" value="invitation">
+              <img src="assets/imgs/adduser.png" class="imagebgColor">
+              <br/>INVITE FRIENDS
+            </ion-segment-button>
+            <ion-segment-button class="seg-btn" value="changepwd">
+              <img src="assets/imgs/lockbk.png" class="imagebgColor">
+              <br/>CHANGE PASSWORD
+            </ion-segment-button>
+          </ion-segment>
+      </ion-slide>
+  </ion-slides>
 </ion-footer>

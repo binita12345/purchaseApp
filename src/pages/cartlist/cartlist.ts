@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the CartlistPage page.
  *
@@ -25,13 +26,16 @@ export class CartlistPage {
   userType: any;
   id : any;
   selectedArray :any = [];
+  currentLatitude : any;
+  currentLongitude : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
+    private loader: Loader) {
     // this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "1",selected: false},
     // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "2",selected: false},
     // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "3",selected: false},
     // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "4",selected: false}]
-
+    this.getCurrentLocation();
     this.id = navParams.get('id');
     // console.log("get navpramas this.id" +this.id);
     this.storage.get("userData").then(userData => {
@@ -49,24 +53,40 @@ export class CartlistPage {
       //   // this.forBothContent =false;
       // } else {
       // }
+      
       this.getProductsListData();
       this.storage.remove("selectedArray");
     });
     
   }
 
+  getCurrentLocation() {
+    this.storage.get("currentLatitude").then(currentLat => {
+      this.currentLatitude = currentLat;
+      console.log("this.currentLatitude" +this.currentLatitude);
+    });
+    this.storage.get("currentLongitude").then(currentLng => {
+      this.currentLongitude = currentLng;
+      console.log("this.currentLongitude" +this.currentLongitude);
+    });
+  }
+
   getProductsListData() {
+    this.loader.show("Retrieving products...");
     // console.log("getProductsListData");
     // console.log("this.id....." +this.id);
     let getId = {
-      'ID' : this.id
+      'ID' : this.id,
+      "latitude": this.currentLatitude,
+      "longitude": this.currentLongitude,
     }
-    // console.log("getId" +JSON.stringify(getId));
+    console.log("getId" +JSON.stringify(getId));
     this.serviceProvider.getProductList(getId).then((result) => {
       // console.log("result products list" +JSON.stringify(result));
       if(result["status"] == 1) {
+        this.loader.hide();
         this.lists = result["data"];
-        // console.log("lists of product" +JSON.stringify(this.lists));
+        console.log("lists of product" +JSON.stringify(this.lists));
       }
       // this.getProfileData();
     }, (err) => {
@@ -115,30 +135,54 @@ export class CartlistPage {
   // inquiryProduct(){
   //   this.navCtrl.push("InquiryproductPage");
   // }
-  gotoHome(){
-  	this.navCtrl.push("HomeappPage");
+
+  statusChanged(event) {
+
+    console.log("event", event.value);
+    if(event.value == "home"){
+      this.navCtrl.push("HomeappPage");
+    } else if(event.value == "shopping"){
+      this.navCtrl.push("CartlistPage");
+    } else if(event.value == "request"){
+      this.navCtrl.push("RequestlistPage");
+    } else if(event.value == "profile"){
+      this.navCtrl.push("ProfilePage");
+    } else if(event.value == "notification"){
+      this.navCtrl.push("NotificationPage");
+    } else if(event.value == "inquiry"){
+      this.navCtrl.push("InquiryproductdetailPage");
+    } else if(event.value == "invitation"){
+      this.navCtrl.push("InvitefriendsPage");
+    } else if(event.value == "changepwd"){
+      this.navCtrl.push("ChangepasswordPage");
+    } else {
+      
+    }
   }
-  gotoCart(){
-  	this.navCtrl.push("CartlistPage");
-  }
-  gotoRequest(){
-  	this.navCtrl.push("RequestlistPage");
-  }
-  gotoProfile(){
-  	this.navCtrl.push("ProfilePage");
-  }
-  gotoNotification(){
-  	this.navCtrl.push("NotificationPage");
-  }
-  gotoInquiryProduct(){
-  	this.navCtrl.push("InquiryproductdetailPage");
-  }
-  gotoInviteFriend(){
-  	this.navCtrl.push("InvitefriendsPage");
-  }
-  gotoChangePassword(){
-  	this.navCtrl.push("ChangepasswordPage");
-  }
+  // gotoHome(){
+  // 	this.navCtrl.push("HomeappPage");
+  // }
+  // gotoCart(){
+  // 	this.navCtrl.push("CartlistPage");
+  // }
+  // gotoRequest(){
+  // 	this.navCtrl.push("RequestlistPage");
+  // }
+  // gotoProfile(){
+  // 	this.navCtrl.push("ProfilePage");
+  // }
+  // gotoNotification(){
+  // 	this.navCtrl.push("NotificationPage");
+  // }
+  // gotoInquiryProduct(){
+  // 	this.navCtrl.push("InquiryproductdetailPage");
+  // }
+  // gotoInviteFriend(){
+  // 	this.navCtrl.push("InvitefriendsPage");
+  // }
+  // gotoChangePassword(){
+  // 	this.navCtrl.push("ChangepasswordPage");
+  // }
 
   inviteSupplier(){
     this.navCtrl.push("SupplierlistPage");

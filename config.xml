@@ -99,6 +99,13 @@
     </plugin>
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="cordova-plugin-contacts" spec="^3.0.1" />
+    <plugin name="cordova-plugin-advanced-geolocation" spec="https://github.com/esri/cordova-plugin-advanced-geolocation.git" />
+    <plugin name="cordova-plugin-nativegeocoder" spec="^3.1.1">
+        <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="Use geocoder service" />
+    </plugin>
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
+    </plugin>
     <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.4" />
 </widget>

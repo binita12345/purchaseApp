@@ -101,29 +101,53 @@ export class AddreviewPage {
     // console.log("event value..." +JSON.stringify(event.value));
   }
 
-  gotoHome(){
-  	this.navCtrl.push("HomeappPage");
+  statusChanged(event) {
+
+    console.log("event", event.value);
+    if(event.value == "home"){
+      this.navCtrl.push("HomeappPage");
+    } else if(event.value == "shopping"){
+      this.navCtrl.push("CartlistPage");
+    } else if(event.value == "request"){
+      this.navCtrl.push("RequestlistPage");
+    } else if(event.value == "profile"){
+      this.navCtrl.push("ProfilePage");
+    } else if(event.value == "notification"){
+      this.navCtrl.push("NotificationPage");
+    } else if(event.value == "inquiry"){
+      this.navCtrl.push("InquiryproductdetailPage");
+    } else if(event.value == "invitation"){
+      this.navCtrl.push("InvitefriendsPage");
+    } else if(event.value == "changepwd"){
+      this.navCtrl.push("ChangepasswordPage");
+    } else {
+      
+    }
   }
-  gotoCart(){
-  	this.navCtrl.push("CartlistPage");
-  }
-  gotoRequest(){
-  	this.navCtrl.push("RequestlistPage");
-  }
-  gotoProfile(){
-  	this.navCtrl.push("ProfilePage");
-  }
-  gotoNotification(){
-  	this.navCtrl.push("NotificationPage");
-  }
-  gotoInquiryProduct(){
-  	this.navCtrl.push("InquiryproductdetailPage");
-  }
-  gotoInviteFriend(){
-  	this.navCtrl.push("InvitefriendsPage");
-  }
-  gotoChangePassword(){
-  	this.navCtrl.push("ChangepasswordPage");
-  }
+
+  // gotoHome(){
+  // 	this.navCtrl.push("HomeappPage");
+  // }
+  // gotoCart(){
+  // 	this.navCtrl.push("CartlistPage");
+  // }
+  // gotoRequest(){
+  // 	this.navCtrl.push("RequestlistPage");
+  // }
+  // gotoProfile(){
+  // 	this.navCtrl.push("ProfilePage");
+  // }
+  // gotoNotification(){
+  // 	this.navCtrl.push("NotificationPage");
+  // }
+  // gotoInquiryProduct(){
+  // 	this.navCtrl.push("InquiryproductdetailPage");
+  // }
+  // gotoInviteFriend(){
+  // 	this.navCtrl.push("InvitefriendsPage");
+  // }
+  // gotoChangePassword(){
+  // 	this.navCtrl.push("ChangepasswordPage");
+  // }
 
 }

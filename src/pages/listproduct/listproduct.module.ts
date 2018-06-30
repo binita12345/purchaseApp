@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ListproductPage } from './listproduct';
+import { FooterComponentModule } from '../../components/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ListproductPage } from './listproduct';
   ],
   imports: [
     IonicPageModule.forChild(ListproductPage),
+    FooterComponentModule
   ],
 })
 export class ListproductPageModule {}

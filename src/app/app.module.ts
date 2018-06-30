@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { HTTP } from '@ionic-native/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -14,6 +15,8 @@ import * as _ from 'lodash';
 import { SearchPipe } from '../pipes/search/search';
 // import { SortPipe } from '../pipes/sort/sort';
 import { AgmCoreModule } from '@agm/core';
+import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 // import { InvitefriendsPageModule } from '../pages/invitefriends/invitefriends.module';
 
 // import { HttpClientModule } from "@angular/common/http";
@@ -67,6 +70,9 @@ import { ServiceProvider } from '../providers/service/service';
     Device,
     Facebook,
     GooglePlus,
+    Geolocation,
+    NativeGeocoder,
+    HTTP
     // SearchPipe
   ]
 })

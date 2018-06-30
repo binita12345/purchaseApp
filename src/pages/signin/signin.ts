@@ -301,6 +301,19 @@ export class SigninPage {
           // "gender":this.gender,
           // "password": "123456"
         }
+
+        // let googlePlusLoginData = {
+        //   "identifierId":this.userId,
+        //   "name":this.displayName,
+        //   "email":this.email,
+        //   "deviceType":"ios",
+        //   "deviceToken":"devicetoken",
+        //   "loginType":this.loginType,
+        //   "userImageUrl":this.imageUrl,
+        //   // "userType":this.user_type,
+        //   // "gender":this.gender,
+        //   // "password": "123456"
+        // }
         // console.log("google plus googlePlusLoginData" +JSON.stringify(googlePlusLoginData));
         // if(res.user_type == undefined){
         //   console.log("iffffffrf");
@@ -433,11 +446,17 @@ export class SigninPage {
     // console.log("sign in password", this.signInFrom.value.password);
     
 
+    // let signinData = {
+    //   email: this.signInFrom.value.email,
+    //   password: this.signInFrom.value.password,
+    //   deviceType: this.deviceInfo.platform,
+    //   deviceToken: this.deviceInfo.token
+    // };
     let signinData = {
       email: this.signInFrom.value.email,
       password: this.signInFrom.value.password,
-      deviceType: this.deviceInfo.platform,
-      deviceToken: this.deviceInfo.token
+      deviceType:"ios",
+      deviceToken:"devicetoken",
     };
     console.log("signinData object" +JSON.stringify(signinData));
 

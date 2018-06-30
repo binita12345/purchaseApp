@@ -16,7 +16,7 @@ import { Storage } from "@ionic/storage";
   and Angular DI.
 */
 
-let apiUrl = 'http://192.168.0.137:8080/purchasing/apis/';
+let apiUrl = 'http://ec2-13-59-134-99.us-east-2.compute.amazonaws.com/purchasing/apis/';
 
 @Injectable()
 export class ServiceProvider {
@@ -27,6 +27,10 @@ export class ServiceProvider {
     console.log('Hello ServiceProvider Provider');
     storage.get("token").then(token => {
       if (token) {
+        this.headers.append('Access-Control-Allow-Origin' , '*');
+        this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+        this.headers.append('Accept','application/json');
+        this.headers.append('content-type','application/json');
         this.headers.append("Authorization", token);
       }
     });
@@ -48,7 +52,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'usermodule/userSignUp', JSON.stringify(credentials), {headers: headers})
+      this.http.post(apiUrl + 'UserModule/userSignUp', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
         	// console.log("res signup", res.json());
       		resolve(res.json());
@@ -63,7 +67,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'usermodule/userSignIn', JSON.stringify(credentials), {headers: headers})
+      this.http.post(apiUrl + 'UserModule/userSignIn', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
         	// console.log("res signin", res.json());
       		resolve(res.json());
@@ -78,7 +82,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'usermodule/socialSignIn', JSON.stringify(credentials), {headers: headers})
+      this.http.post(apiUrl + 'UserModule/socialSignIn', JSON.stringify(credentials), {headers: headers})
         .subscribe(res => {
         	// console.log("res signin", res.json());
       		resolve(res.json());
@@ -93,7 +97,7 @@ export class ServiceProvider {
   	return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'usermodule/forgotPassword', JSON.stringify(credential), {headers: headers})
+      this.http.post(apiUrl + 'UserModule/forgotPassword', JSON.stringify(credential), {headers: headers})
         .subscribe(res => {
         	// console.log("res forgot password", res.json());
       		resolve(res.json());
@@ -108,7 +112,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'usermodule/userUpdate', JSON.stringify(credential), {headers: headers})
+      this.http.post(apiUrl + 'UserModule/userUpdate', JSON.stringify(credential), {headers: headers})
         .subscribe(res => {
           // console.log("res forgot password", res.json());
           resolve(res.json());
@@ -123,7 +127,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'productmodule/productAdd', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'ProductModule/productAdd', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("add product data", res.json());
           resolve(res.json());
@@ -138,7 +142,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'productmodule/productList', JSON.stringify(ID), {headers: headers})
+      this.http.post(apiUrl + 'ProductModule/productList', JSON.stringify(ID), {headers: headers})
         .subscribe(res => {
           console.log("get product list", res.json());
           resolve(res.json());
@@ -153,7 +157,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'productmodule/productEdit', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'ProductModule/productEdit', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("edit products list" +JSON.stringify(res.json()));
           resolve(res.json());
@@ -168,7 +172,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'usermodule/supplierList', JSON.stringify(ID), {headers: headers})
+      this.http.post(apiUrl + 'UserModule/supplierList', JSON.stringify(ID), {headers: headers})
         .subscribe(res => {
           console.log("get supplier list", res.json());
           resolve(res.json());
@@ -183,7 +187,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'usermodule/changePassword', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'UserModule/changePassword', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("change password", res.json());
           resolve(res.json());
@@ -198,7 +202,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'ordermodule/orderCreate', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'OrderModule/orderCreate', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("create order", res.json());
           resolve(res.json());
@@ -213,7 +217,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'ordermodule/requestList', JSON.stringify(ID), {headers: headers})
+      this.http.post(apiUrl + 'OrderModule/requestList', JSON.stringify(ID), {headers: headers})
         .subscribe(res => {
           // console.log("get request list", res.json());
           resolve(res.json());
@@ -228,7 +232,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'ordermodule/orderDelete', JSON.stringify(Id), {headers: headers})
+      this.http.post(apiUrl + 'OrderModule/orderDelete', JSON.stringify(Id), {headers: headers})
         .subscribe(res => {
           console.log("delete order service", res.json());
           resolve(res.json());
@@ -243,7 +247,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'ordermodule/orderRequest', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'OrderModule/orderRequest', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("accept order service", res.json());
           resolve(res.json());
@@ -258,7 +262,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'ordermodule/orderConfrom', JSON.stringify(Id), {headers: headers})
+      this.http.post(apiUrl + 'OrderModule/orderConfrom', JSON.stringify(Id), {headers: headers})
         .subscribe(res => {
           console.log("confirm order service", res.json());
           resolve(res.json());
@@ -273,7 +277,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'reviewmodule/reviewAdd', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'ReviewModule/reviewAdd', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("add review service" +res.json());
           resolve(res.json());
@@ -288,7 +292,7 @@ export class ServiceProvider {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'reviewmodule/reviewList', JSON.stringify(data), {headers: headers})
+      this.http.post(apiUrl + 'ReviewModule/reviewList', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("add review service" +res.json());
           resolve(res.json());
@@ -298,29 +302,44 @@ export class ServiceProvider {
     });
   }
 
-  // This api is used to do inquiries for products which are available or not in other stores.
-  inquiryProducts(data) {
-    // return new Promise((resolve, reject) => {
-    //   let headers = new Headers();
-
-    //   this.http.post(apiUrl + 'reviewmodule/reviewList', JSON.stringify(data), {headers: headers})
-    //     .subscribe(res => {
-    //       console.log("add review service" +res.json());
-    //       resolve(res.json());
-    //     }, (err) => {
-    //       reject(err);
-    //     });
-    // });
-  }
-
   // This api is used to delete the products which is of any order request
-  deleteProduct(Id) {
+  deleteProduct(data) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
 
-      this.http.post(apiUrl + 'ProductModule/productDelete', JSON.stringify(Id), {headers: headers})
+      this.http.post(apiUrl + 'OrderModule/orderProductDelete', JSON.stringify(data), {headers: headers})
         .subscribe(res => {
           console.log("delete order product" +res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to do inquiries for products which are available or not in other stores.
+  inquiryAddProducts(data) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'InquiryModule/inquiryAdd', JSON.stringify(data), {headers: headers})
+        .subscribe(res => {
+          console.log("add product inquiry" +res.json());
+          resolve(res.json());
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  // This api is used to do inquiries for products which are available or not in other stores.
+  inquiryProductsList(Id) {
+    return new Promise((resolve, reject) => {
+      let headers = new Headers();
+
+      this.http.post(apiUrl + 'InquiryModule/inquiryList', JSON.stringify(Id), {headers: headers})
+        .subscribe(res => {
+          // console.log("inquiries list" +JSON.stringify(res.json()));
           resolve(res.json());
         }, (err) => {
           reject(err);

@@ -1,10 +1,4 @@
 page-inquiryproductdetail {
-	.active {
-		max-height: 55px;
-	    background-color: #000000;
-	    color: white;
-	    // border-bottom: 1px solid #0A76D2 ;
-	}
 	.slide-zoom {
 	    text-align: center;
 	    display: contents !important;
@@ -33,10 +27,10 @@ page-inquiryproductdetail {
 	.list-wp {
 	    margin: -50px 0 20px;
 	}
-	.slidesCss{
-	    max-height: 56px;
-	    background-color: #0A76D2;
-	}
+	// .slidesCss{
+	//     max-height: 56px;
+	//     background-color: #0A76D2;
+	// }
 	.imagebgColor{
 		height: 20px;
 		width: 20px;
@@ -47,48 +41,14 @@ page-inquiryproductdetail {
 	    max-height: 25px;
 	    // margin-top: -10px;
 	}
-	.grid-css{
-		border-right: 1px solid #0967B7;
-		cursor: pointer;
-	}
-	.grid-css:active {
-		max-height: 55px;
-		background-color: #000000;
-		cursor: pointer;
-		// border-bottom: 1px solid #0A76D2 ;
-	}
-	.grid-css:focus{
-		max-height: 55px;
-		background-color: #000000;
-		cursor: pointer;
-		// border-bottom: 1px solid #0A76D2 ;
-	}
-	.ion-fixed:focus{
-		max-height: 55px;
-		background-color: #000000;
-		cursor: pointer;
-		// border-bottom: 1px solid #0A76D2 ;
-	}
-	.grid-css:hover, .grid-css.selected {
-		max-height: 55px;
-	    background-color: #000000;
-	    color: white;
-	    // border-bottom: 1px solid #0A76D2 ;
-	}
-	.grid-css:visited {
-		max-height: 55px;
-	    background-color: #000000;
-	    color: white;
-	    // border-bottom: 1px solid #0A76D2 ;
-	}
 	.title-col{
 		margin-top: -10px;
 	}
 
 	// header css
 	.toolbar-ios ion-title {
-	    // left: -20px;
-	    top: -30px;
+	    left: -20px;
+	    // top: -30px;
 	    padding: 0 0 1px !important;
 	    text-align: left;
 	    position: absolute;
@@ -219,5 +179,119 @@ page-inquiryproductdetail {
 	.title-md{
 		margin-top: 0px;
     	// margin-left: -16px;
+	}
+
+	// contents css
+	.cart-list{
+		border: 1px solid #E5E5E5;
+		margin: 0px 0px 10px;
+    	width: 100%;
+    	background-color: #ffffff;
+	}
+	.friendIcon{
+    	font-size: 50px;
+    	color: #474747;
+    }
+    .listname {
+    	float: left;
+    }
+    .listrow {
+		margin-top: -25px;
+	}
+	.listdesc {
+		color: #6C6C6C;
+		font-weight: bold;
+		font-size: 12px;	
+	}
+	.user-img {
+		width: 45px !important;
+    	height: 45px !important;
+    	border-radius: 2px;
+	}
+	p {
+	    line-height: 16px !important;
+	}
+	.replyBtn {
+	    border: 1px solid #f4f4f4;
+	    border-radius: 1px;
+	    height: 3rem;
+	    font-weight: 400;
+	    background-color: #ffffff;
+	    color: black;
+	    text-transform: none;
+	}
+	.reply-col {
+		display: flex;
+    	align-items: center;
+	}
+	.reply-img {
+		height: 25px;
+    	width: 25px;
+	}
+	.col-name {
+		padding: 0px 5px 1px;
+	}
+	.listrow2 {
+		margin-top: -15px;
+	}
+
+	// new css
+	.slide-css {
+		height: 70px !important;
+	}
+	.slidesCss{
+	    max-height: 56px;
+	    background-color: #0A76D2;
+	}
+	.active {
+		max-height: 72px;
+	    background-color: #000000 !important;
+	    color: white;
+	    // border-bottom: 1px solid #0A76D2 ;
+	}
+	.seg-btn {
+		border-right: 1px solid #096BBE;
+		height: 72px !important;
+		opacity: 1 !important;
+		font-size: 8px !important;
+    	color: #fff !important;
+	    border-bottom: none !important;
+	    line-height: 12px !important;
+	    padding: 13px 6px !important;
+	    // background-color: #000000 !important;
+	}
+	.seg-btn{
+		border-right: 1px solid #0967B7;
+		cursor: pointer;
+		// list-style-type: none;
+		// display: inline-block;
+	}
+	.seg-btn:active {
+		max-height: 72px;
+		background-color: #000000;
+		cursor: pointer;
+		// border-bottom: 1px solid #0A76D2 ;
+	}
+	.seg-btn:focus{
+		max-height: 72px;
+		background-color: #000000;
+		cursor: pointer;
+		// border-bottom: 1px solid #0A76D2 ;
+	}
+	.seg-btn:hover, .seg-btn.selected {
+		max-height: 72px;
+	    background-color: #000000;
+	    color: white;
+	    // border-bottom: 1px solid #0A76D2 ;
+	}
+	.seg-btn:visited {
+		max-height: 72px;
+	    background-color: #000000;
+	    color: white;
+	    // border-bottom: 1px solid #0A76D2 ;
+	}
+	.segment-button.segment-activated {
+	    color: #fff;
+	    background-color: #000000 !important;
 	}
 }	

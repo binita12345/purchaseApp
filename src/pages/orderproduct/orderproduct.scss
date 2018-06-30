@@ -1,10 +1,4 @@
 page-orderproduct {
-	.active {
-		max-height: 55px;
-	    background-color: #000000;
-	    color: white;
-	    // border-bottom: 1px solid #0A76D2 ;
-	}
 	.slide-zoom {
 	    text-align: center;
 	    display: contents !important;
@@ -27,10 +21,10 @@ page-orderproduct {
     	color: #fff;
     	font-weight: 500;
 	}
-	.slidesCss{
-	    max-height: 56px;
-	    background-color: #0A76D2;
-	}
+	// .slidesCss{
+	//     max-height: 56px;
+	//     background-color: #0A76D2;
+	// }
 	.imagebgColor{
 		height: 20px;
 		width: 20px;
@@ -40,40 +34,6 @@ page-orderproduct {
 	    max-width: 25px;
 	    max-height: 25px;
 	    // margin-top: -10px;
-	}
-	.grid-css{
-		border-right: 1px solid #0967B7;
-		cursor: pointer;
-	}
-	.grid-css:active {
-		max-height: 55px;
-		background-color: #000000;
-		cursor: pointer;
-		// border-bottom: 1px solid #0A76D2 ;
-	}
-	.grid-css:focus{
-		max-height: 55px;
-		background-color: #000000;
-		cursor: pointer;
-		// border-bottom: 1px solid #0A76D2 ;
-	}
-	.ion-fixed:focus{
-		max-height: 55px;
-		background-color: #000000;
-		cursor: pointer;
-		// border-bottom: 1px solid #0A76D2 ;
-	}
-	.grid-css:hover, .grid-css.selected {
-		max-height: 55px;
-	    background-color: #000000;
-	    color: white;
-	    // border-bottom: 1px solid #0A76D2 ;
-	}
-	.grid-css:visited {
-		max-height: 55px;
-	    background-color: #000000;
-	    color: white;
-	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.btnInvite{
 		font-size: 14px;
@@ -101,8 +61,8 @@ page-orderproduct {
 	    margin: -49px 0 20px;
 	}
 	.toolbar-ios ion-title {
-	    left: -30px;
-	    top: -17px;
+	    left: -45px;
+	    // top: -17px;
 	    padding: 0 !important;
 	    position: absolute;
 	    width: 100%;
@@ -310,5 +270,65 @@ page-orderproduct {
 	    margin: 0px -15px;
 	    min-width: 44px;
 	    box-shadow: none;
+	}
+
+	// new css
+	.slide-css {
+		height: 70px !important;
+	}
+	.slidesCss{
+	    max-height: 56px;
+	    background-color: #0A76D2;
+	}
+	.active {
+		max-height: 72px;
+	    background-color: #000000 !important;
+	    color: white;
+	    // border-bottom: 1px solid #0A76D2 ;
+	}
+	.seg-btn {
+		border-right: 1px solid #096BBE;
+		height: 72px !important;
+		opacity: 1 !important;
+		font-size: 8px !important;
+    	color: #fff !important;
+	    border-bottom: none !important;
+	    line-height: 12px !important;
+	    padding: 13px 6px !important;
+	    // background-color: #000000 !important;
+	}
+	.seg-btn{
+		border-right: 1px solid #0967B7;
+		cursor: pointer;
+		// list-style-type: none;
+		// display: inline-block;
+	}
+	.seg-btn:active {
+		max-height: 72px;
+		background-color: #000000;
+		cursor: pointer;
+		// border-bottom: 1px solid #0A76D2 ;
+	}
+	.seg-btn:focus{
+		max-height: 72px;
+		background-color: #000000;
+		cursor: pointer;
+		// border-bottom: 1px solid #0A76D2 ;
+	}
+	.seg-btn:hover, .seg-btn.selected {
+		max-height: 72px;
+	    background-color: #000000;
+	    color: white;
+	    // border-bottom: 1px solid #0A76D2 ;
+	}
+	.seg-btn:visited {
+		max-height: 72px;
+	    background-color: #000000;
+	    color: white;
+	    // border-bottom: 1px solid #0A76D2 ;
+	}
+	.segment-button.segment-activated {
+	    color: #fff;
+	    background-color: #000000 !important;
 	}
 }	

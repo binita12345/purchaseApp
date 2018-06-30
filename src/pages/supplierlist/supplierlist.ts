@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the SupplierlistPage page.
  *
@@ -24,7 +25,8 @@ export class SupplierlistPage {
   supplierArray : any = [];
   // newarray : any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
+    private loader: Loader) {
 
   	// this.lists = [{'image': "assets/imgs/user.png", 'desc': "Nevine Acotanza"},
    //  {'image': "assets/imgs/user.png", 'desc': "Oluwarotimi Adesina"},
@@ -114,6 +116,7 @@ export class SupplierlistPage {
   }
 
   getSupplierListData() {
+    this.loader.show("Retrieving suppliers...");
     console.log("getSupplierListData");
     // console.log("this.id....." +this.id);
     let getId = {
@@ -123,6 +126,7 @@ export class SupplierlistPage {
     this.serviceProvider.getSupplierList(getId).then((result) => {
       // console.log("result products list" +JSON.stringify(result));
       if(result["status"] == 1) {
+        this.loader.hide();
         this.lists = result["data"];
         // console.log("lists of product" +JSON.stringify(this.lists));
       }
@@ -143,29 +147,53 @@ export class SupplierlistPage {
   	this.navCtrl.push("OrderproductPage");
   }
 
-  gotoHome(){
-  	this.navCtrl.push("HomeappPage");
+  statusChanged(event) {
+
+    console.log("event", event.value);
+    if(event.value == "home"){
+      this.navCtrl.push("HomeappPage");
+    } else if(event.value == "shopping"){
+      this.navCtrl.push("CartlistPage");
+    } else if(event.value == "request"){
+      this.navCtrl.push("SupplierlistPage");
+    } else if(event.value == "profile"){
+      this.navCtrl.push("ProfilePage");
+    } else if(event.value == "notification"){
+      this.navCtrl.push("NotificationPage");
+    } else if(event.value == "inquiry"){
+      this.navCtrl.push("InquiryproductdetailPage");
+    } else if(event.value == "invitation"){
+      this.navCtrl.push("InvitefriendsPage");
+    } else if(event.value == "changepwd"){
+      this.navCtrl.push("ChangepasswordPage");
+    } else {
+      
+    }
   }
-  gotoCart(){
-  	this.navCtrl.push("CartlistPage");
-  }
-  gotoSupplier(){
-  	this.navCtrl.push("SupplierlistPage");
-  }
-  gotoProfile(){
-  	this.navCtrl.push("ProfilePage");
-  }
-  gotoNotification(){
-  	this.navCtrl.push("NotificationPage");
-  }
-  gotoInquiryProduct(){
-  	this.navCtrl.push("InquiryproductdetailPage");
-  }
-  gotoInviteFriend(){
-  	this.navCtrl.push("InvitefriendsPage");
-  }
-  gotoChangePassword(){
-  	this.navCtrl.push("ChangepasswordPage");
-  }
+
+  // gotoHome(){
+  // 	this.navCtrl.push("HomeappPage");
+  // }
+  // gotoCart(){
+  // 	this.navCtrl.push("CartlistPage");
+  // }
+  // gotoSupplier(){
+  // 	this.navCtrl.push("SupplierlistPage");
+  // }
+  // gotoProfile(){
+  // 	this.navCtrl.push("ProfilePage");
+  // }
+  // gotoNotification(){
+  // 	this.navCtrl.push("NotificationPage");
+  // }
+  // gotoInquiryProduct(){
+  // 	this.navCtrl.push("InquiryproductdetailPage");
+  // }
+  // gotoInviteFriend(){
+  // 	this.navCtrl.push("InvitefriendsPage");
+  // }
+  // gotoChangePassword(){
+  // 	this.navCtrl.push("ChangepasswordPage");
+  // }
 
 }

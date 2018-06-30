@@ -99,4 +99,60 @@
 		</ion-grid>
   </ion-toolbar>
 </ion-footer> -->
-
+<!-- <ion-footer>
+  <ion-toolbar>
+    <ion-grid ion-fixed>
+		    <ion-row>
+		      <ion-col col-12 col-xl-12>
+		        <ion-list>
+		            <ion-card>
+		              <ion-slides class="slidesCss">
+		                  <ion-slide (ionSlideDidChange)="slideChanged()" class="slide-css">
+		                    <ion-segment [(ngModel)]="requests" (ionChange)="statusChanged($event)" no-border-top>
+	                          <ion-segment-button value="home">
+	                            <img src="assets/imgs/house.png" class="imagebgColor">
+	                            <p style="font-size: 10px;text-align: center;">HOME</p>
+	                          </ion-segment-button>
+	                          <ion-segment-button value="shopping">
+	                            <img src="assets/imgs/cart.png" class="imagebgColor">
+	                            <p style="font-size: 10px;text-align: center;">SHOPPING LIST</p>
+	                          </ion-segment-button>
+	                          <ion-segment-button value="request">
+	                            <img src="assets/imgs/request.png" class="imagebgColor">
+	                            <p style="font-size: 10px;text-align: center;">REQUEST</p>
+	                          </ion-segment-button>
+	                          <ion-segment-button value="profile">
+	                            <img src="assets/imgs/profile.png" class="imagebgColor">
+	                            <p style="font-size: 10px;text-align: center;">PROFILE</p>
+	                          </ion-segment-button>
+	                        </ion-segment>
+		                  </ion-slide>
+		                  <ion-slide (ionSlideDidChange)="slideChanged()" class="slide-css">
+		                    <ion-segment [(ngModel)]="requests" (ionChange)="statusChanged($event)" no-border-top>
+	                          <ion-segment-button value="notification">
+	                            <img src="assets/imgs/bell.png" class="imagebgColor">
+	                            <p style="font-size: 10px;text-align: center;">NOTIFICATION</p>
+	                          </ion-segment-button>
+	                          <ion-segment-button value="inquiry">
+	                            <img src="assets/imgs/inquiry.png" class="imagebgColor">
+	                            <p style="font-size: 10px;text-align: center;">INQUIRY PRODUCT</p>
+	                          </ion-segment-button>
+	                          <ion-segment-button value="invitation">
+	                            <img src="assets/imgs/adduser.png" class="imagebgColor">
+	                            <p style="font-size: 10px;text-align: center;">INVITE FRIENDS</p>
+	                          </ion-segment-button>
+	                          <ion-segment-button value="changepwd">
+	                            <img src="assets/imgs/lockbk.png" class="imagebgColor">
+	                            <p style="font-size: 10px;text-align: center;">CHANGE PASSWORD</p>
+	                          </ion-segment-button>
+	                        </ion-segment>
+		                  </ion-slide>
+		                </ion-slides>
+		            </ion-card>
+		        </ion-list>
+		       </ion-col>
+		    </ion-row>
+		</ion-grid>
+  </ion-toolbar>
+</ion-footer>
+ -->
