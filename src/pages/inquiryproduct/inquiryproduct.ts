@@ -57,38 +57,49 @@ export class InquiryproductPage {
       "subject": this.subjects,
       "inquiry": this.inquiries
     }
-
-    this.serviceProvider.inquiryAddProducts(inquiryObj).then((result) => {
-      console.log("result inquiry product" +JSON.stringify(result));
-      
-      if(result["status"] == 1){
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          subTitle: result["message"],
-          buttons: [
-            {
-              text: 'OK',
-              handler: () => {
-                  console.log('OK clicked');
-                  this.navCtrl.push("HomeappPage");
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   this.loader.hide();
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to add inquiry for product",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.serviceProvider.inquiryAddProducts(inquiryObj).then((result) => {
+        console.log("result inquiry product" +JSON.stringify(result));
+        
+        if(result["status"] == 1){
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            subTitle: result["message"],
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                    console.log('OK clicked');
+                    this.navCtrl.push("HomeappPage");
+                }
               }
-            }
-          ]
-        });
-        alert.present();
-      } else if(result["status"] == 0) {
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          subTitle: result["message"],
-          buttons: ['Ok']
-        });
-        alert.present();
-      }
-    }, (err) => {
-      console.log("err inquiry products" +JSON.stringify(err));
-      // Error log
-    });
-
-  }  
+            ]
+          });
+          alert.present();
+        } else if(result["status"] == 0) {
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            subTitle: result["message"],
+            buttons: ['Ok']
+          });
+          alert.present();
+        }
+      }, (err) => {
+        console.log("err inquiry products" +JSON.stringify(err));
+        // Error log
+      });
+    }
+  // }  
 
 }

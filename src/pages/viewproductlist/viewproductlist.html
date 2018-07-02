@@ -34,7 +34,7 @@
       <!-- <p class="priceP">₹ {{list.quantity * list.amount}}</p> -->
 	    <!-- <p class="cart-parag"><img src="{{product.map}}" class="cart-imgs"> {{product.parag}}</p> -->
 	    <p class="cart-parag"><img src="assets/imgs/placeholder.png" class="cart-imgs"> {{product.address}}</p>
-	    <img src="assets/imgs/map.png">
+	    <img src="assets/imgs/map.png"><p class="disP">{{product.distance}} KM</p>
 	    <p item-end style="color: #000000;" *ngIf="afterAccept">₹ {{product.amount * product.quantity}}</p>
       <div item-end class="icon_middle" *ngIf="beforeAccept"><p item-end style="color: #000000;">₹ {{product.amount * product.quantity}}</p><span><button ion-button class="btn-inquiry" (click)="inquiryProduct(product)">Inquiry</button></span> </div>
 	   	<!-- <input type="checkbox" item-end [(ngModel)]="product.selected" (change)="checkIfAllSelected(product)" class="check-css"> -->

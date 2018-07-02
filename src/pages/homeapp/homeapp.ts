@@ -24,9 +24,20 @@ export class HomeappPage {
   bothLogin : any;
   userType: any;
   id : any;
+  offline : any;
+  online : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
     private loader: Loader, private alertCtrl: AlertController) {
+
+    // this.storage.get('isOffline').then(networkStatus => {
+    //   this.offline = networkStatus;
+    //   console.log("this.offline", this.offline);
+    // });
+    // this.storage.get('isOnline').then(networkStatus => {
+    //   this.online = networkStatus;
+    //   console.log("this.online", this.online);
+    // });
 
     this.storage.get("userData").then(userData => {
       this.id = userData.data.ID;
@@ -72,28 +83,39 @@ export class HomeappPage {
     let getReviewObj = {
       "ID": this.id 
     }
-
-    this.serviceProvider.ReviewListData(getReviewObj).then((result) => {
-      console.log("result ReviewListData" +JSON.stringify(result));
-      if(result["status"] == 1) {
-        this.loader.hide();
-        console.log("review result" +JSON.stringify(result["data"]));
-        this.storage.set('reviewData', result["data"]);
-        this.navCtrl.push("ReviewlistPage");
-      } else if(result["status"] == 0) {
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          // title: 'Low battery',
-          subTitle: result["message"],
-          buttons: ['Ok']
-        });
-        alert.present();
-      }
-    }, (err) => {
-      console.log("err declined list" +JSON.stringify(err));
-      // Error log
-    });
-    
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   this.loader.hide();
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to get review list",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.serviceProvider.ReviewListData(getReviewObj).then((result) => {
+        console.log("result ReviewListData" +JSON.stringify(result));
+        if(result["status"] == 1) {
+          this.loader.hide();
+          console.log("review result" +JSON.stringify(result["data"]));
+          this.storage.set('reviewData', result["data"]);
+          this.navCtrl.push("ReviewlistPage");
+        } else if(result["status"] == 0) {
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            // title: 'Low battery',
+            subTitle: result["message"],
+            buttons: ['Ok']
+          });
+          alert.present();
+        }
+      }, (err) => {
+        console.log("err declined list" +JSON.stringify(err));
+        // Error log
+      });
+    // }
   }
 
   ionViewDidLoad() {

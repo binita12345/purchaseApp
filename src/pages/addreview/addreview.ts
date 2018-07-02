@@ -57,41 +57,53 @@ export class AddreviewPage {
       "reviewStar": this.ratings,
       "reviewContent": this.comments
     }
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   this.loader.hide();
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to add the review",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.serviceProvider.addReviewData(reviewObj).then((result) => {
+        console.log("result addReviewData" +JSON.stringify(result));
 
-    this.serviceProvider.addReviewData(reviewObj).then((result) => {
-      console.log("result addReviewData" +JSON.stringify(result));
+        if(result["status"] == 1) {
+          // console.log("signup status 1", result["message"]);
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            subTitle: result["message"],
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  console.log('ok clicked');
+                  // let ratings = {'ratings':this.ratings}
+                  console.log("review page this.orderid" +this.orderid);
+                  console.log("review page this.ratings" +this.ratings);
 
-      if(result["status"] == 1) {
-        // console.log("signup status 1", result["message"]);
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          subTitle: result["message"],
-          buttons: [
-            {
-              text: 'OK',
-              handler: () => {
-                console.log('ok clicked');
-                // let ratings = {'ratings':this.ratings}
-                console.log("review page this.orderid" +this.orderid);
-                console.log("review page this.ratings" +this.ratings);
-
-                this.storage.set('reviewStar', this.ratings);
-                // this.storage.set('orderid', this.orderid);
-                
-                this.navCtrl.push("RequestlistPage");
-                // this.navCtrl.push("RequestlistPage", {'userid' : this.userid, 'reviewStar': this.ratings});
+                  this.storage.set('reviewStar', this.ratings);
+                  // this.storage.set('orderid', this.orderid);
+                  
+                  this.navCtrl.push("RequestlistPage");
+                  // this.navCtrl.push("RequestlistPage", {'userid' : this.userid, 'reviewStar': this.ratings});
+                }
               }
-            }
-          ]
-        });
-        alert.present();
-      } else {
-        this.loader.hide();
-      }
-    }, (err) => {
-      console.log("err addReviewData" +JSON.stringify(err));
-      // Error log
-    });
+            ]
+          });
+          alert.present();
+        } else {
+          this.loader.hide();
+        }
+      }, (err) => {
+        console.log("err addReviewData" +JSON.stringify(err));
+        // Error log
+      });
+    // }
 
   	
   }

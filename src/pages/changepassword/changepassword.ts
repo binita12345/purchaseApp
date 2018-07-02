@@ -49,36 +49,49 @@ export class ChangepasswordPage {
       this.error = "Password Mismatch";
     } else {
       console.log("changedData" +JSON.stringify(changedData));
-      this.serviceProvider.changePasswordService(changedData).then((result) => {
-        console.log("result of changed password" +JSON.stringify(result));
-        if(result["status"] == 1) {
-          this.loader.hide();
-          let alert = this.alertCtrl.create({
-            subTitle: result["message"],
-            buttons: [
-              {
-                text: 'OK',
-                handler: () => {
-                  console.log('ok clicked');
-                  this.navCtrl.push("SigninPage");
+      // if(this.serviceProvider.getNetworkType() == 'none') {
+      //   this.loader.hide();
+      //   // console.log('network was disconnected :-(');
+      //   let alert = this.alertCtrl.create({
+      //     title: 'Oops!',
+      //     subTitle: "You seem to be offline ! Please Enable network to change the password",
+      //     buttons: [{
+      //       text: ("Okay")
+      //     }]
+      //   });
+      //   alert.present();
+      // } else {
+        this.serviceProvider.changePasswordService(changedData).then((result) => {
+          console.log("result of changed password" +JSON.stringify(result));
+          if(result["status"] == 1) {
+            this.loader.hide();
+            let alert = this.alertCtrl.create({
+              subTitle: result["message"],
+              buttons: [
+                {
+                  text: 'OK',
+                  handler: () => {
+                    console.log('ok clicked');
+                    this.navCtrl.push("SigninPage");
+                  }
                 }
-              }
-            ]
-          });
-          alert.present();
-          // console.log("lists of product" +JSON.stringify(this.lists));
-        } else if(result["status"] == 2) {
-          this.loader.hide();
-          this.error = result["message"];
-        } else {
+              ]
+            });
+            alert.present();
+            // console.log("lists of product" +JSON.stringify(this.lists));
+          } else if(result["status"] == 2) {
+            this.loader.hide();
+            this.error = result["message"];
+          } else {
 
-        }
-        // this.getProfileData();
-      }, (err) => {
-        console.log("err product list" +JSON.stringify(err));
-        // Error log
-      });
-    }
+          }
+          // this.getProfileData();
+        }, (err) => {
+          console.log("err product list" +JSON.stringify(err));
+          // Error log
+        });
+      }
+    // }
   }
 
   ionViewDidLoad() {

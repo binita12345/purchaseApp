@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServiceProvider } from '../../providers/service/service';
 import { Storage } from '@ionic/storage';
+import { Loader } from "../../providers/loader/loader";
 /**
  * Generated class for the InquiryproductdetailPage page.
  *
@@ -22,16 +23,19 @@ export class InquiryproductdetailPage {
   addReply : boolean;
   nodata : boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public serviceProvider: ServiceProvider, public storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public serviceProvider: ServiceProvider, public storage: Storage, private loader: Loader,
+    private alertCtrl: AlertController) {
 
-    this.lists = [{'name':"User Name", 'productname':"Product Name",'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration"},
-    {'name':"User Name", 'productname':"Product Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration"},
-    {'name':"User Name", 'productname':"Product Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration"}]
+    // this.lists = [{'name':"User Name", 'productname':"Product Name",'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration"},
+    // {'name':"User Name", 'productname':"Product Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration"},
+    // {'name':"User Name", 'productname':"Product Name", 'desc': "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration"}]
 
     this.inquiryListService();
   }
 
   inquiryListService() {
+
+    this.loader.show("retrieving inquiries");
     this.storage.get("userData").then(userData => {
       console.log("userData in list" +JSON.stringify(userData));
       this.id = userData.data.ID;
@@ -39,47 +43,62 @@ export class InquiryproductdetailPage {
       let inquiryObj = {
         "ID": this.id
       }
-      this.serviceProvider.inquiryProductsList(inquiryObj).then((result) => {
-        console.log("result inquiry product" +JSON.stringify(result));
+      // if(this.serviceProvider.getNetworkType() == 'none') {
+      //   this.loader.hide();
+      //   // console.log('network was disconnected :-(');
+      //   let alert = this.alertCtrl.create({
+      //     title: 'Oops!',
+      //     subTitle: "You seem to be offline ! Please Enable network to get review list",
+      //     buttons: [{
+      //       text: ("Okay")
+      //     }]
+      //   });
+      //   alert.present();
+      // } else {
+        this.serviceProvider.inquiryProductsList(inquiryObj).then((result) => {
+          console.log("result inquiry product" +JSON.stringify(result));
 
-        if(result["status"] == 1) {
-          this.nodata = false;
-          this.inquiryDataArray = result["data"];
-        } else if(result["status"] == 0){
-          this.nodata = true;
-          this.inquiryDataArray = [];
-        } else {
+          if(result["status"] == 1) {
+            this.loader.hide();
+            this.nodata = false;
+            this.inquiryDataArray = result["data"];
+          } else if(result["status"] == 0){
+            this.loader.hide();
+            this.nodata = true;
+            this.inquiryDataArray = [];
+          } else {
 
-        }
-        
-        
-        // if(result["status"] == 1){
-        //   this.loader.hide();
-        //   let alert = this.alertCtrl.create({
-        //     subTitle: result["message"],
-        //     buttons: [
-        //       {
-        //         text: 'OK',
-        //         handler: () => {
-        //             console.log('OK clicked');
-        //             this.navCtrl.push("HomeappPage");
-        //         }
-        //       }
-        //     ]
-        //   });
-        //   alert.present();
-        // } else if(result["status"] == 0) {
-        //   this.loader.hide();
-        //   let alert = this.alertCtrl.create({
-        //     subTitle: result["message"],
-        //     buttons: ['Ok']
-        //   });
-        //   alert.present();
-        // }
-      }, (err) => {
-        console.log("err inquiry products" +JSON.stringify(err));
-        // Error log
-      });
+          }
+          
+          
+          // if(result["status"] == 1){
+          //   this.loader.hide();
+          //   let alert = this.alertCtrl.create({
+          //     subTitle: result["message"],
+          //     buttons: [
+          //       {
+          //         text: 'OK',
+          //         handler: () => {
+          //             console.log('OK clicked');
+          //             this.navCtrl.push("HomeappPage");
+          //         }
+          //       }
+          //     ]
+          //   });
+          //   alert.present();
+          // } else if(result["status"] == 0) {
+          //   this.loader.hide();
+          //   let alert = this.alertCtrl.create({
+          //     subTitle: result["message"],
+          //     buttons: ['Ok']
+          //   });
+          //   alert.present();
+          // }
+        }, (err) => {
+          console.log("err inquiry products" +JSON.stringify(err));
+          // Error log
+        });
+      // }
     });
   }
 

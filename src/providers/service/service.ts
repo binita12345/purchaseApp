@@ -6,9 +6,12 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { catchError } from 'rxjs/operators';
-import { Events } from 'ionic-angular';
+import { Events, AlertController } from 'ionic-angular';
 import { map } from 'rxjs/operators/map';
 import { Storage } from "@ionic/storage";
+import * as PouchDB from 'pouchdb';  
+// import cordovaSqlitePlugin from 'pouchdb-adapter-cordova-sqlite';
+import { Network } from '@ionic-native/network';
 /*
   Generated class for the ServiceProvider provider.
 
@@ -18,13 +21,31 @@ import { Storage } from "@ionic/storage";
 
 let apiUrl = 'http://ec2-13-59-134-99.us-east-2.compute.amazonaws.com/purchasing/apis/';
 
+export enum ConnectionStatus {
+  Online,
+  Offline
+}
+
 @Injectable()
 export class ServiceProvider {
 
+  public pdb; 
+  public products;
+  public previousStatus
+  isOnline : any;
+
+  private _DB     : any;
+  private success : boolean = true;
+
 	headers = new Headers({ "Content-Type": "application/json" });
 
-  constructor(public http : Http, private storage: Storage) {
+  constructor(public http : Http, private storage: Storage, public network: Network, public events: Events, public alertCtrl: AlertController) {
     console.log('Hello ServiceProvider Provider');
+
+    // this.initialiseDB();
+
+    this.previousStatus = ConnectionStatus.Online;
+
     storage.get("token").then(token => {
       if (token) {
         this.headers.append('Access-Control-Allow-Origin' , '*');
@@ -35,12 +56,72 @@ export class ServiceProvider {
       }
     });
   }
+
+  // initialiseDB()
+  // {
+  //     this._DB = new PouchDB('purchasingApp');
+  // }
+
+   /* BOOTS a listener on the network */
+  public initializeNetworkEvents(): void {
+
+    /* OFFLINE */
+    this.network.onDisconnect().subscribe(() => {
+
+      if(this.previousStatus === ConnectionStatus.Online) { 
+        this.events.publish('network:offline') 
+        this.previousStatus = ConnectionStatus.Offline
+        console.log("Offline this.previousStatus", this.previousStatus);
+        // if(this.previousStatus == 1) {
+        //   this.isOnline = false;
+        //   this.storage.set('isConnected', this.isOnline);
+        // }
+      }
+    })
+
+    /* ONLINE */
+    this.network.onConnect().subscribe(() => {
+
+      console.log('network connected!');
+
+      if(this.previousStatus === ConnectionStatus.Offline) { 
+        this.events.publish('network:online') 
+        this.previousStatus = ConnectionStatus.Online
+        console.log("Online this.previousStatus", this.previousStatus);
+        // if(this.previousStatus == 0) {
+        //   this.isOnline = true;
+        //   this.storage.set('isConnected', this.isOnline);
+        // }
+      }
+
+      // We just got a connection but we need to wait briefly
+      // before we determine the connection type. Might need to wait.
+      // prior to doing any api requests as well.
+      setTimeout(() => {
+        if (this.network.type === 'wifi') {
+          console.log('we got a wifi connection, woohoo!');
+        }
+      }, 3000);
+    })
+
+  }
+
+  public getNetworkType(): string {
+    return this.network.type
+  }
+
   error(err) {
     let json = JSON.parse(err._body);
     if (json.error.message == 1) {
       console.log("please Re Login ...!!!");
     }
   }
+
+  // createPouchDB() {
+  //   PouchDB.plugin(cordovaSqlitePlugin);
+  //   this.pdb = new PouchDB('products.db', 
+  //   { adapter: 'cordova-sqlite' });
+  // }
 
   private extractData(res: Response) {
     let body = res;
@@ -174,7 +255,7 @@ export class ServiceProvider {
 
       this.http.post(apiUrl + 'UserModule/supplierList', JSON.stringify(ID), {headers: headers})
         .subscribe(res => {
-          console.log("get supplier list", res.json());
+          console.log("get supplier list" +JSON.stringify(res.json()));
           resolve(res.json());
         }, (err) => {
           reject(err);

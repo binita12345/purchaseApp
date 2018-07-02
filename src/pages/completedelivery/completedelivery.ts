@@ -67,6 +67,18 @@ export class CompletedeliveryPage {
         alert.present();
     } else {
       // if(this.allProduct == true) {
+      // if(this.serviceProvider.getNetworkType() == 'none') {
+      //   this.loader.hide();
+      //   // console.log('network was disconnected :-(');
+      //   let alert = this.alertCtrl.create({
+      //     title: 'Oops!',
+      //     subTitle: "You seem to be offline ! Please Enable network to deliver the product and make complete",
+      //     buttons: [{
+      //       text: ("Okay")
+      //     }]
+      //   });
+      //   alert.present();
+      // } else {
         this.serviceProvider.completeDeliveryData(confirmData).then((result) => {
           console.log("result completeDeliveryData" +JSON.stringify(result));
 
@@ -103,6 +115,7 @@ export class CompletedeliveryPage {
           console.log("err completeDeliveryData" +JSON.stringify(err));
           // Error log
         });
+      // }
       // } else {
       //   this.loader.hide();
       //   let alert = this.alertCtrl.create({

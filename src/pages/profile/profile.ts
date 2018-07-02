@@ -144,21 +144,32 @@ export class ProfilePage {
       // 'supplier':this.signUpFrom.value.supplier
     }
     // console.log("profileObj" +JSON.stringify(profileObj));
-    this.serviceProvider.profileUpdateData(profileObj).then((result) => {
-      console.log("result profile" +JSON.stringify(result));
-      if(result["status"] == 1) {
-        let alert = this.alertCtrl.create({
-          subTitle: result["message"],
-          buttons: ['Ok']
-        });
-        alert.present();
-      }
-      // this.getProfileData();
-    }, (err) => {
-      console.log("err profile" +JSON.stringify(err));
-      // Error log
-    });
-
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to edit profile",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.serviceProvider.profileUpdateData(profileObj).then((result) => {
+        console.log("result profile" +JSON.stringify(result));
+        if(result["status"] == 1) {
+          let alert = this.alertCtrl.create({
+            subTitle: result["message"],
+            buttons: ['Ok']
+          });
+          alert.present();
+        }
+        // this.getProfileData();
+      }, (err) => {
+        console.log("err profile" +JSON.stringify(err));
+        // Error log
+      });
+    // }
     // this.navCtrl.push("ProfilePage");
   }
 

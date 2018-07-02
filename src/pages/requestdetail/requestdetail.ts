@@ -127,35 +127,47 @@ export class RequestdetailPage {
               text: 'Yes',
               handler: () => {
                 console.log('ok clicked');
-                this.serviceProvider.deleteProduct(deleteData).then((result) => {
-                  console.log("result delete product" +JSON.stringify(result));
-                  
-                  if(result["status"] == 1){
-                    // this.loader.hide();     
-                      let toastSuccess = this.toastCtrl.create({
-                      message: result["message"],
-                      duration: 7000,
-                      position: 'top',
-                      showCloseButton:true,
-                      closeButtonText:'X',
-                      cssClass: "toast-success",
-                    });
-                    toastSuccess.present();
-                    this.getDetail();
-                    // this.ionViewWillEnter();
-                    // this.navCtrl.setRoot(this.navCtrl.getActive().component);
-                  } else if(result["status"] == 2) {
-                    // this.loader.hide();
-                    let alert = this.alertCtrl.create({
-                      subTitle: result["message"],
-                      buttons: ['Ok']
-                    });
-                    alert.present();
-                  }
-                }, (err) => {
-                  console.log("err delete records" +JSON.stringify(err));
-                  // Error log
-                });
+                // if(this.serviceProvider.getNetworkType() == 'none') {
+                //   // console.log('network was disconnected :-(');
+                //   let alert = this.alertCtrl.create({
+                //     title: 'Oops!',
+                //     subTitle: "You seem to be offline ! Please Enable network to place the order.",
+                //     buttons: [{
+                //       text: ("Okay")
+                //     }]
+                //   });
+                //   alert.present();
+                // } else {
+                  this.serviceProvider.deleteProduct(deleteData).then((result) => {
+                    console.log("result delete product" +JSON.stringify(result));
+                    
+                    if(result["status"] == 1){
+                      // this.loader.hide();     
+                        let toastSuccess = this.toastCtrl.create({
+                        message: result["message"],
+                        duration: 7000,
+                        position: 'top',
+                        showCloseButton:true,
+                        closeButtonText:'X',
+                        cssClass: "toast-success",
+                      });
+                      toastSuccess.present();
+                      this.getDetail();
+                      // this.ionViewWillEnter();
+                      // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+                    } else if(result["status"] == 2) {
+                      // this.loader.hide();
+                      let alert = this.alertCtrl.create({
+                        subTitle: result["message"],
+                        buttons: ['Ok']
+                      });
+                      alert.present();
+                    }
+                  }, (err) => {
+                    console.log("err delete records" +JSON.stringify(err));
+                    // Error log
+                  });
+                // }
               }
           }
       ]

@@ -229,57 +229,70 @@ export class OrderproductPage {
   }
 
   placeOrder() {
-    this.error = '';
-    this.loader.show("Please Wait");
 
-    // console.log("order place");
-    console.log("this.filtered" +JSON.stringify(this.filtered));
-    // console.log("this.address" +this.address);
-    // console.log("this.contact" +this.contact);
-    // console.log("this.payment" +this.payment);
-    // console.log("this.havingcar" +this.havingcar);
-    // console.log("quantity" +this.quantity);
-    // console.log("this.getSup....." +JSON.stringify(this.getSup));
-    // console.log("order suppArray....." +JSON.stringify(this.suppArray));
-    // console.log(this.suppArray.toString());
-    let placeData = {
-      "ID": this.id,
-      "ProductDetails": this.filtered,
-      "supplierid": this.suppArray.toString(),
-      "address": this.address,
-      "contact": this.contact,
-      "payType": this.payment,
-      "carUse": this.havingcar
-    }
-    console.log("placeData....." +JSON.stringify(placeData));
-    this.serviceProvider.orderPlace(placeData).then((result) => {
-      console.log("result place order" +JSON.stringify(result));
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to place the order.",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.error = '';
+      this.loader.show("Please Wait");
 
-      if(result["status"] == 2){
-        this.loader.hide();
-        this.error = result["message"];
-
-      } else if(result["status"] == 1){
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          subTitle: result["message"],
-          buttons: [
-            {
-              text: 'OK',
-              handler: () => {
-                console.log('ok clicked');
-                
-                this.navCtrl.push("RequestlistPage");
-              }
-            }
-          ]
-        });
-        alert.present();
+      // console.log("order place");
+      console.log("this.filtered" +JSON.stringify(this.filtered));
+      // console.log("this.address" +this.address);
+      // console.log("this.contact" +this.contact);
+      // console.log("this.payment" +this.payment);
+      // console.log("this.havingcar" +this.havingcar);
+      // console.log("quantity" +this.quantity);
+      // console.log("this.getSup....." +JSON.stringify(this.getSup));
+      // console.log("order suppArray....." +JSON.stringify(this.suppArray));
+      // console.log(this.suppArray.toString());
+      let placeData = {
+        "ID": this.id,
+        "ProductDetails": this.filtered,
+        "supplierid": this.suppArray.toString(),
+        "address": this.address,
+        "contact": this.contact,
+        "payType": this.payment,
+        "carUse": this.havingcar
       }
-    }, (err) => {
-      console.log("err order place" +JSON.stringify(err));
-      // Error log
-    });
+      console.log("placeData....." +JSON.stringify(placeData));
+      this.serviceProvider.orderPlace(placeData).then((result) => {
+        console.log("result place order" +JSON.stringify(result));
+
+        if(result["status"] == 2){
+          this.loader.hide();
+          this.error = result["message"];
+
+        } else if(result["status"] == 1){
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            subTitle: result["message"],
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  console.log('ok clicked');
+                  
+                  this.navCtrl.push("RequestlistPage");
+                }
+              }
+            ]
+          });
+          alert.present();
+        }
+      }, (err) => {
+        console.log("err order place" +JSON.stringify(err));
+        // Error log
+      });
+    // }
 
   }
 

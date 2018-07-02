@@ -4,8 +4,8 @@ import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
 import { Loader } from "../../providers/loader/loader";
 import { Location } from '@angular/common';
-import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation';
-// import { googlemaps } from 'googlemaps';
+import { Geolocation ,GeolocationOptions ,Geoposition ,PositionError } from '@ionic-native/geolocation';
+import { googlemaps } from 'googlemaps';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 /**
  * Generated class for the RequestlistPage page.
@@ -66,66 +66,17 @@ export class RequestlistPage {
   // public addressDistance: any[];
   // radiusDistance : any;
 
-  
-
   map:any;
   latLng:any;
   markers:any;
   mapOptions:any;  
-  isKM:any=500;
+  isKM:any;
   isType:any="";
-  // accept : boolean;
-
-  // customerLogin : any;
-  // bothLogin : any;
-  // supplierLogin : any;
-
-  // stardetail : any = [];
-  // totalPrice : any = 0;
-  // reqIdentify : any;
-  // openproduct : any;
-  // closeRelation : any;
-  // ratings: any;
-  
-
-  // star : boolean = false;
-  // listorderId : any;
-  // arraysum : any = [];
-  // amountArray : any = [];
-  // mergeArray : any = [];
-  // summation : any;
-  // accepted : any;
-  // accept : boolean = true;
-  // reviewOrderId : any;
-  // reviewUserId: any;
-  // closeUserId : any;
-  // starRate : any;
+  service : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
     private loader: Loader, private alertCtrl: AlertController, public toastCtrl: ToastController, private location: Location,
     public nativeGeocoder: NativeGeocoder, private ngZone: NgZone, private geolocation : Geolocation) {
-    // this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
-    // {'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
-    // {'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
-    // {'image' : "assets/imgs/bgcolor.png", 'name':"User Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"}]
-    // this.lists = [{'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
-    // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
-    // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"},
-    // {'orderid':"6485764856gdf", 'time':"12:54:39 P.M.", 'parag': "12-22 Rothschild Avenue", 'price': "$54.00", 'count': "12"}]
-    // this.storage.get("totalSum").then(totalPrice => {
-    //   this.totalprice = totalPrice;
-    //   console.log("this.totalprice list products" +this.totalprice);
-    // });
-    // this.ratings = navParams.get('reviewStar');
-    // console.log("review ratings" +this.ratings);
-    // this.supplierid = navParams.get('userid');
-    // console.log("review supplierid" +this.supplierid);
-    // this.storage.get("reviewStar").then(ratings => {
-    //   this.ratings = ratings;
-    //   this.star = this.ratings;
-    //   console.log("review ratings" +this.ratings);
-    // });
-    
 
     this.storage.get("orderid").then(orderId => {
       this.orderid = orderId;
@@ -139,12 +90,19 @@ export class RequestlistPage {
     
     this.ownUser = "Your Request";
     this.anotherUser = "Deliver Request";
-    // if(this.ownUser) {
-    //   this.closeRelation = true;
-    // } else if(this.anotherUser){
-    //   this.closeRelation = false;
-    // }
+
   }
+
+  // distanceAddresses() {
+  //   this.addressDistance = [
+  //       {id: 1, name: '5 KM', radius: '5000'},
+  //       {id: 2, name: '10 KM', radius: '10000'},
+  //       {id: 3, name: '15 KM', radius: '15000'},
+  //       {id: 4, name: '20 KM', radius: '20000'},
+  //       {id: 5, name: '25 KM', radius: '25000'},
+  //       {id: 6, name: '30 KM', radius: '30000'}
+  //   ];
+  // }
 
   // distanceAddresses() {
   //   this.addressDistance = [
@@ -161,6 +119,106 @@ export class RequestlistPage {
     console.log('ionViewDidLoad RequestlistPage');
     // this.loadMap();
   }
+
+  getCurrentLocation() {
+    this.storage.get("currentLatitude").then(currentLat => {
+      this.currentLatitude = currentLat;
+      console.log("this.currentLatitude" +this.currentLatitude);
+    });
+    this.storage.get("currentLongitude").then(currentLng => {
+      this.currentLongitude = currentLng;
+      console.log("this.currentLongitude" +this.currentLongitude);
+    });
+  }
+
+  // loadMap(){
+
+  //   this.geolocation.getCurrentPosition().then((position) => {
+  //     console.log("getCurrentPosition", position);
+
+  //     console.log("current latitude", position.coords.latitude);
+  //     console.log("current longitude", position.coords.longitude);
+
+  //     this.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+  //         console.log('latLng',this.latLng);
+     
+  //         this.mapOptions = {
+  //           center: this.latLng,
+  //           zoom: 14,
+  //           // mapTypeId: google.maps.MapTypeId.ROADMAP
+  //         }   
+  //     // this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+
+  //     this.map = new google.maps.Map(this.mapOptions);
+
+  //   }, (err) => {
+  //     alert('err '+err);
+  //   });
+
+  // }
+
+
+ /*--------------------Find Nearby Place------------------------*/ 
+
+  nearbyPlace(){
+    // this.loadMap();
+    // this.latLng = new google.maps.LatLng(this.currentLatitude, this.currentLongitude);
+    this.latLng = {
+      'lat' : this.currentLatitude, 
+      'lng': this.currentLongitude
+    }
+
+    //     console.log('latLng',this.latLng);
+   
+        this.mapOptions = {
+          center: this.latLng,
+          zoom: 14,
+          // mapTypeId: google.maps.MapTypeId.ROADMAP
+        }   
+    this.map = new google.maps.Map(document.getElementById('map'), this.mapOptions);
+
+    // this.map = new google.maps.Map(this.mapOptions);
+    // this.markers = [];
+    this.service = new google.maps.places.PlacesService(this.map);
+    this.service.nearbySearch({
+      location: this.latLng,
+      radius: this.isKM,
+      // types: [this.isType]
+    }, (results, status) => {
+        this.callback(results, status);
+    });
+  }
+
+  callback(results, status) {
+    console.log('callback results',results);
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      for (var i = 0; i < results.length; i++) {
+        console.log('callback results[i]',results[i]);
+        // this.createMarker(results[i]);
+      }
+    }
+  }
+
+  // createMarker(place){
+  //   var placeLoc = place;
+  //   console.log('placeLoc',placeLoc);
+  //   this.markers = new google.maps.Marker({
+  //       map: this.map,
+  //       position: place.geometry.location
+  //   });
+
+  //   let infowindow = new google.maps.InfoWindow();
+
+  //   google.maps.event.addListener(this.markers, 'click', () => {
+  //     this.ngZone.run(() => {
+  //       infowindow.setContent(place.name);
+  //       infowindow.open(this.map, this.markers);
+  //     });
+  //   });
+  // }
+
+// }
 
   // loadMap(){
 
@@ -184,233 +242,236 @@ export class RequestlistPage {
 
   // }
 
-  // nearbyPlace() {
-  //   this.loadMap();
-  //   this.markers = [];
-  //   let service = new google.maps.places.PlacesService(this.map);
-  //   service.nearbySearch({
-  //     location: this.latLng,
-  //     radius: this.isKM,
-  //     types: [this.isType]
-  //   }, (results, status) => {
-  //     console.log("near by result", results);
-  //     console.log("near by status", status);
-  //       this.callback(results, status);
-  //   });
+  // // nearbyPlace() {
+  // //   // this.loadMap();
+  // //   this.markers = [];
+  // //   let service = new google.maps.places.PlacesService(this.map);
+  // //   service.nearbySearch({
+  // //     location: this.latLng,
+  // //     radius: this.isKM,
+  // //     types: [this.isType]
+  // //   }, (results, status) => {
+  // //     console.log("near by result", results);
+  // //     console.log("near by status", status);
+  // //       this.callback(results, status);
+  // //   });
 
 
-  //   // console.log("distance selected", distance);
-  //   // this.radiusDistance = distance.name;
+  // //   // console.log("distance selected", distance);
+  // //   // this.radiusDistance = distance.name;
 
-  //   // console.log("get userrequestArray" +JSON.stringify(this.userrequestArray));
+  // //   // console.log("get userrequestArray" +JSON.stringify(this.userrequestArray));
 
-  //   // for(let userreq of this.userrequestArray) {
-  //   //   console.log("userreq from array", userreq);
-  //   //   this.orderAdd = userreq.address;
-  //   //   console.log("userreq address", this.orderAdd);
+  // //   // for(let userreq of this.userrequestArray) {
+  // //   //   console.log("userreq from array", userreq);
+  // //   //   this.orderAdd = userreq.address;
+  // //   //   console.log("userreq address", this.orderAdd);
 
-  //   //   this.nativeGeocoder.forwardGeocode(this.orderAdd)
-  //   //     .then((coordinates: NativeGeocoderForwardResult[]) => {
-  //   //       console.log('The coordinates are latitude=' + coordinates[0].latitude + ' and longitude=' + coordinates[0].longitude)
+  // //   //   this.nativeGeocoder.forwardGeocode(this.orderAdd)
+  // //   //     .then((coordinates: NativeGeocoderForwardResult[]) => {
+  // //   //       console.log('The coordinates are latitude=' + coordinates[0].latitude + ' and longitude=' + coordinates[0].longitude)
 
-  //   //       let endLatitude : any = coordinates[0].latitude;
-  //   //       let endLongitude : any = coordinates[0].longitude;
+  // //   //       let endLatitude : any = coordinates[0].latitude;
+  // //   //       let endLongitude : any = coordinates[0].longitude;
           
-  //   //       let p = 0.017453292519943295;    // Math.PI / 180
-  //   //       let c = Math.cos;
-  //   //       let a = 0.5 - c((this.currentLatitude-endLatitude) * p) / 2 + c(endLatitude * p) *c((this.currentLatitude) * p) * (1 - c(((this.currentLongitude- endLongitude) * p))) / 2;
-  //   //       let dis = (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
-  //   //       console.log("distance in km", dis);
-  //   //     })
-  //   //     .catch((error: any) => 
-  //   //       console.log(error)
-  //   //     );
+  // //   //       let p = 0.017453292519943295;    // Math.PI / 180
+  // //   //       let c = Math.cos;
+  // //   //       let a = 0.5 - c((this.currentLatitude-endLatitude) * p) / 2 + c(endLatitude * p) *c((this.currentLatitude) * p) * (1 - c(((this.currentLongitude- endLongitude) * p))) / 2;
+  // //   //       let dis = (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
+  // //   //       console.log("distance in km", dis);
+  // //   //     })
+  // //   //     .catch((error: any) => 
+  // //   //       console.log(error)
+  // //   //     );
 
 
 
-  //   //   // this.nativegeocoder.forwardGeocode(success, failure, this.orderAdd, { useLocale: true, maxResults: 1 });
-  //   //   //   function success(coordinates) {
-  //   //   //     alert("The coordinates are latitude = " + coordinates[0].latitude + " and longitude = " + coordinates[0].longitude);
-  //   //   //   }
-  //   //   //   function failure(err) {
-  //   //   //     alert(JSON.stringify(err));
-  //   //   //   }
-  //   // }
-  // }
+  // //   //   // this.nativegeocoder.forwardGeocode(success, failure, this.orderAdd, { useLocale: true, maxResults: 1 });
+  // //   //   //   function success(coordinates) {
+  // //   //   //     alert("The coordinates are latitude = " + coordinates[0].latitude + " and longitude = " + coordinates[0].longitude);
+  // //   //   //   }
+  // //   //   //   function failure(err) {
+  // //   //   //     alert(JSON.stringify(err));
+  // //   //   //   }
+  // //   // }
+  // // }
 
-  callback(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        console.log("near by search results[i]", results[i]);
-        // this.userrequestArray = results[i];
+  // // callback(results, status) {
+  // //   if (status === google.maps.places.PlacesServiceStatus.OK) {
+  // //     for (var i = 0; i < results.length; i++) {
+  // //       console.log("near by search results[i]", results[i]);
+  // //       // this.userrequestArray = results[i];
 
-        console.log("this.userrequestArray near", this.userrequestArray);
-        // this.createMarker(results[i]);
-      }
-    }
-  }
+  // //       console.log("this.userrequestArray near", this.userrequestArray);
+  // //       // this.createMarker(results[i]);
+  // //     }
+  // //   }
+  // // }
 
-  getCurrentLocation() {
-    this.storage.get("currentLatitude").then(currentLat => {
-      this.currentLatitude = currentLat;
-      console.log("this.currentLatitude" +this.currentLatitude);
-    });
-    this.storage.get("currentLongitude").then(currentLng => {
-      this.currentLongitude = currentLng;
-      console.log("this.currentLongitude" +this.currentLongitude);
-    });
-  }
+  
 
   getRequestList() {
-    this.loader.show("Retrieving requests...");
-    this.storage.get("userData").then(userData => {
-      // console.log("userData" +JSON.stringify(userData));
-      this.id = userData.data.ID;
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to get requests list",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.loader.show("Retrieving requests...");
+      this.storage.get("userData").then(userData => {
+        // console.log("userData" +JSON.stringify(userData));
+        this.id = userData.data.ID;
 
-      let reqObj = {
-        "ID": this.id,
-        "latitude": this.currentLatitude,
-        "longitude": this.currentLongitude
-      }
-      
-      this.serviceProvider.requestListData(reqObj).then((result) => {
-        console.log("result request list" +JSON.stringify(result));
-        // location.reload()
-        if(result["status"] == 1){
-          this.loader.hide();
-          this.deliveryrequests = result["data"].deliveryRequest;
-          // console.log("get request list" +JSON.stringify(this.deliveryrequests));
-
-          this.userrequests = result["data"].userRequest;
-          this.userrequestArray = this.userrequests;
-          // console.log("get userrequestArray" +JSON.stringify(this.userrequestArray));
-
-          // for(let userreq of this.userrequestArray) {
-          //   console.log("userreq from array", userreq);
-          //   this.orderAdd = userreq.address;
-          //   console.log("userreq address", this.orderAdd);
-
-          //   // let options: NativeGeocoderOptions = {
-          //   //     useLocale: true,
-          //   //     maxResults: 5
-          //   // };
-
-          //   // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818, options)
-          //   //   .then((result: NativeGeocoderReverseResult[]) => console.log(JSON.stringify(result[0])))
-          //   //   .catch((error: any) => console.log(error));
-
-          //   this.nativeGeocoder.forwardGeocode(this.orderAdd)
-          //     .then((coordinates: NativeGeocoderForwardResult[]) => {
-          //       console.log('The coordinates are latitude=' + coordinates[0].latitude + ' and longitude=' + coordinates[0].longitude)
-
-          //       let endLatitude : any = coordinates[0].latitude;
-          //       let endLongitude : any = coordinates[0].longitude;
-          //       // let currentLat = this.currentLatitude;
-          //       // let currentLng = this.currentLongitude;
-
-          //       // calculateDistance(this.currentLatitude,endLatitude,this.currentLongitude,endLongitude){
-          //         let p = 0.017453292519943295;    // Math.PI / 180
-          //         let c = Math.cos;
-          //         let a = 0.5 - c((this.currentLatitude-endLatitude) * p) / 2 + c(endLatitude * p) *c((this.currentLatitude) * p) * (1 - c(((this.currentLongitude- endLongitude) * p))) / 2;
-          //         let dis = (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
-          //         console.log("distance in km", dis);
-          //         // return dis;
-          //       // }
-          //       // function getDistanceFromLatLonInKm(currentLat,currentLng,endLatitude,endLongitude) {
-          //       //   var R = 6371; // Radius of the earth in km
-          //       //   var dLat = deg2rad(endLatitude-currentLat);  // deg2rad below
-          //       //   var dLon = deg2rad(endLongitude-currentLng); 
-          //       //   var a = 
-          //       //     Math.sin(dLat/2) * Math.sin(dLat/2) +
-          //       //     Math.cos(deg2rad(currentLat)) * Math.cos(deg2rad(endLatitude)) * 
-          //       //     Math.sin(dLon/2) * Math.sin(dLon/2)
-          //       //     ; 
-          //       //   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-          //       //   var d = R * c; // Distance in km
-          //       //   console.log("distance in km", d);
-          //       //   return d;
-          //       //  }
-
-          //       //  function deg2rad(deg) {
-          //       //   return deg * (Math.PI/180)
-          //       //  }
-          //     })
-          //     .catch((error: any) => 
-          //       console.log(error)
-          //     );
-
-
-
-          //   // this.nativegeocoder.forwardGeocode(success, failure, this.orderAdd, { useLocale: true, maxResults: 1 });
-          //   //   function success(coordinates) {
-          //   //     alert("The coordinates are latitude = " + coordinates[0].latitude + " and longitude = " + coordinates[0].longitude);
-          //   //   }
-          //   //   function failure(err) {
-          //   //     alert(JSON.stringify(err));
-          //   //   }
-          // }
-
-          this.openrelations = result["data"].openReationship;
-          // console.log("get open relations list" +JSON.stringify(this.openrelations));
-
-          this.closerelations = result["data"].closeReationship;
-          // console.log("get close relations list" +JSON.stringify(this.closerelations));
-
-          for(let products of this.deliveryrequests) {
-            // console.log("get products......" +JSON.stringify(products));
-            this.productdetail = products.productDetails;
-            // console.log("this.productdetail......" +JSON.stringify(this.productdetail));
-            let totalPrice = 0;
-            let stringArray : any = [];
-            for(let detail of this.productdetail) {
-              // console.log("get detail......" +JSON.stringify(detail));
-              this.amount = detail.amount;
-              this.quantity = detail.quantity;
-              this.count = this.amount * this.quantity;
-              // console.log("this.count......" +JSON.stringify(this.count));
-
-              totalPrice += this.count;
-              this.totalSum = totalPrice;
-              // console.log("totalPrice......" +JSON.stringify(this.totalPrice));
-              // console.log("this.totalSum......" +this.totalSum);   
-            }
-          }
-          
-          
-        } else {
-          this.loader.hide();
+        let reqObj = {
+          "ID": this.id,
+          "latitude": this.currentLatitude,
+          "longitude": this.currentLongitude
         }
-      }, (err) => {
-        console.log("err request list" +JSON.stringify(err));
-        // Error log
+        
+        this.serviceProvider.requestListData(reqObj).then((result) => {
+          console.log("result request list" +JSON.stringify(result));
+          // location.reload()
+          if(result["status"] == 1){
+            this.loader.hide();
+            this.deliveryrequests = result["data"].deliveryRequest;
+            // console.log("get request list" +JSON.stringify(this.deliveryrequests));
+
+            this.userrequests = result["data"].userRequest;
+            this.userrequestArray = this.userrequests;
+            // console.log("get userrequestArray" +JSON.stringify(this.userrequestArray));
+
+            // for(let userreq of this.userrequestArray) {
+            //   console.log("userreq from array", userreq);
+            //   this.orderAdd = userreq.address;
+            //   console.log("userreq address", this.orderAdd);
+
+            //   // let options: NativeGeocoderOptions = {
+            //   //     useLocale: true,
+            //   //     maxResults: 5
+            //   // };
+
+            //   // this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818, options)
+            //   //   .then((result: NativeGeocoderReverseResult[]) => console.log(JSON.stringify(result[0])))
+            //   //   .catch((error: any) => console.log(error));
+
+            //   this.nativeGeocoder.forwardGeocode(this.orderAdd)
+            //     .then((coordinates: NativeGeocoderForwardResult[]) => {
+            //       console.log('The coordinates are latitude=' + coordinates[0].latitude + ' and longitude=' + coordinates[0].longitude)
+
+            //       let endLatitude : any = coordinates[0].latitude;
+            //       let endLongitude : any = coordinates[0].longitude;
+            //       // let currentLat = this.currentLatitude;
+            //       // let currentLng = this.currentLongitude;
+
+            //       // calculateDistance(this.currentLatitude,endLatitude,this.currentLongitude,endLongitude){
+            //         let p = 0.017453292519943295;    // Math.PI / 180
+            //         let c = Math.cos;
+            //         let a = 0.5 - c((this.currentLatitude-endLatitude) * p) / 2 + c(endLatitude * p) *c((this.currentLatitude) * p) * (1 - c(((this.currentLongitude- endLongitude) * p))) / 2;
+            //         let dis = (12742 * Math.asin(Math.sqrt(a))); // 2 * R; R = 6371 km
+            //         console.log("distance in km", dis);
+            //         // return dis;
+            //       // }
+            //       // function getDistanceFromLatLonInKm(currentLat,currentLng,endLatitude,endLongitude) {
+            //       //   var R = 6371; // Radius of the earth in km
+            //       //   var dLat = deg2rad(endLatitude-currentLat);  // deg2rad below
+            //       //   var dLon = deg2rad(endLongitude-currentLng); 
+            //       //   var a = 
+            //       //     Math.sin(dLat/2) * Math.sin(dLat/2) +
+            //       //     Math.cos(deg2rad(currentLat)) * Math.cos(deg2rad(endLatitude)) * 
+            //       //     Math.sin(dLon/2) * Math.sin(dLon/2)
+            //       //     ; 
+            //       //   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            //       //   var d = R * c; // Distance in km
+            //       //   console.log("distance in km", d);
+            //       //   return d;
+            //       //  }
+
+            //       //  function deg2rad(deg) {
+            //       //   return deg * (Math.PI/180)
+            //       //  }
+            //     })
+            //     .catch((error: any) => 
+            //       console.log(error)
+            //     );
+
+
+
+            //   // this.nativegeocoder.forwardGeocode(success, failure, this.orderAdd, { useLocale: true, maxResults: 1 });
+            //   //   function success(coordinates) {
+            //   //     alert("The coordinates are latitude = " + coordinates[0].latitude + " and longitude = " + coordinates[0].longitude);
+            //   //   }
+            //   //   function failure(err) {
+            //   //     alert(JSON.stringify(err));
+            //   //   }
+            // }
+
+            this.openrelations = result["data"].openReationship;
+            // console.log("get open relations list" +JSON.stringify(this.openrelations));
+
+            this.closerelations = result["data"].closeReationship;
+            // console.log("get close relations list" +JSON.stringify(this.closerelations));
+
+            for(let products of this.deliveryrequests) {
+              // console.log("get products......" +JSON.stringify(products));
+              this.productdetail = products.productDetails;
+              // console.log("this.productdetail......" +JSON.stringify(this.productdetail));
+              let totalPrice = 0;
+              let stringArray : any = [];
+              for(let detail of this.productdetail) {
+                // console.log("get detail......" +JSON.stringify(detail));
+                this.amount = detail.amount;
+                this.quantity = detail.quantity;
+                this.count = this.amount * this.quantity;
+                // console.log("this.count......" +JSON.stringify(this.count));
+
+                totalPrice += this.count;
+                this.totalSum = totalPrice;
+                // console.log("totalPrice......" +JSON.stringify(this.totalPrice));
+                // console.log("this.totalSum......" +this.totalSum);   
+              }
+            }
+            
+            
+          } else {
+            this.loader.hide();
+          }
+        }, (err) => {
+          console.log("err request list" +JSON.stringify(err));
+          // Error log
+        });
+
+        this.userType = userData.data.user_type;
+        if (this.userType == "CUSTOMER") {
+          this.forUserContent = true;
+          this.forSupplierContent =false;
+          this.forBothContent = false;
+          this.showOnlyForUser = true;
+          this.showForBoth = false;
+
+        } else if (this.userType == "SUPPLIER") {
+          this.forUserContent = false;
+          this.forSupplierContent =true;
+          this.forBothContent = false;
+          this.showOnlyForUser = false;
+          this.showForBoth = false;
+          this.forSupplier = false;
+
+        } else if (this.userType == "USER") {
+          this.forUserContent = false;
+          this.forSupplierContent =false;
+          this.forBothContent = true;
+          this.showOnlyForUser = false;
+          this.showForBoth = true;
+
+        } else {
+        }
       });
-
-      this.userType = userData.data.user_type;
-      if (this.userType == "CUSTOMER") {
-        this.forUserContent = true;
-        this.forSupplierContent =false;
-        this.forBothContent = false;
-        this.showOnlyForUser = true;
-        this.showForBoth = false;
-
-      } else if (this.userType == "SUPPLIER") {
-        this.forUserContent = false;
-        this.forSupplierContent =true;
-        this.forBothContent = false;
-        this.showOnlyForUser = false;
-        this.showForBoth = false;
-        this.forSupplier = false;
-
-      } else if (this.userType == "USER") {
-        this.forUserContent = false;
-        this.forSupplierContent =false;
-        this.forBothContent = true;
-        this.showOnlyForUser = false;
-        this.showForBoth = true;
-
-      } else {
-      }
-    });
+    // }
   }
 
   deleteOrder(orderId) {
@@ -433,27 +494,39 @@ export class RequestlistPage {
               text: 'Yes',
               handler: () => {
                 console.log('ok clicked');
-                this.serviceProvider.deleteOrderData(deleteData).then((result) => {
-                  console.log("result delete order" +JSON.stringify(result));
-                  
-                  if(result["status"] == 1){
-                    this.loader.hide();     
-                      let toastSuccess = this.toastCtrl.create({
-                      message: result["message"],
-                      duration: 7000,
-                      position: 'top',
-                      showCloseButton:true,
-                      closeButtonText:'X',
-                      cssClass: "toast-success",
-                    });
-                    toastSuccess.present();
-                    this.getRequestList();
-                  }
+                if(this.serviceProvider.getNetworkType() == 'none') {
+                  // console.log('network was disconnected :-(');
+                  let alert = this.alertCtrl.create({
+                    title: 'Oops!',
+                    subTitle: "You seem to be offline ! Please Enable network to place the order.",
+                    buttons: [{
+                      text: ("Okay")
+                    }]
+                  });
+                  alert.present();
+                } else {
+                  this.serviceProvider.deleteOrderData(deleteData).then((result) => {
+                    console.log("result delete order" +JSON.stringify(result));
+                    
+                    if(result["status"] == 1){
+                      this.loader.hide();     
+                        let toastSuccess = this.toastCtrl.create({
+                        message: result["message"],
+                        duration: 7000,
+                        position: 'top',
+                        showCloseButton:true,
+                        closeButtonText:'X',
+                        cssClass: "toast-success",
+                      });
+                      toastSuccess.present();
+                      this.getRequestList();
+                    }
 
-                }, (err) => {
-                  console.log("err delete records" +JSON.stringify(err));
-                  // Error log
-                });
+                  }, (err) => {
+                    console.log("err delete records" +JSON.stringify(err));
+                    // Error log
+                  });
+                }
               }
           }
       ]
@@ -677,7 +750,7 @@ export class RequestlistPage {
       // console.log("userrequests" ,this.userrequests);
       this.userrequestArray = this.userrequests.filter((item) => {
         // console.log("get items item...", item);
-          return ((item.UserDetails.name.toLowerCase().indexOf(val.toLowerCase()) > -1));
+          return ((item.UserDetails.name.toLowerCase().indexOf(val.toLowerCase()) > -1) || (item.address.toLowerCase().indexOf(val.toLowerCase()) > -1));
       });
 
     } else if(val == ''){

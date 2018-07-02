@@ -30,6 +30,8 @@ import { MyApp } from './app.component';
 import { MainPage } from '../pages/main/main';
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { ServiceProvider } from '../providers/service/service';
+// import cordovaSqlitePlugin from 'pouchdb-adapter-cordova-sqlite';
+import { Network } from '@ionic-native/network';
 // import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
@@ -72,7 +74,9 @@ import { ServiceProvider } from '../providers/service/service';
     GooglePlus,
     Geolocation,
     NativeGeocoder,
-    HTTP
+    HTTP,
+    // cordovaSqlitePlugin,
+    Network
     // SearchPipe
   ]
 })

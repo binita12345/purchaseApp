@@ -41,7 +41,19 @@ export class ForgotpasswordPage {
     let resetpwdData = {
       'email' : this.resetForm.value.email
     }
-    this.serviceProvider.forgotPasswordData(resetpwdData).then(
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   this.loader.hide();
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to get the password",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.serviceProvider.forgotPasswordData(resetpwdData).then(
         data => {
           console.log("ts forgot data" +JSON.stringify(data))
           if(data['status'] == 0){
@@ -69,34 +81,11 @@ export class ForgotpasswordPage {
             });
             alert.present();
           }
-          // let obj: any = data;
-          // console.log("obj" +JSON.stringify(obj));
-          // console.log("userId" +obj.data.ID);
-          // console.log("token" +obj.data.sessionId);
-          // // console.log(this.serviceProvider.headers, obj.data.ID);
-          // this.serviceProvider.headers.append("Authorization", obj.data.sessionId);
-          // this.storage.set("userData", obj);
-          // this.storage.set("userId", obj.data.ID);
-          // this.storage.set("token", obj.data.sessionId);
-
-          // if (obj.data.user_type) {
-          //     this.loader.hide();
-          //     this.navCtrl.setRoot("HomeappPage", { user_type: obj.data.user_type });
-          // }
         },
         err => {
           console.log("this.error" +JSON.stringify(err))
-          // this.storage.set("userId", "");
-          // this.storage.set("token", "");
-          // this.storage.set("userData", "");
-
-          // this.loader.hide();
-          // // console.log("err", err)
-          // this.error = err.message;
-          
-        }
-      );
-    // this.navCtrl.push("SigninPage");
-  }
+      });
+    }
+  // }
 
 }

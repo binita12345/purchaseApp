@@ -381,7 +381,8 @@ page-requestlist {
 	    // border-bottom: 1px solid #0A76D2 ;
 	}
 	.seg-btn {
-		border-right: 1px solid #096BBE;
+		border-right: 1px solid #096BBE !important;
+		// border-right: 1px solid #096BBE;
 		height: 72px !important;
 		opacity: 1 !important;
 		font-size: 8px !important;
@@ -392,7 +393,7 @@ page-requestlist {
 	    background-color: #0A76D2 !important;
 	}
 	.seg-btn{
-		border-right: 1px solid #0967B7;
+		// border-right: 1px solid #0967B7;
 		cursor: pointer;
 		// list-style-type: none;
 		// display: inline-block;

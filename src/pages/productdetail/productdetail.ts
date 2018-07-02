@@ -148,37 +148,48 @@ export class ProductdetailPage {
       "productImage":this.image
     }
     console.log("productObj" +JSON.stringify(productObj));
-    this.serviceProvider.editProductData(productObj).then((result) => {
-      console.log("result profile" +JSON.stringify(result));
-      if(result["status"] == 1) {
-        let alert = this.alertCtrl.create({
-          subTitle: result["message"],
-          buttons: [
-            {
-              text: 'OK',
-              handler: () => {
-                console.log('ok clicked');
-                this.navCtrl.push("RequestlistPage");
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to edit the product",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.serviceProvider.editProductData(productObj).then((result) => {
+        console.log("result profile" +JSON.stringify(result));
+        if(result["status"] == 1) {
+          let alert = this.alertCtrl.create({
+            subTitle: result["message"],
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  console.log('ok clicked');
+                  this.navCtrl.push("RequestlistPage");
+                }
               }
-            }
-          ]
-        });
-        alert.present();
-      } else if(result["status"] == 0){
-        let alert = this.alertCtrl.create({
-          subTitle: result["message"],
-          buttons: ['Ok']
-        });
-        alert.present();
-      } else {
+            ]
+          });
+          alert.present();
+        } else if(result["status"] == 0){
+          let alert = this.alertCtrl.create({
+            subTitle: result["message"],
+            buttons: ['Ok']
+          });
+          alert.present();
+        } else {
 
-      }
-      // this.getProfileData();
-    }, (err) => {
-      console.log("err product edit" +JSON.stringify(err));
-      // Error log
-    });
-
+        }
+        // this.getProfileData();
+      }, (err) => {
+        console.log("err product edit" +JSON.stringify(err));
+        // Error log
+      });
+    // }
     // this.navCtrl.push("ProfilePage");
   }
 

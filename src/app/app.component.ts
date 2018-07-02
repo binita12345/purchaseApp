@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, Events, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
-
+import { Network } from '@ionic-native/network';
 import { MainPage } from '../pages/main/main';
+import { ServiceProvider } from '../providers/service/service';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,8 +23,36 @@ export class MyApp {
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private keyboard: Keyboard, private geolocation: Geolocation,
-    public storage: Storage) {
+    public storage: Storage, public serviceProvider: ServiceProvider, public events: Events, public alertCtrl: AlertController) {
     platform.ready().then(() => {
+
+      /* Check serviceProvider */
+      this.serviceProvider.initializeNetworkEvents()
+      this.events.subscribe('network:offline', () => {
+        console.log('network:offline ==> ' + this.serviceProvider.getNetworkType())
+        // if(this.serviceProvider.getNetworkType() == 'none') {
+          console.log('network was disconnected :-(');
+        //   let alert = this.alertCtrl.create({
+        //     title: "Connection Failed !",
+        //     subTitle: "There may be a problem in your internet connection. Please try again !",
+        //     buttons: [{
+        //       text: ("Okay")
+        //     }]
+        //   });
+        //   alert.present();
+        // }
+        // this.storage.set('isOffline', this.serviceProvider.getNetworkType());
+      })
+      this.events.subscribe('network:online', () => {
+        console.log('network:online ==> ' + this.serviceProvider.getNetworkType())
+
+        // this.storage.set('isOnline', this.serviceProvider.getNetworkType());
+      })
+      // this.storage.get('isConnected').then(isOnline => {
+      //   this.network = isOnline;
+      //   console.log("this.network", this.network);
+      // });
+      // console.log('network:status ==> ' + this.serviceProvider.getNetworkType());
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       // statusBar.styleDefault();

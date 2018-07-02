@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
 import { Loader } from "../../providers/loader/loader";
@@ -30,7 +30,7 @@ export class CartlistPage {
   currentLongitude : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
-    private loader: Loader) {
+    private loader: Loader, private alertCtrl: AlertController) {
     // this.lists = [{'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "1",selected: false},
     // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "2",selected: false},
     // {'image' : "assets/imgs/bgcolor.png", 'name':"Product Name", 'map': "assets/imgs/placeholder.png", 'parag': "12-22 Rothschild Avenue", 'distance': "assets/imgs/map.png", 'price': "$54.00", 'id' : "3",selected: false},
@@ -72,27 +72,39 @@ export class CartlistPage {
   }
 
   getProductsListData() {
-    this.loader.show("Retrieving products...");
-    // console.log("getProductsListData");
-    // console.log("this.id....." +this.id);
-    let getId = {
-      'ID' : this.id,
-      "latitude": this.currentLatitude,
-      "longitude": this.currentLongitude,
-    }
-    console.log("getId" +JSON.stringify(getId));
-    this.serviceProvider.getProductList(getId).then((result) => {
-      // console.log("result products list" +JSON.stringify(result));
-      if(result["status"] == 1) {
-        this.loader.hide();
-        this.lists = result["data"];
-        console.log("lists of product" +JSON.stringify(this.lists));
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to get products list",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.loader.show("Retrieving products...");
+      // console.log("getProductsListData");
+      // console.log("this.id....." +this.id);
+      let getId = {
+        'ID' : this.id,
+        "latitude": this.currentLatitude,
+        "longitude": this.currentLongitude,
       }
-      // this.getProfileData();
-    }, (err) => {
-      console.log("err product list" +JSON.stringify(err));
-      // Error log
-    });
+      console.log("getId" +JSON.stringify(getId));
+      this.serviceProvider.getProductList(getId).then((result) => {
+        // console.log("result products list" +JSON.stringify(result));
+        if(result["status"] == 1) {
+          this.loader.hide();
+          this.lists = result["data"];
+          console.log("lists of product" +JSON.stringify(this.lists));
+        }
+        // this.getProfileData();
+      }, (err) => {
+        console.log("err product list" +JSON.stringify(err));
+        // Error log
+      });
+    // }
   }
 
   selectAll() {

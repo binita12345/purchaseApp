@@ -186,50 +186,63 @@ export class AddproductPage {
 
 
   addtoCartList(){
-    this.error = '';
-    this.loader.show("Please Wait");
-    console.log("add product of user");
 
-    let productsObj = {
-      'ID': this.id,
-      'name': this.productData.name,
-      'description': this.productData.description,
-      'address': this.productData.address,
-      "latitude": this.currentLatitude,
-      "longitude": this.currentLongitude,
-      'deliveryTime': this.productData.time,
-      'amount': this.productData.amount,
-      'productImage': this.image,
-    }
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to add products in cart list.",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.error = '';
+      this.loader.show("Please Wait");
+      console.log("add product of user");
 
-    // console.log("productsObj" +JSON.stringify(productsObj));
-    this.serviceProvider.addProductData(productsObj).then((result) => {
-      console.log("result add product" +JSON.stringify(result));
-      if(result["status"] == 2) {
-        this.loader.hide();
-        this.error = result["message"];
-
-      } else if(result["status"] == 1) {
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          subTitle: result["message"],
-          buttons: [
-            {
-              text: 'OK',
-              handler: () => {
-                console.log('ok clicked');
-                // console.log("this.id", this.id);
-                this.navCtrl.push("CartlistPage", {'id': this.id});
-              }
-            }
-          ]
-        });
-        alert.present();
+      let productsObj = {
+        'ID': this.id,
+        'name': this.productData.name,
+        'description': this.productData.description,
+        'address': this.productData.address,
+        "latitude": this.currentLatitude,
+        "longitude": this.currentLongitude,
+        'deliveryTime': this.productData.time,
+        'amount': this.productData.amount,
+        'productImage': this.image,
       }
-    }, (err) => {
-      console.log("err add product" +JSON.stringify(err));
-      // Error log
-    });
-  }
+
+      // console.log("productsObj" +JSON.stringify(productsObj));
+      this.serviceProvider.addProductData(productsObj).then((result) => {
+        console.log("result add product" +JSON.stringify(result));
+        if(result["status"] == 2) {
+          this.loader.hide();
+          this.error = result["message"];
+
+        } else if(result["status"] == 1) {
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            subTitle: result["message"],
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  console.log('ok clicked');
+                  // console.log("this.id", this.id);
+                  this.navCtrl.push("CartlistPage", {'id': this.id});
+                }
+              }
+            ]
+          });
+          alert.present();
+        }
+      }, (err) => {
+        console.log("err add product" +JSON.stringify(err));
+        // Error log
+      });
+    }
+  // }
 
 }

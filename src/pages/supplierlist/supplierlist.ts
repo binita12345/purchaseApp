@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ServiceProvider } from '../../providers/service/service';
 import { Loader } from "../../providers/loader/loader";
@@ -26,7 +26,7 @@ export class SupplierlistPage {
   // newarray : any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public serviceProvider: ServiceProvider,
-    private loader: Loader) {
+    private loader: Loader, private alertCtrl: AlertController) {
 
   	// this.lists = [{'image': "assets/imgs/user.png", 'desc': "Nevine Acotanza"},
    //  {'image': "assets/imgs/user.png", 'desc': "Oluwarotimi Adesina"},
@@ -116,25 +116,38 @@ export class SupplierlistPage {
   }
 
   getSupplierListData() {
-    this.loader.show("Retrieving suppliers...");
-    console.log("getSupplierListData");
-    // console.log("this.id....." +this.id);
-    let getId = {
-      'ID' : this.id
-    }
-    // console.log("getId" +JSON.stringify(getId));
-    this.serviceProvider.getSupplierList(getId).then((result) => {
-      // console.log("result products list" +JSON.stringify(result));
-      if(result["status"] == 1) {
-        this.loader.hide();
-        this.lists = result["data"];
-        // console.log("lists of product" +JSON.stringify(this.lists));
+    // if(this.serviceProvider.getNetworkType() == 'none') {
+    //   // console.log('network was disconnected :-(');
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Oops!',
+    //     subTitle: "You seem to be offline ! Please Enable network to get products list",
+    //     buttons: [{
+    //       text: ("Okay")
+    //     }]
+    //   });
+    //   alert.present();
+    // } else {
+      this.loader.show("Retrieving suppliers...");
+      console.log("getSupplierListData");
+      // console.log("this.id....." +this.id);
+      let getId = {
+        "ID" : this.id
       }
-      // this.getProfileData();
-    }, (err) => {
-      console.log("err product list" +JSON.stringify(err));
-      // Error log
-    });
+      // console.log("getId" +JSON.stringify(getId));
+      this.serviceProvider.getSupplierList(getId).then((result) => {
+        // console.log("result products list" +JSON.stringify(result));
+        if(result["status"] == 1) {
+          this.loader.hide();
+          this.lists = result["data"];
+          // console.log("lists of product" +JSON.stringify(this.lists));
+        }
+        // this.getProfileData();
+      }, (err) => {
+        console.log("err product list" +JSON.stringify(err));
+        // Error log
+      });
+    // }
+      
   }
 
   ionViewDidLoad() {

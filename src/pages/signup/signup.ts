@@ -155,66 +155,78 @@ export class SignupPage {
     }
 
     console.log("formObj signup" +JSON.stringify(formObj));
+    if(this.serviceProvider.getNetworkType() == 'none') {
+      this.loader.hide();
+      // console.log('network was disconnected :-(');
+      let alert = this.alertCtrl.create({
+        title: 'Oops!',
+        subTitle: "You seem to be offline ! Please Enable network to create new user account.",
+        buttons: [{
+          text: ("Okay")
+        }]
+      });
+      alert.present();
+    } else {
+      this.serviceProvider.signupData(formObj).then((result) => {
+        // console.log("result signup" +JSON.stringify(result));
+        this.responseData = result;
+        // console.log("this.responseData" +JSON.stringify(this.responseData));
 
-    this.serviceProvider.signupData(formObj).then((result) => {
-      // console.log("result signup" +JSON.stringify(result));
-      this.responseData = result;
-      // console.log("this.responseData" +JSON.stringify(this.responseData));
+        // set storage data to get all user data on profile page
+        this.storage.set('userSignupData', this.responseData);
 
-      // set storage data to get all user data on profile page
-      this.storage.set('userSignupData', this.responseData);
+        if(this.responseData["status"] == 0) {
+          // this.error = this.responseData["message"];
+          // console.log("this.error 0", this.error);
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            // title: 'Low battery',
+            subTitle: this.responseData["message"],
+            buttons: ['Ok']
+          });
+          alert.present();
+        } else if(this.responseData["status"] == 1) {
+          // console.log("signup status 1", this.responseData["message"]);
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            subTitle: this.responseData["message"],
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  console.log('ok clicked');
+                  // console.log("this.responseData on alert control" +JSON.stringify(this.responseData));
+                  // console.log("usertype signup" +this.responseData.data.user_type);
 
-      if(this.responseData["status"] == 0) {
-        // this.error = this.responseData["message"];
-        // console.log("this.error 0", this.error);
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          // title: 'Low battery',
-          subTitle: this.responseData["message"],
-          buttons: ['Ok']
-        });
-        alert.present();
-      } else if(this.responseData["status"] == 1) {
-        // console.log("signup status 1", this.responseData["message"]);
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          subTitle: this.responseData["message"],
-          buttons: [
-            {
-              text: 'OK',
-              handler: () => {
-                console.log('ok clicked');
-                // console.log("this.responseData on alert control" +JSON.stringify(this.responseData));
-                // console.log("usertype signup" +this.responseData.data.user_type);
+                  // ------------------------------temporary comment this code of userType------------------------------
+                  let userType = this.responseData.data.user_type;
 
-                // ------------------------------temporary comment this code of userType------------------------------
-                let userType = this.responseData.data.user_type;
-
-                // let userType = "USER";
-                this.storage.set('user_type', userType);
-                // this.storage.set('user_type', "USER");
-                this.navCtrl.push("SigninPage");
+                  // let userType = "USER";
+                  this.storage.set('user_type', userType);
+                  // this.storage.set('user_type', "USER");
+                  this.navCtrl.push("SigninPage");
+                }
               }
-            }
-          ]
-        });
-        alert.present();
-      } else if(this.responseData["status"] == 2) {
-        // this.error = this.responseData["message"];
-        this.loader.hide();
-        let alert = this.alertCtrl.create({
-          // title: 'Low battery',
-          subTitle: this.responseData["message"],
-          buttons: ['Ok']
-        });
-        alert.present();
-      } else {
+            ]
+          });
+          alert.present();
+        } else if(this.responseData["status"] == 2) {
+          // this.error = this.responseData["message"];
+          this.loader.hide();
+          let alert = this.alertCtrl.create({
+            // title: 'Low battery',
+            subTitle: this.responseData["message"],
+            buttons: ['Ok']
+          });
+          alert.present();
+        } else {
 
-      }
-    }, (err) => {
-      console.log("err signup" +JSON.stringify(err));
-      // Error log
-    });
+        }
+      }, (err) => {
+        console.log("err signup" +JSON.stringify(err));
+        // Error log
+      });
+    }
   }
   gotoSignIn(){
   	this.navCtrl.push("SigninPage");
