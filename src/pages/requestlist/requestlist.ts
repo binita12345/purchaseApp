@@ -5,7 +5,7 @@ import { ServiceProvider } from '../../providers/service/service';
 import { Loader } from "../../providers/loader/loader";
 import { Location } from '@angular/common';
 import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation';
-import { googlemaps } from 'googlemaps';
+// import { googlemaps } from 'googlemaps';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 /**
  * Generated class for the RequestlistPage page.
